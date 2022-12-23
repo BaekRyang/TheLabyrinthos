@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 8811733623116923156}
   m_Layer: 0
   m_Name: MainFloor
-  m_TagString: Untagged
+  m_TagString: MainFloor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -130,6 +130,7 @@ Transform:
   - {fileID: 7738088215216705958}
   - {fileID: 791691719800676555}
   - {fileID: 5045234262214732221}
+  - {fileID: 7738088214226206525}
   m_Father: {fileID: 7738088215713541272}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -749,7 +750,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7738088214196230196}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &3737948018180951216
 MonoBehaviour:
@@ -2190,7 +2191,7 @@ GameObject:
   - component: {fileID: 7738088214196230196}
   m_Layer: 0
   m_Name: Stairs
-  m_TagString: Untagged
+  m_TagString: Stairs
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2208,7 +2209,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7738088214991733486}
-  - {fileID: 7738088214226206525}
   - {fileID: 7738088214298147695}
   - {fileID: 7738088215897066038}
   - {fileID: 7738088216053893531}
@@ -2231,7 +2231,7 @@ GameObject:
   - component: {fileID: 7738088214226206527}
   - component: {fileID: 7738088214226206524}
   m_Layer: 0
-  m_Name: FrontWall
+  m_Name: BackWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2245,12 +2245,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7738088214226206522}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.4499999, y: 0.85, z: -0.99999994}
+  m_LocalPosition: {x: -0.4499999, y: 0.85, z: -1}
   m_LocalScale: {x: 2.1, y: 1.6, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7738088214196230196}
-  m_RootOrder: 1
+  m_Father: {fileID: 8811733623116923156}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7738088214226206526
 MeshFilter:
@@ -2280,7 +2280,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4d7e3bd451096f341bed2531c3be6b06, type: 2}
+  - {fileID: 2100000, guid: 525fa0005e151e44388a496b70bc37c9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2349,7 +2349,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7738088214196230196}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &7738088214247897305
 MonoBehaviour:
@@ -3714,7 +3714,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7738088214196230196}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7738088214298147664
 MeshFilter:
@@ -4571,7 +4571,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7738088214196230196}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7738088214723626857
 MeshFilter:
@@ -5442,7 +5442,7 @@ GameObject:
   - component: {fileID: 7738088215777456546}
   m_Layer: 0
   m_Name: Elevator_Entrace
-  m_TagString: Untagged
+  m_TagString: Elevator
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5501,7 +5501,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7738088214196230196}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7738088215897066043
 MeshFilter:
@@ -5598,7 +5598,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7738088214196230196}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7738088216053893532
 MeshFilter:
@@ -5674,7 +5674,7 @@ GameObject:
   - component: {fileID: 878754678504775715}
   m_Layer: 0
   m_Name: Elevator
-  m_TagString: Untagged
+  m_TagString: Elevator
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

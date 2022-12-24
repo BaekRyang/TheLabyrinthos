@@ -4,39 +4,31 @@ using UnityEngine;
 
 public class WallCulling : MonoBehaviour
 {
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
-
+    [SerializeField] string nowStay;
+    [SerializeField] int nowLevel;
 
     //Camera.main.cullingMask |= 1 << LayerMask.NameToLayer("Group");
     //// CullingMask에 "Group" Layer를 제거합니다.
     //Camera.main.cullingMask = Camera.main.cullingMask & ~(1 << LayerMask.NameToLayer("Group"));
     //// Nothing 상태인 CullingMask에서 Group Layer를 추가합니다.
 
-    private void OnCollisionEnter(Collision collision)
+
+    private void OnTriggerEnter(Collider other)
     {
-        switch (collision.gameObject.tag)
+        Debug.Log(other.gameObject.name);
+        if (other.gameObject.name != "RoomColider") return;
+        else
         {
-            case "MainFloor":
-                
-                break;
+            nowStay = other.transform.parent.name;
+            nowLevel = int.Parse(other.transform.parent.parent.name);
 
-            case "Stairs":
-                break;
-
-            case "Elevator":
-                break;
-
-            default:
-                break;
+            if (nowLevel % 2 == 0)
+            {
+                Camera.main.cullingMask = ~(1 << LayerMask.NameToLayer("LevelOdd"));
+            } else
+            {
+                Camera.main.cullingMask = ~(1 << LayerMask.NameToLayer("LevelEven"));
+            }
         }
-        Debug.Log(collision.transform.parent.parent.gameObject.name + " -> " + collision.transform.parent.gameObject.name);
     }
 }

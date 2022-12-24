@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using UnityEngine.Windows;
+using Input = UnityEngine.Input;
 
 public class PlayerController : MonoBehaviour
 {
@@ -24,6 +25,16 @@ public class PlayerController : MonoBehaviour
 
     Vector3 camPos;
 
+    private void Update()
+    {
+        if (Input.touchCount > 0)
+        {
+            Debug.Log(Input.GetTouch(0).position);
+        }
+
+        
+        direction = new Vector3(-Input.GetAxis("Horizontal"), 0f, -Input.GetAxis("Vertical"));
+    }
 
     private void Awake()
     {
@@ -36,13 +47,6 @@ public class PlayerController : MonoBehaviour
     {
         Move();
     }
-
-    public void OnMoveInput(InputAction.CallbackContext context)
-    {
-        Vector2 input = context.ReadValue<Vector2>();
-        direction = new Vector3(-input.x, 0f, -input.y);
-    }
-
     protected void Move()
     {
         Camera.main.transform.position = camPos + transform.position;

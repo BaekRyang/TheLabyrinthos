@@ -14,6 +14,9 @@ public class PlayerController : MonoBehaviour
 
     private int groundLayer;
 
+    [SerializeField] bool isOnSlope;
+    [SerializeField] bool isGrounded;
+
     public float MoveSpeed { get { return MoveSpeed; } }
     [SerializeField] float moveSpeed;
     Rigidbody rigid;
@@ -45,8 +48,8 @@ public class PlayerController : MonoBehaviour
         Camera.main.transform.position = camPos + transform.position;
         float currentMoveSpeed = moveSpeed;
 
-        bool isOnSlope = IsOnSlope();
-        bool isGrounded = IsGrounded();
+        isOnSlope = IsOnSlope();
+        isGrounded = IsGrounded();
         Vector3 velocity = direction;
         Vector3 gravity = Vector3.down * Mathf.Abs(rigid.velocity.y);
 

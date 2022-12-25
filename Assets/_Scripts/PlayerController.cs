@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Windows;
+using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 using Input = UnityEngine.Input;
 
 public class PlayerController : MonoBehaviour
@@ -25,15 +27,47 @@ public class PlayerController : MonoBehaviour
 
     Vector3 camPos;
 
+    public bl_Joystick js;
+    float horizontal;
+    float vertical;
+
     private void Update()
     {
-        if (Input.touchCount > 0)
-        {
-            Debug.Log(Input.GetTouch(0).position);
-        }
+        //horizontal = Input.GetAxisRaw("Horizontal");
+        //vertical = Input.GetAxisRaw("Vertical");
 
-        
-        direction = new Vector3(-Input.GetAxis("Horizontal"), 0f, -Input.GetAxis("Vertical"));
+        horizontal = js.Horizontal;
+        vertical = js.Vertical;
+
+
+
+        direction = transform.forward * vertical + transform.right * horizontal;
+        direction.Normalize();
+        Debug.DrawRay(transform.position, direction, Color.yellow);
+
+        LookAt();
+
+        //if (Input.touchCount > 0)
+        //{
+        //    if (Input.GetTouch(0).phase == TouchPhase.Began)
+        //    {
+        //        firstPoint = Input.GetTouch(0).position;
+        //        xAngleTemp = xAngle;
+        //        yAngleTemp = yAngle;
+        //    }
+        //    if (Input.GetTouch(0).phase == TouchPhase.Moved)
+        //    {
+        //        secondPoint= Input.GetTouch(0).position;
+        //        xAngle = xAngleTemp + (secondPoint.x - firstPoint.x) * 180 / Screen.width;
+        //        yAngle = yAngleTemp - (secondPoint.y - firstPoint.x) * 90 * 3f / Screen.height; //y값 변화가 느려서 3x
+
+        //        //회전값 40 ~ 85 Clamp
+        //        if (yAngle < 40f) yAngle = 40f;
+        //        if (yAngle > 85f) yAngle = 80f;
+
+        //        transform.rotation = Quaternion.Euler(yAngle, xAngle, 0.0f);
+        //    }
+        //}
     }
 
     private void Awake()
@@ -45,7 +79,14 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Move();
+        
+        if (horizontal == 0 && vertical == 0)
+        {
+            rigid.velocity = Vector3.zero;
+        } else
+        {
+            Move();
+        }
     }
     protected void Move()
     {
@@ -54,7 +95,7 @@ public class PlayerController : MonoBehaviour
 
         isOnSlope = IsOnSlope();
         isGrounded = IsGrounded();
-        Vector3 velocity = direction;
+        Vector3 velocity = new Vector3(direction.x, rigid.velocity.y, direction.z);
         Vector3 gravity = Vector3.down * Mathf.Abs(rigid.velocity.y);
 
         if (isGrounded && isOnSlope)
@@ -67,19 +108,18 @@ public class PlayerController : MonoBehaviour
         {
             rigid.useGravity = true;
         }
-            
-
-        LookAt();
         rigid.velocity = velocity * currentMoveSpeed + gravity;
     }
 
     protected void LookAt()
     {
-        if (direction != Vector3.zero)
-        {
-            Quaternion targetAngle = Quaternion.LookRotation(direction);
-            rigid.rotation = targetAngle;
-        }
+        //if (direction != Vector3.zero)
+        //{
+        //    Quaternion targetAngle = Quaternion.LookRotation(direction);
+        //    rigid.rotation = targetAngle;
+        //}
+        Vector3 tmpRot = new Vector3(0, Camera.main.transform.rotation.eulerAngles.y, 0);
+        rigid.rotation = Quaternion.Euler(tmpRot);
     }
     
     protected bool IsOnSlope()

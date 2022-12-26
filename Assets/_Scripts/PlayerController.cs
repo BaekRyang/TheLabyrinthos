@@ -27,47 +27,19 @@ public class PlayerController : MonoBehaviour
 
     Vector3 camPos;
 
-    public bl_Joystick js;
     float horizontal;
     float vertical;
 
     private void Update()
     {
-        //horizontal = Input.GetAxisRaw("Horizontal");
-        //vertical = Input.GetAxisRaw("Vertical");
-
-        horizontal = js.Horizontal;
-        vertical = js.Vertical;
-
-
+        horizontal = Input.GetAxisRaw("Horizontal");
+        vertical = Input.GetAxisRaw("Vertical");
 
         direction = transform.forward * vertical + transform.right * horizontal;
         direction.Normalize();
         Debug.DrawRay(transform.position, direction, Color.yellow);
 
         LookAt();
-
-        //if (Input.touchCount > 0)
-        //{
-        //    if (Input.GetTouch(0).phase == TouchPhase.Began)
-        //    {
-        //        firstPoint = Input.GetTouch(0).position;
-        //        xAngleTemp = xAngle;
-        //        yAngleTemp = yAngle;
-        //    }
-        //    if (Input.GetTouch(0).phase == TouchPhase.Moved)
-        //    {
-        //        secondPoint= Input.GetTouch(0).position;
-        //        xAngle = xAngleTemp + (secondPoint.x - firstPoint.x) * 180 / Screen.width;
-        //        yAngle = yAngleTemp - (secondPoint.y - firstPoint.x) * 90 * 3f / Screen.height; //y값 변화가 느려서 3x
-
-        //        //회전값 40 ~ 85 Clamp
-        //        if (yAngle < 40f) yAngle = 40f;
-        //        if (yAngle > 85f) yAngle = 80f;
-
-        //        transform.rotation = Quaternion.Euler(yAngle, xAngle, 0.0f);
-        //    }
-        //}
     }
 
     private void Awake()

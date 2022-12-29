@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class InputManager : MonoBehaviour
 {
+    public static InputManager instance;
+
     [SerializeField] GameObject joystick1;
     [SerializeField] GameObject joystick2;
 
@@ -17,8 +19,11 @@ public class InputManager : MonoBehaviour
 
     public int cameraId = -1;
     public int joystickId = -1;
+
+
     void Start()
     {
+        instance = this;
         screenWidth = Screen.width;
         screenHeight = Screen.height;
     }
@@ -36,9 +41,10 @@ public class InputManager : MonoBehaviour
                         {
                             if (!cameraTouched)
                             {
-                                Debug.Log("CAM");
                                 cameraTouched = true;
                                 cameraId = Input.GetTouch(i).fingerId;
+                                joystick1.GetComponent<RectTransform>().position = Input.GetTouch(i).position;
+                                CameraController.instance.CameraInit(Input.GetTouch(i).position);
                             }
                             else Debug.Log("CAM_Denied");
                         } else
@@ -48,6 +54,7 @@ public class InputManager : MonoBehaviour
                                 Debug.Log("Joystic");
                                 joystickTouched = true;
                                 joystickId = Input.GetTouch(i).fingerId;
+                                joystick2.GetComponent<RectTransform>().position = Input.GetTouch(i).position;
                             }
                             else Debug.Log("JOY_Denied");
                         }
@@ -55,11 +62,12 @@ public class InputManager : MonoBehaviour
                     case TouchPhase.Moved:
                         if (Input.GetTouch(i).fingerId == cameraId)
                         {
-                            joystick1.GetComponent<RectTransform>().position = Input.GetTouch(i).position;
+                            joystick1.transform.Find("InnerCircle").GetComponent<RectTransform>().position = Input.GetTouch(i).position;
+                            CameraController.instance.CameraMove(Input.GetTouch(i).position);
                         }
                         else if (Input.GetTouch(i).fingerId == joystickId)
                         {
-                            joystick2.GetComponent<RectTransform>().position = Input.GetTouch(i).position;
+                            joystick2.transform.Find("InnerCircle").GetComponent<RectTransform>().position = Input.GetTouch(i).position;
                         }
                         
                         break;

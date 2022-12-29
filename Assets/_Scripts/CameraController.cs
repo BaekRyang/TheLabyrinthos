@@ -7,46 +7,47 @@ using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] Vector3 firstPoint;
-    [SerializeField] Vector3 secondPoint;
-    [SerializeField] float xAngle;
-    [SerializeField] float yAngle;
-    [SerializeField] float xAngleTemp;
-    [SerializeField] float yAngleTemp;
+    static public CameraController instance;
+    public Vector3 firstPoint;
+    public Vector3 secondPoint;
+    public float xAngle;
+    public float yAngle;
+    public float xAngleTemp;
+    public float yAngleTemp;
 
     public int joysticTouchId = 0;
 
     private void Start()
     {
+        instance = this;
         //transform.rotation = Quaternion.Euler(yAngle, xAngle, 0); 
     }
     private void Update()
     {
-        if (Input.touchCount > 0)
+        if (InputManager.instance.cameraTouched)
         {
-            if (Input.GetTouch(Input.touchCount-1).fingerId != joysticTouchId)
-            {
-                
-                if (Input.GetTouch(0).phase == TouchPhase.Began)
-                {
-                    firstPoint = Input.GetTouch(0).position;
-                    xAngleTemp = xAngle;
-                    yAngleTemp = yAngle;
-                }
-                if (Input.GetTouch(0).phase == TouchPhase.Moved)
-                {
-                    secondPoint = Input.GetTouch(0).position;
-                    xAngle = xAngleTemp + (secondPoint.x - firstPoint.x) * 180 / Screen.width;
-                    yAngle = yAngleTemp - (secondPoint.y - firstPoint.y) * 180 / Screen.height;
-
-                    //회전값 40 ~ 85 Clamp
-                    if (yAngle < -40f) yAngle = -40f;
-                    if (yAngle > 40f) yAngle = 40f;
-                }
-            }
+            transform.rotation = Quaternion.Euler(yAngle, xAngle, 0.0f);
         }
         
-        transform.rotation = Quaternion.Euler(yAngle, xAngle, 0.0f);
+    }
+
+    public void CameraInit(Vector2 _pos)
+    {
+        firstPoint = _pos;
+        xAngleTemp = xAngle;
+        yAngleTemp = yAngle;
+    }
+
+    public void CameraMove(Vector2 _pos)
+    {
+        secondPoint = _pos;
+        xAngle = xAngleTemp + (secondPoint.x - firstPoint.x) * 180 / Screen.width;
+        yAngle = yAngleTemp - (secondPoint.y - firstPoint.y) * 180 / Screen.height;
+
+        //회전값 40 ~ 85 Clamp
+        if (yAngle < -40f) yAngle = -40f;
+        if (yAngle > 40f) yAngle = 40f;
+
     }
 
     public bool IsPointerOverUIObject(Vector2 touchPos)

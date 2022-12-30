@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5817876952292789407}
   - component: {fileID: 4934394451514793368}
   - component: {fileID: 772222773044688312}
+  - component: {fileID: 3608353702206798733}
   m_Layer: 8
   m_Name: Door
   m_TagString: Door
@@ -30,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 2456476636463522582}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.0565934, y: -0.08727646, z: 2.1342509}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -842,17 +843,9 @@ MonoBehaviour:
   m_Mesh: {fileID: 0}
   m_VersionIndex: 1674
   m_IsSelectable: 1
-  m_SelectedFaces: 0d000000
-  m_SelectedEdges:
-  - a: 53
-    b: 52
-  - a: 52
-    b: 54
-  - a: 54
-    b: 55
-  - a: 55
-    b: 53
-  m_SelectedVertices: 36000000350000003400000037000000
+  m_SelectedFaces: 
+  m_SelectedEdges: []
+  m_SelectedVertices: 
 --- !u!114 &4007780421434227919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -948,3 +941,16 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!65 &3608353702206798733
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2456476636463522582}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.2, y: 2.1000001, z: 0.1}
+  m_Center: {x: 0, y: 0, z: 0.2}

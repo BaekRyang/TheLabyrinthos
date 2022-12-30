@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] Texture[] playerTexture;
 
-    private const float RAY_DISTANCE = 1f;
+    private const float RAY_DISTANCE = 2f;
     
     private RaycastHit slopeHit;
     private float maxSlopeAngle = 90f;
@@ -35,10 +35,10 @@ public class PlayerController : MonoBehaviour
     Vector3 camPos;
 
     Vector3 camRot;
+    [SerializeField] float camRotX;
 
     float horizontal;
     float vertical;
-
     private void Start()
     {
         playerTexture = Resources.LoadAll<Texture>("Sprites/Player");
@@ -55,10 +55,10 @@ public class PlayerController : MonoBehaviour
         Debug.DrawRay(transform.position, direction, Color.yellow);
 
         camRot = Camera.main.transform.rotation.eulerAngles;
-        camRot.x = 0;
+        camRot.x = camRotX;
         rigid.rotation = Quaternion.Euler(camRot);
 
-        LookAt();
+        LookAt();  
     }
 
     private void Awake()
@@ -70,7 +70,6 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
         if (horizontal == 0 && vertical == 0)
         {
             rigid.velocity = Vector3.zero;
@@ -79,6 +78,7 @@ public class PlayerController : MonoBehaviour
             Move();
         }
     }
+
     protected void Move()
     {
         Camera.main.transform.position = camPos + transform.position;

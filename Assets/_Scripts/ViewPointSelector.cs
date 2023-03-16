@@ -16,9 +16,17 @@ public class ViewPointSelector : MonoBehaviour
     {
         groundLayer = 1 << LayerMask.NameToLayer("Ground");
     }
+
+    private void Start()
+    {
+        Physics.Raycast(transform.position, Vector3.down, out roomCheck, RAY_DISTANCE, groundLayer);
+        prevRoom = roomCheck.transform.root.gameObject;
+        prevRoomName = prevRoom.name;
+        prevRoom.GetComponent<RoomController>().ChangeRoomState(true);
+    }
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(Physics.Raycast(other.transform.position, Vector3.down, out roomCheck, RAY_DISTANCE, groundLayer));
+        Debug.Log(Physics.Raycast(transform.position, Vector3.down, out roomCheck, RAY_DISTANCE, groundLayer));
         Debug.Log(roomCheck.transform.root.name);
 
         prevRoom.GetComponent<RoomController>().ChangeRoomState(false);

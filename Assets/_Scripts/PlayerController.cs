@@ -113,29 +113,29 @@ public class PlayerController : MonoBehaviour
         {
             // player is moving right and up (diagonal)
             faceing = 9;
-            spriteBox.GetComponent<Renderer>().material.mainTexture = playerTexture[1];
-            spriteBox.transform.localScale = new Vector3(-1, 1.7f, 0.01f);
+            spriteBox.GetComponent<Renderer>().material.SetTexture("_PlayerTexture", playerTexture[1]);
+            spriteBox.transform.localScale = new Vector3(-1, 1, 0.01f);
         }
         else if (horizontal == 1 && vertical == -1)
         {
             // player is moving right and down (diagonal)
             faceing = 3;
-            spriteBox.GetComponent<Renderer>().material.mainTexture = playerTexture[3];
-            spriteBox.transform.localScale = new Vector3(-1, 1.7f, 0.01f);
+            spriteBox.GetComponent<Renderer>().material.SetTexture("_PlayerTexture", playerTexture[3]);
+            spriteBox.transform.localScale = new Vector3(-1, 1, 0.01f);
         }
         else if (horizontal == -1 && vertical == 1)
         {
             // player is moving left and up (diagonal)
             faceing = 7;
-            spriteBox.GetComponent<Renderer>().material.mainTexture = playerTexture[1];
-            spriteBox.transform.localScale = new Vector3(1, 1.7f, 0.01f);
+            spriteBox.GetComponent<Renderer>().material.SetTexture("_PlayerTexture", playerTexture[1]);
+            spriteBox.transform.localScale = new Vector3(1, 1, 0.01f);
         }
         else if (horizontal == -1 && vertical == -1)
         {
             // player is moving left and down (diagonal)
             faceing = 1;
-            spriteBox.GetComponent<Renderer>().material.mainTexture = playerTexture[3];
-            spriteBox.transform.localScale = new Vector3(1, 1.7f, 0.01f);
+            spriteBox.GetComponent<Renderer>().material.SetTexture("_PlayerTexture", playerTexture[3]);
+            spriteBox.transform.localScale = new Vector3(1, 1, 0.01f);
         }
         else if (horizontal == 1)
         {
@@ -149,17 +149,17 @@ public class PlayerController : MonoBehaviour
         }
         else if (vertical == 1)
         {
-            // player is moving up
+            // player is moving ups
             faceing = 8;
-            spriteBox.GetComponent<Renderer>().material.mainTexture = playerTexture[0];
-            spriteBox.transform.localScale = new Vector3(1, 1.7f, 0.01f);
+            spriteBox.GetComponent<Renderer>().material.SetTexture("_PlayerTexture", playerTexture[0]);
+            spriteBox.transform.localScale = new Vector3(1, 1, 0.01f);
         }
         else if (vertical == -1)
         {
             // player is moving down
             faceing = 2;
-            spriteBox.GetComponent<Renderer>().material.mainTexture = playerTexture[2];
-            spriteBox.transform.localScale = new Vector3(1, 1.7f, 0.01f);
+            spriteBox.GetComponent<Renderer>().material.SetTexture("_PlayerTexture", playerTexture[2]);
+            spriteBox.transform.localScale = new Vector3(1, 1, 0.01f);
         }
     }
     

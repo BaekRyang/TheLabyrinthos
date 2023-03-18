@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RoomController : MonoBehaviour
 {
+    [SerializeField] public int index;
     [SerializeField] GameObject doors;
     [SerializeField] GameObject ceilings;
     [SerializeField] bool startActive;

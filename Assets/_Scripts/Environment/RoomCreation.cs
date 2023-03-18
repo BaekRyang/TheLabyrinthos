@@ -62,17 +62,16 @@ public class RoomCreation : MonoBehaviour
                                                             Quaternion.identity);                                           //R
 
                 //가장 왼쪽/오른쪽이 아니고 양옆에 방이 있으면
-                if (i % 10 != 0 && i % 10 != 9 && iaMap[i - 1] == 1 && iaMap[i + 1] == 1 && iaMap[i - 10] == 0 && iaMap[i + 10] == 0)
+                if (i % 10 != 0 && i % 10 != 9 && iaMap[i - 1] != 0 && iaMap[i + 1] != 0 && iaMap[i - 10] == 0 && iaMap[i + 10] == 0)
                 {
                     tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#f1c94f> -- </color>";
                 }
                 //가장 위/아래가 아니고 위 아래에 방이 있으면
-                else if (i  > 9 && i  < 90 && iaMap[i - 10] == 1 && iaMap[i + 10] == 1 && iaMap[i - 1] == 0 && iaMap[i + 1] == 0)
+                else if (i  > 9 && i  < 90 && iaMap[i - 10] != 0 && iaMap[i + 10] != 0 && iaMap[i - 1] == 0 && iaMap[i + 1] == 0)
                 {
                     tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#f1c94f> | </color>";
                 }
-
-                    if (i == 45)
+                if (i == 45)
                 {
                     tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#16c60c> S </color>";
                 }
@@ -140,7 +139,7 @@ public class RoomCreation : MonoBehaviour
                 }
 
 
-
+                tmpGO.GetComponent<RoomController>().index = i;
             }
         }
 

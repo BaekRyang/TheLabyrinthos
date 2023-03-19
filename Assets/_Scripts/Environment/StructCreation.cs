@@ -9,7 +9,7 @@ public class StructCreation
     int iCreateRoomCount = 0;
     Random rand = new Random();
 
-    //´ÙÀ½À¸·Î Å½»öÇÒ ¹æµéÀÇ ÀÎµ¦½º¸¦ ÀúÀåÇÒ Å¥
+    //ë‹¤ìŒìœ¼ë¡œ íƒìƒ‰í•  ë°©ë“¤ì˜ ì¸ë±ìŠ¤ë¥¼ ì €ìž¥í•  í
     Queue<int> qRoomIdx = new Queue<int>();
 
     int[] iaMap = new int[100];
@@ -18,40 +18,40 @@ public class StructCreation
 
     public bool Run(int maxRoom, ref int[] destArray)
     {
-        //¹æ Å©±â ÃÊ±âÈ­
+        //ë°© í¬ê¸° ì´ˆê¸°í™”
         iMaxRoom = maxRoom;
 
-        Check(iaMap, iFirstRoom); //ÃÊ±â À§Ä¡ (Áß¾Ó)
+        Check(iaMap, iFirstRoom); //ì´ˆê¸° ìœ„ì¹˜ (ì¤‘ì•™)
 
-        //Å¥¿¡ ¹æÀÌ ÇÏ³ªµµ ³²Áö ¾ÊÀ»¶§±îÁö ¹Ýº¹
+        //íì— ë°©ì´ í•˜ë‚˜ë„ ë‚¨ì§€ ì•Šì„ë•Œê¹Œì§€ ë°˜ë³µ
         while (qRoomIdx.Count > 0)
         {
             int iRoom = qRoomIdx.Dequeue();
             bool bCreated = false;
-            int iXPos = iRoom % 10; //¿­ ÀÎµ¦½º
+            int iXPos = iRoom % 10; //ì—´ ì¸ë±ìŠ¤
 
-            //°¢°¢ ºÙ¾îÀÖ´Â "bCreated ||" ´Â ³ªÁß¿¡ ¹æ¹®ÇÑ°÷¿¡¼­ ¹æÀ» ¸¸µéÁö ¸øÇß´õ¶óµµ ÀÌÀü¿¡ ¸¸µç °ª¿¡ ¿µÇâÀ» ÁÖÁö ¾Êµµ·Ï ÀÖÀ½
-            //ÇöÀç ¼¿ÀÌ °¡Àå ¿ÞÂÊ¿¡ ºÙ¾îÀÖÁö ¾Ê´Ù¸é ¿ÞÂÊÀ¸·Î ÀÌµ¿ÇÑ´Ù.
+            //ê°ê° ë¶™ì–´ìžˆëŠ” "bCreated ||" ëŠ” ë‚˜ì¤‘ì— ë°©ë¬¸í•œê³³ì—ì„œ ë°©ì„ ë§Œë“¤ì§€ ëª»í–ˆë”ë¼ë„ ì´ì „ì— ë§Œë“  ê°’ì— ì˜í–¥ì„ ì£¼ì§€ ì•Šë„ë¡ ìžˆìŒ
+            //í˜„ìž¬ ì…€ì´ ê°€ìž¥ ì™¼ìª½ì— ë¶™ì–´ìžˆì§€ ì•Šë‹¤ë©´ ì™¼ìª½ìœ¼ë¡œ ì´ë™í•œë‹¤.
 
             if (iXPos > 0) bCreated = bCreated || Check(iaMap, iRoom - 1);
 
-            //ÇöÀç ¼¿ÀÌ °¡Àå ¿À¸¥ÂÊ¿¡ ºÙ¾îÀÖÁö ¾Ê´Ù¸é ¿À¸¥ÂÊÀ¸·Î ÀÌµ¿ÇÑ´Ù.
+            //í˜„ìž¬ ì…€ì´ ê°€ìž¥ ì˜¤ë¥¸ìª½ì— ë¶™ì–´ìžˆì§€ ì•Šë‹¤ë©´ ì˜¤ë¥¸ìª½ìœ¼ë¡œ ì´ë™í•œë‹¤.
             if (iXPos < 8) bCreated = bCreated || Check(iaMap, iRoom + 1);
 
-            //ÇöÀç ¼¿ÀÌ °¡Àå À§ÂÊ¿¡ ºÙ¾îÀÖÁö ¾Ê´Ù¸é À§ÂÊÀ¸·Î ÀÌµ¿ÇÑ´Ù.
+            //í˜„ìž¬ ì…€ì´ ê°€ìž¥ ìœ„ìª½ì— ë¶™ì–´ìžˆì§€ ì•Šë‹¤ë©´ ìœ„ìª½ìœ¼ë¡œ ì´ë™í•œë‹¤.
             if (iRoom > 9) bCreated = bCreated | Check(iaMap, iRoom - 10);
 
-            //ÇöÀç ¼¿ÀÌ °¡Àå ¾Æ·¡ÂÊ¿¡ ºÙ¾îÀÖÁö ¾Ê´Ù¸é ¾Æ·¡ÂÊÀ¸·Î ÀÌµ¿ÇÑ´Ù.
+            //í˜„ìž¬ ì…€ì´ ê°€ìž¥ ì•„ëž˜ìª½ì— ë¶™ì–´ìžˆì§€ ì•Šë‹¤ë©´ ì•„ëž˜ìª½ìœ¼ë¡œ ì´ë™í•œë‹¤.
             if (iRoom < 90) bCreated = bCreated | Check(iaMap, iRoom + 10);
 
-            //°á±¹ ¾Æ¹«°÷¿¡µµ ¹æÀ» ¸¸µéÁö ¸øÇÏ´Â À§Ä¡¶ó¸é ¿£µå·ë Å¥¿¡ Ãß°¡ÇÑ´Ù.
+            //ê²°êµ­ ì•„ë¬´ê³³ì—ë„ ë°©ì„ ë§Œë“¤ì§€ ëª»í•˜ëŠ” ìœ„ì¹˜ë¼ë©´ ì—”ë“œë£¸ íì— ì¶”ê°€í•œë‹¤.
             if (!bCreated) qEndRoom.Push(iRoom);
         }
 
         if (iCreateRoomCount != iMaxRoom) return false;
 
-        //Á¶°Ç ºÒ¸¸Á·ÀÏ¶§ Æ¯¼ö¹æ ¹èÄ¡ÇÏ¸é ºó ½ºÅÃ ¿À·ù ¹ß»ýÇÏ¹Ç·Î
-        //Á¶°Ç È®ÀÎÈÄ ¹èÄ¡
+        //ì¡°ê±´ ë¶ˆë§Œì¡±ì¼ë•Œ íŠ¹ìˆ˜ë°© ë°°ì¹˜í•˜ë©´ ë¹ˆ ìŠ¤íƒ ì˜¤ë¥˜ ë°œìƒí•˜ë¯€ë¡œ
+        //ì¡°ê±´ í™•ì¸í›„ ë°°ì¹˜
         PlaceSpecialRoom(iaMap);
 
         int ttmp = qEndRoom.Count;
@@ -69,21 +69,21 @@ public class StructCreation
 
     bool Check(int[] map, int i)
     {
-        //ÀÌ¹Ì »ý¼ºµÈ ¹æÀÌ ÀÖÀ¸¸é Æ÷±â
+        //ì´ë¯¸ ìƒì„±ëœ ë°©ì´ ìžˆìœ¼ë©´ í¬ê¸°
         if (map[i] != 0) return false;
 
-        //ÀÌ¹Ì ÁÖº¯¿¡ ¹æÀÌ 2°³ ÀÌ»ó ¸¸µé¾î Áø °æ¿ì Æ÷±â
+        //ì´ë¯¸ ì£¼ë³€ì— ë°©ì´ 2ê°œ ì´ìƒ ë§Œë“¤ì–´ ì§„ ê²½ìš° í¬ê¸°
         if (NeighborCount(map, i) >= 2) return false;
 
-        //¹æÀÇ °³¼ö°¡ ²Ë Âù °æ¿ì Æ÷±â
+        //ë°©ì˜ ê°œìˆ˜ê°€ ê½‰ ì°¬ ê²½ìš° í¬ê¸°
         if (iCreateRoomCount >= iMaxRoom) return false;
-        // //¹«ÀÛÀ§¼ºÀ» À§ÇØ 50%È®·ü·Î Æ÷±â
+        // //ë¬´ìž‘ìœ„ì„±ì„ ìœ„í•´ 50%í™•ë¥ ë¡œ í¬ê¸°
         if (rand.Next(2) == 1 && i != iFirstRoom)
         return false;
-        //¸ðµç Á¶°Ç¿¡ Åë°úÇß´Ù¸é ÇØ´ç À§Ä¡¸¦ Å¥¿¡ ³Ö¾îÁØ´Ù.
+        //ëª¨ë“  ì¡°ê±´ì— í†µê³¼í–ˆë‹¤ë©´ í•´ë‹¹ ìœ„ì¹˜ë¥¼ íì— ë„£ì–´ì¤€ë‹¤.
         qRoomIdx.Enqueue(i);
 
-        //ÇØ´ç Ä­Àº ¹æÀÌ »ý°åÀ¸¹Ç·Î 1À¸·Î ¸¸µé°í ¹æ °³¼ö¸¦ +1 ÇØÁØ´Ù.
+        //í•´ë‹¹ ì¹¸ì€ ë°©ì´ ìƒê²¼ìœ¼ë¯€ë¡œ 1ìœ¼ë¡œ ë§Œë“¤ê³  ë°© ê°œìˆ˜ë¥¼ +1 í•´ì¤€ë‹¤.
         map[i] = 1;
 
         if (i == iFirstRoom) map[i] = 1;
@@ -104,8 +104,8 @@ public class StructCreation
 
     void PlaceSpecialRoom(int[] destArray)
     {
-        //¿£µå·ëÀº Å¥¿¡ ÀúÀåµÇ¾î ÀÖ´Âµ¥, ¾Ë°í¸®Áò»ó ¿£µå·ëÁß °¡Àå ¸Ö¸® ÀÖ´Â °ÍÀÌ Á¦ÀÏ ¸¶Áö¸·¿¡ À§Ä¡ÇÑ´Ù.
-        //±× ¹æÀ» ÃþÀ» ³»·Á°¡´Âµ¥ ÇÊ¿äÇÑ ¾ÆÀÌÅÛÀÌ ³ª¿À´Â ¹æÀ¸·Î ¹èÄ¡ÇÑ´Ù.
+        //ì—”ë“œë£¸ì€ íì— ì €ìž¥ë˜ì–´ ìžˆëŠ”ë°, ì•Œê³ ë¦¬ì¦˜ìƒ ì—”ë“œë£¸ì¤‘ ê°€ìž¥ ë©€ë¦¬ ìžˆëŠ” ê²ƒì´ ì œì¼ ë§ˆì§€ë§‰ì— ìœ„ì¹˜í•œë‹¤.
+        //ê·¸ ë°©ì„ ì¸µì„ ë‚´ë ¤ê°€ëŠ”ë° í•„ìš”í•œ ì•„ì´í…œì´ ë‚˜ì˜¤ëŠ” ë°©ìœ¼ë¡œ ë°°ì¹˜í•œë‹¤.
         destArray[qEndRoom.Pop()] = 9;
     }
 

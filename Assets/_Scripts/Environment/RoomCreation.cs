@@ -8,7 +8,7 @@ using static UnityEditor.Rendering.CameraUI;
 public class RoomCreation : MonoBehaviour
 {
     private GameObject InstantiateObject(GameObject prefab, Vector3 position, Quaternion rotation, Transform parent)
-        //¿ÀºêÁ§Æ® »ı¼ºÈÄ Parent º¯°æ
+        //ì˜¤ë¸Œì íŠ¸ ìƒì„±í›„ Parent ë³€ê²½
     {
         GameObject tmpGO = GameObject.Instantiate(prefab, position, rotation);
         tmpGO.transform.SetParent(parent);
@@ -16,7 +16,7 @@ public class RoomCreation : MonoBehaviour
     }
 
     private void CreateWallOrDoor(GameObject wallPrefab, GameObject doorPrefab, Transform parent, Vector3 position, Quaternion rotation, bool condition)
-        //º®ÀÌ³ª ¹®À» ÆÇÁ¤ÈÄ »ı¼º
+        //ë²½ì´ë‚˜ ë¬¸ì„ íŒì •í›„ ìƒì„±
     {
         if (condition)
         {
@@ -40,7 +40,7 @@ public class RoomCreation : MonoBehaviour
     void Start()
     {
         int cnt = 0;
-        //¹æÀº ¾ğÁ¦³ª 10x10ÀÇ »çÀÌÁî¸¦ °®À¸¹Ç·Î ¹è¿­·Î °íÁ¤ÇÒ´çÇÑ´Ù.
+        //ë°©ì€ ì–¸ì œë‚˜ 10x10ì˜ ì‚¬ì´ì¦ˆë¥¼ ê°–ìœ¼ë¯€ë¡œ ë°°ì—´ë¡œ ê³ ì •í• ë‹¹í•œë‹¤.
         int[] iaMap = new int[MAP_SIZE];
         StructCreation structCreation = new StructCreation();
         while (true)
@@ -66,7 +66,7 @@ public class RoomCreation : MonoBehaviour
 
         }
 
-        //¹æ ±¸Á¶ º£ÀÌ½º »ı¼º
+        //ë°© êµ¬ì¡° ë² ì´ìŠ¤ ìƒì„±
         for (int i = 0; i < 100; i++)
         {
             if (iaMap[i] == 0)
@@ -87,12 +87,12 @@ public class RoomCreation : MonoBehaviour
                                                             (-4 * iRoomSize) + (i / 10) * iRoomSize),                       //Z
                                                             Quaternion.identity);                                           //R
 
-                //°¡Àå ¿ŞÂÊ/¿À¸¥ÂÊÀÌ ¾Æ´Ï°í ¾ç¿·¿¡ ¹æÀÌ ÀÖÀ¸¸é
+                //ê°€ì¥ ì™¼ìª½/ì˜¤ë¥¸ìª½ì´ ì•„ë‹ˆê³  ì–‘ì˜†ì— ë°©ì´ ìˆìœ¼ë©´
                 if (i % 10 != 0 && i % 10 != 9 && iaMap[i - 1] != 0 && iaMap[i + 1] != 0 && iaMap[i - 10] == 0 && iaMap[i + 10] == 0)
                 {
                     tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#f1c94f> -- </color>";
                 }
-                //°¡Àå À§/¾Æ·¡°¡ ¾Æ´Ï°í À§ ¾Æ·¡¿¡ ¹æÀÌ ÀÖÀ¸¸é
+                //ê°€ì¥ ìœ„/ì•„ë˜ê°€ ì•„ë‹ˆê³  ìœ„ ì•„ë˜ì— ë°©ì´ ìˆìœ¼ë©´
                 else if (i  > 9 && i  < 90 && iaMap[i - 10] != 0 && iaMap[i + 10] != 0 && iaMap[i - 1] == 0 && iaMap[i + 1] == 0)
                 {
                     tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#f1c94f> | </color>";

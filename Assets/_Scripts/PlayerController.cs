@@ -106,7 +106,7 @@ public class PlayerController : MonoBehaviour
     {
         if (horizontal == 0 && vertical == 0)
         {
-            // ÇÃ·¹ÀÌ¾î°¡ °¡¸¸È÷ ÀÖÀ»¶§
+            // í”Œë ˆì´ì–´ê°€ ê°€ë§Œíˆ ìˆì„ë•Œ
             faceing = 5;
         }
         else if (horizontal == 1 && vertical == 1)
@@ -175,7 +175,7 @@ public class PlayerController : MonoBehaviour
     }
 
     protected Vector3 AdjustDirectionToSlope(Vector3 direction)
-    { //ÀüÁøÇÏ°í ÀÖ´Â ¹æÇâ Vector¿Í ¼­ÀÖ´Â ¶¥ÀÇ Normal Vector¸¦ ÅëÇØ ¼­ÀÖ´Â ¶¥ÀÇ ±â¿ï¾îÁø ¹æÇâÀÇ Vector¸¦ ¹İÈ¯ÇÑ´Ù.
+    { //ì „ì§„í•˜ê³  ìˆëŠ” ë°©í–¥ Vectorì™€ ì„œìˆëŠ” ë•…ì˜ Normal Vectorë¥¼ í†µí•´ ì„œìˆëŠ” ë•…ì˜ ê¸°ìš¸ì–´ì§„ ë°©í–¥ì˜ Vectorë¥¼ ë°˜í™˜í•œë‹¤.
         return Vector3.ProjectOnPlane(direction, slopeHit.normal).normalized;
     }
 

@@ -33,7 +33,7 @@ public class RoomController : MonoBehaviour
         transform.name = "Room_" + index.ToString();
         for (int i = 0; i < transform.childCount; i++)
         {
-            // ¿ÀºêÁ§Æ®°¡ Instantiate·Î »ý¼ºµÈ ¿ÀºêÁ§Æ®ÀÏ °æ¿ì
+            // ì˜¤ë¸Œì íŠ¸ê°€ Instantiateë¡œ ìƒì„±ëœ ì˜¤ë¸Œì íŠ¸ì¼ ê²½ìš°
             if (transform.GetChild(i).name.EndsWith("(Clone)"))
             {
                 while (transform.GetChild(i).childCount != 0)
@@ -41,23 +41,23 @@ public class RoomController : MonoBehaviour
                     if (transform.GetChild(i).GetChild(0).name == "Door")
                     {
                         Debug.Log("DOOR");
-                        // Door ¿ÀºêÁ§Æ®¸¦ doors ¿ÀºêÁ§Æ®ÀÇ ÇÏÀ§·Î ÀÌµ¿
+                        // Door ì˜¤ë¸Œì íŠ¸ë¥¼ doors ì˜¤ë¸Œì íŠ¸ì˜ í•˜ìœ„ë¡œ ì´ë™
                         transform.GetChild(i).GetChild(0).parent = doors.transform;
                     }
-                    // Wall ¿ÀºêÁ§Æ®¸¦ Ã£À½
+                    // Wall ì˜¤ë¸Œì íŠ¸ë¥¼ ì°¾ìŒ
                     else if (transform.GetChild(i).GetChild(0).name == "Wall")
                     {
-                        // Wall ¿ÀºêÁ§Æ®¸¦ walls ¿ÀºêÁ§Æ®ÀÇ ÇÏÀ§·Î ÀÌµ¿
+                        // Wall ì˜¤ë¸Œì íŠ¸ë¥¼ walls ì˜¤ë¸Œì íŠ¸ì˜ í•˜ìœ„ë¡œ ì´ë™
                         transform.GetChild(i).GetChild(0).parent = walls.transform;
                     }
-                    // ±× ¿ÜÀÇ ¿ÀºêÁ§Æ®¸¦ Ã£À½
+                    // ê·¸ ì™¸ì˜ ì˜¤ë¸Œì íŠ¸ë¥¼ ì°¾ìŒ
                     else
                     {
-                        // ÇØ´ç ¿ÀºêÁ§Æ®¸¦ ÇöÀç °ÔÀÓ ¿ÀºêÁ§Æ®ÀÇ ÇÏÀ§·Î ÀÌµ¿
+                        // í•´ë‹¹ ì˜¤ë¸Œì íŠ¸ë¥¼ í˜„ìž¬ ê²Œìž„ ì˜¤ë¸Œì íŠ¸ì˜ í•˜ìœ„ë¡œ ì´ë™
                         transform.GetChild(i).GetChild(0).parent = this.transform;
                     }
                 }
-                // Instantiate·Î »ý¼ºµÈ °ÔÀÓ ¿ÀºêÁ§Æ®¸¦ »èÁ¦
+                // Instantiateë¡œ ìƒì„±ëœ ê²Œìž„ ì˜¤ë¸Œì íŠ¸ë¥¼ ì‚­ì œ
                 Destroy(transform.GetChild(i).gameObject);
             }
         }

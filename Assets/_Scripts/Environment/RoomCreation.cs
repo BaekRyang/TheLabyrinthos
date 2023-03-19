@@ -7,19 +7,45 @@ using static UnityEditor.Rendering.CameraUI;
 
 public class RoomCreation : MonoBehaviour
 {
+    private GameObject InstantiateObject(GameObject prefab, Vector3 position, Quaternion rotation, Transform parent)
+        //오브젝트 생성후 Parent 변경
+    {
+        GameObject tmpGO = GameObject.Instantiate(prefab, position, rotation);
+        tmpGO.transform.SetParent(parent);
+        return tmpGO;
+    }
+
+    private void CreateWallOrDoor(GameObject wallPrefab, GameObject doorPrefab, Transform parent, Vector3 position, Quaternion rotation, bool condition)
+        //벽이나 문을 판정후 생성
+    {
+        if (condition)
+        {
+            InstantiateObject(wallPrefab, position, rotation, parent);
+        }
+        else
+        {
+            InstantiateObject(doorPrefab, position, rotation, parent);
+        }
+    }
+
+    private const int MAX_ATTEMPTS = 5000;
+    private const int MAP_SIZE = 100;
+
     [SerializeField] GameObject RoomBase;
     [SerializeField] GameObject RoomWall;
     [SerializeField] GameObject RoomDoor;
+    [SerializeField] GameObject Player;
     [SerializeField] int RoomCount = 10;
     int iRoomSize = 10;
     void Start()
     {
         int cnt = 0;
-        int[] iaMap = new int[100];
+        //방은 언제나 10x10의 사이즈를 갖으므로 배열로 고정할당한다.
+        int[] iaMap = new int[MAP_SIZE];
         StructCreation structCreation = new StructCreation();
         while (true)
         {
-            if (cnt >= 5000)
+            if (cnt >= MAX_ATTEMPTS)
             {
                 Debug.LogError("TIMEOUT");
                 break;
@@ -32,7 +58,7 @@ public class RoomCreation : MonoBehaviour
             }
             else
             {
-                Array.Clear(iaMap, 0, 100);
+                Array.Clear(iaMap, 0, MAP_SIZE);
                 structCreation = new StructCreation();
                 Debug.LogWarning("DISCARD");
                 cnt++;
@@ -82,73 +108,28 @@ public class RoomCreation : MonoBehaviour
                 else if (iaMap[i] == 9)
                 {
                     tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#e74856> K </color>";
-                } 
-
-
-                if (i % 10 < 0) //가장 왼쪽?
-                {
-                    GameObject.Instantiate(RoomWall, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 270, 0))).transform.SetParent(tmpGO.transform);
-
-                }
-                else if (iaMap[i - 1] == 0)
-                {
-                    GameObject.Instantiate(RoomWall, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 270, 0))).transform.SetParent(tmpGO.transform);
-                }
-                else
-                {
-                    GameObject.Instantiate(RoomDoor, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 270, 0))).transform.SetParent(tmpGO.transform);
                 }
 
-                if (i % 10 > 8) //가장 오른쪽?
-                {
-                    GameObject.Instantiate(RoomWall, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 90, 0))).transform.SetParent(tmpGO.transform);
-                }
-                else if (iaMap[i + 1] == 0) //오른쪽이 0?
-                {
-                    GameObject.Instantiate(RoomWall, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 90, 0))).transform.SetParent(tmpGO.transform);
-                }
-                else
-                {
-                    GameObject.Instantiate(RoomDoor, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 90, 0))).transform.SetParent(tmpGO.transform);
-                }
 
-                if (i < 9) //가장 위쪽?
-                {
-                    GameObject.Instantiate(RoomWall, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 180, 0))).transform.SetParent(tmpGO.transform);
-                }
-                else if (iaMap[i - 10] == 0) //왼쪽이 0?
-                {
-                    GameObject.Instantiate(RoomWall, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 180, 0))).transform.SetParent(tmpGO.transform);
-                }
-                else
-                {
-                    GameObject.Instantiate(RoomDoor, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 180, 0))).transform.SetParent(tmpGO.transform);
-                }
-
-                if (i > 90) //가장 아래쪽?
-                {
-                    GameObject.Instantiate(RoomWall, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 0, 0))).transform.SetParent(tmpGO.transform);
-                }
-                else if (iaMap[i + 10] == 0) //아래쪽이 0?
-                {
-                    GameObject.Instantiate(RoomWall, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 0, 0))).transform.SetParent(tmpGO.transform);
-                }
-                else
-                {
-                    GameObject.Instantiate(RoomDoor, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 0, 0))).transform.SetParent(tmpGO.transform);
-                }
-
+                CreateWallOrDoor(RoomWall, RoomDoor, tmpGO.transform, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 270, 0)), i % 10 < 1 || iaMap[i - 1] == 0);
+                CreateWallOrDoor(RoomWall, RoomDoor, tmpGO.transform, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 90, 0)), i % 10 > 8 || iaMap[i + 1] == 0);
+                CreateWallOrDoor(RoomWall, RoomDoor, tmpGO.transform, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 180, 0)), i < 10 || iaMap[i - 10] == 0);
+                CreateWallOrDoor(RoomWall, RoomDoor, tmpGO.transform, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 0, 0)), i > 90 || iaMap[i + 10] == 0);
 
                 tmpGO.GetComponent<RoomController>().index = i;
+                tmpGO.GetComponent<RoomController>().SortObjects();
+
+                if(i == 45)
+                {
+                    GameObject.Instantiate(Player);
+                }
             }
         }
 
 
     }
+
     
-    void Update()
-    {
-        
-    }
+
 
 }

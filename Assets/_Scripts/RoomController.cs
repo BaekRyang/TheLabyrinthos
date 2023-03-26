@@ -61,6 +61,7 @@ public class RoomController : MonoBehaviour
                 Destroy(transform.GetChild(i).gameObject);
             }
         }
+        doors.SetActive(false);
     }
 
 }

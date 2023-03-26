@@ -72,12 +72,6 @@ public class RoomCreation : MonoBehaviour
             if (iaMap[i] == 0)
             {
                 continue;
-                //GameObject tmpGO = GameObject.Instantiate(
-                //                                            RoomBase, new Vector3((-5 * iRoomSize) + (i % 10) * iRoomSize,  //X
-                //                                            0,                                                              //Y
-                //                                            (-4 * iRoomSize) + (i / 10) * iRoomSize),                       //Z
-                //                                            Quaternion.identity);                                           //R
-                //tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#111111> X </color>";
             }
             else
             {
@@ -87,16 +81,18 @@ public class RoomCreation : MonoBehaviour
                                                             (-4 * iRoomSize) + (i / 10) * iRoomSize),                       //Z
                                                             Quaternion.identity);                                           //R
 
-                //가장 왼쪽/오른쪽이 아니고 양옆에 방이 있으면
-                if (i % 10 != 0 && i % 10 != 9 && iaMap[i - 1] != 0 && iaMap[i + 1] != 0 && iaMap[i - 10] == 0 && iaMap[i + 10] == 0)
+                if(i % 10 != 0 && i % 10 != 9 && i > 9 && i < 90)
                 {
-                    tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#f1c94f> -- </color>";
+                    if (iaMap[i - 1] != 0 && iaMap[i + 1] != 0 && iaMap[i - 10] == 0 && iaMap[i + 10] == 0)
+                    {
+                        tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#f1c94f> -- </color>";
+                    }
+                    else if (iaMap[i - 10] != 0 && iaMap[i + 10] != 0 && iaMap[i - 1] == 0 && iaMap[i + 1] == 0)
+                    {
+                        tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#f1c94f> | </color>";
+                    }
                 }
-                //가장 위/아래가 아니고 위 아래에 방이 있으면
-                else if (i  > 9 && i  < 90 && iaMap[i - 10] != 0 && iaMap[i + 10] != 0 && iaMap[i - 1] == 0 && iaMap[i + 1] == 0)
-                {
-                    tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#f1c94f> | </color>";
-                }
+                
                 if (i == 45)
                 {
                     tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#16c60c> S </color>";

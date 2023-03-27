@@ -5,9 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    [SerializeField] GameObject floorPrefab;
-    int buildingLevel = 50;
-    public GameObject[] levels;
+    public Creatures creatures;
 
     void Start()
     {
@@ -15,6 +13,8 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
         }
+
+        creatures = new Creatures();
     }
 
     void Update()

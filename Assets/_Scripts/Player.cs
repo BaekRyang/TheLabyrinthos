@@ -6,10 +6,13 @@ public class Player : MonoBehaviour
 {
     PlayerStats PS_PlayerStats;
 
-    void Start()
+    void Awake()
     {
         PS_PlayerStats = new PlayerStats();
+    }
 
+    void Start()
+    {
         //인벤토리 key, value 형식으로 사용
         Dictionary<string, int> inventory = new Dictionary<string, int>();
     }

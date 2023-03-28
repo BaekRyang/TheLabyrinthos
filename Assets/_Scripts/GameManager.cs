@@ -5,16 +5,19 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    public Creatures creatures;
+    public Creatures creatures = new Creatures();
 
-    void Start()
+    void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
         }
+    }
 
-        creatures = new Creatures();
+    void Start()
+    {
+        
     }
 
     void Update()

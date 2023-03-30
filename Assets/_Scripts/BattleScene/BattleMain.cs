@@ -18,6 +18,8 @@ public class BattleMain : MonoBehaviour
 
     [SerializeField] GameObject GO_PlayerTP;
     [SerializeField] GameObject GO_EnemyTP;
+
+    //임시
     [SerializeField] Button BTN_Player;
     [SerializeField] Button BTN_Enemy;
 
@@ -25,10 +27,13 @@ public class BattleMain : MonoBehaviour
     Slider SL_EnemyTP;
 
     float f_EnemyHealth = 0;
-    int i_EnemyTP = 0;
-
-    public float f_PlayerSpeed = 0.0f;
     float f_EnemySpeed = 0.0f;
+    int i_EmemyDef = 0;
+
+    //플레이어는 체력을 컴포넌트의 Value값을 그대로 가져와 사용
+    float f_PlayerSpeed = 0.0f;
+    int i_PlayerDef = 0;
+    
 
 
     void Awake()
@@ -97,11 +102,13 @@ public class BattleMain : MonoBehaviour
     {
         //플레이어는 고정이니까 게임 매니저에서 가져온다.
         f_PlayerSpeed = GameManager.Instance.GetComponent<Player>().GetPlayerStats.f_Speed; //속도
+        i_PlayerDef = GameManager.Instance.GetComponent<Player>().GetPlayerStats.i_Def; //방어력
         SL_PlayerTP.value = GameManager.Instance.GetComponent<Player>().GetPlayerStats.i_PrepareSpeed; //기민함
 
         //적의 스텟을 가져오는 부분인데 임시로 1번 Default값 사용
         f_EnemyHealth = GameManager.Instance.creatures.C_Default[0].f_Health; //체력
         f_EnemySpeed = GameManager.Instance.creatures.C_Default[0].f_Speed; //속도
+        i_EmemyDef = GameManager.Instance.creatures.C_Default[0].i_Defense; //방어력
         SL_EnemyTP.value = GameManager.Instance.creatures.C_Default[0].i_PrepareSpeed; //기민함
 
         //전투창 활성화

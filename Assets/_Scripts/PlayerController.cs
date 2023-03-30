@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
         camRot.x = camRotX;
         rigid.rotation = Quaternion.Euler(camRot);
 
-        LookAt();  
+        //LookAt();  
     }
 
     private void Awake()

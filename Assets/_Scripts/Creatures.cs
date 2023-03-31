@@ -2,13 +2,13 @@ public class Creatures
 {
     public Creature[] C_Default;
 
-    //º¯È­°ª
+    //ë³€í™”ê°’
     const float f_Multipler_ATK = 1.34f;
     const float f_Multipler_DEF = 1.2f;
     const float f_Multipler_HP = 1.25f;
     const float f_Multipler_SPD = 1.0f;
     
-    //Á¶Á¤°ª
+    //ì¡°ì •ê°’
     const float f_Adjustment_ATK = -0.02f;
     const float f_Adjustment_DEF = 0.01f;
     const float f_Adjustment_HP = -0.01f;
@@ -18,10 +18,10 @@ public class Creatures
     public Creatures()
     {
         C_Default = new Creature[8];
-        //ÃÊ±â°ª
+        //ì´ˆê¸°ê°’
         C_Default[0] = new Creature(10, 3, 50.0f, 1.0f);
 
-        //ÃÊ±â°ªÀ» ÅëÇÏ¿© ½ºÅİ º¯È­°è»êÈÄ Àû¿ë
+        //ì´ˆê¸°ê°’ì„ í†µí•˜ì—¬ ìŠ¤í…Ÿ ë³€í™”ê³„ì‚°í›„ ì ìš©
         for (int i = 1; i < 8; i++)
         {
             int atk = (int)(C_Default[i - 1].i_AttackDamage * (f_Multipler_ATK + f_Adjustment_ATK * i));

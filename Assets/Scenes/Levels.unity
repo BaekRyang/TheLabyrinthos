@@ -1037,7 +1037,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &310569998
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2827,6 +2827,7 @@ GameObject:
   - component: {fileID: 997984185}
   - component: {fileID: 997984184}
   - component: {fileID: 997984188}
+  - component: {fileID: 997984190}
   - component: {fileID: 997984189}
   m_Layer: 5
   m_Name: BattleCavnas
@@ -2940,6 +2941,9 @@ MonoBehaviour:
   GO_EnemyTP: {fileID: 1099346671}
   BTN_Player: {fileID: 1523529557}
   BTN_Enemy: {fileID: 341902073}
+  TMP_PlayerDamage: {fileID: 772642000}
+  TMP_EnemyDamage: {fileID: 546681952}
+  GO_ActionList: {fileID: 310569997}
 --- !u!222 &997984189
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2948,6 +2952,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 997984183}
   m_CullTransparentMesh: 1
+--- !u!114 &997984190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 997984183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0452a8f39fa69942b6d83a3d92ac30e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1039868527
 GameObject:
   m_ObjectHideFlags: 0
@@ -3349,10 +3365,10 @@ RectTransform:
   m_Father: {fileID: 310569998}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 384, y: -369}
+  m_SizeDelta: {x: 500, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1055860944
 MonoBehaviour:
@@ -3397,7 +3413,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1055860945}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 997984190}
+        m_TargetAssemblyTypeName: BattleActions, Assembly-CSharp
+        m_MethodName: ButtonClick
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Tab_Defense
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1055860945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3547,10 +3575,10 @@ RectTransform:
   m_Father: {fileID: 310569998}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 384, y: -549}
+  m_SizeDelta: {x: 500, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1077618829
 MonoBehaviour:
@@ -3595,7 +3623,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1077618830}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 997984190}
+        m_TargetAssemblyTypeName: BattleActions, Assembly-CSharp
+        m_MethodName: ButtonClick
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Tab_Item
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1077618830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3788,10 +3828,10 @@ RectTransform:
   m_Father: {fileID: 310569998}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 384, y: -189}
+  m_SizeDelta: {x: 500, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1081082267
 MonoBehaviour:
@@ -3836,7 +3876,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1081082268}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 997984190}
+        m_TargetAssemblyTypeName: BattleActions, Assembly-CSharp
+        m_MethodName: ButtonClick
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Tab_Attack
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1081082268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4758,10 +4810,10 @@ RectTransform:
   m_Father: {fileID: 310569998}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 384, y: -729}
+  m_SizeDelta: {x: 500, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1359352089
 MonoBehaviour:
@@ -4806,7 +4858,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1359352090}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 997984190}
+        m_TargetAssemblyTypeName: BattleActions, Assembly-CSharp
+        m_MethodName: ButtonClick
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Tab_Escape
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1359352090
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 
-//°°Àº ÀÌ¸§ÀÇ Å¬·¡½º°¡ µÎ°³¶ó¼­ °íÁ¤
+//ê°™ì€ ì´ë¦„ì˜ í´ë˜ìŠ¤ê°€ ë‘ê°œë¼ì„œ ê³ ì •
 using Slider = UnityEngine.UI.Slider;
 using Button = UnityEngine.UI.Button;
 
@@ -19,18 +19,25 @@ public class BattleMain : MonoBehaviour
     [SerializeField] GameObject GO_PlayerTP;
     [SerializeField] GameObject GO_EnemyTP;
 
-    //ÀÓ½Ã
+    //ì„ì‹œ
     [SerializeField] Button BTN_Player;
     [SerializeField] Button BTN_Enemy;
+
+    [SerializeField] TMP_Text TMP_PlayerDamage;
+    [SerializeField] TMP_Text TMP_EnemyDamage;
+
+    [SerializeField] GameObject GO_ActionList;
 
     Slider SL_PlayerTP;
     Slider SL_EnemyTP;
 
     float f_EnemyHealth = 0;
+    int i_EnemyDamage = 0;
     float f_EnemySpeed = 0.0f;
     int i_EmemyDef = 0;
 
-    //ÇÃ·¹ÀÌ¾î´Â Ã¼·ÂÀ» ÄÄÆ÷³ÍÆ®ÀÇ Value°ªÀ» ±×´ë·Î °¡Á®¿Í »ç¿ë
+    //í”Œë ˆì´ì–´ëŠ” ì²´ë ¥ì„ ì»´í¬ë„ŒíŠ¸ì˜ Valueê°’ì„ ê·¸ëŒ€ë¡œ ê°€ì ¸ì™€ ì‚¬ìš©
+    int i_PlayerDamage = 0;
     float f_PlayerSpeed = 0.0f;
     int i_PlayerDef = 0;
     
@@ -45,7 +52,7 @@ public class BattleMain : MonoBehaviour
     void Start()
     {
         SL_PlayerTP.value = 0;
-        StartBattleScene(); //ÀÓ½Ã
+        StartBattleScene(); //ì„ì‹œ
     }
 
     void Update()
@@ -53,32 +60,32 @@ public class BattleMain : MonoBehaviour
         if (!b_Paused)
         {
             
-            //speed¸¦ ±â¹İÀ¸·Î Áõ°¡·®À» °è»ê.
-            //0~100±îÁö Áõ°¡·®Àº ¼Óµµ 1.0 ±âÁØÀ¸·Î 3ÃÊ°¡ °É¸°´Ù.
+            //speedë¥¼ ê¸°ë°˜ìœ¼ë¡œ ì¦ê°€ëŸ‰ì„ ê³„ì‚°.
+            //0~100ê¹Œì§€ ì¦ê°€ëŸ‰ì€ ì†ë„ 1.0 ê¸°ì¤€ìœ¼ë¡œ 3ì´ˆê°€ ê±¸ë¦°ë‹¤.
             float p_increment = Time.deltaTime * f_PlayerSpeed * 33.3f;
             float e_increment = Time.deltaTime * f_EnemySpeed * 33.3f;
 
-            //Áõ°¡·®¸¸Å­ ´õÇØÁÖ°í
+            //ì¦ê°€ëŸ‰ë§Œí¼ ë”í•´ì£¼ê³ 
             SL_PlayerTP.value += p_increment;
             SL_EnemyTP.value += e_increment;
 
-            //ÇÃ·¹ÀÌ¾î°¡ Æ÷ÀÎÆ®°¡ ´Ù Ã¤¿öÁ³À¸¸é Çàµ¿À» ½ÇÇàÇÏµµ·Ï Àá½Ã ¸ØÃá´Ù.
+            //í”Œë ˆì´ì–´ê°€ í¬ì¸íŠ¸ê°€ ë‹¤ ì±„ì›Œì¡Œìœ¼ë©´ í–‰ë™ì„ ì‹¤í–‰í•˜ë„ë¡ ì ì‹œ ë©ˆì¶˜ë‹¤.
             if (SL_PlayerTP.value >= 100)
             {
                 b_Paused = true;
                 b_PlayerReady = true;
-                Debug.Log("ÇÃ·¹ÀÌ¾î ÁØºñ");
+                Debug.Log("í”Œë ˆì´ì–´ ì¤€ë¹„");
             }
             if (SL_EnemyTP.value >= 100)
             {
                 b_Paused = true;
                 b_EnemyReady = true;
-                Debug.Log("Å©¸®ÃÄ ÁØºñ");
+                Debug.Log("í¬ë¦¬ì³ ì¤€ë¹„");
             }
         }
 
-        if (b_PlayerReady) BTN_Player.interactable = true;
-        //ÇÃ·¹ÀÌ¾î°¡ ÁØºñ »óÅÂÀÌ¸é ÀûÀº ±â´Ù¸®°Ô
+        if (b_PlayerReady) GO_ActionList.SetActive(true);
+        //í”Œë ˆì´ì–´ê°€ ì¤€ë¹„ ìƒíƒœì´ë©´ ì ì€ ê¸°ë‹¤ë¦¬ê²Œ
         if (b_EnemyReady && !b_PlayerReady) BTN_Enemy.interactable = true;
     }
 
@@ -100,18 +107,25 @@ public class BattleMain : MonoBehaviour
 
     void StartBattleScene()
     {
-        //ÇÃ·¹ÀÌ¾î´Â °íÁ¤ÀÌ´Ï±î °ÔÀÓ ¸Å´ÏÀú¿¡¼­ °¡Á®¿Â´Ù.
-        f_PlayerSpeed = GameManager.Instance.GetComponent<Player>().GetPlayerStats.f_Speed; //¼Óµµ
-        i_PlayerDef = GameManager.Instance.GetComponent<Player>().GetPlayerStats.i_Def; //¹æ¾î·Â
-        SL_PlayerTP.value = GameManager.Instance.GetComponent<Player>().GetPlayerStats.i_PrepareSpeed; //±â¹ÎÇÔ
+        //í”Œë ˆì´ì–´ëŠ” ê³ ì •ì´ë‹ˆê¹Œ ê²Œì„ ë§¤ë‹ˆì €ì—ì„œ ê°€ì ¸ì˜¨ë‹¤.
+        i_PlayerDamage = GameManager.Instance.GetComponent<Player>().GetPlayerStats.i_Damage; //ê³µê²©ë ¥
+        f_PlayerSpeed = GameManager.Instance.GetComponent<Player>().GetPlayerStats.f_Speed; //ì†ë„
+        i_PlayerDef = GameManager.Instance.GetComponent<Player>().GetPlayerStats.i_Def; //ë°©ì–´ë ¥
+        SL_PlayerTP.value = GameManager.Instance.GetComponent<Player>().GetPlayerStats.i_PrepareSpeed; //ê¸°ë¯¼í•¨
 
-        //ÀûÀÇ ½ºÅİÀ» °¡Á®¿À´Â ºÎºĞÀÎµ¥ ÀÓ½Ã·Î 1¹ø Default°ª »ç¿ë
-        f_EnemyHealth = GameManager.Instance.creatures.C_Default[0].f_Health; //Ã¼·Â
-        f_EnemySpeed = GameManager.Instance.creatures.C_Default[0].f_Speed; //¼Óµµ
-        i_EmemyDef = GameManager.Instance.creatures.C_Default[0].i_Defense; //¹æ¾î·Â
-        SL_EnemyTP.value = GameManager.Instance.creatures.C_Default[0].i_PrepareSpeed; //±â¹ÎÇÔ
+        TMP_PlayerDamage.text = "DMG\n" + i_PlayerDamage;
 
-        //ÀüÅõÃ¢ È°¼ºÈ­
+        //ì ì˜ ìŠ¤í…Ÿì„ ê°€ì ¸ì˜¤ëŠ” ë¶€ë¶„ì¸ë° ì„ì‹œë¡œ 1ë²ˆ Defaultê°’ ì‚¬ìš©
+        f_EnemyHealth = GameManager.Instance.creatures.C_Default[0].f_Health; //ì²´ë ¥
+        i_EnemyDamage = GameManager.Instance.creatures.C_Default[0].i_AttackDamage; //ê³µê²©ë ¥
+        f_EnemySpeed = GameManager.Instance.creatures.C_Default[0].f_Speed; //ì†ë„
+        i_EmemyDef = GameManager.Instance.creatures.C_Default[0].i_Defense; //ë°©ì–´ë ¥
+        SL_EnemyTP.value = GameManager.Instance.creatures.C_Default[0].i_PrepareSpeed; //ê¸°ë¯¼í•¨
+
+        TMP_EnemyDamage.text = "DMG\n" + i_EnemyDamage;
+
+
+        //ì „íˆ¬ì°½ í™œì„±í™”
         this.gameObject.SetActive(true);
         
     }

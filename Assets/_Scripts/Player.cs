@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        //ÀÎº¥Åä¸® key, value Çü½ÄÀ¸·Î »ç¿ë
+        //ì¸ë²¤í† ë¦¬ key, value í˜•ì‹ìœ¼ë¡œ ì‚¬ìš©
         Dictionary<string, int> inventory = new Dictionary<string, int>();
     }
 
@@ -30,10 +30,11 @@ public class Player : MonoBehaviour
 }
 
 public class PlayerStats { 
-    //±âº» ½ºÅİ
+    //ê¸°ë³¸ ìŠ¤í…Ÿ
     public float f_Health = 100.0f;
     public float f_Exp = 1.0f;
     public float f_Speed = 1.0f;
     public int i_Def = 5;
     public int i_PrepareSpeed = 0;
+    public int i_Damage = 1;
 }

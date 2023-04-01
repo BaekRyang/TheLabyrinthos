@@ -9,55 +9,58 @@ using UnityEngine.UIElements;
 using Slider = UnityEngine.UI.Slider;
 using Button = UnityEngine.UI.Button;
 
+public enum StatsType
+{
+    Hp,
+    Tp,
+    Damage,
+    Defense,
+    Speed
+}
+
 public class BattleMain : MonoBehaviour
 {
-    public bool b_Paused;
+    BattleActions BA_BattleActions;
 
     bool b_PlayerReady;
     bool b_EnemyReady;
 
-    [SerializeField] GameObject GO_PlayerTP;
-    [SerializeField] GameObject GO_EnemyTP;
-
-    //임시
-    [SerializeField] Button BTN_Player;
-    [SerializeField] Button BTN_Enemy;
+    [SerializeField] GameObject GO_PlayerBar;
+    [SerializeField] GameObject GO_EnemyBar;
 
     [SerializeField] TMP_Text TMP_PlayerDamage;
     [SerializeField] TMP_Text TMP_EnemyDamage;
 
     [SerializeField] GameObject GO_ActionList;
 
-    Slider SL_PlayerTP;
-    Slider SL_EnemyTP;
+    public Slider SL_PlayerTP;
+    public Slider SL_EnemyTP;
+    public Slider SL_PlayerHP;
+    public Slider SL_EnemyHP;
 
-    float f_EnemyHealth = 0;
-    int i_EnemyDamage = 0;
-    float f_EnemySpeed = 0.0f;
-    int i_EmemyDef = 0;
-
-    //플레이어는 체력을 컴포넌트의 Value값을 그대로 가져와 사용
-    int i_PlayerDamage = 0;
-    float f_PlayerSpeed = 0.0f;
-    int i_PlayerDef = 0;
-    
+    protected float f_EnemySpeed = 0.0f;
+    protected float f_PlayerSpeed = 0.0f;
 
 
     void Awake()
     {
-        SL_PlayerTP = GO_PlayerTP.GetComponent<Slider>();
-        SL_EnemyTP = GO_EnemyTP.GetComponent<Slider>();
+        SL_PlayerTP = GO_PlayerBar.transform.Find("TurnPoint").GetComponent<Slider>();
+        SL_EnemyTP = GO_EnemyBar.transform.Find("TurnPoint").GetComponent<Slider>();
+        SL_PlayerHP = GO_PlayerBar.transform.Find("HP").GetComponent<Slider>();
+        SL_EnemyHP = GO_EnemyBar.transform.Find("HP").GetComponent<Slider>();
     }
 
     void Start()
     {
+        BA_BattleActions = GetComponent<BattleActions>();
         SL_PlayerTP.value = 0;
-        StartBattleScene(); //임시
+        StartBattleScene(GameManager.Instance.creatures.C_Default[0]); //임시
+
     }
 
     void Update()
     {
-        if (!b_Paused)
+        if (!b_PlayerReady && !b_EnemyReady) //둘다 준비상태가 아닐 때
         {
             
             //speed를 기반으로 증가량을 계산.
@@ -72,61 +75,75 @@ public class BattleMain : MonoBehaviour
             //플레이어가 포인트가 다 채워졌으면 행동을 실행하도록 잠시 멈춘다.
             if (SL_PlayerTP.value >= 100)
             {
-                b_Paused = true;
                 b_PlayerReady = true;
                 Debug.Log("플레이어 준비");
             }
             if (SL_EnemyTP.value >= 100)
             {
-                b_Paused = true;
                 b_EnemyReady = true;
                 Debug.Log("크리쳐 준비");
             }
         }
 
         if (b_PlayerReady) GO_ActionList.SetActive(true);
-        //플레이어가 준비 상태이면 적은 기다리게
-        if (b_EnemyReady && !b_PlayerReady) BTN_Enemy.interactable = true;
+        else if (b_EnemyReady) BA_BattleActions.Attack(false);
+
     }
 
-    public void PlayerButton()
+    void StartBattleScene(Creature CR_Opponent)
     {
-        BTN_Player.interactable = false;
-        SL_PlayerTP.value = 0;
-        b_PlayerReady = false;
-        b_Paused = false;
-    }
+        BA_BattleActions.CR_Enemy = CR_Opponent;
 
-    public void EnemyButton()
-    {
-        BTN_Enemy.interactable = false;
-        SL_EnemyTP.value = 0;
-        b_EnemyReady = false;
-        b_Paused = false;
-    }
+        //행동 포인트관련 초기화 : 전투 중간에 변경될 일이 있을까? => 있으면 f_Speed같은 경우는 ref로 넘겨줘야함
+        SL_PlayerTP.value = GameManager.Instance.GetComponent<Player>().GetPlayerStats().i_PrepareSpeed;
+        f_PlayerSpeed = GameManager.Instance.GetComponent<Player>().GetPlayerStats().f_Speed;
 
-    void StartBattleScene()
-    {
-        //플레이어는 고정이니까 게임 매니저에서 가져온다.
-        i_PlayerDamage = GameManager.Instance.GetComponent<Player>().GetPlayerStats.i_Damage; //공격력
-        f_PlayerSpeed = GameManager.Instance.GetComponent<Player>().GetPlayerStats.f_Speed; //속도
-        i_PlayerDef = GameManager.Instance.GetComponent<Player>().GetPlayerStats.i_Def; //방어력
-        SL_PlayerTP.value = GameManager.Instance.GetComponent<Player>().GetPlayerStats.i_PrepareSpeed; //기민함
+        SL_EnemyHP.value = SL_EnemyHP.maxValue = CR_Opponent.f_Health;
+        SL_EnemyTP.value = CR_Opponent.i_PrepareSpeed;
+        f_EnemySpeed = CR_Opponent.f_Speed-0.05f;
 
-        TMP_PlayerDamage.text = "DMG\n" + i_PlayerDamage;
-
-        //적의 스텟을 가져오는 부분인데 임시로 1번 Default값 사용
-        f_EnemyHealth = GameManager.Instance.creatures.C_Default[0].f_Health; //체력
-        i_EnemyDamage = GameManager.Instance.creatures.C_Default[0].i_AttackDamage; //공격력
-        f_EnemySpeed = GameManager.Instance.creatures.C_Default[0].f_Speed; //속도
-        i_EmemyDef = GameManager.Instance.creatures.C_Default[0].i_Defense; //방어력
-        SL_EnemyTP.value = GameManager.Instance.creatures.C_Default[0].i_PrepareSpeed; //기민함
-
-        TMP_EnemyDamage.text = "DMG\n" + i_EnemyDamage;
-
+        TMP_PlayerDamage.text = "DMG\n" + GameManager.Instance.GetComponent<Player>().GetPlayerStats().i_Damage;
+        TMP_EnemyDamage.text = "DMG\n" + CR_Opponent.i_Damage;
 
         //전투창 활성화
-        this.gameObject.SetActive(true);
+        this.gameObject.SetActive(true);        
+    }
+
+    public void ChangeSliderValue(bool b_IsPlayer, StatsType statsType, float f_val)
+    {
+        switch (statsType)
+        {
+            case StatsType.Hp:
+                if (b_IsPlayer) SL_PlayerHP.value = f_val;
+                else SL_EnemyHP.value = f_val;
+                break;
+            case StatsType.Tp:
+                if (b_IsPlayer) SL_PlayerTP.value = f_val;
+                else SL_EnemyTP.value = f_val;
+                break;
+            case StatsType.Damage:
+                break;
+            case StatsType.Defense:
+                break;
+            case StatsType.Speed:
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void EndTurn(bool b_IsPlayer) {
+        if (b_IsPlayer)
+        {
+            b_PlayerReady = false;
+            GO_ActionList.SetActive(false);
+        } else
+        {
+            b_EnemyReady = false;
+        }
         
     }
 }
+
+//슬라이더는 오른쪽 Display 값이랑만 연동되어있고 실제 변수와 연결되어있지 않음
+//변수값을 Slider의 Value와 연동이 필요

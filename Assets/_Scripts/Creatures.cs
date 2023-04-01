@@ -24,7 +24,7 @@ public class Creatures
         //초기값을 통하여 스텟 변화계산후 적용
         for (int i = 1; i < 8; i++)
         {
-            int atk = (int)(C_Default[i - 1].i_AttackDamage * (f_Multipler_ATK + f_Adjustment_ATK * i));
+            int atk = (int)(C_Default[i - 1].i_Damage * (f_Multipler_ATK + f_Adjustment_ATK * i));
             int def = (int)(C_Default[i - 1].i_Defense * (f_Multipler_DEF + f_Adjustment_DEF * i));
             float hp = C_Default[i - 1].f_Health * (f_Multipler_HP + f_Adjustment_HP * i);
             float spd = C_Default[i - 1].f_Speed * (f_Multipler_SPD + f_Adjustment_SPD * i);
@@ -36,16 +36,17 @@ public class Creatures
 public class Creature
 {
     public Creature(int atk, int def, float hp, float spd, int pspd = 0) {
-        this.i_AttackDamage = atk;
+        this.i_Damage = atk;
         this.i_Defense = def;
         this.f_Health = hp;
         this.f_Speed = spd;
         this.i_PrepareSpeed = pspd;
     }
 
-    public int i_AttackDamage = 0;
-    public int i_Defense = 0;
-    public float f_Health = 0.0f;
+    public float f_Health = 100.0f;
+    public float f_Exp = 1.0f;
     public float f_Speed = 1.0f;
+    public int i_Defense = 5;
     public int i_PrepareSpeed = 0;
+    public int i_Damage = 1;
 }

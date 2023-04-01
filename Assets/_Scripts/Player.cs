@@ -22,19 +22,19 @@ public class Player : MonoBehaviour
         
     }
     
-    public PlayerStats GetPlayerStats
+    public ref PlayerStats GetPlayerStats()
     {
-        set { PS_PlayerStats = value; }
-        get { return PS_PlayerStats; }
+        return ref PS_PlayerStats;
     }
 }
 
 public class PlayerStats { 
     //기본 스텟
     public float f_Health = 100.0f;
+    public float f_MaxHealth = 100.0f;
     public float f_Exp = 1.0f;
     public float f_Speed = 1.0f;
-    public int i_Def = 5;
+    public int i_Defense = 5;
     public int i_PrepareSpeed = 0;
-    public int i_Damage = 1;
+    public int i_Damage = 10;
 }

@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
 
+
 public class BattleActions : MonoBehaviour
 {
-    // Á¤º¸¸¦ ¹Ş¾Æ¿Í¼­ ÀúÀåÇÒ À§Ä¡
+    const int CONST_DEF = 20; //ë°©ì–´ ìƒìˆ˜
+
+    // ì •ë³´ë¥¼ ë°›ì•„ì™€ì„œ ì €ì¥í•  ìœ„ì¹˜
     private PlayerStats PS_Player;
     public Creature CR_Enemy;
 
@@ -13,7 +16,7 @@ public class BattleActions : MonoBehaviour
 
     void Start()
     {
-        // PlayerStats Å¬·¡½º °´Ã¼ °¡Á®¿À±â(ÂüÁ¶·Î °¡Á®¿Â´Ù)
+        // PlayerStats í´ë˜ìŠ¤ ê°ì²´ ê°€ì ¸ì˜¤ê¸°(ì°¸ì¡°ë¡œ ê°€ì ¸ì˜¨ë‹¤)
         PS_Player = GameManager.Instance.GetComponent<Player>().GetPlayerStats();
 
         BM_BattleMain = GetComponent<BattleMain>();
@@ -48,20 +51,24 @@ public class BattleActions : MonoBehaviour
     {
         if (b_IsPlayer)
         {
-            int damage = PS_Player.i_Damage - CR_Enemy.i_Defense;
+            float damage = (PS_Player.i_Damage * (1 - CR_Enemy.i_Defense / (float)(CR_Enemy.i_Defense + CONST_DEF)));
+            damage = Mathf.Round(damage * 10f) / 10f;
             CR_Enemy.f_Health -= damage;
+            CR_Enemy.f_Health = Mathf.Round(CR_Enemy.f_Health * 10f) / 10f;
             BM_BattleMain.ChangeSliderValue(false, StatsType.Hp, CR_Enemy.f_Health);
             BM_BattleMain.ChangeSliderValue(true, StatsType.Tp, 0);
             BM_BattleMain.EndTurn(true);
-            Debug.Log("ATTACK");
+            Debug.Log(damage + "DMG - Player ATTACK");
         } else
         {
-            int damage = CR_Enemy.i_Damage - PS_Player.i_Defense;
+            float damage = (CR_Enemy.i_Damage * (1 - PS_Player.i_Defense / (float)(PS_Player.i_Defense + CONST_DEF)));
+            damage = Mathf.Round(damage * 10f) / 10f;
             PS_Player.f_Health -= damage;
+            PS_Player.f_Health = Mathf.Round(PS_Player.f_Health * 10f) / 10f;
             BM_BattleMain.ChangeSliderValue(true, StatsType.Hp, PS_Player.f_Health);
             BM_BattleMain.ChangeSliderValue(false, StatsType.Tp, 0);
             BM_BattleMain.EndTurn(false);
-            Debug.Log("Enemy ATTACK");
+            Debug.Log(damage + "DMG - Enemy ATTACK");
         }
     }
 }

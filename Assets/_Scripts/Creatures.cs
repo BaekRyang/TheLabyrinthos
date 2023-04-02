@@ -3,14 +3,14 @@ public class Creatures
     public Creature[] C_Default;
 
     //변화값
-    const float f_Multipler_ATK = 1.34f;
+    const float f_Multipler_ATK = 1.125f;
     const float f_Multipler_DEF = 1.2f;
     const float f_Multipler_HP = 1.25f;
     const float f_Multipler_SPD = 1.0f;
     
     //조정값
     const float f_Adjustment_ATK = -0.02f;
-    const float f_Adjustment_DEF = 0.01f;
+    const float f_Adjustment_DEF = -0.01f;
     const float f_Adjustment_HP = -0.01f;
     const float f_Adjustment_SPD = 0.0f;
 
@@ -19,7 +19,7 @@ public class Creatures
     {
         C_Default = new Creature[8];
         //초기값
-        C_Default[0] = new Creature(10, 3, 50.0f, 1.0f);
+        C_Default[0] = new Creature(8, 3, 50.0f, 1.0f);
 
         //초기값을 통하여 스텟 변화계산후 적용
         for (int i = 1; i < 8; i++)
@@ -44,7 +44,6 @@ public class Creature
     }
 
     public float f_Health = 100.0f;
-    public float f_Exp = 1.0f;
     public float f_Speed = 1.0f;
     public int i_Defense = 5;
     public int i_PrepareSpeed = 0;

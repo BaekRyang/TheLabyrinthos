@@ -1,6 +1,29 @@
 using System.Collections.Generic;
 using System;
-using System.Diagnostics;
+
+public enum RoomType
+{
+    empty,
+    common,
+    EndRoom,
+    KeyRoom
+}
+
+public class RoomNode
+{
+    public int Id { get; set; }
+    public RoomType RoomType { get; set; }
+    public int ParentIndex { get; set; }
+    public List<int> Children { get; set; }
+
+    public RoomNode(int id, int parentIndex = -1)
+    {
+        Id = id;
+        ParentIndex = parentIndex;
+        Children = new List<int>();
+    }
+}
+
 
 public class StructCreation
 {
@@ -9,104 +32,91 @@ public class StructCreation
     int iCreateRoomCount = 0;
     Random rand = new Random();
 
-    //다음으로 탐색할 방들의 인덱스를 저장할 큐
-    Queue<int> qRoomIdx = new Queue<int>();
+    Queue<RoomNode> qRoomIdx = new Queue<RoomNode>();
 
-    int[] iaMap = new int[100];
+    Dictionary<int, RoomNode> roomGraph = new Dictionary<int, RoomNode>();
 
-    Stack<int> qEndRoom = new Stack<int>();
+    Stack<RoomNode> qEndRoom = new Stack<RoomNode>();
 
-    public bool Run(int maxRoom, ref int[] destArray)
+    public bool Run(int maxRoom, ref Dictionary<int, RoomNode> destGraph)
     {
-        //방 크기 초기화
         iMaxRoom = maxRoom;
 
-        Check(iaMap, iFirstRoom); //초기 위치 (중앙)
+        Check(roomGraph, iFirstRoom);
 
-        //큐에 방이 하나도 남지 않을때까지 반복
         while (qRoomIdx.Count > 0)
         {
-            int iRoom = qRoomIdx.Dequeue();
+            RoomNode currentRoom = qRoomIdx.Dequeue();
             bool bCreated = false;
-            int iXPos = iRoom % 10; //열 인덱스
+            int iRoom = currentRoom.Id;
+            int iXPos = iRoom % 10;
 
-            //각각 붙어있는 "bCreated ||" 는 나중에 방문한곳에서 방을 만들지 못했더라도 이전에 만든 값에 영향을 주지 않도록 있음
-            //현재 셀이 가장 왼쪽에 붙어있지 않다면 왼쪽으로 이동한다.
+            if (iXPos > 0) bCreated = bCreated || Check(roomGraph, iRoom - 1, currentRoom, 1);
+            if (iXPos < 8) bCreated = bCreated || Check(roomGraph, iRoom + 1, currentRoom, 0);
+            if (iRoom > 9) bCreated = bCreated | Check(roomGraph, iRoom - 10, currentRoom, 3);
+            if (iRoom < 90) bCreated = bCreated | Check(roomGraph, iRoom + 10, currentRoom, 2);
 
-            if (iXPos > 0) bCreated = bCreated || Check(iaMap, iRoom - 1);
+            if (!bCreated)
+            {
+                qEndRoom.Push(currentRoom); //모든 조건을 검사해봤지만 방이 생기지 않았으면 현재방을 엔드룸으로 설정
+                currentRoom.RoomType = RoomType.EndRoom;
 
-            //현재 셀이 가장 오른쪽에 붙어있지 않다면 오른쪽으로 이동한다.
-            if (iXPos < 8) bCreated = bCreated || Check(iaMap, iRoom + 1);
-
-            //현재 셀이 가장 위쪽에 붙어있지 않다면 위쪽으로 이동한다.
-            if (iRoom > 9) bCreated = bCreated | Check(iaMap, iRoom - 10);
-
-            //현재 셀이 가장 아래쪽에 붙어있지 않다면 아래쪽으로 이동한다.
-            if (iRoom < 90) bCreated = bCreated | Check(iaMap, iRoom + 10);
-
-            //결국 아무곳에도 방을 만들지 못하는 위치라면 엔드룸 큐에 추가한다.
-            if (!bCreated) qEndRoom.Push(iRoom);
+            }
         }
 
         if (iCreateRoomCount != iMaxRoom) return false;
 
-        //조건 불만족일때 특수방 배치하면 빈 스택 오류 발생하므로
-        //조건 확인후 배치
-        PlaceSpecialRoom(iaMap);
+        PlaceSpecialRoom(roomGraph);
 
-        int ttmp = qEndRoom.Count;
-        for (int i = 0; i < ttmp; i++)
+        destGraph = roomGraph;
+        return true;
+    }
+
+    bool Check(Dictionary<int, RoomNode> graph, int i, RoomNode parent = null, int direction = -1)
+    {
+        if (graph.ContainsKey(i)) return false; //이미 방이 있으면 포기
+
+        if (NeighborCount(graph, i) >= 2) return false; //주변에 방이 2개 이상 만들어져 있으면 포기
+
+        if (iCreateRoomCount >= iMaxRoom) return false; //최대 개수에 도달하였으면 포기
+
+        if (rand.Next(2) == 1 && i != iFirstRoom) return false; //50%확률로 포기
+
+        //위 모든 조건을 통과했다면 방이 만들어진 것으로 그래프에 추가해준다.
+        RoomNode newNode = new RoomNode(i);
+        graph[i] = newNode;
+        qRoomIdx.Enqueue(newNode);
+
+        newNode.RoomType = RoomType.common; //우선 기본타입 방으로 설정
+
+        if (parent != null && direction != -1) //시작 노드가 아닌경우
         {
-            int tmp = qEndRoom.Pop();
-            Console.Write(tmp + " - ");
-            iaMap[tmp] = 2;
+            newNode.ParentIndex = parent.Id; //부모 인덱스를 추가해주고
+            parent.Children.Add(newNode.Id); //부모 노드에 자식으로 추가한다.
         }
 
-
-        destArray = iaMap;
-        return true;
+        if (i == iFirstRoom) graph[i] = newNode; //만약 시작 노드인경우 45번 칸에 해당 노드를 넣는다.
+        iCreateRoomCount++; //방하나 추가
+        return true; //방이 만들어졌으로 true 반환
     }
 
-    bool Check(int[] map, int i)
+    int NeighborCount(Dictionary<int, RoomNode> graph, int i)
     {
-        //이미 생성된 방이 있으면 포기
-        if (map[i] != 0) return false;
-
-        //이미 주변에 방이 2개 이상 만들어 진 경우 포기
-        if (NeighborCount(map, i) >= 2) return false;
-
-        //방의 개수가 꽉 찬 경우 포기
-        if (iCreateRoomCount >= iMaxRoom) return false;
-        // //무작위성을 위해 50%확률로 포기
-        if (rand.Next(2) == 1 && i != iFirstRoom)
-        return false;
-        //모든 조건에 통과했다면 해당 위치를 큐에 넣어준다.
-        qRoomIdx.Enqueue(i);
-
-        //해당 칸은 방이 생겼으므로 1으로 만들고 방 개수를 +1 해준다.
-        map[i] = 1;
-
-        if (i == iFirstRoom) map[i] = 1;
-        iCreateRoomCount++;
-        return true;
-    }
-
-    int NeighborCount(int[] map, int i)
-    {   
         int iXPos = i % 10;
         int n = 0;
-        if (iXPos > 0) n += map[i - 1];
-        if (iXPos < 8) n += map[i + 1];
-        if (i > 9) n += map[i - 10];
-        if (i < 80) n += map[i + 10];
+        if (iXPos > 0) n += graph.ContainsKey(i - 1) ? 1 : 0;
+        if (iXPos < 8) n += graph.ContainsKey(i + 1) ? 1 : 0;
+        if (i > 9) n += graph.ContainsKey(i - 10) ? 1 : 0;
+        if (i < 80) n += graph.ContainsKey(i + 10) ? 1 : 0;
         return n;
     }
 
-    void PlaceSpecialRoom(int[] destArray)
+    void PlaceSpecialRoom(Dictionary<int, RoomNode> graph)
     {
-        //엔드룸은 큐에 저장되어 있는데, 알고리즘상 엔드룸중 가장 멀리 있는 것이 제일 마지막에 위치한다.
-        //그 방을 층을 내려가는데 필요한 아이템이 나오는 방으로 배치한다.
-        destArray[qEndRoom.Pop()] = 9;
+        // 엔드룸은 큐에 저장되어 있는데, 알고리즘상 엔드룸 중 가장 멀리 있는 것이 제일 마지막에 위치한다.
+        // 그 방을 층을 내려가는데 필요한 아이템이 나오는 방으로 배치한다.
+        RoomNode specialRoom = qEndRoom.Pop();
+        specialRoom.RoomType = RoomType.KeyRoom;
+        // 필요한 경우, specialRoom.Id 값을 사용하여 해당 방에 특수 아이템 등을 할당할 수 있습니다.
     }
-
 }

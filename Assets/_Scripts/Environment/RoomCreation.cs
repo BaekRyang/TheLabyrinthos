@@ -29,7 +29,6 @@ public class RoomCreation : MonoBehaviour
     }
 
     private const int MAX_ATTEMPTS = 5000;
-    private const int MAP_SIZE = 100;
 
     [SerializeField] GameObject RoomBase;
     [SerializeField] GameObject RoomWall;
@@ -41,7 +40,7 @@ public class RoomCreation : MonoBehaviour
     {
         int cnt = 0;
         //방은 언제나 10x10의 사이즈를 갖으므로 배열로 고정할당한다.
-        int[] iaMap = new int[MAP_SIZE];
+        Dictionary<int, RoomNode> roomMap = new Dictionary<int, RoomNode>();
         StructCreation structCreation = new StructCreation();
         while (true)
         {
@@ -51,14 +50,14 @@ public class RoomCreation : MonoBehaviour
                 break;
             }
 
-            if ((structCreation.Run(RoomCount, ref iaMap)))
+            if ((structCreation.Run(RoomCount, ref roomMap)))
             {
                 Debug.Log("CREATED");
                 break;
             }
             else
             {
-                Array.Clear(iaMap, 0, MAP_SIZE);
+                roomMap.Clear();
                 structCreation = new StructCreation();
                 Debug.LogWarning("DISCARD");
                 cnt++;
@@ -69,7 +68,7 @@ public class RoomCreation : MonoBehaviour
         //방 구조 베이스 생성
         for (int i = 0; i < 100; i++)
         {
-            if (iaMap[i] == 0)
+            if (!roomMap.ContainsKey(i)) //key가 없으면 아무것도 없는곳임
             {
                 continue;
             }
@@ -83,34 +82,47 @@ public class RoomCreation : MonoBehaviour
 
                 if(i % 10 != 0 && i % 10 != 9 && i > 9 && i < 90)
                 {
-                    if (iaMap[i - 1] != 0 && iaMap[i + 1] != 0 && iaMap[i - 10] == 0 && iaMap[i + 10] == 0)
+                    if (roomMap.ContainsKey(i - 1) && roomMap.ContainsKey(i + 1) && roomMap[i - 1].RoomType != 0 && roomMap[i + 1].RoomType != 0 && !roomMap.ContainsKey(i - 10) && !roomMap.ContainsKey(i + 10))
                     {
                         tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#f1c94f> -- </color>";
                     }
-                    else if (iaMap[i - 10] != 0 && iaMap[i + 10] != 0 && iaMap[i - 1] == 0 && iaMap[i + 1] == 0)
+                    else if (roomMap.ContainsKey(i - 10) && roomMap.ContainsKey(i + 10) && roomMap[i - 10].RoomType != 0 && roomMap[i + 10].RoomType != 0 && !roomMap.ContainsKey(i - 1) && !roomMap.ContainsKey(i + 1))
                     {
                         tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#f1c94f> | </color>";
                     }
+
                 }
-                
+
                 if (i == 45)
                 {
                     tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#16c60c> S </color>";
                 }
-                else if (iaMap[i] == 2)
+                else if (roomMap[i].RoomType == RoomType.EndRoom)   
                 {
                     tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#3b78ff> E </color>";
                 }
-                else if (iaMap[i] == 9)
+                else if (roomMap[i].RoomType == RoomType.KeyRoom)
                 {
                     tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#e74856> K </color>";
                 }
 
+                //각 방의 4방향을 조사하여 0이면 벽을, 1이면 문을
+                RoomNode currentNode = roomMap[i];
 
-                CreateWallOrDoor(RoomWall, RoomDoor, tmpGO.transform, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 270, 0)), i % 10 < 1 || iaMap[i - 1] == 0);
-                CreateWallOrDoor(RoomWall, RoomDoor, tmpGO.transform, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 90, 0)), i % 10 > 8 || iaMap[i + 1] == 0);
-                CreateWallOrDoor(RoomWall, RoomDoor, tmpGO.transform, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 180, 0)), i < 10 || iaMap[i - 10] == 0);
-                CreateWallOrDoor(RoomWall, RoomDoor, tmpGO.transform, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 0, 0)), i > 90 || iaMap[i + 10] == 0);
+                int parentDirection = -1;
+                if (currentNode.ParentIndex != -1)
+                {
+                    if (currentNode.ParentIndex == i - 1) parentDirection = 0;
+                    else if (currentNode.ParentIndex == i + 1) parentDirection = 1;
+                    else if (currentNode.ParentIndex == i - 10) parentDirection = 2;
+                    else if (currentNode.ParentIndex == i + 10) parentDirection = 3;
+                }
+
+                CreateWallOrDoor(RoomWall, RoomDoor, tmpGO.transform, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 270, 0)), i % 10 < 1 || (!currentNode.Children.Contains(i - 1) && parentDirection != 0));
+                CreateWallOrDoor(RoomWall, RoomDoor, tmpGO.transform, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 90, 0)), i % 10 > 8 || (!currentNode.Children.Contains(i + 1) && parentDirection != 1));
+                CreateWallOrDoor(RoomWall, RoomDoor, tmpGO.transform, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 180, 0)), i < 10 || (!currentNode.Children.Contains(i - 10) && parentDirection != 2));
+                CreateWallOrDoor(RoomWall, RoomDoor, tmpGO.transform, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 0, 0)), i > 90 || (!currentNode.Children.Contains(i + 10) && parentDirection != 3));
+
 
                 tmpGO.GetComponent<RoomController>().index = i;
                 tmpGO.GetComponent<RoomController>().SortObjects();

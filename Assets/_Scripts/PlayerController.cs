@@ -1,10 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Windows;
-using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 using Input = UnityEngine.Input;
 
 public class PlayerController : MonoBehaviour
@@ -14,31 +11,30 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] Texture[] playerTexture;
 
-    private const float RAY_DISTANCE = 2f;
-    
-    private RaycastHit slopeHit;
-    private float maxSlopeAngle = 90f;
-
     [SerializeField] Transform groundCheck;
-
-    private int groundLayer;
-
-    [SerializeField] bool isOnSlope;
-    [SerializeField] bool isGrounded;
 
     public float MoveSpeed { get { return MoveSpeed; } }
     [SerializeField] float moveSpeed;
     Rigidbody rigid;
-    Vector3 direction;
-    int faceing;
+    public Vector3 direction;
+    int faceing = 0;
 
     Vector3 camPos;
 
     Vector3 camRot;
     [SerializeField] float camRotX;
 
+    RaycastHit hit;
+    bool isHit;
+    float detectionDistance = 0.2f;
+    LayerMask layerMask; // 검출하고자 하는 레이어를 지정합니다.
+    Vector3 boxSize = new Vector3(0.2f, 1f, 0.2f);
+
     float horizontal;
     float vertical;
+
+    GameObject GO_LastHitGO;
+
     private void Start()
     {
         playerTexture = Resources.LoadAll<Texture>("Sprites/Player");
@@ -46,13 +42,15 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
 
-        direction = transform.forward * vertical + transform.right * horizontal;
-        direction.Normalize();
-        Debug.DrawRay(transform.position, direction, Color.yellow);
+        if (Mathf.Abs(horizontal) > 0.01f || Mathf.Abs(vertical) > 0.01f)
+        {
+            direction = transform.forward * vertical + transform.right * horizontal;
+            direction.Normalize();
+            Debug.DrawRay(transform.position, direction, Color.yellow);
+        } //direction을 마지막에 썼던 값을 유지시키기 위해
 
         camRot = Camera.main.transform.rotation.eulerAngles;
         camRot.x = camRotX;
@@ -65,11 +63,24 @@ public class PlayerController : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody>();
         camPos = Camera.main.transform.position;
-        groundLayer = 1 << LayerMask.NameToLayer("Ground");
+        layerMask = 1 << LayerMask.NameToLayer("Door");
     }
 
     private void FixedUpdate()
     {
+        isHit = Physics.BoxCast(transform.position, boxSize, direction, out hit, Quaternion.identity, detectionDistance);
+        if (isHit)
+        {
+            if (GO_LastHitGO != hit.transform.gameObject)
+            {
+                GO_LastHitGO = hit.transform.gameObject;
+                Debug.Log("Changed");
+            }
+        } else
+        {
+            GO_LastHitGO = null;
+        }
+
         if (horizontal == 0 && vertical == 0)
         {
             rigid.velocity = Vector3.zero;
@@ -77,6 +88,7 @@ public class PlayerController : MonoBehaviour
         {
             Move();
         }
+
     }
 
     protected void Move()
@@ -95,23 +107,9 @@ public class PlayerController : MonoBehaviour
 
         Camera.main.transform.position = camPos + transform.position;
         float currentMoveSpeed = moveSpeed;
+        Vector3 velocity = new Vector3(direction.x, 0, direction.z);
 
-        isOnSlope = IsOnSlope();
-        isGrounded = IsGrounded();
-        Vector3 velocity = new Vector3(direction.x, rigid.velocity.y, direction.z);
-        Vector3 gravity = Vector3.down * Mathf.Abs(rigid.velocity.y);
-
-        if (isGrounded && isOnSlope)
-        {
-            velocity = AdjustDirectionToSlope(direction);
-            gravity = Vector3.zero;
-            rigid.useGravity = false;
-        }
-        else
-        {
-            rigid.useGravity = true;
-        }
-        rigid.velocity = velocity * currentMoveSpeed + gravity;
+        rigid.velocity = velocity * currentMoveSpeed;
     }
 
     protected void LookAt()
@@ -174,33 +172,9 @@ public class PlayerController : MonoBehaviour
             spriteBox.transform.localScale = new Vector3(1, 1, 0.01f);
         }
     }
-    
-    protected bool IsOnSlope()
-    {
-        Ray ray = new Ray(transform.position, Vector3.down);
-        if (Physics.Raycast(ray, out slopeHit, RAY_DISTANCE, groundLayer))
-        {
-            var angle = Vector3.Angle(Vector3.up, slopeHit.normal);
-            return angle != 0f && angle < maxSlopeAngle;
-        }
-        return false;
-    }
-
-    protected Vector3 AdjustDirectionToSlope(Vector3 direction)
-    { //전진하고 있는 방향 Vector와 서있는 땅의 Normal Vector를 통해 서있는 땅의 기울어진 방향의 Vector를 반환한다.
-        return Vector3.ProjectOnPlane(direction, slopeHit.normal).normalized;
-    }
-
-    protected bool IsGrounded()
-    {
-        Vector3 boxSize = new Vector3(transform.lossyScale.x/2, 0.05f, transform.lossyScale.z/2);
-        return Physics.CheckBox(groundCheck.position, boxSize, Quaternion.identity, groundLayer);
-    }
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
-        Vector3 boxSize = new Vector3(transform.lossyScale.x/2, 0.05f, transform.lossyScale.z/2);
-        Gizmos.DrawWireCube(groundCheck.position, boxSize);
+        
     }
 }

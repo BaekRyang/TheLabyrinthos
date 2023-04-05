@@ -107,7 +107,7 @@ public class StructCreation
         if (iXPos > 0) n += graph.ContainsKey(i - 1) ? 1 : 0;
         if (iXPos < 8) n += graph.ContainsKey(i + 1) ? 1 : 0;
         if (i > 9) n += graph.ContainsKey(i - 10) ? 1 : 0;
-        if (i < 80) n += graph.ContainsKey(i + 10) ? 1 : 0;
+        if (i < 90) n += graph.ContainsKey(i + 10) ? 1 : 0;
         return n;
     }
 

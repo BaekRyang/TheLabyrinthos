@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UIElements;
 using static UnityEditor.Rendering.CameraUI;
 
 public class RoomCreation : MonoBehaviour
@@ -24,7 +25,7 @@ public class RoomCreation : MonoBehaviour
         }
         else
         {
-            InstantiateObject(doorPrefab, position, rotation, parent);
+            InstantiateObject(RoomDoor_t1, position, rotation, parent);
         }
     }
 
@@ -33,6 +34,8 @@ public class RoomCreation : MonoBehaviour
     [SerializeField] GameObject RoomBase;
     [SerializeField] GameObject RoomWall;
     [SerializeField] GameObject RoomDoor;
+    [SerializeField] GameObject RoomDoor_t1;
+    [SerializeField] GameObject RoomNoDoor;
     [SerializeField] GameObject Player;
     [SerializeField] int RoomCount = 10;
     int iRoomSize = 10;
@@ -108,6 +111,8 @@ public class RoomCreation : MonoBehaviour
 
                 //각 방의 4방향을 조사하여 0이면 벽을, 1이면 문을
                 RoomNode currentNode = roomMap[i];
+                RoomNode parentNode;
+                if (currentNode.ParentIndex != -1) parentNode = roomMap[currentNode.ParentIndex];
 
                 int parentDirection = -1;
                 if (currentNode.ParentIndex != -1)
@@ -118,10 +123,22 @@ public class RoomCreation : MonoBehaviour
                     else if (currentNode.ParentIndex == i + 10) parentDirection = 3;
                 }
 
-                CreateWallOrDoor(RoomWall, RoomDoor, tmpGO.transform, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 270, 0)), i % 10 < 1 || (!currentNode.Children.Contains(i - 1) && parentDirection != 0));
-                CreateWallOrDoor(RoomWall, RoomDoor, tmpGO.transform, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 90, 0)), i % 10 > 8 || (!currentNode.Children.Contains(i + 1) && parentDirection != 1));
-                CreateWallOrDoor(RoomWall, RoomDoor, tmpGO.transform, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 180, 0)), i < 10 || (!currentNode.Children.Contains(i - 10) && parentDirection != 2));
-                CreateWallOrDoor(RoomWall, RoomDoor, tmpGO.transform, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 0, 0)), i > 90 || (!currentNode.Children.Contains(i + 10) && parentDirection != 3));
+                bool shouldCreateWallLeft = i % 10 < 1 || (!currentNode.Children.Contains(i - 1) && parentDirection != 0);
+                if (!shouldCreateWallLeft && parentDirection == 0) InstantiateObject(RoomNoDoor, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 270, 0)), tmpGO.transform);
+                else CreateWallOrDoor(RoomWall, RoomDoor, tmpGO.transform, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 270, 0)), shouldCreateWallLeft);
+
+                bool shouldCreateWallRight = i % 10 > 8 || (!currentNode.Children.Contains(i + 1) && parentDirection != 1);
+                if (!shouldCreateWallRight && parentDirection == 1) InstantiateObject(RoomNoDoor, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 90, 0)), tmpGO.transform);
+                else CreateWallOrDoor(RoomWall, RoomDoor, tmpGO.transform, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 90, 0)), shouldCreateWallRight);
+
+                bool shouldCreateWallUp = i < 10 || (!currentNode.Children.Contains(i - 10) && parentDirection != 2);
+                if (!shouldCreateWallUp && parentDirection == 2) InstantiateObject(RoomNoDoor, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 180, 0)), tmpGO.transform);
+                else CreateWallOrDoor(RoomWall, RoomDoor, tmpGO.transform, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 180, 0)), shouldCreateWallUp);
+
+                bool shouldCreateWallDown = i > 90 || (!currentNode.Children.Contains(i + 10) && parentDirection != 3);
+                if (!shouldCreateWallDown && parentDirection == 3) InstantiateObject(RoomNoDoor, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 0, 0)), tmpGO.transform);
+                else CreateWallOrDoor(RoomWall, RoomDoor, tmpGO.transform, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 0, 0)), shouldCreateWallDown);
+
 
 
                 tmpGO.GetComponent<RoomController>().index = i;

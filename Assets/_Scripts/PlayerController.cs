@@ -81,6 +81,18 @@ public class PlayerController : MonoBehaviour
 
     protected void Move()
     {
+        int size = 10;
+        // 플레이어의 위치
+        Vector3 playerPos = transform.position;
+
+        // 플레이어가 있는 방의 인덱스 계산
+        int roomIndexX = Mathf.FloorToInt(((playerPos.x + 5) / size) + 5);
+        int roomIndexY = Mathf.FloorToInt(((playerPos.z + 5) / size) + 4) * 10;
+        int roomIndex = roomIndexX + roomIndexY;
+
+        // 현재 플레이어가 있는 방의 인덱스 출력
+        Debug.Log("Current room index: " + roomIndex);
+
         Camera.main.transform.position = camPos + transform.position;
         float currentMoveSpeed = moveSpeed;
 

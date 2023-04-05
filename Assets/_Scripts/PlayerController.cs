@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] Transform groundCheck;
 
+    [SerializeField] GameObject GO_PrevInteracted = null;
     public float MoveSpeed { get { return MoveSpeed; } }
     [SerializeField] float moveSpeed;
     Rigidbody rigid;
@@ -57,6 +58,60 @@ public class PlayerController : MonoBehaviour
         rigid.rotation = Quaternion.Euler(camRot);
 
         //LookAt();  
+
+        //Click Check
+        
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit chit;
+        if (Physics.Raycast(ray, out chit))
+        {
+            if (chit.transform.CompareTag("Interactable"))
+            {
+                if (Vector3.Distance(chit.transform.position, transform.position) < 2)
+                {
+                    if (GO_PrevInteracted != null && GO_PrevInteracted != chit.transform.gameObject)
+                    {
+                        Debug.Log("OFF");
+                        GO_PrevInteracted.GetComponent<Outline>().enabled = false;
+                    }
+                    GO_PrevInteracted = chit.transform.gameObject;
+
+                    chit.transform.GetComponent<Outline>().enabled = true;
+                    Debug.Log("Interactable");
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        //Interactable 한 Object를 클릭했을때 처리
+                        chit.transform.GetComponent<Interactable>().Run();
+                        Debug.Log("INTERACTED");
+                    }
+                } 
+                else
+                {
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        Debug.Log("Too Far");
+                    }
+                }    
+            }
+            else
+            {
+                Debug.Log("Not Interactable");
+                if (GO_PrevInteracted != null)
+                {
+                    Debug.Log("OFF");
+                    GO_PrevInteracted.GetComponent<Outline>().enabled = false;
+                    GO_PrevInteracted = null;
+                }
+            }
+        } else
+        {
+            if (GO_PrevInteracted != null)
+            {
+                Debug.Log("OFF");
+                GO_PrevInteracted.GetComponent<Outline>().enabled = false;
+                GO_PrevInteracted = null;
+            }
+        }
     }
 
     private void Awake()
@@ -68,19 +123,6 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        isHit = Physics.BoxCast(transform.position, boxSize, direction, out hit, Quaternion.identity, detectionDistance);
-        if (isHit)
-        {
-            if (GO_LastHitGO != hit.transform.gameObject)
-            {
-                GO_LastHitGO = hit.transform.gameObject;
-                Debug.Log("Changed");
-            }
-        } else
-        {
-            GO_LastHitGO = null;
-        }
-
         if (horizontal == 0 && vertical == 0)
         {
             rigid.velocity = Vector3.zero;

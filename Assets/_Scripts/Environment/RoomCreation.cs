@@ -144,7 +144,7 @@ public class RoomCreation : MonoBehaviour
                 tmpGO.GetComponent<RoomController>().index = i;
                 tmpGO.GetComponent<RoomController>().SortObjects();
 
-                if(i == 45)
+                if (i == 45)
                 {
                     GameObject.Instantiate(Player);
                 }

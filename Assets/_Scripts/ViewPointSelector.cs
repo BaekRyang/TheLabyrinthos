@@ -7,39 +7,39 @@ public class ViewPointSelector : MonoBehaviour
     private const float RAY_DISTANCE = 2f;
     private int groundLayer;
 
-    // Raycast¿¡ »ç¿ëµÇ´Â º¯¼ö
+    // Raycastì— ì‚¬ìš©ë˜ëŠ” ë³€ìˆ˜
     RaycastHit roomCheck;
     Ray roomCheckRay;
 
-    // ÀÌÀü ¹æÀÇ ÀÌ¸§°ú °ÔÀÓ ¿ÀºêÁ§Æ®
+    // ì´ì „ ë°©ì˜ ì´ë¦„ê³¼ ê²Œì„ ì˜¤ë¸Œì íŠ¸
     [SerializeField] string prevRoomName = "null";
     [SerializeField] GameObject prevRoom;
 
     void Awake()
     {
-        // ·¹ÀÌ¾î ¼³Á¤
+        // ë ˆì´ì–´ ì„¤ì •
         groundLayer = 1 << LayerMask.NameToLayer("Ground");
     }
 
     private void Start()
     {
-        // ÃÊ±â À§Ä¡¿¡¼­ ·¹ÀÌÄ³½ºÆ®¸¦ ÀÌ¿ëÇÏ¿© ÇÃ·¹ÀÌ¾î°¡ À§Ä¡ÇÑ ¹æÀ» °¨ÁöÇÏ°í ÇØ´ç ¹æÀÇ »óÅÂ¸¦ º¯°æ
+        // ì´ˆê¸° ìœ„ì¹˜ì—ì„œ ë ˆì´ìºìŠ¤íŠ¸ë¥¼ ì´ìš©í•˜ì—¬ í”Œë ˆì´ì–´ê°€ ìœ„ì¹˜í•œ ë°©ì„ ê°ì§€í•˜ê³  í•´ë‹¹ ë°©ì˜ ìƒíƒœë¥¼ ë³€ê²½
         Physics.Raycast(transform.position, Vector3.down, out roomCheck, RAY_DISTANCE, groundLayer);
-        prevRoom = roomCheck.transform.root.gameObject; // ÇÃ·¹ÀÌ¾î°¡ À§Ä¡ÇÑ ¹æÀÇ ·çÆ® ¿ÀºêÁ§Æ®¸¦ ÀúÀå
-        prevRoomName = prevRoom.name; // ÇÃ·¹ÀÌ¾î°¡ À§Ä¡ÇÑ ¹æÀÇ ÀÌ¸§À» ÀúÀå
-        prevRoom.GetComponent<RoomController>().ChangeRoomState(true); // ÇÃ·¹ÀÌ¾î°¡ À§Ä¡ÇÑ ¹æÀÇ »óÅÂ¸¦ º¯°æ
+        prevRoom = roomCheck.transform.root.gameObject; // í”Œë ˆì´ì–´ê°€ ìœ„ì¹˜í•œ ë°©ì˜ ë£¨íŠ¸ ì˜¤ë¸Œì íŠ¸ë¥¼ ì €ì¥
+        prevRoomName = prevRoom.name; // í”Œë ˆì´ì–´ê°€ ìœ„ì¹˜í•œ ë°©ì˜ ì´ë¦„ì„ ì €ì¥
+        prevRoom.GetComponent<RoomController>().ChangeRoomState(true); // í”Œë ˆì´ì–´ê°€ ìœ„ì¹˜í•œ ë°©ì˜ ìƒíƒœë¥¼ ë³€ê²½
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        // Æ®¸®°Å ¿µ¿ª ¾ÈÀ¸·Î µé¾î°¥ ¶§, ·¹ÀÌÄ³½ºÆ®¸¦ ÀÌ¿ëÇÏ¿© ÇÃ·¹ÀÌ¾î°¡ À§Ä¡ÇÑ ¹æÀ» °¨ÁöÇÏ°í ÇØ´ç ¹æÀÇ »óÅÂ¸¦ º¯°æ
-        Debug.Log(Physics.Raycast(transform.position, Vector3.down, out roomCheck, RAY_DISTANCE, groundLayer)); // ·¹ÀÌÄ³½ºÆ® °á°ú¸¦ ·Î±×·Î Ãâ·Â
-        Debug.Log(roomCheck.transform.root.name); // ·¹ÀÌÄ³½ºÆ® °á°ú·Î °¨ÁöµÈ ¹æÀÇ ÀÌ¸§À» ·Î±×·Î Ãâ·Â
+        // íŠ¸ë¦¬ê±° ì˜ì—­ ì•ˆìœ¼ë¡œ ë“¤ì–´ê°ˆ ë•Œ, ë ˆì´ìºìŠ¤íŠ¸ë¥¼ ì´ìš©í•˜ì—¬ í”Œë ˆì´ì–´ê°€ ìœ„ì¹˜í•œ ë°©ì„ ê°ì§€í•˜ê³  í•´ë‹¹ ë°©ì˜ ìƒíƒœë¥¼ ë³€ê²½
+        Debug.Log(Physics.Raycast(transform.position, Vector3.down, out roomCheck, RAY_DISTANCE, groundLayer)); // ë ˆì´ìºìŠ¤íŠ¸ ê²°ê³¼ë¥¼ ë¡œê·¸ë¡œ ì¶œë ¥
+        Debug.Log(roomCheck.transform.root.name); // ë ˆì´ìºìŠ¤íŠ¸ ê²°ê³¼ë¡œ ê°ì§€ëœ ë°©ì˜ ì´ë¦„ì„ ë¡œê·¸ë¡œ ì¶œë ¥
 
-        prevRoom.GetComponent<RoomController>().ChangeRoomState(false); // ÀÌÀü ¹æÀÇ »óÅÂ¸¦ º¯°æ
-        prevRoom = roomCheck.transform.root.gameObject; // ÇÃ·¹ÀÌ¾î°¡ À§Ä¡ÇÑ ¹æÀÇ ·çÆ® ¿ÀºêÁ§Æ®¸¦ ÀúÀå
-        prevRoomName = prevRoom.name; // ÇÃ·¹ÀÌ¾î°¡ À§Ä¡ÇÑ ¹æÀÇ ÀÌ¸§À» ÀúÀå
-        prevRoom.GetComponent<RoomController>().ChangeRoomState(true); // ÇÃ·¹ÀÌ¾î°¡ À§Ä¡ÇÑ ¹æÀÇ »óÅÂ¸¦ º¯°æ
+        prevRoom.GetComponent<RoomController>().ChangeRoomState(false); // ì´ì „ ë°©ì˜ ìƒíƒœë¥¼ ë³€ê²½
+        prevRoom = roomCheck.transform.root.gameObject; // í”Œë ˆì´ì–´ê°€ ìœ„ì¹˜í•œ ë°©ì˜ ë£¨íŠ¸ ì˜¤ë¸Œì íŠ¸ë¥¼ ì €ì¥
+        prevRoomName = prevRoom.name; // í”Œë ˆì´ì–´ê°€ ìœ„ì¹˜í•œ ë°©ì˜ ì´ë¦„ì„ ì €ì¥
+        prevRoom.GetComponent<RoomController>().ChangeRoomState(true); // í”Œë ˆì´ì–´ê°€ ìœ„ì¹˜í•œ ë°©ì˜ ìƒíƒœë¥¼ ë³€ê²½
     }
 
 }

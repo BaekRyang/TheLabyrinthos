@@ -21,11 +21,15 @@ public class PlayerController : MonoBehaviour
     int faceing = 0;
     
     //카메라 회전
-    public float rotationSpeed = 2f;
-    public float distanceFromPlayer = 5f;
+    float rotationSpeed = 2f;
+    float distanceFromPlayer = 5f;
 
     private Vector3 offset;
     private float yaw = 0;
+
+    float minZoomDistance = 3f;
+    float maxZoomDistance = 5f;
+
     //
 
     //플레이어 마우스 액션
@@ -73,6 +77,17 @@ public class PlayerController : MonoBehaviour
             Debug.DrawRay(transform.position, direction, Color.yellow);
         }
 
+        //마우스 휠
+        float scrollInput = Input.GetAxis("Mouse ScrollWheel");
+        if (Mathf.Abs(scrollInput) > 0.01f)
+        {
+            Debug.Log(scrollInput);
+            distanceFromPlayer -= scrollInput * rotationSpeed;
+            distanceFromPlayer = Mathf.Clamp(distanceFromPlayer, minZoomDistance, maxZoomDistance);
+            offset = new Vector3(0, 1, -distanceFromPlayer);
+        }
+
+
         // 우클릭을 누르고 있는 경우
         if (Input.GetMouseButton(1))
         {
@@ -81,8 +96,8 @@ public class PlayerController : MonoBehaviour
 
         Quaternion rotation = Quaternion.Euler(25, yaw, 0);
         Camera.main.transform.position = transform.position + rotation * offset;
-        Camera.main.transform.LookAt(transform);
-        spriteBox.transform.rotation = Quaternion.Euler(Camera.main.transform.rotation.eulerAngles.x, Camera.main.transform.rotation.eulerAngles.y, 0);
+        Camera.main.transform.LookAt(transform.position + Vector3.up);
+        spriteBox.transform.rotation = Quaternion.Euler(0, Camera.main.transform.rotation.eulerAngles.y, 0);
 
 
         //LookAt();  

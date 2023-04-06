@@ -21,6 +21,6 @@ public class SliderValue : MonoBehaviour
         if (isFloat) TT_Text.text = i_SliderValue.value.ToString();
         else TT_Text.text = Mathf.FloorToInt(i_SliderValue.value).ToString();
 
-        //TP°°Àº °æ¿ì Float·Î Ç¥½ÃÇÏ¸é º¸±â°¡ ¾ÈÁÁÀ½
+        //TPê°™ì€ ê²½ìš° Floatë¡œ í‘œì‹œí•˜ë©´ ë³´ê¸°ê°€ ì•ˆì¢‹ìŒ
     }
 }

@@ -11,15 +11,15 @@ public enum RoomType
 
 public class RoomNode
 {
-    public int Id { get; set; }
-    public RoomType RoomType { get; set; }
-    public int ParentIndex { get; set; }
-    public List<int> Children { get; set; }
+    public int Id { get; set; } //방의 위치를 1차원으로 표시할때의 인덱스
+    public RoomType RoomType { get; set; } //방의 타입
+    public RoomNode ParentNode { get; set; } //상위 노드
+    public List<int> Children { get; set; } //직접 연결된 하위 노드
 
-    public RoomNode(int id, int parentIndex = -1)
+    public RoomNode(int id, RoomNode parentNode = null)
     {
         Id = id;
-        ParentIndex = parentIndex;
+        ParentNode = parentNode;
         Children = new List<int>();
     }
 }
@@ -83,15 +83,14 @@ public class StructCreation
         if (rand.Next(2) == 1 && i != iFirstRoom) return false; //50%확률로 포기
 
         //위 모든 조건을 통과했다면 방이 만들어진 것으로 그래프에 추가해준다.
-        RoomNode newNode = new RoomNode(i);
-        graph[i] = newNode;
+        RoomNode newNode = new RoomNode(i, parent); //자신의 인덱스와 부모 정보를 넣어주고
+        graph[i] = newNode; //방 그래프에 할당
         qRoomIdx.Enqueue(newNode);
 
         newNode.RoomType = RoomType.common; //우선 기본타입 방으로 설정
 
         if (parent != null && direction != -1) //시작 노드가 아닌경우
         {
-            newNode.ParentIndex = parent.Id; //부모 인덱스를 추가해주고
             parent.Children.Add(newNode.Id); //부모 노드에 자식으로 추가한다.
         }
 

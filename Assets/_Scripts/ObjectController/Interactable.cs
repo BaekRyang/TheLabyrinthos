@@ -15,7 +15,7 @@ public class Interactable : MonoBehaviour
         switch (type)
         {
             case ObjectType.Door:
-                GetComponent<Animator>().SetBool("isOpen", true);
+                StartCoroutine(OpenDoor());
                 this.enabled = false;
                 this.tag = "Untagged";
                 GetComponent<Outline>().enabled = false;
@@ -26,5 +26,24 @@ public class Interactable : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    private IEnumerator OpenDoor()
+    {
+        Quaternion startRotation = transform.rotation;
+        Vector3 targetRotationEulerAngles = transform.rotation.eulerAngles;
+        targetRotationEulerAngles.y -= 120;
+        Quaternion targetRotation = Quaternion.Euler(targetRotationEulerAngles);
+
+        float t = 0;
+        while (t < 1)
+        {
+            t += Time.deltaTime * 1.5f;
+            transform.rotation = Quaternion.Lerp(startRotation, targetRotation, t);
+            yield return null;
+        }
+
+        // 완전히 열린 상태로 설정
+        transform.rotation = targetRotation;
     }
 }

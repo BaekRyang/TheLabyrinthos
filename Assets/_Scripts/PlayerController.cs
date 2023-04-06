@@ -19,22 +19,34 @@ public class PlayerController : MonoBehaviour
     Rigidbody rigid;
     public Vector3 direction;
     int faceing = 0;
+    
+    //카메라 회전
+    public float rotationSpeed = 2f;
+    public float distanceFromPlayer = 5f;
 
-    Vector3 camPos;
+    private Vector3 offset;
+    private float yaw = 0;
+    //
 
-    Vector3 camRot;
-    [SerializeField] float camRotX;
-
+    //플레이어 마우스 액션
     RaycastHit hit;
     bool isHit;
     float detectionDistance = 0.2f;
-    LayerMask layerMask; // 검출하고자 하는 레이어를 지정합니다.
-    Vector3 boxSize = new Vector3(0.2f, 1f, 0.2f);
+    LayerMask LM_InteractLayerMask; // 검출하고자 하는 레이어를 지정합니다.
+    GameObject GO_LastHitGO;
+    //
 
     float horizontal;
     float vertical;
 
-    GameObject GO_LastHitGO;
+    
+
+    private void Awake()
+    {
+        rigid = GetComponent<Rigidbody>();
+        offset = new Vector3(0, 1, -distanceFromPlayer);
+        LM_InteractLayerMask = 1 << LayerMask.NameToLayer("Interactable");
+    }
 
     private void Start()
     {
@@ -48,22 +60,38 @@ public class PlayerController : MonoBehaviour
 
         if (Mathf.Abs(horizontal) > 0.01f || Mathf.Abs(vertical) > 0.01f)
         {
-            direction = transform.forward * vertical + transform.right * horizontal;
+            Vector3 cameraForward = Camera.main.transform.forward;
+            cameraForward.y = 0;
+            cameraForward.Normalize();
+
+            Vector3 cameraRight = Camera.main.transform.right;
+            cameraRight.y = 0;
+            cameraRight.Normalize();
+
+            direction = cameraForward * vertical + cameraRight * horizontal;
             direction.Normalize();
             Debug.DrawRay(transform.position, direction, Color.yellow);
-        } //direction을 마지막에 썼던 값을 유지시키기 위해
+        }
 
-        camRot = Camera.main.transform.rotation.eulerAngles;
-        camRot.x = camRotX;
-        rigid.rotation = Quaternion.Euler(camRot);
+        // 우클릭을 누르고 있는 경우
+        if (Input.GetMouseButton(1))
+        {
+            yaw += Input.GetAxis("Mouse X") * rotationSpeed;
+        }
+
+        Quaternion rotation = Quaternion.Euler(25, yaw, 0);
+        Camera.main.transform.position = transform.position + rotation * offset;
+        Camera.main.transform.LookAt(transform);
+        spriteBox.transform.rotation = Quaternion.Euler(Camera.main.transform.rotation.eulerAngles.x, Camera.main.transform.rotation.eulerAngles.y, 0);
+
 
         //LookAt();  
 
         //Click Check
-        
+
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit chit;
-        if (Physics.Raycast(ray, out chit))
+        if (Physics.Raycast(ray, out chit, 50, LM_InteractLayerMask))
         {
             if (chit.transform.CompareTag("Interactable"))
             {
@@ -114,13 +142,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Awake()
-    {
-        rigid = GetComponent<Rigidbody>();
-        camPos = Camera.main.transform.position;
-        layerMask = 1 << LayerMask.NameToLayer("Door");
-    }
-
     private void FixedUpdate()
     {
         if (horizontal == 0 && vertical == 0)
@@ -147,7 +168,6 @@ public class PlayerController : MonoBehaviour
         // 현재 플레이어가 있는 방의 인덱스 출력
         Debug.Log("Current room index: " + roomIndex);
 
-        Camera.main.transform.position = camPos + transform.position;
         float currentMoveSpeed = moveSpeed;
         Vector3 velocity = new Vector3(direction.x, 0, direction.z);
 

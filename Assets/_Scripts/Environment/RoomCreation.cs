@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 using static UnityEditor.Rendering.CameraUI;
@@ -83,7 +84,7 @@ public class RoomCreation : MonoBehaviour
                                                             (-4 * iRoomSize) + (i / 10) * iRoomSize),                       //Z
                                                             Quaternion.identity);                                           //R
 
-                if(i % 10 != 0 && i % 10 != 9 && i > 9 && i < 90)
+                if (i % 10 != 0 && i % 10 != 9 && i > 9 && i < 90)
                 {
                     if (roomMap.ContainsKey(i - 1) && roomMap.ContainsKey(i + 1) && roomMap[i - 1].RoomType != 0 && roomMap[i + 1].RoomType != 0 && !roomMap.ContainsKey(i - 10) && !roomMap.ContainsKey(i + 10))
                     {
@@ -111,16 +112,15 @@ public class RoomCreation : MonoBehaviour
 
                 //각 방의 4방향을 조사하여 0이면 벽을, 1이면 문을
                 RoomNode currentNode = roomMap[i];
-                RoomNode parentNode;
-                if (currentNode.ParentIndex != -1) parentNode = roomMap[currentNode.ParentIndex];
+                RoomNode parentNode = currentNode.ParentNode;
 
                 int parentDirection = -1;
-                if (currentNode.ParentIndex != -1)
+                if (currentNode.ParentNode != null) //시작노드는 Root가 없으므로 제외
                 {
-                    if (currentNode.ParentIndex == i - 1) parentDirection = 0;
-                    else if (currentNode.ParentIndex == i + 1) parentDirection = 1;
-                    else if (currentNode.ParentIndex == i - 10) parentDirection = 2;
-                    else if (currentNode.ParentIndex == i + 10) parentDirection = 3;
+                    if (currentNode.ParentNode.Id == i - 1) parentDirection = 0;
+                    else if (currentNode.ParentNode.Id == i + 1) parentDirection = 1;
+                    else if (currentNode.ParentNode.Id == i - 10) parentDirection = 2;
+                    else if (currentNode.ParentNode.Id == i + 10) parentDirection = 3;
                 }
 
                 bool shouldCreateWallLeft = i % 10 < 1 || (!currentNode.Children.Contains(i - 1) && parentDirection != 0);
@@ -139,14 +139,13 @@ public class RoomCreation : MonoBehaviour
                 if (!shouldCreateWallDown && parentDirection == 3) InstantiateObject(RoomNoDoor, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 0, 0)), tmpGO.transform);
                 else CreateWallOrDoor(RoomWall, RoomDoor, tmpGO.transform, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 0, 0)), shouldCreateWallDown);
 
-
-
                 tmpGO.GetComponent<RoomController>().index = i;
                 tmpGO.GetComponent<RoomController>().SortObjects();
 
                 if (i == 45)
                 {
                     GameObject.Instantiate(Player);
+
                 }
             }
         }

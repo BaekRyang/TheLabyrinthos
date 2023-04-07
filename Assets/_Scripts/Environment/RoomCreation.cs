@@ -71,7 +71,8 @@ public class RoomCreation : MonoBehaviour
             else
             {
                 GameObject tmpGO = GameObject.Instantiate(
-                                                            RoomBase, new Vector3((-5 * iRoomSize) + (i % 10) * iRoomSize,  //X
+                                                            RoomBase,
+                                                            new Vector3((-5 * iRoomSize) + (i % 10) * iRoomSize,            //X
                                                             0,                                                              //Y
                                                             (-4 * iRoomSize) + (i / 10) * iRoomSize),                       //Z
                                                             Quaternion.identity);                                           //R
@@ -147,6 +148,8 @@ public class RoomCreation : MonoBehaviour
                     GameObject.Instantiate(Player);
 
                 }
+
+                GameManager.Instance.GO_Map[i] = tmpGO;
             }
         }
 

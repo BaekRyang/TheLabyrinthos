@@ -43,18 +43,29 @@ public class PlayerController : MonoBehaviour
     float horizontal;
     float vertical;
 
-    
+    //방 체크
+    private int groundLayer;
+
+    // 이전 방의 이름과 게임 오브젝트
+    [SerializeField] string prevRoomName = "null";
+    [SerializeField] GameObject prevRoom;
+    [SerializeField] GameObject prev2Room;
+
 
     private void Awake()
     {
         rigid = GetComponent<Rigidbody>();
         offset = new Vector3(0, 1, -distanceFromPlayer);
         LM_InteractLayerMask = 1 << LayerMask.NameToLayer("Interactable");
+        groundLayer = 1 << LayerMask.NameToLayer("Ground");
     }
 
     private void Start()
     {
         playerTexture = Resources.LoadAll<Texture>("Sprites/Player");
+        prevRoom = GameManager.Instance.GO_Map[45].gameObject; // 플레이어가 위치한 방의 루트 오브젝트를 저장 (플레이어는 45번에 생성)
+        prevRoomName = prevRoom.name; // 플레이어가 위치한 방의 이름을 저장
+        prevRoom.GetComponent<RoomController>().ChangeRoomState(true); // 플레이어가 위치한 방의 상태를 변경
     }
 
     private void Update()
@@ -182,6 +193,11 @@ public class PlayerController : MonoBehaviour
 
         // 현재 플레이어가 있는 방의 인덱스 출력
         Debug.Log("Current room index: " + roomIndex);
+
+        prevRoom.GetComponent<RoomController>().ChangeRoomState(false); // 이전 방의 상태를 변경
+        prevRoom = GameManager.Instance.GO_Map[roomIndex].gameObject; // 플레이어가 위치한 방의 오브젝트를 저장
+        prevRoomName = prevRoom.name; // 플레이어가 위치한 방의 이름을 저장
+        prevRoom.GetComponent<RoomController>().ChangeRoomState(true); // 플레이어가 위치한 방의 상태를 변경
 
         float currentMoveSpeed = moveSpeed;
         Vector3 velocity = new Vector3(direction.x, 0, direction.z);

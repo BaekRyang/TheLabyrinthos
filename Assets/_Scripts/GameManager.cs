@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public Creatures creatures = new Creatures();
+    public GameObject[] GO_Map = new GameObject[100];
 
     void Awake()
     {

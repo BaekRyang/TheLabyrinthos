@@ -12,6 +12,8 @@ public class RoomController : MonoBehaviour
 
     [SerializeField] GameObject[] GO_RoomPrefabs;
 
+    [SerializeField] Material[] M_Ceiling;
+
     void Awake()
     {
         GO_RoomPrefabs = Resources.LoadAll<GameObject>("RoomStructures");
@@ -21,11 +23,9 @@ public class RoomController : MonoBehaviour
     {
         if (_state)
         {
-            doors.SetActive(true);
             ceilings.SetActive(false);
         } else
         {
-            doors.SetActive(false);
             ceilings.SetActive(true);
         }
     }
@@ -59,14 +59,12 @@ public class RoomController : MonoBehaviour
                     {
                         // 해당 오브젝트를 현재 게임 오브젝트의 하위로 이동
                         transform.GetChild(i).GetChild(0).parent = this.transform;
-                    }
+                    } 
                 }
                 // Instantiate로 생성된 게임 오브젝트를 삭제
                 Destroy(transform.GetChild(i).gameObject);
             }
         }
-        //doors.SetActive(true);
-        ceilings.SetActive(false);
         GameObject GO_Struct = GameObject.Instantiate(GO_RoomPrefabs[0], transform.position, Quaternion.identity);
         GO_Struct.transform.SetParent(transform);
     }

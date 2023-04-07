@@ -9,24 +9,16 @@ using static UnityEditor.Rendering.CameraUI;
 
 public class RoomCreation : MonoBehaviour
 {
-    private GameObject InstantiateObject(GameObject prefab, Vector3 position, Quaternion rotation, Transform parent)
-        //오브젝트 생성후 Parent 변경
-    {
-        GameObject tmpGO = GameObject.Instantiate(prefab, position, rotation);
-        tmpGO.transform.SetParent(parent);
-        return tmpGO;
-    }
-
-    private void CreateWallOrDoor(GameObject wallPrefab, GameObject doorPrefab, Transform parent, Vector3 position, Quaternion rotation, bool condition)
+    private void CreateWallOrDoor(Transform parent, Vector3 position, Quaternion rotation, bool condition)
         //벽이나 문을 판정후 생성
     {
         if (condition)
         {
-            InstantiateObject(wallPrefab, position, rotation, parent);
+            GameObject.Instantiate(RoomWall, position, rotation, parent);
         }
         else
         {
-            InstantiateObject(RoomDoor_t1, position, rotation, parent);
+            GameObject.Instantiate(RoomDoor_t1, position, rotation, parent);
         }
     }
 
@@ -34,12 +26,12 @@ public class RoomCreation : MonoBehaviour
 
     [SerializeField] GameObject RoomBase;
     [SerializeField] GameObject RoomWall;
-    [SerializeField] GameObject RoomDoor;
     [SerializeField] GameObject RoomDoor_t1;
     [SerializeField] GameObject RoomNoDoor;
     [SerializeField] GameObject Player;
     [SerializeField] int RoomCount = 10;
     int iRoomSize = 10;
+
     void Start()
     {
         int cnt = 0;
@@ -110,34 +102,42 @@ public class RoomCreation : MonoBehaviour
                     tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#e74856> K </color>";
                 }
 
-                //각 방의 4방향을 조사하여 0이면 벽을, 1이면 문을
+                // 각 방의 4방향을 조사하여 0이면 벽을, 1이면 문을
                 RoomNode currentNode = roomMap[i];
-                RoomNode parentNode = currentNode.ParentNode;
 
                 int parentDirection = -1;
-                if (currentNode.ParentNode != null) //시작노드는 Root가 없으므로 제외
+                if (currentNode.ParentNode != null) // 시작노드는 Root가 없으므로 제외
                 {
+                    //상위 노드의 상대위치를 저장해둔다.
                     if (currentNode.ParentNode.Id == i - 1) parentDirection = 0;
                     else if (currentNode.ParentNode.Id == i + 1) parentDirection = 1;
                     else if (currentNode.ParentNode.Id == i - 10) parentDirection = 2;
                     else if (currentNode.ParentNode.Id == i + 10) parentDirection = 3;
                 }
 
-                bool shouldCreateWallLeft = i % 10 < 1 || (!currentNode.Children.Contains(i - 1) && parentDirection != 0);
-                if (!shouldCreateWallLeft && parentDirection == 0) InstantiateObject(RoomNoDoor, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 270, 0)), tmpGO.transform);
-                else CreateWallOrDoor(RoomWall, RoomDoor, tmpGO.transform, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 270, 0)), shouldCreateWallLeft);
+                // 문이 생기는 자리인데, 해당 방향이 상위 노드이면 문을 비워둔 벽 생성
+                // 이외에는 문이 생겨야하는지 조건에 따라 문 또는 벽을 생성
 
-                bool shouldCreateWallRight = i % 10 > 8 || (!currentNode.Children.Contains(i + 1) && parentDirection != 1);
-                if (!shouldCreateWallRight && parentDirection == 1) InstantiateObject(RoomNoDoor, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 90, 0)), tmpGO.transform);
-                else CreateWallOrDoor(RoomWall, RoomDoor, tmpGO.transform, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 90, 0)), shouldCreateWallRight);
+                //상(0)
+                bool shouldCreateWall = i > 90 || (!currentNode.Children.Contains(i + 10) && parentDirection != 3);
+                if (!shouldCreateWall && parentDirection == 3) GameObject.Instantiate(RoomNoDoor, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 0, 0)), tmpGO.transform);
+                else CreateWallOrDoor(tmpGO.transform, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 0, 0)), shouldCreateWall);
 
-                bool shouldCreateWallUp = i < 10 || (!currentNode.Children.Contains(i - 10) && parentDirection != 2);
-                if (!shouldCreateWallUp && parentDirection == 2) InstantiateObject(RoomNoDoor, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 180, 0)), tmpGO.transform);
-                else CreateWallOrDoor(RoomWall, RoomDoor, tmpGO.transform, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 180, 0)), shouldCreateWallUp);
+                //우(90)
+                shouldCreateWall = i % 10 > 8 || (!currentNode.Children.Contains(i + 1) && parentDirection != 1);
+                if (!shouldCreateWall && parentDirection == 1) GameObject.Instantiate(RoomNoDoor, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 90, 0)), tmpGO.transform);
+                else CreateWallOrDoor(tmpGO.transform, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 90, 0)), shouldCreateWall);
 
-                bool shouldCreateWallDown = i > 90 || (!currentNode.Children.Contains(i + 10) && parentDirection != 3);
-                if (!shouldCreateWallDown && parentDirection == 3) InstantiateObject(RoomNoDoor, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 0, 0)), tmpGO.transform);
-                else CreateWallOrDoor(RoomWall, RoomDoor, tmpGO.transform, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 0, 0)), shouldCreateWallDown);
+                //하(180)
+                shouldCreateWall = i < 10 || (!currentNode.Children.Contains(i - 10) && parentDirection != 2); 
+                if (!shouldCreateWall && parentDirection == 2) GameObject.Instantiate(RoomNoDoor, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 180, 0)), tmpGO.transform);
+                else CreateWallOrDoor(tmpGO.transform, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 180, 0)), shouldCreateWall);
+
+                //좌(270)
+                shouldCreateWall = i % 10 < 1 || (!currentNode.Children.Contains(i - 1) && parentDirection != 0);
+                if (!shouldCreateWall && parentDirection == 0) GameObject.Instantiate(RoomNoDoor, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 270, 0)), tmpGO.transform);
+                else CreateWallOrDoor(tmpGO.transform, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 270, 0)), shouldCreateWall);
+
 
                 tmpGO.GetComponent<RoomController>().index = i;
                 tmpGO.GetComponent<RoomController>().SortObjects();

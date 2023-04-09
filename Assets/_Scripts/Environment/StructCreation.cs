@@ -6,6 +6,8 @@ public enum RoomType
     empty,
     common,
     EndRoom,
+    CraftingRoom,
+    Shop,
     KeyRoom
 }
 
@@ -36,7 +38,7 @@ public class StructCreation
 
     Dictionary<int, RoomNode> roomGraph = new Dictionary<int, RoomNode>();
 
-    Stack<RoomNode> qEndRoom = new Stack<RoomNode>();
+    LinkedList<RoomNode> qEndRoom = new LinkedList<RoomNode>();
 
     public bool Run(int maxRoom, ref Dictionary<int, RoomNode> destGraph)
     {
@@ -51,20 +53,21 @@ public class StructCreation
             int iRoom = currentRoom.Id;
             int iXPos = iRoom % 10;
 
-            if (iXPos > 0) bCreated = bCreated || Check(roomGraph, iRoom - 1, currentRoom, 1);
-            if (iXPos < 8) bCreated = bCreated || Check(roomGraph, iRoom + 1, currentRoom, 0);
-            if (iRoom > 9) bCreated = bCreated | Check(roomGraph, iRoom - 10, currentRoom, 3);
-            if (iRoom < 90) bCreated = bCreated | Check(roomGraph, iRoom + 10, currentRoom, 2);
+            if (iXPos > 0) bCreated = bCreated || Check(roomGraph, iRoom - 1, currentRoom);
+            if (iXPos < 8) bCreated = bCreated || Check(roomGraph, iRoom + 1, currentRoom);
+            if (iRoom > 9) bCreated = bCreated | Check(roomGraph, iRoom - 10, currentRoom);
+            if (iRoom < 90) bCreated = bCreated | Check(roomGraph, iRoom + 10, currentRoom);
 
             if (!bCreated)
             {
-                qEndRoom.Push(currentRoom); //모든 조건을 검사해봤지만 방이 생기지 않았으면 현재방을 엔드룸으로 설정
+                qEndRoom.AddLast(currentRoom); //모든 조건을 검사해봤지만 방이 생기지 않았으면 현재방을 엔드룸으로 설정
                 currentRoom.RoomType = RoomType.EndRoom;
 
             }
         }
 
-        if (iCreateRoomCount != iMaxRoom) return false;
+        if (iCreateRoomCount != iMaxRoom) return false; //방 개수가 설정보다 적으면 안됨
+        if(qEndRoom.Count < 4) return false; //엔드룸이 너무 적으면 안됨
 
         PlaceSpecialRoom(roomGraph);
 
@@ -72,7 +75,7 @@ public class StructCreation
         return true;
     }
 
-    bool Check(Dictionary<int, RoomNode> graph, int i, RoomNode parent = null, int direction = -1)
+    bool Check(Dictionary<int, RoomNode> graph, int i, RoomNode parent = null)
     {
         if (graph.ContainsKey(i)) return false; //이미 방이 있으면 포기
 
@@ -89,7 +92,7 @@ public class StructCreation
 
         newNode.RoomType = RoomType.common; //우선 기본타입 방으로 설정
 
-        if (parent != null && direction != -1) //시작 노드가 아닌경우
+        if (parent != null) //시작 노드가 아닌경우
         {
             parent.Children.Add(newNode.Id); //부모 노드에 자식으로 추가한다.
         }
@@ -114,8 +117,16 @@ public class StructCreation
     {
         // 엔드룸은 큐에 저장되어 있는데, 알고리즘상 엔드룸 중 가장 멀리 있는 것이 제일 마지막에 위치한다.
         // 그 방을 층을 내려가는데 필요한 아이템이 나오는 방으로 배치한다.
-        RoomNode specialRoom = qEndRoom.Pop();
-        specialRoom.RoomType = RoomType.KeyRoom;
+        qEndRoom.Last.Value.RoomType = RoomType.KeyRoom;
+        qEndRoom.RemoveLast();
+
+        qEndRoom.RemoveFirst(); //너무 가까운곳 하나 버리고
+
+        qEndRoom.First.Value.RoomType = RoomType.CraftingRoom; //다음 가까운곳은 제작실
+        qEndRoom.RemoveFirst();
+
+        qEndRoom.First.Value.RoomType = RoomType.Shop; //그 다음은 상점
+        qEndRoom.RemoveFirst();
         // 필요한 경우, specialRoom.Id 값을 사용하여 해당 방에 특수 아이템 등을 할당할 수 있습니다.
     }
 }

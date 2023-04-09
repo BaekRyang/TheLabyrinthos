@@ -92,15 +92,23 @@ public class RoomCreation : MonoBehaviour
 
                 if (i == 45)
                 {
-                    tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#16c60c> S </color>";
-                }
-                else if (roomMap[i].RoomType == RoomType.EndRoom)   
-                {
-                    tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#3b78ff> E </color>";
-                }
-                else if (roomMap[i].RoomType == RoomType.KeyRoom)
-                {
-                    tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#e74856> K </color>";
+                    tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#16c60c> Start </color>";
+                } else {
+                    switch (roomMap[i].RoomType)
+                    {
+                        case RoomType.EndRoom:
+                            tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#3b78ff> End </color>";
+                            break;
+                        case RoomType.CraftingRoom:
+                            tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#524f6a> Craft </color>";
+                            break;
+                        case RoomType.Shop:
+                            tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#efdb17> Shop </color>";
+                            break;
+                        case RoomType.KeyRoom:
+                            tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#e74856> Key </color>";
+                            break;
+                    }
                 }
 
                 // 각 방의 4방향을 조사하여 0이면 벽을, 1이면 문을

@@ -65,8 +65,16 @@ public class RoomController : MonoBehaviour
                 Destroy(transform.GetChild(i).gameObject);
             }
         }
-        GameObject GO_Struct = GameObject.Instantiate(GO_RoomPrefabs[0], transform.position, Quaternion.identity);
-        GO_Struct.transform.SetParent(transform);
+        if (index == 45)
+        {
+            GameObject GO_Struct = GameObject.Instantiate(GO_RoomPrefabs[0], transform.position, Quaternion.identity);
+            GO_Struct.transform.SetParent(transform);
+        } else
+        {
+            GameObject GO_Struct = GameObject.Instantiate(GO_RoomPrefabs[1], transform.position, Quaternion.identity);
+            GO_Struct.transform.SetParent(transform);
+        }
+        
     }
 
 }

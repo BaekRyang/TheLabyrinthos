@@ -89,8 +89,14 @@ MonoBehaviour:
   GO_PrevInteracted: {fileID: 0}
   moveSpeed: 3
   direction: {x: 0, y: 0, z: 0}
-  rotationSpeed: 2
-  distanceFromPlayer: 7.5
+  b_camControll: 0
+  yaw: 0
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  prevRoomName: null
+  prevRoom: {fileID: 0}
+  prev2Room: {fileID: 0}
 --- !u!1 &2271119612486156601
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,7 +190,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6625738369442953097}
   - component: {fileID: 7699408781232693143}
-  - component: {fileID: 5962116866745093228}
   m_Layer: 7
   m_Name: RoomCheckPoint
   m_TagString: Untagged
@@ -220,17 +225,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.01, y: 1, z: 0.01}
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &5962116866745093228
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6857795808258083736}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 234d4f7ac26140145a01ac6207ebb693, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prevRoomName: null
-  prevRoom: {fileID: 0}

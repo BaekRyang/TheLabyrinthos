@@ -358,8 +358,8 @@ GameObject:
   - component: {fileID: 568292585472720859}
   - component: {fileID: 568292585472720858}
   - component: {fileID: 568292585472720857}
-  - component: {fileID: 568292585472720848}
   - component: {fileID: 568292585472720863}
+  - component: {fileID: 7767042855343870600}
   m_Layer: 0
   m_Name: Keypad
   m_TagString: Interactable
@@ -691,7 +691,22 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
---- !u!114 &568292585472720848
+--- !u!114 &568292585472720863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568292585472720856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75e9a907cb2e9da43bef6cd397d0cf59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  f_fadePercent: 0
+  b_fading: 0
+  type: 2
+--- !u!114 &7767042855343870600
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -709,16 +724,3 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
---- !u!114 &568292585472720863
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 568292585472720856}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75e9a907cb2e9da43bef6cd397d0cf59, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 2

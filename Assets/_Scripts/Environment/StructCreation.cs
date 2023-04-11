@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System;
+using UnityEngine;
+using Random = System.Random;
 
 public enum RoomType
 {
@@ -17,6 +19,7 @@ public class RoomNode
     public RoomType RoomType { get; set; } //방의 타입
     public RoomNode ParentNode { get; set; } //상위 노드
     public List<int> Children { get; set; } //직접 연결된 하위 노드
+    public GameObject RoomObject { get; set; }
 
     public RoomNode(int id, RoomNode parentNode = null)
     {
@@ -32,7 +35,7 @@ public class StructCreation
     int iFirstRoom = 45;
     int iMaxRoom = 5;
     int iCreateRoomCount = 0;
-    Random rand = new Random();
+    Random rand;
 
     Queue<RoomNode> qRoomIdx = new Queue<RoomNode>();
 
@@ -40,8 +43,9 @@ public class StructCreation
 
     LinkedList<RoomNode> qEndRoom = new LinkedList<RoomNode>();
 
-    public bool Run(int maxRoom, ref Dictionary<int, RoomNode> destGraph)
+    public bool Run(int maxRoom, ref Dictionary<int, RoomNode> destGraph, int seed, int seedAdjust)
     {
+        rand = new Random(seed + (seedAdjust * 185303) % 8473629); //시드 실패시 조정하는값  
         iMaxRoom = maxRoom;
 
         Check(roomGraph, iFirstRoom);
@@ -66,10 +70,15 @@ public class StructCreation
             }
         }
 
-        if (iCreateRoomCount != iMaxRoom) return false; //방 개수가 설정보다 적으면 안됨
-        if(qEndRoom.Count < 4) return false; //엔드룸이 너무 적으면 안됨
+        if (iCreateRoomCount != iMaxRoom)
+        {
+            return false; //방 개수가 설정보다 적으면 안됨
+        }
+        if (qEndRoom.Count < 4) {
+            return false; //엔드룸이 너무 적으면 안됨
+        }
 
-        PlaceSpecialRoom(roomGraph);
+        PlaceSpecialRoom();
 
         destGraph = roomGraph;
         return true;
@@ -113,7 +122,7 @@ public class StructCreation
         return n;
     }
 
-    void PlaceSpecialRoom(Dictionary<int, RoomNode> graph)
+    void PlaceSpecialRoom()
     {
         // 엔드룸은 큐에 저장되어 있는데, 알고리즘상 엔드룸 중 가장 멀리 있는 것이 제일 마지막에 위치한다.
         // 그 방을 층을 내려가는데 필요한 아이템이 나오는 방으로 배치한다.

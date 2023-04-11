@@ -2,15 +2,39 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 using static UnityEditor.Rendering.CameraUI;
+using Random = System.Random;
 
 public class RoomCreation : MonoBehaviour
 {
+    public Dictionary<int, RoomNode> roomMap; //맵 저장용
+
+    private const int MAX_ATTEMPTS = 10000;
+
+    [SerializeField] GameObject RoomBase;
+    [SerializeField] GameObject RoomWall;
+    [SerializeField] GameObject RoomDoor_t1;
+    [SerializeField] GameObject RoomNoDoor;
+    [SerializeField] GameObject Player;
+    int RoomCount = 10;
+    int iRoomSize = 10;
+
+    void Start()
+    {
+        
+    }
+    public void CreateSeed(ref string uSeed)
+    {
+        Random random = new Random();
+        uSeed = random.Next(0x000000, 0xFFFFFF).ToString("X"); //6자리 16진수 시드 생성
+    }
+
     private void CreateWallOrDoor(Transform parent, Vector3 position, Quaternion rotation, bool condition)
-        //벽이나 문을 판정후 생성
+    //벽이나 문을 판정후 생성
     {
         if (condition)
         {
@@ -22,22 +46,13 @@ public class RoomCreation : MonoBehaviour
         }
     }
 
-    private const int MAX_ATTEMPTS = 5000;
-
-    [SerializeField] GameObject RoomBase;
-    [SerializeField] GameObject RoomWall;
-    [SerializeField] GameObject RoomDoor_t1;
-    [SerializeField] GameObject RoomNoDoor;
-    [SerializeField] GameObject Player;
-    [SerializeField] int RoomCount = 10;
-    int iRoomSize = 10;
-
-    void Start()
+    public void InitStruct(int seed, int roomCount)
     {
+        RoomCount = roomCount;
+
         int cnt = 0;
-        //방은 언제나 10x10의 사이즈를 갖으므로 배열로 고정할당한다.
-        Dictionary<int, RoomNode> roomMap = new Dictionary<int, RoomNode>();
-        StructCreation structCreation = new StructCreation();
+        roomMap = new Dictionary<int, RoomNode>(); //방의 각 노드를 저장할 Dictionary
+        StructCreation structCreation = new StructCreation(); //구조 생성용 클래스 객체
         while (true)
         {
             if (cnt >= MAX_ATTEMPTS)
@@ -46,7 +61,7 @@ public class RoomCreation : MonoBehaviour
                 break;
             }
 
-            if ((structCreation.Run(RoomCount, ref roomMap)))
+            if ((structCreation.Run(RoomCount, ref roomMap, seed, cnt)))
             {
                 Debug.Log("CREATED");
                 break;
@@ -60,7 +75,10 @@ public class RoomCreation : MonoBehaviour
             }
 
         }
+    }
 
+    public void PlaceRoom()
+    {
         //방 구조 베이스 생성
         for (int i = 0; i < 100; i++)
         {
@@ -93,7 +111,9 @@ public class RoomCreation : MonoBehaviour
                 if (i == 45)
                 {
                     tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#16c60c> Start </color>";
-                } else {
+                }
+                else
+                {
                     switch (roomMap[i].RoomType)
                     {
                         case RoomType.EndRoom:
@@ -138,7 +158,7 @@ public class RoomCreation : MonoBehaviour
                 else CreateWallOrDoor(tmpGO.transform, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 90, 0)), shouldCreateWall);
 
                 //하(180)
-                shouldCreateWall = i < 10 || (!currentNode.Children.Contains(i - 10) && parentDirection != 2); 
+                shouldCreateWall = i < 10 || (!currentNode.Children.Contains(i - 10) && parentDirection != 2);
                 if (!shouldCreateWall && parentDirection == 2) GameObject.Instantiate(RoomNoDoor, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 180, 0)), tmpGO.transform);
                 else CreateWallOrDoor(tmpGO.transform, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 180, 0)), shouldCreateWall);
 
@@ -151,20 +171,12 @@ public class RoomCreation : MonoBehaviour
                 tmpGO.GetComponent<RoomController>().index = i;
                 tmpGO.GetComponent<RoomController>().SortObjects();
 
-                if (i == 45)
-                {
-                    GameObject.Instantiate(Player);
+                if (i == 45) GameObject.Instantiate(Player);
 
-                }
-
-                GameManager.Instance.GO_Map[i] = tmpGO;
+                roomMap[i].RoomObject = tmpGO; //만들어진 오브젝트를 그래프에 넣어준다.
             }
+
         }
-
-
     }
-
-    
-
 
 }

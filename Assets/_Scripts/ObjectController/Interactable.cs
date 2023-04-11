@@ -14,6 +14,7 @@ enum ObjectType
 public class Interactable : MonoBehaviour
 {
     const float CHANGE_ROOM_DELAY = 1f;
+    const float CHANGE_LEVEL_DELAY = 3f;
 
     public float f_fadePercent = 0;
     public bool b_fading = false;
@@ -149,8 +150,9 @@ public class Interactable : MonoBehaviour
 
     }
 
-    private IEnumerator OpenElevator(GameObject[] obj, float duration)
+    private IEnumerator OpenElevator(GameObject[] obj, float duration) //obj는 엘레베이터 양쪽 문 오브젝트 저장되어있음
     {
+        StartCoroutine(GameManager.Instance.CurtainModify(false, CHANGE_ROOM_DELAY)); //화면 암전
         float elapsedTime = 0f;
 
         Vector3 obj1StartPosition = obj[0].transform.localPosition;

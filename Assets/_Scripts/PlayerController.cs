@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         playerTexture = Resources.LoadAll<Texture>("Sprites/Player");
-        prevRoom = GameManager.Instance.GO_Map[45].gameObject; // 플레이어가 위치한 방의 루트 오브젝트를 저장 (플레이어는 45번에 생성)
+        prevRoom = GameManager.Instance.GetComponent<RoomCreation>().roomMap[45].RoomObject; // 플레이어가 위치한 방의 루트 오브젝트를 저장 (플레이어는 45번에 생성)
         prevRoomName = prevRoom.name; // 플레이어가 위치한 방의 이름을 저장
         prevRoom.GetComponent<RoomController>().ChangeRoomState(true); // 플레이어가 위치한 방의 상태를 변경
         defaultCameraDistance = Vector3.Distance(Camera.main.transform.position, transform.position);
@@ -113,7 +113,9 @@ public class PlayerController : MonoBehaviour
             if (Input.GetMouseButton(1))
             {
                 yaw += Input.GetAxis("Mouse X") * rotationSpeed;
+                defaultCameraDistance = Vector3.Distance(Camera.main.transform.position, transform.position);
             }
+
             Quaternion rotation = Quaternion.Euler(25, yaw, 0);
             Vector3 newCameraPosition = transform.position + rotation * offset;
             Camera.main.transform.position = newCameraPosition;
@@ -123,7 +125,7 @@ public class PlayerController : MonoBehaviour
             if (Physics.Raycast(transform.position, (newCameraPosition - transform.position).normalized, out hit, defaultCameraDistance, wallLayer))
             {
                 // 벽을 감지한 경우, 카메라의 거리를 벽과 플레이어 사이로 조절합니다.
-                Camera.main.transform.position = hit.point + hit.normal * 0.1f; // 여기서 0.1f는 카메라와 벽 사이의 여유 공간입니다.
+                Camera.main.transform.position = hit.point + hit.normal * 0.2f; // 여기서 0.1f는 카메라와 벽 사이의 여유 공간입니다.
             }
 
             // 기존 코드
@@ -219,7 +221,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Current room index: " + roomIndex);
 
         prevRoom.GetComponent<RoomController>().ChangeRoomState(false); // 이전 방의 상태를 변경
-        prevRoom = GameManager.Instance.GO_Map[roomIndex].gameObject; // 플레이어가 위치한 방의 오브젝트를 저장
+        prevRoom = GameManager.Instance.GetComponent<RoomCreation>().roomMap[45].RoomObject; // 플레이어가 위치한 방의 오브젝트를 저장
         prevRoomName = prevRoom.name; // 플레이어가 위치한 방의 이름을 저장
         prevRoom.GetComponent<RoomController>().ChangeRoomState(true); // 플레이어가 위치한 방의 상태를 변경
 

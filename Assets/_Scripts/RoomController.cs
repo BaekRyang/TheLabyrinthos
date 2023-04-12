@@ -5,18 +5,14 @@ using UnityEngine;
 public class RoomController : MonoBehaviour
 {
     [SerializeField] public int index;
-    [SerializeField] public bool startActive;
-    [SerializeField] GameObject doors;
-    [SerializeField] GameObject walls;
-    [SerializeField] GameObject ceilings;
+    GameObject walls;
+    GameObject ceilings;
 
-    [SerializeField] GameObject[] GO_RoomPrefabs;
+    GameManager GM;
 
-    [SerializeField] Material[] M_Ceiling;
-
-    void Awake()
+    private void Start()
     {
-        GO_RoomPrefabs = Resources.LoadAll<GameObject>("RoomStructures");
+        GM = GameManager.Instance;
     }
 
     public void ChangeRoomState(bool _state)
@@ -67,11 +63,11 @@ public class RoomController : MonoBehaviour
         }
         if (index == 45)
         {
-            GameObject GO_Struct = GameObject.Instantiate(GO_RoomPrefabs[0], transform.position, Quaternion.identity);
+            GameObject GO_Struct = GameObject.Instantiate(GM.GetRoomObject(0), transform.position, Quaternion.identity);
             GO_Struct.transform.SetParent(transform);
         } else
         {
-            GameObject GO_Struct = GameObject.Instantiate(GO_RoomPrefabs[1], transform.position, Quaternion.identity);
+            GameObject GO_Struct = GameObject.Instantiate(GM.GetRoomObject(), transform.position, Quaternion.identity);
             GO_Struct.transform.SetParent(transform);
         }
         

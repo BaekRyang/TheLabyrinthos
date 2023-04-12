@@ -19,9 +19,10 @@ public class RoomCreation : MonoBehaviour
     [SerializeField] GameObject RoomWall;
     [SerializeField] GameObject RoomDoor_t1;
     [SerializeField] GameObject RoomNoDoor;
-    [SerializeField] GameObject Player;
     int RoomCount = 10;
     int iRoomSize = 10;
+
+    GameObject go_roomsRoot;
 
     void Start()
     {
@@ -79,6 +80,9 @@ public class RoomCreation : MonoBehaviour
 
     public void PlaceRoom()
     {
+        if (!go_roomsRoot.IsDestroyed()) Destroy(go_roomsRoot); //이전게 남아있으면 Destory한다.
+        go_roomsRoot = new GameObject("Rooms");
+
         //방 구조 베이스 생성
         for (int i = 0; i < 100; i++)
         {
@@ -171,9 +175,10 @@ public class RoomCreation : MonoBehaviour
                 tmpGO.GetComponent<RoomController>().index = i;
                 tmpGO.GetComponent<RoomController>().SortObjects();
 
-                if (i == 45) GameObject.Instantiate(Player);
+                //if (i == 45) GameObject.Instantiate(Player);
 
                 roomMap[i].RoomObject = tmpGO; //만들어진 오브젝트를 그래프에 넣어준다.
+                tmpGO.transform.SetParent(go_roomsRoot.transform);
             }
 
         }

@@ -7,16 +7,14 @@ using Input = UnityEngine.Input;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Player Textures")]
     [SerializeField] GameObject spriteBox;
     [SerializeField] Material playerMat;
-
     [SerializeField] Texture[] playerTexture;
 
-    [SerializeField] Transform groundCheck;
+    GameObject GO_PrevInteracted = null;
 
-    [SerializeField] GameObject GO_PrevInteracted = null;
-    public float MoveSpeed { get { return MoveSpeed; } }
-    [SerializeField] float moveSpeed;
+    float moveSpeed;
     Rigidbody rigid;
     public Vector3 direction;
     int faceing = 0;
@@ -70,10 +68,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         playerTexture = Resources.LoadAll<Texture>("Sprites/Player");
-        prevRoom = GameManager.Instance.GetComponent<RoomCreation>().roomMap[45].RoomObject; // 플레이어가 위치한 방의 루트 오브젝트를 저장 (플레이어는 45번에 생성)
-        prevRoomName = prevRoom.name; // 플레이어가 위치한 방의 이름을 저장
-        prevRoom.GetComponent<RoomController>().ChangeRoomState(true); // 플레이어가 위치한 방의 상태를 변경
-        defaultCameraDistance = Vector3.Distance(Camera.main.transform.position, transform.position);
+        ResetSetting();
     }
 
     private void Update()
@@ -292,7 +287,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    
+    public void ResetSetting()
+    {
+        prevRoom = GameManager.Instance.GetComponent<RoomCreation>().roomMap[45].RoomObject; // 플레이어가 위치한 방의 루트 오브젝트를 저장 (플레이어는 45번에 생성)
+        prevRoomName = prevRoom.name; // 플레이어가 위치한 방의 이름을 저장
+        prevRoom.GetComponent<RoomController>().ChangeRoomState(true); // 플레이어가 위치한 방의 상태를 변경
+        defaultCameraDistance = Vector3.Distance(Camera.main.transform.position, transform.position);
+    }
 
 
 }

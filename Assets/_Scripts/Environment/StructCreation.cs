@@ -45,7 +45,7 @@ public class StructCreation
 
     public bool Run(int maxRoom, ref Dictionary<int, RoomNode> destGraph, int seed, int seedAdjust)
     {
-        rand = new Random(seed + (seedAdjust * 185303) % 8473629); //시드 실패시 조정하는값  
+        rand = new Random(seed + (seedAdjust * 185303) % 16777216); //시드 실패시 조정하는값 16777216은 6자리 16진수의 최대값
         iMaxRoom = maxRoom;
 
         Check(roomGraph, iFirstRoom);

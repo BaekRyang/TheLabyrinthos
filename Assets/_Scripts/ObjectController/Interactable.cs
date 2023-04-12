@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,10 +17,11 @@ public class Interactable : MonoBehaviour
     const float CHANGE_ROOM_DELAY = 1f;
     const float CHANGE_LEVEL_DELAY = 3f;
 
-    public float f_fadePercent = 0;
-    public bool b_fading = false;
+    float f_fadePercent = 0;
+    bool b_fading = false;
 
     Coroutine crt_coroutine = null;
+    [Header("This Object Type")]
     [SerializeField] ObjectType type;
 
     private void Start()
@@ -51,12 +53,12 @@ public class Interactable : MonoBehaviour
                     f_fadePercent = 0;
 
                     //코루틴도 종료
-                    StopCoroutine(crt_coroutine);
+                    if(!crt_coroutine.IsUnityNull()) StopCoroutine(crt_coroutine);
                     crt_coroutine = null;
 
                     GameObject[] go_doors = { transform.parent.Find("Doors").GetChild(0).gameObject, transform.parent.Find("Doors").GetChild(1).gameObject };   //문 열기 위해서 문 객체 저장하고
                     transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0, 8, 0)) ;                                    //키패드 초록색으로 바꾼뒤
-                    StartCoroutine(OpenElevator(go_doors, 1f));                                                                                                 //문열기 시작
+                    GameManager.Instance.StartCoroutine(GameManager.Instance.OpenElevator(go_doors, 1f, CHANGE_LEVEL_DELAY));                                                                                                 //문열기 시작
                 } else
                 {
                     if (b_fading) f_fadePercent = 3f;                                                                                                           //3초간 Fading / 이미 Fading중에 또 누르면 시간만 초기화
@@ -148,32 +150,6 @@ public class Interactable : MonoBehaviour
         if(!reuseable) transform.rotation = targetRotation;
         else transform.rotation = startRotation;
 
-    }
-
-    private IEnumerator OpenElevator(GameObject[] obj, float duration) //obj는 엘레베이터 양쪽 문 오브젝트 저장되어있음
-    {
-        StartCoroutine(GameManager.Instance.CurtainModify(false, CHANGE_ROOM_DELAY)); //화면 암전
-        float elapsedTime = 0f;
-
-        Vector3 obj1StartPosition = obj[0].transform.localPosition;
-        Vector3 obj1EndPosition = new Vector3(obj1StartPosition.x, obj1StartPosition.y, obj1StartPosition.z + obj[0].transform.localScale.z);
-
-        Vector3 obj2StartPosition = obj[1].transform.localPosition;
-        Vector3 obj2EndPosition = new Vector3(obj2StartPosition.x, obj2StartPosition.y, obj2StartPosition.z - obj[1].transform.localScale.z);
-
-        while (elapsedTime < duration)
-        {
-            elapsedTime += Time.deltaTime;
-            float t = elapsedTime / duration;
-
-            obj[0].transform.localPosition = Vector3.Lerp(obj1StartPosition, obj1EndPosition, t);
-            obj[1].transform.localPosition = Vector3.Lerp(obj2StartPosition, obj2EndPosition, t);
-
-            yield return null;
-        }
-
-        obj[0].transform.localPosition = obj1EndPosition;
-        obj[1].transform.localPosition = obj2EndPosition;
     }
 
     private IEnumerator ChangeColor(Material mat, float duration, Color targetColor)

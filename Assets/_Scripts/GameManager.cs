@@ -28,7 +28,8 @@ public class GameManager : MonoBehaviour
     [NonSerialized] public GameObject go_player;
 
     [Header("Room Struct Prefabs")]
-    public GameObject[] GO_RoomPrefabs;
+    [SerializeField] GameObject[] GO_RoomPrefabs;
+    [SerializeField] public GameObject[] GO_CorridorPrefabs;
 
     [Header("Level Controll")]
     public int i_level = 1;
@@ -39,7 +40,8 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
         }
-        GO_RoomPrefabs = Resources.LoadAll<GameObject>("RoomStructures");
+        GO_RoomPrefabs = Resources.LoadAll<GameObject>("RoomStructures/Default");
+        GO_CorridorPrefabs = Resources.LoadAll<GameObject>("RoomStructures/Corridor");
     }
 
     void Start()
@@ -144,4 +146,5 @@ public class GameManager : MonoBehaviour
             return GO_RoomPrefabs[1]; //무작위 구조 반환
         }
     }
+    
 }

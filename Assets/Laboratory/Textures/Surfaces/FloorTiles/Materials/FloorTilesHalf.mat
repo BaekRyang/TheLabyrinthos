@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Concrete01
+  m_Name: FloorTilesHalf
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_ValidKeywords:
   - _METALLICSPECGLOSSMAP
@@ -16,7 +16,7 @@ Material:
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 1
+  m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap:
     RenderType: Opaque
@@ -25,11 +25,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
+        m_Texture: {fileID: 2800000, guid: f954c36672888814bb4044c2a3eb041b, type: 3}
+        m_Scale: {x: 0.5, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: bedec7aaeeb5bca4f9a5fe87ac96b7ac, type: 3}
+        m_Texture: {fileID: 2800000, guid: 90260e4ddac7fe441ae9ca52f7226126, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -49,15 +49,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
+        m_Texture: {fileID: 2800000, guid: f954c36672888814bb4044c2a3eb041b, type: 3}
+        m_Scale: {x: 0.5, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: eb5391cea47768343a0b80573397243e, type: 3}
+        m_Texture: {fileID: 2800000, guid: 92400d6612d9c934ebbc089fc1a6146e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
-        m_Texture: {fileID: 2800000, guid: 93e84576b8b4aa0499d12bf3f1bcfc71, type: 3}
+        m_Texture: {fileID: 2800000, guid: b653c65320b8a6143b1e2015645a0d97, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
@@ -82,19 +82,21 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _2ndTiling: 1
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
-    - _Cull: 0
+    - _Cull: 2
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _EmissionPower: 0
     - _EnvironmentReflections: 1
-    - _GlossMapScale: 0.45
-    - _Glossiness: 0.5
+    - _GlossMapScale: 0.8
+    - _Glossiness: 0.387
     - _GlossyReflections: 1
     - _Metallic: 0
     - _Mode: 0
@@ -102,21 +104,26 @@ Material:
     - _Parallax: 0.02
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 0.45
+    - _Smoothness: 1
+    - _SmoothnessPower: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
+    - _Tiling: 0.42
+    - _TriplanarFaloff: 1
     - _UVSec: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
+    - __dirty: 1
     m_Colors:
-    - _BaseColor: {r: 0.53773576, g: 0.53773576, b: 0.53773576, a: 1}
-    - _Color: {r: 0.5377357, g: 0.5377357, b: 0.5377357, a: 1}
+    - _2ndColor: {r: 1, g: 1, b: 1, a: 0}
+    - _BaseColor: {r: 0.9, g: 0.9, b: 0.9, a: 1}
+    - _Color: {r: 0.9, g: 0.9, b: 0.9, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &192360520078583986
+--- !u!114 &199851991841450944
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

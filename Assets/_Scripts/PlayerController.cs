@@ -214,7 +214,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Current room index: " + roomIndex);
 
         prevRoom.GetComponent<RoomController>().ChangeRoomState(false); // 이전 방의 상태를 변경
-        prevRoom = GameManager.Instance.GetComponent<RoomCreation>().roomMap[45].RoomObject; // 플레이어가 위치한 방의 오브젝트를 저장
+        prevRoom = GameManager.Instance.GetComponent<RoomCreation>().roomMap[roomIndex].RoomObject; // 플레이어가 위치한 방의 오브젝트를 저장
         prevRoom.GetComponent<RoomController>().ChangeRoomState(true); // 플레이어가 위치한 방의 상태를 변경
 
         float currentMoveSpeed = moveSpeed;

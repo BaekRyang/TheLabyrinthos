@@ -104,10 +104,12 @@ public class RoomCreation : MonoBehaviour
                     if (roomMap.ContainsKey(i - 1) && roomMap.ContainsKey(i + 1) && roomMap[i - 1].RoomType != 0 && roomMap[i + 1].RoomType != 0 && !roomMap.ContainsKey(i - 10) && !roomMap.ContainsKey(i + 10))
                     {
                         tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#f1c94f> -- </color>";
+                        tmpGO.GetComponent<RoomController>().RT_roomType = SpecialRoomType.HorizontalCorridor;
                     }
                     else if (roomMap.ContainsKey(i - 10) && roomMap.ContainsKey(i + 10) && roomMap[i - 10].RoomType != 0 && roomMap[i + 10].RoomType != 0 && !roomMap.ContainsKey(i - 1) && !roomMap.ContainsKey(i + 1))
                     {
                         tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#f1c94f> | </color>";
+                        tmpGO.GetComponent<RoomController>().RT_roomType = SpecialRoomType.VerticalCorridor;
                     }
 
                 }

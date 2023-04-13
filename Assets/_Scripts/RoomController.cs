@@ -3,12 +3,21 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+public enum SpecialRoomType
+{
+    Normal,
+    VerticalCorridor,
+    HorizontalCorridor
+}
+
 public class RoomController : MonoBehaviour
 {
+    [Header("Set Automatically")]
     [SerializeField] public int index;
     [SerializeField] GameObject walls;
     [SerializeField] GameObject ceilings;
     [SerializeField] public GameObject go_specialObject;
+    [SerializeField] public SpecialRoomType RT_roomType;
 
     GameManager GM;
 
@@ -69,10 +78,32 @@ public class RoomController : MonoBehaviour
             GO_Struct.transform.SetParent(transform);
             go_specialObject = GO_Struct.transform.Find("ElevatorBox").Find("Display").GetChild(0).gameObject;
             //이 방은 GameManager에서 관리해야하는 오브젝트가 있어서 여기서 등록해준다.
-        } else
-        {
+        } else if (RT_roomType == SpecialRoomType.Normal)
+        { //특수방 아니면 랜덤으로 뽑는다.
             GameObject GO_Struct = GameObject.Instantiate(GM.GetRoomObject(), transform.position, Quaternion.identity);
             GO_Struct.transform.SetParent(transform);
+        } else
+        { //특수방
+            GameObject GO_Struct;
+
+            switch (RT_roomType)
+            {
+                case SpecialRoomType.VerticalCorridor:
+                    GO_Struct = GameObject.Instantiate(GM.GO_CorridorPrefabs[0], transform.position, Quaternion.identity);
+                    GO_Struct.transform.SetParent(transform);
+                    break;
+
+                case SpecialRoomType.HorizontalCorridor:
+                    GO_Struct = GameObject.Instantiate(GM.GO_CorridorPrefabs[0], transform.position, Quaternion.Euler(0, 90, 0));
+                    GO_Struct.transform.SetParent(transform);
+                    break;
+
+                default:
+                    break;
+
+            }
+
+            
         }
         
     }

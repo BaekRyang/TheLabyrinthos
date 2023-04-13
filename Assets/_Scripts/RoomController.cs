@@ -1,16 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class RoomController : MonoBehaviour
 {
     [SerializeField] public int index;
-    GameObject walls;
-    GameObject ceilings;
+    [SerializeField] GameObject walls;
+    [SerializeField] GameObject ceilings;
+    [SerializeField] public GameObject go_specialObject;
 
     GameManager GM;
 
-    private void Start()
+    private void Awake()
     {
         GM = GameManager.Instance;
     }
@@ -65,6 +67,8 @@ public class RoomController : MonoBehaviour
         {
             GameObject GO_Struct = GameObject.Instantiate(GM.GetRoomObject(0), transform.position, Quaternion.identity);
             GO_Struct.transform.SetParent(transform);
+            go_specialObject = GO_Struct.transform.Find("ElevatorBox").Find("Display").GetChild(0).gameObject;
+            //이 방은 GameManager에서 관리해야하는 오브젝트가 있어서 여기서 등록해준다.
         } else
         {
             GameObject GO_Struct = GameObject.Instantiate(GM.GetRoomObject(), transform.position, Quaternion.identity);

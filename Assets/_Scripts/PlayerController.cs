@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
 
     GameObject GO_PrevInteracted = null;
 
-    float moveSpeed;
+    float moveSpeed = 2.5f;
     Rigidbody rigid;
     public Vector3 direction;
     int faceing = 0;
@@ -44,17 +44,14 @@ public class PlayerController : MonoBehaviour
     LayerMask LM_InteractLayerMask; // 검출하고자 하는 레이어를 지정.
     GameObject GO_LastHitGO;
 
-    float horizontal;
-    float vertical;
+    public float horizontal;
+    public float vertical;
 
     //방 체크
     private int groundLayer;
 
     // 이전 방의 이름과 게임 오브젝트
-    [SerializeField] string prevRoomName = "null";
     [SerializeField] GameObject prevRoom;
-    [SerializeField] GameObject prev2Room;
-
 
     private void Awake()
     {
@@ -97,10 +94,11 @@ public class PlayerController : MonoBehaviour
             float scrollInput = Input.GetAxis("Mouse ScrollWheel");
             if (Mathf.Abs(scrollInput) > 0.01f)
             {
-                Debug.Log(scrollInput);
                 distanceFromPlayer -= scrollInput * rotationSpeed;
                 distanceFromPlayer = Mathf.Clamp(distanceFromPlayer, minZoomDistance, maxZoomDistance);
                 offset = new Vector3(0, 1, -distanceFromPlayer);
+                Quaternion rot = Quaternion.Euler(25, yaw, 0);
+                defaultCameraDistance = Vector3.Distance(transform.position + rot * offset, transform.position);
             }
 
 
@@ -108,7 +106,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetMouseButton(1))
             {
                 yaw += Input.GetAxis("Mouse X") * rotationSpeed;
-                defaultCameraDistance = Vector3.Distance(Camera.main.transform.position, transform.position);
+                
             }
 
             Quaternion rotation = Quaternion.Euler(25, yaw, 0);
@@ -217,7 +215,6 @@ public class PlayerController : MonoBehaviour
 
         prevRoom.GetComponent<RoomController>().ChangeRoomState(false); // 이전 방의 상태를 변경
         prevRoom = GameManager.Instance.GetComponent<RoomCreation>().roomMap[45].RoomObject; // 플레이어가 위치한 방의 오브젝트를 저장
-        prevRoomName = prevRoom.name; // 플레이어가 위치한 방의 이름을 저장
         prevRoom.GetComponent<RoomController>().ChangeRoomState(true); // 플레이어가 위치한 방의 상태를 변경
 
         float currentMoveSpeed = moveSpeed;
@@ -290,7 +287,6 @@ public class PlayerController : MonoBehaviour
     public void ResetSetting()
     {
         prevRoom = GameManager.Instance.GetComponent<RoomCreation>().roomMap[45].RoomObject; // 플레이어가 위치한 방의 루트 오브젝트를 저장 (플레이어는 45번에 생성)
-        prevRoomName = prevRoom.name; // 플레이어가 위치한 방의 이름을 저장
         prevRoom.GetComponent<RoomController>().ChangeRoomState(true); // 플레이어가 위치한 방의 상태를 변경
         defaultCameraDistance = Vector3.Distance(Camera.main.transform.position, transform.position);
     }

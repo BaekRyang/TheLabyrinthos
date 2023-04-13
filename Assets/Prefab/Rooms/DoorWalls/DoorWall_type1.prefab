@@ -457,8 +457,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75e9a907cb2e9da43bef6cd397d0cf59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  f_fadePercent: 0
-  b_fading: 0
   type: 0
 --- !u!114 &190942014570424683
 MonoBehaviour:
@@ -488,11 +486,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1280526152544974082}
   m_Layer: 0
-  m_Name: DoorWall_Type1
+  m_Name: DoorWall_type1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1280526152544974082
 Transform:

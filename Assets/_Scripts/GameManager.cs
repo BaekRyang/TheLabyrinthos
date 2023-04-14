@@ -7,6 +7,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using static UnityEngine.UIElements.UxmlAttributeDescription;
+using Random = System.Random;
 
 public class GameManager : MonoBehaviour
 {
@@ -30,9 +31,15 @@ public class GameManager : MonoBehaviour
     [Header("Room Struct Prefabs")]
     [SerializeField] GameObject[] GO_RoomPrefabs;
     [SerializeField] public GameObject[] GO_CorridorPrefabs;
+    [SerializeField] public GameObject[] GO_CraftingPrefabs;
+    [SerializeField] public GameObject[] GO_BossRoomPrefabs;
+    [SerializeField] public GameObject[] GO_ShopPrefabs;
 
     [Header("Level Controll")]
     public int i_level = 1;
+
+    [HideInInspector]
+    public Dictionary<string, Random> randomObjects;
 
     void Awake()
     {
@@ -42,6 +49,10 @@ public class GameManager : MonoBehaviour
         }
         GO_RoomPrefabs = Resources.LoadAll<GameObject>("RoomStructures/Default");
         GO_CorridorPrefabs = Resources.LoadAll<GameObject>("RoomStructures/Corridor");
+        GO_CraftingPrefabs = Resources.LoadAll<GameObject>("RoomStructures/SpecialRoom/Crafting");
+        //GO_BossRoomPrefabs = Resources.LoadAll<GameObject>("RoomStructures/SpecialRoom/BossRoom");
+        //GO_ShopPrefabs = Resources.LoadAll<GameObject>("RoomStructures/SpecialRoom/Shop");
+
     }
 
     void Start()
@@ -51,6 +62,9 @@ public class GameManager : MonoBehaviour
             //시드를 따로 지정하지 않았으면 새로 만들어준다.
             GetComponent<RoomCreation>().CreateSeed(ref seed);
         }
+        //randomObjects.Add("Object", new Random(Convert.ToInt32(seed, 16) + 1)); //오브젝트용 랜덤 시드
+        //randomObjects.Add("Creature", new Random(Convert.ToInt32(seed, 16) + 2)); //크리쳐용 랜덤 시드
+        
         ResetLevel(i_level);
         go_player = Instantiate(go_playerPrefab);
 
@@ -138,12 +152,25 @@ public class GameManager : MonoBehaviour
         pc_controller.b_camControll = false;
     }
 
-    public GameObject GetRoomObject(int typeId = -1)
+    public GameObject GetRoomObject(SpecialRoomType roomType, int typeId = -1)
     {
-        if (typeId != -1) return GO_RoomPrefabs[typeId];
-        else
+        switch (roomType)
         {
-            return GO_RoomPrefabs[1]; //무작위 구조 반환
+            case SpecialRoomType.Normal:
+                if (typeId != -1)   return GO_RoomPrefabs[typeId];
+                else                return GO_RoomPrefabs[1]; //무작위 구조 반환
+            case SpecialRoomType.VerticalCorridor:
+                return null;
+            case SpecialRoomType.HorizontalCorridor:
+                return null;
+            case SpecialRoomType.Crafting:
+                return null;
+            case SpecialRoomType.BossRoom:
+                return null;
+            case SpecialRoomType.Shop:
+                return null;
+            default:
+                return null;
         }
     }
     

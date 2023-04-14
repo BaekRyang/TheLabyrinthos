@@ -7,7 +7,10 @@ public enum SpecialRoomType
 {
     Normal,
     VerticalCorridor,
-    HorizontalCorridor
+    HorizontalCorridor,
+    Crafting,
+    BossRoom,
+    Shop
 }
 
 public class RoomController : MonoBehaviour
@@ -66,7 +69,7 @@ public class RoomController : MonoBehaviour
                     {
                         // 해당 오브젝트를 현재 게임 오브젝트의 하위로 이동
                         transform.GetChild(i).GetChild(0).parent = this.transform;
-                    } 
+                    }
                 }
                 // Instantiate로 생성된 게임 오브젝트를 삭제
                 Destroy(transform.GetChild(i).gameObject);
@@ -78,34 +81,12 @@ public class RoomController : MonoBehaviour
             GO_Struct.transform.SetParent(transform);
             go_specialObject = GO_Struct.transform.Find("ElevatorBox").Find("Display").GetChild(0).gameObject;
             //이 방은 GameManager에서 관리해야하는 오브젝트가 있어서 여기서 등록해준다.
-        } else if (RT_roomType == SpecialRoomType.Normal)
-        { //특수방 아니면 랜덤으로 뽑는다.
-            GameObject GO_Struct = GameObject.Instantiate(GM.GetRoomObject(), transform.position, Quaternion.identity);
-            GO_Struct.transform.SetParent(transform);
-        } else
-        { //특수방
-            GameObject GO_Struct;
-
-            switch (RT_roomType)
-            {
-                case SpecialRoomType.VerticalCorridor:
-                    GO_Struct = GameObject.Instantiate(GM.GO_CorridorPrefabs[0], transform.position, Quaternion.identity);
-                    GO_Struct.transform.SetParent(transform);
-                    break;
-
-                case SpecialRoomType.HorizontalCorridor:
-                    GO_Struct = GameObject.Instantiate(GM.GO_CorridorPrefabs[0], transform.position, Quaternion.Euler(0, 90, 0));
-                    GO_Struct.transform.SetParent(transform);
-                    break;
-
-                default:
-                    break;
-
-            }
-
-            
         }
-        
-    }
+        else if (RT_roomType == SpecialRoomType.Normal)
+        {
+            GameObject GO_Struct = GameObject.Instantiate(GM.GetRoomObject(RT_roomType), transform.position, Quaternion.identity);
+            GO_Struct.transform.SetParent(transform);
+        }
 
+    }
 }

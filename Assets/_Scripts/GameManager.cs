@@ -5,6 +5,7 @@ using System.Security.Cryptography.X509Certificates;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.ProBuilder.MeshOperations;
 using UnityEngine.UI;
 using static UnityEngine.UIElements.UxmlAttributeDescription;
 using Random = System.Random;
@@ -29,17 +30,18 @@ public class GameManager : MonoBehaviour
     [NonSerialized] public GameObject go_player;
 
     [Header("Room Struct Prefabs")]
+    [SerializeField] GameObject GO_startRoomPrefab;
     [SerializeField] GameObject[] GO_RoomPrefabs;
-    [SerializeField] public GameObject[] GO_CorridorPrefabs;
-    [SerializeField] public GameObject[] GO_CraftingPrefabs;
-    [SerializeField] public GameObject[] GO_BossRoomPrefabs;
-    [SerializeField] public GameObject[] GO_ShopPrefabs;
+    [SerializeField] GameObject[] GO_CorridorPrefabs;
+    [SerializeField] GameObject[] GO_CraftingPrefabs;
+    [SerializeField] GameObject[] GO_BossRoomPrefabs;
+    [SerializeField] GameObject[] GO_ShopPrefabs;
 
     [Header("Level Controll")]
     public int i_level = 1;
 
     [HideInInspector]
-    public Dictionary<string, Random> randomObjects;
+    public Dictionary<string, Random> randomObjects = new Dictionary<string, Random>();
 
     void Awake()
     {
@@ -47,11 +49,12 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
         }
+        GO_startRoomPrefab = Resources.Load<GameObject>("RoomStructures/StartRoom/StartRoom");
         GO_RoomPrefabs = Resources.LoadAll<GameObject>("RoomStructures/Default");
         GO_CorridorPrefabs = Resources.LoadAll<GameObject>("RoomStructures/Corridor");
         GO_CraftingPrefabs = Resources.LoadAll<GameObject>("RoomStructures/SpecialRoom/Crafting");
-        //GO_BossRoomPrefabs = Resources.LoadAll<GameObject>("RoomStructures/SpecialRoom/BossRoom");
-        //GO_ShopPrefabs = Resources.LoadAll<GameObject>("RoomStructures/SpecialRoom/Shop");
+        GO_BossRoomPrefabs = Resources.LoadAll<GameObject>("RoomStructures/SpecialRoom/BossRoom");
+        GO_ShopPrefabs = Resources.LoadAll<GameObject>("RoomStructures/SpecialRoom/Shop");
 
     }
 
@@ -62,8 +65,10 @@ public class GameManager : MonoBehaviour
             //시드를 따로 지정하지 않았으면 새로 만들어준다.
             GetComponent<RoomCreation>().CreateSeed(ref seed);
         }
-        //randomObjects.Add("Object", new Random(Convert.ToInt32(seed, 16) + 1)); //오브젝트용 랜덤 시드
-        //randomObjects.Add("Creature", new Random(Convert.ToInt32(seed, 16) + 2)); //크리쳐용 랜덤 시드
+
+        randomObjects.Add("Object", new Random(Convert.ToInt32(seed, 16) + 1)); //오브젝트용 랜덤 시드
+        randomObjects.Add("Creature", new Random(Convert.ToInt32(seed, 16) + 2)); //크리쳐용 랜덤 시드
+        randomObjects.Add("Room", new Random(Convert.ToInt32(seed, 16) + 3)); //방배치용 랜덤 시드
         
         ResetLevel(i_level);
         go_player = Instantiate(go_playerPrefab);
@@ -158,17 +163,28 @@ public class GameManager : MonoBehaviour
         {
             case SpecialRoomType.Normal:
                 if (typeId != -1)   return GO_RoomPrefabs[typeId];
-                else                return GO_RoomPrefabs[1]; //무작위 구조 반환
-            case SpecialRoomType.VerticalCorridor:
-                return null;
+                else                return GO_RoomPrefabs[randomObjects["Room"].Next(GO_RoomPrefabs.Length)]; //무작위 구조 반환
+
+            case SpecialRoomType.StartRoom:
+                return GO_startRoomPrefab;
+
+            case SpecialRoomType.VerticalCorridor: //이 두개는 같은걸 return
             case SpecialRoomType.HorizontalCorridor:
-                return null;
+                if (typeId != -1)   return GO_CorridorPrefabs[typeId];
+                else                return GO_CorridorPrefabs[randomObjects["Room"].Next(GO_RoomPrefabs.Length)];
+
             case SpecialRoomType.Crafting:
-                return null;
+                if (typeId != -1) return GO_CraftingPrefabs[typeId];
+                else return GO_CraftingPrefabs[randomObjects["Room"].Next(GO_RoomPrefabs.Length)];
+
             case SpecialRoomType.BossRoom:
-                return null;
+                if (typeId != -1) return GO_BossRoomPrefabs[typeId];
+                else return GO_BossRoomPrefabs[randomObjects["Room"].Next(GO_RoomPrefabs.Length)];
+
             case SpecialRoomType.Shop:
-                return null;
+                if (typeId != -1) return GO_ShopPrefabs[typeId];
+                else return GO_ShopPrefabs[randomObjects["Room"].Next(GO_RoomPrefabs.Length)];
+
             default:
                 return null;
         }

@@ -6,6 +6,7 @@ using UnityEngine;
 public enum SpecialRoomType
 {
     Normal,
+    StartRoom,
     VerticalCorridor,
     HorizontalCorridor,
     Crafting,
@@ -75,18 +76,13 @@ public class RoomController : MonoBehaviour
                 Destroy(transform.GetChild(i).gameObject);
             }
         }
-        if (index == 45)
-        {
-            GameObject GO_Struct = GameObject.Instantiate(GM.GetRoomObject(0), transform.position, Quaternion.identity);
-            GO_Struct.transform.SetParent(transform);
-            go_specialObject = GO_Struct.transform.Find("ElevatorBox").Find("Display").GetChild(0).gameObject;
-            //이 방은 GameManager에서 관리해야하는 오브젝트가 있어서 여기서 등록해준다.
-        }
-        else if (RT_roomType == SpecialRoomType.Normal)
-        {
-            GameObject GO_Struct = GameObject.Instantiate(GM.GetRoomObject(RT_roomType), transform.position, Quaternion.identity);
-            GO_Struct.transform.SetParent(transform);
-        }
+        GameObject GO_Struct = GameObject.Instantiate(GM.GetRoomObject(RT_roomType), transform.position, Quaternion.identity);
+        if (RT_roomType == SpecialRoomType.HorizontalCorridor) GO_Struct.transform.Rotate(new Vector3(0, 90, 0)); //세로방은 90도 회전
+        GO_Struct.transform.SetParent(transform);
+
+        if (index == 45) go_specialObject = GO_Struct.transform.Find("ElevatorBox").Find("Display").GetChild(0).gameObject;
+        //이 방은 GameManager에서 관리해야하는 오브젝트가 있어서 여기서 등록해준다.
+
 
     }
 }

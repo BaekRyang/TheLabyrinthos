@@ -117,6 +117,7 @@ public class RoomCreation : MonoBehaviour
                 if (i == 45)
                 {
                     tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#16c60c> Start </color>";
+                    tmpGO.GetComponent<RoomController>().RT_roomType = SpecialRoomType.StartRoom;
                 }
                 else
                 {
@@ -127,12 +128,15 @@ public class RoomCreation : MonoBehaviour
                             break;
                         case RoomType.CraftingRoom:
                             tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#524f6a> Craft </color>";
+                            tmpGO.GetComponent<RoomController>().RT_roomType = SpecialRoomType.Crafting;
                             break;
                         case RoomType.Shop:
                             tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#efdb17> Shop </color>";
+                            tmpGO.GetComponent<RoomController>().RT_roomType = SpecialRoomType.Shop;
                             break;
                         case RoomType.KeyRoom:
                             tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#e74856> Key </color>";
+                            tmpGO.GetComponent<RoomController>().RT_roomType = SpecialRoomType.BossRoom;
                             break;
                     }
                 }

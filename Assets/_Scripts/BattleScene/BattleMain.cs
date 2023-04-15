@@ -25,17 +25,15 @@ public class BattleMain : MonoBehaviour
     bool b_PlayerReady;
     bool b_EnemyReady;
 
-    [SerializeField] GameObject GO_PlayerBar;
-    [SerializeField] GameObject GO_EnemyBar;
-
     [SerializeField] TMP_Text TMP_PlayerDamage;
     [SerializeField] TMP_Text TMP_EnemyDamage;
 
     [SerializeField] GameObject GO_ActionList;
 
+    [Header("Set in Inspector")]
+    public Slider SL_PlayerHP;
     public Slider SL_PlayerTP;
     public Slider SL_EnemyTP;
-    public Slider SL_PlayerHP;
     public Slider SL_EnemyHP;
 
     protected float f_EnemySpeed = 0.0f;
@@ -44,10 +42,6 @@ public class BattleMain : MonoBehaviour
 
     void Awake()
     {
-        SL_PlayerTP = GO_PlayerBar.transform.Find("TurnPoint").GetComponent<Slider>();
-        SL_EnemyTP = GO_EnemyBar.transform.Find("TurnPoint").GetComponent<Slider>();
-        SL_PlayerHP = GO_PlayerBar.transform.Find("HP").GetComponent<Slider>();
-        SL_EnemyHP = GO_EnemyBar.transform.Find("HP").GetComponent<Slider>();
     }
 
     void Start()

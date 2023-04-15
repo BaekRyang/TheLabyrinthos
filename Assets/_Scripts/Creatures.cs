@@ -1,34 +1,36 @@
+using UnityEngine;
+
 public class Creatures
 {
-    public Creature[] C_Default;
+    public Creature[] C_default;
 
     //변화값
-    const float f_Multipler_ATK = 1.125f;
-    const float f_Multipler_DEF = 1.2f;
-    const float f_Multipler_HP = 1.25f;
-    const float f_Multipler_SPD = 1.0f;
+    const float ATTACK_MULT = 1.125f;
+    const float DEFENCE_MULT = 1.2f;
+    const float HP_MULT = 1.25f;
+    const float SPEED_MULT = 1.0f;
     
     //조정값
-    const float f_Adjustment_ATK = -0.02f;
-    const float f_Adjustment_DEF = -0.01f;
-    const float f_Adjustment_HP = -0.01f;
-    const float f_Adjustment_SPD = 0.0f;
+    const float ATTACK_ADJ = -0.02f;
+    const float DEFENCE_ADJ = -0.01f;
+    const float HP_ADJ = -0.01f;
+    const float SPEED_ADJ = 0.0f;
 
 
     public Creatures()
     {
-        C_Default = new Creature[8];
+        C_default = new Creature[8];
         //초기값
-        C_Default[0] = new Creature(8, 3, 50.0f, 1.0f);
+        C_default[0] = new Creature(8, 3, 50.0f, 1.0f);
 
         //초기값을 통하여 스텟 변화계산후 적용
         for (int i = 1; i < 8; i++)
         {
-            int atk = (int)(C_Default[i - 1].i_Damage * (f_Multipler_ATK + f_Adjustment_ATK * i));
-            int def = (int)(C_Default[i - 1].i_Defense * (f_Multipler_DEF + f_Adjustment_DEF * i));
-            float hp = C_Default[i - 1].f_Health * (f_Multipler_HP + f_Adjustment_HP * i);
-            float spd = C_Default[i - 1].f_Speed * (f_Multipler_SPD + f_Adjustment_SPD * i);
-            C_Default[i] = new Creature(atk, def, hp, spd);
+            int atk = (int)(C_default[i - 1].damage * (ATTACK_MULT + ATTACK_ADJ * i));
+            int def = (int)(C_default[i - 1].defense * (DEFENCE_MULT + DEFENCE_ADJ * i));
+            float hp = C_default[i - 1].health * (HP_MULT + HP_ADJ * i);
+            float spd = C_default[i - 1].speed * (SPEED_MULT + SPEED_ADJ * i);
+            C_default[i] = new Creature(atk, def, hp, spd);
         }
     }
 }
@@ -36,16 +38,17 @@ public class Creatures
 public class Creature
 {
     public Creature(int atk, int def, float hp, float spd, int pspd = 0) {
-        this.i_Damage = atk;
-        this.i_Defense = def;
-        this.f_Health = hp;
-        this.f_Speed = spd;
-        this.i_PrepareSpeed = pspd;
+        this.damage = atk;
+        this.defense = def;
+        this.health = hp;
+        this.speed = spd;
+        this.prepareSpeed = pspd;
     }
 
-    public float f_Health = 100.0f;
-    public float f_Speed = 1.0f;
-    public int i_Defense = 5;
-    public int i_PrepareSpeed = 0;
-    public int i_Damage = 1;
+    public float health = 100.0f;
+    public float speed = 1.0f;
+    public int defense = 5;
+    public int prepareSpeed = 0;
+    public int damage = 1;
+    //Sprite attackSprite = null;
 }

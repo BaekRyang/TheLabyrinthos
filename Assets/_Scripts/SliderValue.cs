@@ -6,20 +6,20 @@ using UnityEngine.UI;
 
 public class SliderValue : MonoBehaviour
 {
-    public TMP_Text TT_Text;
-    public Slider i_SliderValue;
+    public TMP_Text text;
+    public Slider sliderValue;
 
     [SerializeField] bool isFloat = true;
     void Awake()
     {
-        TT_Text = GetComponentInChildren<TMP_Text>();
-        i_SliderValue = GetComponent<Slider>();
+        text = GetComponentInChildren<TMP_Text>();
+        sliderValue = GetComponent<Slider>();
     }
 
     public void ChangeValue()
     {
-        if (isFloat) TT_Text.text = i_SliderValue.value.ToString();
-        else TT_Text.text = Mathf.FloorToInt(i_SliderValue.value).ToString();
+        if (isFloat) text.text = sliderValue.value.ToString();
+        else text.text = Mathf.FloorToInt(sliderValue.value).ToString();
 
         //TP같은 경우 Float로 표시하면 보기가 안좋음
     }

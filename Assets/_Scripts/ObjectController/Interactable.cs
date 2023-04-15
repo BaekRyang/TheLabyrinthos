@@ -46,7 +46,7 @@ public class Interactable : MonoBehaviour
                 break;
 
             case ObjectType.Elevator:
-                if (GameManager.Instance.hasKey)
+                if (GameManager.Instance.b_hasKey)
                 {
                     //키패트 라이팅 정보 초기화
                     b_fading = false;

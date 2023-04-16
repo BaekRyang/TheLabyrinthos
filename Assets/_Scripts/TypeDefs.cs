@@ -77,7 +77,7 @@ namespace TypeDefs
         public float health = 100.0f;
         public float maxHealth = 100.0f;
         public float exp = 1.0f;
-        public float speed = 3.0f;
+        public float speed = 1.0f;
         public int defense = 5;
         public int prepareSpeed = 0;
         public int damage = 10;
@@ -85,6 +85,7 @@ namespace TypeDefs
     #endregion
 
     #region Creature
+    [Serializable]
     public class Creature
     {
         public Creature(int atk, int def, float hp, float spd, int pspd, Sprite fullBody = null, Sprite sideBody = null, Sprite face = null)

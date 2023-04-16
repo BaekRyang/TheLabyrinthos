@@ -27,6 +27,8 @@ public class BattleMain : MonoBehaviour
 {
     BattleActions BA_battleActions;
 
+    [SerializeField] float f_turnDelay = 1f;
+
     bool b_playerReady;
     bool b_enemyReady;
 
@@ -91,7 +93,7 @@ public class BattleMain : MonoBehaviour
     {
         BA_battleActions = GetComponent<BattleActions>();
         SL_playerTP.value = 0;
-        StartBattleScene(ref GameManager.Instance.creatures.C_default[0]); //임시
+        StartBattleScene(ref GameManager.Instance.creatures.C_default[5]); //임시
 
         IMG_playerHP = SL_playerHP.transform.Find("Fill Area").GetChild(0).GetComponent<Image>();
         IMG_playerTP = SL_playerTP.transform.Find("Fill Area").GetChild(0).GetComponent<Image>();
@@ -132,11 +134,11 @@ public class BattleMain : MonoBehaviour
     {
         if (!b_playerReady && !b_enemyReady) //둘다 준비상태가 아닐 때
         {
-            
+
             //speed를 기반으로 증가량을 계산.
             //0~100까지 증가량은 속도 1.0 기준으로 3초가 걸린다.
-            float tmp_playerIncrement = Time.deltaTime * PS_playerStats.speed * 33.3f;
-            float tmp_enemyIncrement = Time.deltaTime * f_enemySpeed * 33.3f;
+            float tmp_playerIncrement = Time.deltaTime * PS_playerStats.speed * (100 / f_turnDelay);
+            float tmp_enemyIncrement = Time.deltaTime * f_enemySpeed * (100 / f_turnDelay);
 
             //증가량만큼 더해주고
             SL_playerTP.value += tmp_playerIncrement;

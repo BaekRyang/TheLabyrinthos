@@ -3573,7 +3573,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_UiScaleMode: 1
-  m_ReferencePixelsPerUnit: 100
+  m_ReferencePixelsPerUnit: 3
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
@@ -3641,6 +3641,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2833c00dad0e8b84291021506b203a32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  f_turnDelay: 1
   GO_hitImage: {fileID: 69867662667428402, guid: 64ae7d2d300f57940b193e391c655bfd,
     type: 3}
   TMP_playerDamage: {fileID: 772642000}
@@ -3696,6 +3697,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0452a8f39fa69942b6d83a3d92ac30e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CR_Enemy:
+    health: 0
+    speed: 0
+    defense: 0
+    prepareSpeed: 0
+    damage: 0
+    fullBody: {fileID: 0}
+    sideBody: {fileID: 0}
+    face: {fileID: 0}
 --- !u!1 &1001292649
 GameObject:
   m_ObjectHideFlags: 0
@@ -3854,6 +3864,8 @@ MonoBehaviour:
   s_seed: '-'
   i_roomSize: 0
   GO_curtain: {fileID: 1947326161}
+  creatures:
+    C_default: []
   b_hasKey: 0
   go_playerPrefab: {fileID: 2271119611936407058, guid: 1e3e41c9142fc534fbacf4228fa5cfbc,
     type: 3}

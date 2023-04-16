@@ -18,9 +18,10 @@ public class Creatures
 
     public Creatures()
     {
+        CreatureSpritePack tmp = GameManager.Instance.spritePack;
         C_default = new Creature[8];
         //초기값
-        C_default[0] = new Creature(8, 3, 50.0f, 1.0f);
+        C_default[0] = new Creature(8, 3, 50.0f, 1.0f, 0, tmp.fullBody, tmp.sideBody, tmp.face);
 
         //초기값을 통하여 스텟 변화계산후 적용
         for (int i = 1; i < 8; i++)
@@ -29,7 +30,7 @@ public class Creatures
             int def = (int)(C_default[i - 1].defense * (DEFENCE_MULT + DEFENCE_ADJ * i));
             float hp = C_default[i - 1].health * (HP_MULT + HP_ADJ * i);
             float spd = C_default[i - 1].speed * (SPEED_MULT + SPEED_ADJ * i);
-            C_default[i] = new Creature(atk, def, hp, spd);
+            C_default[i] = new Creature(atk, def, hp, spd, 0);
         }
     }
 }

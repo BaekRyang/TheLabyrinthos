@@ -27,15 +27,21 @@ public class BattleMain : MonoBehaviour
 {
     BattleActions BA_battleActions;
 
-    [SerializeField] bool b_playerReady;
-    [SerializeField] bool b_enemyReady;
+    bool b_playerReady;
+    bool b_enemyReady;
 
     [Header("Set in Inspector")]
     [SerializeField] public GameObject GO_hitImage;
     [SerializeField] TMP_Text TMP_playerDamage;
     [SerializeField] TMP_Text TMP_EnemyDamage;
+
+    [SerializeField] Image[] IMG_enemyFullBodys = new Image[3];
+    [SerializeField] Image IMG_enemySideBody;
+    [SerializeField] Image IMG_enemyFace;
+
     public GameObject GO_actionList;
     public GameObject GO_attackList;
+
     public Sprite SPR_playerAttack;
     public Sprite SPR_enemyAttack;
 
@@ -43,6 +49,7 @@ public class BattleMain : MonoBehaviour
     public Slider SL_playerTP;
     public Slider SL_enemyHP;
     public Slider SL_enemyTP;
+
     public Transform TF_playerHitAnchor;
     public Transform TF_enemyHitAnchor;
 
@@ -67,7 +74,8 @@ public class BattleMain : MonoBehaviour
     public Dictionary<Parts, DmgAccText> dict_dmgAccList = new Dictionary<Parts, DmgAccText>();
 
     protected float f_enemySpeed = 0.0f;
-    protected float f_playerSpeed = 0.0f;
+    Creature CR_Enemy;
+    PlayerStats PS_playerStats;
 
 
     void Awake()
@@ -83,7 +91,7 @@ public class BattleMain : MonoBehaviour
     {
         BA_battleActions = GetComponent<BattleActions>();
         SL_playerTP.value = 0;
-        StartBattleScene(GameManager.Instance.creatures.C_default[0]); //임시
+        StartBattleScene(ref GameManager.Instance.creatures.C_default[0]); //임시
 
         IMG_playerHP = SL_playerHP.transform.Find("Fill Area").GetChild(0).GetComponent<Image>();
         IMG_playerTP = SL_playerTP.transform.Find("Fill Area").GetChild(0).GetComponent<Image>();
@@ -127,7 +135,7 @@ public class BattleMain : MonoBehaviour
             
             //speed를 기반으로 증가량을 계산.
             //0~100까지 증가량은 속도 1.0 기준으로 3초가 걸린다.
-            float tmp_playerIncrement = Time.deltaTime * f_playerSpeed * 33.3f;
+            float tmp_playerIncrement = Time.deltaTime * PS_playerStats.speed * 33.3f;
             float tmp_enemyIncrement = Time.deltaTime * f_enemySpeed * 33.3f;
 
             //증가량만큼 더해주고
@@ -154,20 +162,28 @@ public class BattleMain : MonoBehaviour
 
     }
 
-    void StartBattleScene(Creature CR_Opponent)
+    void StartBattleScene(ref Creature CR_Opponent)
     {
-        BA_battleActions.CR_Enemy = CR_Opponent;
+        //BattleMain과 BattleAction에서도 Enemy의 스텟을 참조해야 하므로 참조로 넘겨준다.
+        BA_battleActions.CR_Enemy = CR_Enemy = CR_Opponent;
+
+        //Enemy의 이미지를 사용하는 모든곳의 이미지를 해당 Enemy로 바꿔주고
+        foreach (Image img in IMG_enemyFullBodys) img.sprite    = CR_Enemy.fullBody;
+        IMG_enemySideBody.sprite                                = CR_Enemy.sideBody;
+        IMG_enemyFace.sprite                                    = CR_Enemy.face;
+
+        //플레이어 스텟을 가져와서 저장한다. (플레이어는 일회용이 아니므로 ref 으로 넘어옴)
+        PS_playerStats = GameManager.Instance.GetComponent<Player>().GetPlayerStats();
 
         //행동 포인트관련 초기화 : 전투 중간에 변경될 일이 있을까? => 있으면 f_Speed같은 경우는 ref로 넘겨줘야함
-        SL_playerTP.value = GameManager.Instance.GetComponent<Player>().GetPlayerStats().prepareSpeed;
-        f_playerSpeed = GameManager.Instance.GetComponent<Player>().GetPlayerStats().speed;
+        ChangeSliderValue(true, StatsType.Hp, PS_playerStats.health);   //체력바 플레이어 체력으로 초기화
+        SL_playerTP.value = PS_playerStats.prepareSpeed;                //플레이어 TP를 스텟으로 맞춰줌(선제공격용)
 
-        SL_enemyHP.value = SL_enemyHP.maxValue = CR_Opponent.health;
-        SL_enemyTP.value = CR_Opponent.prepareSpeed;
-        f_enemySpeed = CR_Opponent.speed-0.05f;
+        SL_enemyHP.value = SL_enemyHP.maxValue = CR_Enemy.health;       //Enemt의 체력 초기값 설정 (MAX/NOW)
+        SL_enemyTP.value = CR_Enemy.prepareSpeed;                       //Enemy의 TP 반영
+        f_enemySpeed = CR_Enemy.speed;                                  //Enemy의 속도 반영
 
-        TMP_playerDamage.text = "DMG\n" + GameManager.Instance.GetComponent<Player>().GetPlayerStats().damage;
-        TMP_EnemyDamage.text = "DMG\n" + CR_Opponent.damage;
+        UpdateDamageIndicator();                                        //공격력 표시창 업데이트
 
         //전투창 활성화
         this.gameObject.SetActive(true);        
@@ -194,6 +210,12 @@ public class BattleMain : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public void UpdateDamageIndicator()
+    {
+        TMP_playerDamage.text = "DMG\n" + PS_playerStats.damage;
+        TMP_EnemyDamage.text = "DMG\n" + CR_Enemy.damage;
     }
 
     public void EndTurn(bool b_isPlayer) {

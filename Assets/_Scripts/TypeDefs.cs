@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -76,7 +77,7 @@ namespace TypeDefs
         public float health = 100.0f;
         public float maxHealth = 100.0f;
         public float exp = 1.0f;
-        public float speed = 1.0f;
+        public float speed = 3.0f;
         public int defense = 5;
         public int prepareSpeed = 0;
         public int damage = 10;
@@ -86,13 +87,16 @@ namespace TypeDefs
     #region Creature
     public class Creature
     {
-        public Creature(int atk, int def, float hp, float spd, int pspd = 0)
+        public Creature(int atk, int def, float hp, float spd, int pspd, Sprite fullBody = null, Sprite sideBody = null, Sprite face = null)
         {
             this.damage = atk;
             this.defense = def;
             this.health = hp;
             this.speed = spd;
             this.prepareSpeed = pspd;
+            this.fullBody = fullBody;
+            this.sideBody = sideBody;
+            this.face = face;
         }
 
         public float health = 100.0f;
@@ -100,7 +104,18 @@ namespace TypeDefs
         public int defense = 5;
         public int prepareSpeed = 0;
         public int damage = 1;
+        public Sprite fullBody;
+        public Sprite sideBody;
+        public Sprite face;
         //Sprite attackSprite = null;
+    }
+
+    [Serializable]
+    public struct CreatureSpritePack
+    {
+        public Sprite fullBody;
+        public Sprite sideBody;
+        public Sprite face;
     }
     #endregion
 

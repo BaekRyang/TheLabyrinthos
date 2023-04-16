@@ -13,7 +13,7 @@ public class BattleActions : MonoBehaviour
     const int CONST_DEF         = 20; //방어 상수
     const int BASE_ACCURACY     = 75; //기본 정확도
 
-    const float WEAKPOINT_DMG   = 1.45f;
+    const float WEAKPOINT_DMG   = 1.55f;
     const float WEAKPOINT_ACC   = 0.75f;
     const float THORAX_DMG      = 1.00f;
     const float THORAX_ACC      = 1.00f;
@@ -252,15 +252,15 @@ public class BattleActions : MonoBehaviour
         Destroy(tmpGO);
     }
 
-    public void SetDmgNAcc()
+    public void SetDmgNAcc() //공격 상세창 값 초기화용
     {
         var typeDict = BM_BattleMain.dict_dmgAccList;
-        typeDict[Parts.Weakpoint]   .percentage.text = (BASE_ACCURACY * dict_attackTable[Parts.Weakpoint]   .accuracy).ToString() + "%";
-        typeDict[Parts.Thorax]      .percentage.text = (BASE_ACCURACY * dict_attackTable[Parts.Thorax]      .accuracy).ToString() + "%";
-        typeDict[Parts.Outer]       .percentage.text = (BASE_ACCURACY * dict_attackTable[Parts.Outer]       .accuracy).ToString() + "%";
+        typeDict[Parts.Weakpoint]   .percentage.text = (BASE_ACCURACY * dict_attackTable[Parts.Weakpoint] .accuracy).ToString() + "%";
+        typeDict[Parts.Thorax]      .percentage.text = (BASE_ACCURACY * dict_attackTable[Parts.Thorax]    .accuracy).ToString() + "%";
+        typeDict[Parts.Outer]       .percentage.text = (BASE_ACCURACY * dict_attackTable[Parts.Outer]     .accuracy).ToString() + "%";
 
-        typeDict[Parts.Weakpoint].damage.text = (PS_player.damage * dict_attackTable[Parts.Weakpoint]  .damage).ToString() + " DMG";
-        typeDict[Parts.Thorax].damage   .text = (PS_player.damage * dict_attackTable[Parts.Thorax]     .damage).ToString() + " DMG";
-        typeDict[Parts.Outer].damage    .text = (PS_player.damage * dict_attackTable[Parts.Outer]      .damage).ToString() + " DMG";
+        typeDict[Parts.Weakpoint]   .damage.text = (PS_player.damage * dict_attackTable[Parts.Weakpoint]  .damage * (1 - CR_Enemy.defense / (float)(CR_Enemy.defense + CONST_DEF))).ToString("0.##") + " DMG";
+        typeDict[Parts.Thorax]      .damage.text = (PS_player.damage * dict_attackTable[Parts.Thorax]     .damage * (1 - CR_Enemy.defense / (float)(CR_Enemy.defense + CONST_DEF))).ToString("0.##") + " DMG";
+        typeDict[Parts.Outer]       .damage.text = (PS_player.damage * dict_attackTable[Parts.Outer]      .damage * (1 - CR_Enemy.defense / (float)(CR_Enemy.defense + CONST_DEF))).ToString("0.##") + " DMG";
     }
 }

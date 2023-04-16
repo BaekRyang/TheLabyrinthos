@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
 
     [Header("System Objects")]
     public GameObject GO_curtain;
-    public Creatures creatures = new Creatures();
+    public Creatures creatures;
 
     [Header("Test Keys")]
     public bool b_hasKey = false;
@@ -41,6 +41,9 @@ public class GameManager : MonoBehaviour
     [Header("Level Controll")]
     public int i_level = 1;
 
+    [Header("DefaultCreatureSprite")]
+    [SerializeField] public CreatureSpritePack spritePack;
+
     [HideInInspector]
     public Dictionary<string, Random> dict_randomObjects = new Dictionary<string, Random>();
 
@@ -57,6 +60,7 @@ public class GameManager : MonoBehaviour
         GO_bossRoomPrefabs =    Resources.LoadAll<GameObject>("RoomStructures/SpecialRoom/BossRoom");
         GO_shopPrefabs =        Resources.LoadAll<GameObject>("RoomStructures/SpecialRoom/Shop");
 
+        creatures = new Creatures();
     }
 
     void Start()

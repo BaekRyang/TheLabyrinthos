@@ -2,17 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-
-public enum SpecialRoomType
-{
-    Normal,
-    StartRoom,
-    VerticalCorridor,
-    HorizontalCorridor,
-    Crafting,
-    BossRoom,
-    Shop
-}
+using TypeDefs;
 
 public class RoomController : MonoBehaviour
 {

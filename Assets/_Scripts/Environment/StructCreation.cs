@@ -2,16 +2,8 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using Random = System.Random;
+using TypeDefs;
 
-public enum RoomType
-{
-    empty,
-    common,
-    EndRoom,
-    CraftingRoom,
-    Shop,
-    KeyRoom
-}
 
 public class RoomNode
 {

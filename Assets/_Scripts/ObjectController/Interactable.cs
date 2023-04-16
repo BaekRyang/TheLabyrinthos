@@ -2,16 +2,8 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using TypeDefs;
 
-enum ObjectType
-{
-    MoveDoor,
-    Door,
-    Elevator,
-    Item
-}
-
-    
 public class Interactable : MonoBehaviour
 {
     const float CHANGE_ROOM_DELAY = 1f;
@@ -94,7 +86,6 @@ public class Interactable : MonoBehaviour
 
         Vector3 cameraPosition = Camera.main.transform.position;
         Vector3 relativeCameraPosition = new Vector3(door.transform.position.x - (cameraPosition.x - door.transform.position.x), cameraPosition.y, door.transform.position.z - (cameraPosition.z - door.transform.position.z));
-        Quaternion relativeCameraRotation = Quaternion.LookRotation(door.transform.position - relativeCameraPosition, Vector3.up);
 
         //카메라를 180도 회전
         Camera.main.transform.position = relativeCameraPosition;

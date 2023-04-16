@@ -4,10 +4,23 @@ using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = System.Random;
+using TypeDefs;
+
+
 
 public class BattleActions : MonoBehaviour
 {
-    const int CONST_DEF = 20; //방어 상수
+    const int CONST_DEF         = 20; //방어 상수
+    const int BASE_ACCURACY     = 75; //기본 정확도
+
+    const float WEAKPOINT_DMG   = 1.45f;
+    const float WEAKPOINT_ACC   = 0.75f;
+    const float THORAX_DMG      = 1.00f;
+    const float THORAX_ACC      = 1.00f;
+    const float OUTER_DMG       = 0.80f;
+    const float OUTER_ACC       = 1.30f;
+
+    Dictionary<Parts, AttackPair> dict_attackTable = new Dictionary<Parts, AttackPair>();
 
     // 정보를 받아와서 저장할 위치
     private PlayerStats PS_player;
@@ -22,6 +35,10 @@ public class BattleActions : MonoBehaviour
         PS_player = GameManager.Instance.GetComponent<Player>().GetPlayerStats();
 
         BM_BattleMain = GetComponent<BattleMain>();
+
+        dict_attackTable.Add(Parts.Weakpoint, new AttackPair(WEAKPOINT_DMG, WEAKPOINT_ACC));
+        dict_attackTable.Add(Parts.Thorax, new AttackPair(THORAX_DMG, THORAX_ACC));
+        dict_attackTable.Add(Parts.Outer, new AttackPair(OUTER_DMG, OUTER_ACC));
     }
     void Update()
     {
@@ -32,8 +49,11 @@ public class BattleActions : MonoBehaviour
     {
         switch (_ButtonType)
         {
+            //메인 행동 3가지
             case "Tab_Attack":
-                Attack(true);
+                SetDmgNAcc();
+                BM_BattleMain.GO_attackList.SetActive(true);
+                BM_BattleMain.GO_actionList.SetActive(false);
                 break;
 
             case "Tab_Item":
@@ -44,54 +64,111 @@ public class BattleActions : MonoBehaviour
 
                 break;
 
+            //Attack 행동 4가지
+            case "Attack_Head":
+                Attack(true, Parts.Weakpoint);
+                break;
+            case "Attack_Thorax":
+                Attack(true, Parts.Thorax);
+                break;
+            case "Attack_Outer":
+                Attack(true, Parts.Outer);
+                break;
+            case "Attack_Back":
+                BM_BattleMain.GO_attackList.SetActive(false);
+                BM_BattleMain.GO_actionList.SetActive(true);
+                break;
+
             default:
                 break;
         }
     }
 
-    public void Attack(bool b_IsPlayer)
+    public void Attack(bool b_IsPlayer, Parts part = Parts.Thorax)
     {
+        AudioClip clip;
+        int randInt = rand.Next(101);
+
         if (b_IsPlayer)
         {
-            BM_BattleMain.IMG_playerTP.color = BM_BattleMain.colors[(int)SliderColor.Tp_default];
-            float damage = (PS_player.damage * (1 - CR_Enemy.defense / (float)(CR_Enemy.defense + CONST_DEF)));
-            damage = Mathf.Round(damage * 10f) / 10f;
-            CR_Enemy.health -= damage;
-            CR_Enemy.health = Mathf.Round(CR_Enemy.health * 10f) / 10f;
-            BM_BattleMain.ChangeSliderValue(false, StatsType.Hp, CR_Enemy.health);
-            BM_BattleMain.ChangeSliderValue(true, StatsType.Tp, 0);
-            BM_BattleMain.EndTurn(true);
+            int accInt = (int)(BASE_ACCURACY * dict_attackTable[part].accuracy);
 
-            StartCoroutine(LerpColor(   BM_BattleMain.enemyElements,    //해당 Target의 Image를
-                                        SliderColor.Hp_hilighted,       //해당 색으로 바꿨다가
-                                        1f));                           //해당 초 동안 돌아온다.
+            if (randInt <   //랜덤 (0~100)
+                accInt)     //기본 정확도 x 부위 정확도 계수
+            {
+                float damage = (PS_player.damage *                                                  //플레이어 공격력
+                                (dict_attackTable[part].damage) *                                   //부위 데미지 계수
+                                (1 - CR_Enemy.defense / (float)(CR_Enemy.defense + CONST_DEF)));    //방어력 계산
+
+                damage = Mathf.Round(damage * 10f) / 10f;
+                CR_Enemy.health -= damage;
+                CR_Enemy.health = Mathf.Round(CR_Enemy.health * 10f) / 10f;
+                BM_BattleMain.ChangeSliderValue(false, StatsType.Hp, CR_Enemy.health);
+
+                StartCoroutine(LerpColor(BM_BattleMain.enemyElements,   //해당 Target의 Image를
+                                            SliderColor.Hp_hilighted,   //해당 색으로 바꿨다가
+                                            1f));                       //해당 초 동안 돌아온다.
+
+                switch (part)
+                {
+                    case Parts.Weakpoint:
+                        clip = BM_BattleMain.AC_playerAttackWeakPoint[rand.Next(BM_BattleMain.AC_playerAttackWeakPoint.Length)];
+                        break;
+                    case Parts.Thorax:
+                        clip = BM_BattleMain.AC_playerAttackThorax[rand.Next(BM_BattleMain.AC_playerAttackThorax.Length)];
+                        break;
+                    case Parts.Outer:
+                        clip = BM_BattleMain.AC_playerAttackOuter[rand.Next(BM_BattleMain.AC_playerAttackOuter.Length)];
+                        break;
+                    default:
+                        clip = BM_BattleMain.AC_playerAttackThorax[rand.Next(BM_BattleMain.AC_playerAttackThorax.Length)];
+                        break;
+                }
+                
+                //맞으면 타격음으로
+            } 
+            else
+            {
+                clip = BM_BattleMain.AC_playerMissed[rand.Next(BM_BattleMain.AC_playerMissed.Length)];
+                //빗나가면 다른 소리로
+            }
+
+            Debug.Log("Player : " + randInt + " > " + accInt);
+            BM_BattleMain.EndTurn(true);
+            BM_BattleMain.GO_attackList.SetActive(false);
+            BM_BattleMain.GO_actionList.SetActive(false);
 
             StartCoroutine(LerpFill(    BM_BattleMain.enemyElements,
                                         0.1f,
                                         BM_BattleMain.SPR_playerAttack,
-                                        BM_BattleMain.AS_playerAttack[rand.Next(BM_BattleMain.AS_playerAttack.Length)]));
-
-            Debug.Log(damage + "DMG - Player ATTACK");
+                                        clip));
         } else
         {
-            BM_BattleMain.IMG_enemyTP.color = BM_BattleMain.colors[(int)SliderColor.Tp_default];
-            float damage = (CR_Enemy.damage * (1 - PS_player.defense / (float)(PS_player.defense + CONST_DEF)));
-            damage = Mathf.Round(damage * 10f) / 10f;
-            PS_player.health -= damage;
-            PS_player.health = Mathf.Round(PS_player.health * 10f) / 10f;
-            BM_BattleMain.ChangeSliderValue(true, StatsType.Hp, PS_player.health);
-            BM_BattleMain.ChangeSliderValue(false, StatsType.Tp, 0);
+            if (randInt <       //랜덤 (0~100)
+               BASE_ACCURACY)   //**크리쳐별 정확도를 가져와서 써야함
+            {
+                float damage = (CR_Enemy.damage * (1 - PS_player.defense / (float)(PS_player.defense + CONST_DEF)));
+                damage = Mathf.Round(damage * 10f) / 10f;
+                PS_player.health -= damage;
+                PS_player.health = Mathf.Round(PS_player.health * 10f) / 10f;
+                BM_BattleMain.ChangeSliderValue(true, StatsType.Hp, PS_player.health);
+
+                StartCoroutine(LerpColor(BM_BattleMain.playerElements,
+                                            SliderColor.Hp_hilighted,
+                                            1f));
+                clip = BM_BattleMain.AC_enemyAttack[rand.Next(BM_BattleMain.AC_enemyAttack.Length)];
+            } 
+            else
+            {
+                clip = BM_BattleMain.AC_playerMissed[rand.Next(BM_BattleMain.AC_playerMissed.Length)];
+            }
+
             BM_BattleMain.EndTurn(false);
-
-            StartCoroutine(LerpColor(BM_BattleMain.playerElements,
-                                        SliderColor.Hp_hilighted,   
-                                        1f));
-
+            Debug.Log("Creature : " + randInt + " > " + BASE_ACCURACY);
             StartCoroutine(LerpFill(    BM_BattleMain.playerElements,
                                         0.1f,
                                         BM_BattleMain.SPR_enemyAttack,
-                                        BM_BattleMain.AS_enemyAttack[rand.Next(BM_BattleMain.AS_enemyAttack.Length)]));
-            Debug.Log(damage + "DMG - Enemy ATTACK");
+                                        clip));
         }
     }
 
@@ -173,5 +250,17 @@ public class BattleActions : MonoBehaviour
         StartCoroutine(LerpColor(hitImage, SliderColor.transparent, 0.5f, true));
         yield return new WaitForSeconds(0.5f);
         Destroy(tmpGO);
+    }
+
+    public void SetDmgNAcc()
+    {
+        var typeDict = BM_BattleMain.dict_dmgAccList;
+        typeDict[Parts.Weakpoint]   .percentage.text = (BASE_ACCURACY * dict_attackTable[Parts.Weakpoint]   .accuracy).ToString() + "%";
+        typeDict[Parts.Thorax]      .percentage.text = (BASE_ACCURACY * dict_attackTable[Parts.Thorax]      .accuracy).ToString() + "%";
+        typeDict[Parts.Outer]       .percentage.text = (BASE_ACCURACY * dict_attackTable[Parts.Outer]       .accuracy).ToString() + "%";
+
+        typeDict[Parts.Weakpoint].damage.text = (PS_player.damage * dict_attackTable[Parts.Weakpoint]  .damage).ToString() + " DMG";
+        typeDict[Parts.Thorax].damage   .text = (PS_player.damage * dict_attackTable[Parts.Thorax]     .damage).ToString() + " DMG";
+        typeDict[Parts.Outer].damage    .text = (PS_player.damage * dict_attackTable[Parts.Outer]      .damage).ToString() + " DMG";
     }
 }

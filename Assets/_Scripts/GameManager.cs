@@ -9,6 +9,7 @@ using UnityEngine.ProBuilder.MeshOperations;
 using UnityEngine.UI;
 using static UnityEngine.UIElements.UxmlAttributeDescription;
 using Random = System.Random;
+using TypeDefs;
 
 public class GameManager : MonoBehaviour
 {

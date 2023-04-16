@@ -1,5 +1,4 @@
-using UnityEngine;
-
+using TypeDefs;
 public class Creatures
 {
     public Creature[] C_default;
@@ -35,20 +34,3 @@ public class Creatures
     }
 }
 
-public class Creature
-{
-    public Creature(int atk, int def, float hp, float spd, int pspd = 0) {
-        this.damage = atk;
-        this.defense = def;
-        this.health = hp;
-        this.speed = spd;
-        this.prepareSpeed = pspd;
-    }
-
-    public float health = 100.0f;
-    public float speed = 1.0f;
-    public int defense = 5;
-    public int prepareSpeed = 0;
-    public int damage = 1;
-    //Sprite attackSprite = null;
-}

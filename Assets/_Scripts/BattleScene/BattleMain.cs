@@ -3,28 +3,11 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using TypeDefs;
 
 //같은 이름의 클래스가 두개라서 고정
 using Slider = UnityEngine.UI.Slider;
 using Image = UnityEngine.UI.Image;
-
-public enum StatsType
-{
-    Hp,
-    Tp,
-    Damage,
-    Defense,
-    Speed
-}
-
-public enum SliderColor
-{
-    Hp_default,
-    Hp_hilighted,
-    Tp_default,
-    Tp_hilighted,
-    transparent
-}
 
 public class UIModElements
 {
@@ -44,14 +27,15 @@ public class BattleMain : MonoBehaviour
 {
     BattleActions BA_battleActions;
 
-    bool b_playerReady;
-    bool b_enemyReady;
+    [SerializeField] bool b_playerReady;
+    [SerializeField] bool b_enemyReady;
 
     [Header("Set in Inspector")]
     [SerializeField] public GameObject GO_hitImage;
     [SerializeField] TMP_Text TMP_playerDamage;
     [SerializeField] TMP_Text TMP_EnemyDamage;
-    [SerializeField] GameObject GO_actionList;
+    public GameObject GO_actionList;
+    public GameObject GO_attackList;
     public Sprite SPR_playerAttack;
     public Sprite SPR_enemyAttack;
 
@@ -63,8 +47,11 @@ public class BattleMain : MonoBehaviour
     public Transform TF_enemyHitAnchor;
 
     [Header("Set Automatically : SFX")]
-    public AudioClip[] AS_playerAttack;
-    public AudioClip[] AS_enemyAttack;
+    public AudioClip[] AC_playerAttackWeakPoint;
+    public AudioClip[] AC_playerAttackThorax;
+    public AudioClip[] AC_playerAttackOuter;
+    public AudioClip[] AC_playerMissed;
+    public AudioClip[] AC_enemyAttack;
 
     [HideInInspector] public Image IMG_playerHP;
     [HideInInspector] public Image IMG_playerTP;
@@ -77,14 +64,19 @@ public class BattleMain : MonoBehaviour
     [Header("Set in Inspector : Colors")]
     [SerializeField] public Color[] colors = new Color[5];
 
+    public Dictionary<Parts, DmgAccText> dict_dmgAccList = new Dictionary<Parts, DmgAccText>();
+
     protected float f_enemySpeed = 0.0f;
     protected float f_playerSpeed = 0.0f;
 
 
     void Awake()
     {
-        AS_playerAttack = Resources.LoadAll<AudioClip>("SFX/PlayerAttack");
-        AS_enemyAttack = Resources.LoadAll<AudioClip>("SFX/EnemyAttack");
+        AC_playerAttackWeakPoint = Resources.LoadAll<AudioClip>("SFX/PlayerAttack/Weakpoint");
+        AC_playerAttackThorax = Resources.LoadAll<AudioClip>("SFX/PlayerAttack/Thorax");
+        AC_playerAttackOuter = Resources.LoadAll<AudioClip>("SFX/PlayerAttack/Outer");
+        AC_playerMissed = Resources.LoadAll<AudioClip>("SFX/PlayerAttack/Miss");
+        AC_enemyAttack = Resources.LoadAll<AudioClip>("SFX/EnemyAttack");
     }
 
     void Start()
@@ -114,6 +106,17 @@ public class BattleMain : MonoBehaviour
             IMG_enemyTP,
             TF_enemyHitAnchor
         );
+
+        dict_dmgAccList.Add(Parts.Weakpoint,
+                            new DmgAccText( GO_attackList.transform.GetChild(0).Find("Percentage").GetComponent<TMP_Text>(),
+                                            GO_attackList.transform.GetChild(0).Find("Damage").GetComponent<TMP_Text>()));
+        dict_dmgAccList.Add(Parts.Thorax,
+                            new DmgAccText(GO_attackList.transform.GetChild(1).Find("Percentage").GetComponent<TMP_Text>(),
+                                            GO_attackList.transform.GetChild(1).Find("Damage").GetComponent<TMP_Text>()));
+        dict_dmgAccList.Add(Parts.Outer,
+                            new DmgAccText(GO_attackList.transform.GetChild(2).Find("Percentage").GetComponent<TMP_Text>(),
+                                            GO_attackList.transform.GetChild(2).Find("Damage").GetComponent<TMP_Text>()));
+
 
     }
 
@@ -194,17 +197,19 @@ public class BattleMain : MonoBehaviour
     }
 
     public void EndTurn(bool b_isPlayer) {
+        ChangeSliderValue(b_isPlayer, StatsType.Tp, 0);
         if (b_isPlayer)
         {
             b_playerReady = false;
             GO_actionList.SetActive(false);
+            IMG_playerTP.color = colors[(int)SliderColor.Tp_default];
         } else
         {
+            IMG_enemyTP.color = colors[(int)SliderColor.Tp_default];
             b_enemyReady = false;
         }
         
     }
-}
 
-//슬라이더는 오른쪽 Display 값이랑만 연동되어있고 실제 변수와 연결되어있지 않음
-//변수값을 Slider의 Value와 연동이 필요
+    
+}

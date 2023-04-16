@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using static UnityEditor.Rendering.CameraUI;
 using Random = System.Random;
+using TypeDefs;
 
 public class RoomCreation : MonoBehaviour
 {

@@ -170,9 +170,9 @@ public class BattleMain : MonoBehaviour
         BA_battleActions.CR_Enemy = CR_Enemy = CR_Opponent;
 
         //Enemy의 이미지를 사용하는 모든곳의 이미지를 해당 Enemy로 바꿔주고
-        foreach (Image img in IMG_enemyFullBodys) img.sprite    = CR_Enemy.fullBody;
-        IMG_enemySideBody.sprite                                = CR_Enemy.sideBody;
-        IMG_enemyFace.sprite                                    = CR_Enemy.face;
+        //foreach (Image img in IMG_enemyFullBodys) img.sprite    = CR_Enemy.fullBody;
+        //IMG_enemySideBody.sprite                                = CR_Enemy.sideBody;
+        //IMG_enemyFace.sprite                                    = CR_Enemy.face;
 
         //플레이어 스텟을 가져와서 저장한다. (플레이어는 일회용이 아니므로 ref 으로 넘어옴)
         PS_playerStats = GameManager.Instance.GetComponent<Player>().GetPlayerStats();

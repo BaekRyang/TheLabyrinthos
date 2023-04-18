@@ -26,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2271119611936407058}
-  m_LocalRotation: {x: 0, y: 0.9238795, z: 0, w: 0.38268343}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -35,7 +35,7 @@ Transform:
   - {fileID: 2271119612486156600}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 135, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &2271119611936407087
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -85,18 +85,16 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 63e2176ec8e7c8e40a67199788ba0a90, type: 3}
   - {fileID: 2800000, guid: ef4a3244bbbd6c34fbf4f8f64cdb82bd, type: 3}
   - {fileID: 2800000, guid: 97711b5d71cf42541a80cb5178f2bf4d, type: 3}
-  groundCheck: {fileID: 0}
-  GO_PrevInteracted: {fileID: 0}
-  moveSpeed: 3
   direction: {x: 0, y: 0, z: 0}
   b_camControll: 0
   yaw: 0
   wallLayer:
     serializedVersion: 2
     m_Bits: 0
-  prevRoomName: null
+  horizontal: 0
+  vertical: 0
   prevRoom: {fileID: 0}
-  prev2Room: {fileID: 0}
+  prevRoomMinimap: {fileID: 0}
 --- !u!1 &2271119612486156601
 GameObject:
   m_ObjectHideFlags: 0

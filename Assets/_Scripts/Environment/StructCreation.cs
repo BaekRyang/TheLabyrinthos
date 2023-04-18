@@ -136,5 +136,6 @@ public class StructCreation
 
         qEndRoom.First.Value.RoomType = RoomType.Shop; //그 다음은 상점
         qEndRoom.RemoveFirst();
+
     }
 }

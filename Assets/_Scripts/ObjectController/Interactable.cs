@@ -110,6 +110,7 @@ public class Interactable : MonoBehaviour
         //플레이어를 문 기준 180도 회전한 위치로 이동
         player.transform.position = newPosition;
 
+        player.CalcRoom(); //문 넘어갔으니까 현재위치 다시 계산
         yield return null;
     }
 

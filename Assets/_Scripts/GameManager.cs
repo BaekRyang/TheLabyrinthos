@@ -97,6 +97,8 @@ public class GameManager : MonoBehaviour
         GetComponent<RoomCreation>().roomMap[45].RoomObject.GetComponent<RoomController>().go_specialObject.GetComponent<TMP_Text>().text = "Level " + i_level;
         if (!go_player.IsUnityNull()) go_player.GetComponent<Rigidbody>().useGravity = true;
 
+        Minimap.instance.CreateMinimap(GameManager.Instance.GetComponent<RoomCreation>().roomMap);
+
     }
 
     public IEnumerator CurtainModify(bool open, float delay) //화면 암전 풀거나 걸기

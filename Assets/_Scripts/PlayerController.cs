@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using static UnityEditor.Searcher.SearcherWindow.Alignment;
 using Input = UnityEngine.Input;
 
@@ -52,6 +53,9 @@ public class PlayerController : MonoBehaviour
 
     //이전 방의 이름과 게임 오브젝트
     [SerializeField] GameObject prevRoom;
+    [SerializeField] GameObject prevRoomMinimap;
+
+    private RectTransform GO_minimapArrow;
 
     private void Awake()
     {
@@ -65,6 +69,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         playerTexture = Resources.LoadAll<Texture>("Sprites/Player");
+        GO_minimapArrow = Minimap.instance.GO_arrow.GetComponent<RectTransform>();
         ResetSetting();
     }
 
@@ -106,7 +111,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetMouseButton(1))
             {
                 yaw += Input.GetAxis("Mouse X") * rotationSpeed;
-                
+                //GO_minimapArrow.transform.rotation = Quaternion.Euler(0, 0, -Camera.main.transform.rotation.eulerAngles.y);
             }
 
             Quaternion rotation = Quaternion.Euler(25, yaw, 0);
@@ -200,22 +205,6 @@ public class PlayerController : MonoBehaviour
 
     protected void Move()
     {
-        int size = 10;
-        //플레이어의 위치
-        Vector3 playerPos = transform.position;
-
-        //플레이어가 있는 방의 인덱스 계산
-        int roomIndexX = Mathf.FloorToInt(((playerPos.x + 5) / size) + 5);
-        int roomIndexY = Mathf.FloorToInt(((playerPos.z + 5) / size) + 4) * 10;
-        int roomIndex = roomIndexX + roomIndexY;
-
-        //현재 플레이어가 있는 방의 인덱스 출력
-        Debug.Log("Current room index: " + roomIndex);
-
-        prevRoom.GetComponent<RoomController>().ChangeRoomState(false); //이전 방의 상태를 변경
-        prevRoom = GameManager.Instance.GetComponent<RoomCreation>().roomMap[roomIndex].RoomObject; //플레이어가 위치한 방의 오브젝트를 저장
-        prevRoom.GetComponent<RoomController>().ChangeRoomState(true); //플레이어가 위치한 방의 상태를 변경
-
         float currentMoveSpeed = moveSpeed;
         Vector3 velocity = new Vector3(direction.x, 0, direction.z);
 
@@ -287,8 +276,34 @@ public class PlayerController : MonoBehaviour
     {
         prevRoom = GameManager.Instance.GetComponent<RoomCreation>().roomMap[45].RoomObject; //플레이어가 위치한 방의 루트 오브젝트를 저장 (플레이어는 45번에 생성)
         prevRoom.GetComponent<RoomController>().ChangeRoomState(true); //플레이어가 위치한 방의 상태를 변경
+
+        prevRoomMinimap = Minimap.instance.GetRoom(45);
+        prevRoomMinimap.GetComponent<Image>().color = Color.white;
         defaultCameraDistance = Vector3.Distance(Camera.main.transform.position, transform.position);
     }
 
+    public void CalcRoom()
+    {
+        int size = 10;
+        //플레이어의 위치
+        Vector3 playerPos = transform.position;
 
+        //플레이어가 있는 방의 인덱스 계산
+        int roomIndexX = Mathf.FloorToInt(((playerPos.x + 5) / size) + 5);
+        int roomIndexY = Mathf.FloorToInt(((playerPos.z + 5) / size) + 4) * 10;
+        int roomIndex = roomIndexX + roomIndexY;
+
+        //현재 플레이어가 있는 방의 인덱스 출력
+        Debug.Log("Current room index: " + roomIndex);
+
+        prevRoom.GetComponent<RoomController>().ChangeRoomState(false); //이전 방의 상태를 변경
+        prevRoom = GameManager.Instance.GetComponent<RoomCreation>().roomMap[roomIndex].RoomObject; //플레이어가 위치한 방의 오브젝트를 저장
+        prevRoom.GetComponent<RoomController>().ChangeRoomState(true); //플레이어가 위치한 방의 상태를 변경
+
+        //위랑 똑같지만 미니맵 전용
+        prevRoomMinimap.GetComponent<Image>().color = Color.gray;
+        prevRoomMinimap = Minimap.instance.GetRoom(roomIndex);
+        prevRoomMinimap.GetComponent<Image>().color = Color.white;
+        Minimap.instance.SetAnchor(roomIndex);
+    }
 }

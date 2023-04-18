@@ -22,7 +22,7 @@ public class BattleActions : MonoBehaviour
 
     Dictionary<Parts, AttackPair> dict_attackTable = new Dictionary<Parts, AttackPair>();
 
-    // 정보를 받아와서 저장할 위치
+    //정보를 받아와서 저장할 위치
     private PlayerStats PS_player;
     public Creature CR_Enemy;
 
@@ -31,7 +31,7 @@ public class BattleActions : MonoBehaviour
 
     void Start()
     {
-        // PlayerStats 클래스 객체 가져오기(참조로 가져온다)
+        //PlayerStats 클래스 객체 가져오기(참조로 가져온다)
         PS_player = GameManager.Instance.GetComponent<Player>().GetPlayerStats();
 
         BM_BattleMain = GetComponent<BattleMain>();

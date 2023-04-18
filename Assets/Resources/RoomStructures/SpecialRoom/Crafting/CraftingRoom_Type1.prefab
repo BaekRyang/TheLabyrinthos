@@ -117,10 +117,10 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5}
   - {x: 0.5, y: 0.5}
   - {x: 0.5, y: 0.5}
-  - {x: 1.5, y: 2.9960938}
-  - {x: 2.5, y: 2.9960938}
-  - {x: 1.5, y: 1.9960938}
-  - {x: 2.5, y: 1.9960938}
+  - {x: -0.5, y: 0.9960937}
+  - {x: 0.5, y: 0.9960937}
+  - {x: -0.5, y: -0.0039063096}
+  - {x: 0.5, y: -0.0039063096}
   m_Textures2: []
   m_Textures3: []
   m_Tangents:
@@ -145,7 +145,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 753
+  m_VersionIndex: 762
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -865,6 +865,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f30dda2b49ac6294e8c68af7cbb2e678, type: 3}
+--- !u!1 &8199412806913185655 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4174829857618225211, guid: f30dda2b49ac6294e8c68af7cbb2e678,
+    type: 3}
+  m_PrefabInstance: {fileID: 5198793494560128844}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5198793494874932295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8199412806913185655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12b1f4524d325a44cb9731193edfa2d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  i_Percent: 80
 --- !u!1001 &5198793494610721014
 PrefabInstance:
   m_ObjectHideFlags: 0

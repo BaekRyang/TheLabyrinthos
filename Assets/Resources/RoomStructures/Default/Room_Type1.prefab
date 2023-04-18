@@ -770,6 +770,7 @@ GameObject:
   - component: {fileID: 2245164732463515327}
   - component: {fileID: 5089506533004585870}
   - component: {fileID: 8420849112403781521}
+  - component: {fileID: 6565952258869031781}
   m_Layer: 0
   m_Name: PlasticCrate01_Green Variant
   m_TagString: Untagged
@@ -871,6 +872,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6565952258869031781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 510238684984586851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12b1f4524d325a44cb9731193edfa2d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  i_percent: 50
+  i_randNum: 0
 --- !u!1 &546151051966362689
 GameObject:
   m_ObjectHideFlags: 0
@@ -3265,6 +3280,7 @@ GameObject:
   - component: {fileID: 631868386256024618}
   - component: {fileID: 8279496293191407304}
   - component: {fileID: 2402705115521823470}
+  - component: {fileID: 1807063546194657982}
   m_Layer: 0
   m_Name: WasteBag01b Variant
   m_TagString: Untagged
@@ -3367,6 +3383,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1807063546194657982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1222743789995868406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12b1f4524d325a44cb9731193edfa2d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  i_percent: 50
+  i_randNum: 0
 --- !u!1 &1260967229858945870
 GameObject:
   m_ObjectHideFlags: 0
@@ -7875,6 +7905,7 @@ GameObject:
   - component: {fileID: 4256792904170886404}
   - component: {fileID: 4697637487110191078}
   - component: {fileID: 1481218016117650440}
+  - component: {fileID: 5109664356016985587}
   m_Layer: 0
   m_Name: WasteBag01b
   m_TagString: Untagged
@@ -7977,6 +8008,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5109664356016985587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2535522859796685272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12b1f4524d325a44cb9731193edfa2d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  i_percent: 50
+  i_randNum: 0
 --- !u!1 &2657773165185812826
 GameObject:
   m_ObjectHideFlags: 0
@@ -17379,6 +17424,7 @@ GameObject:
   - component: {fileID: 8827858766704615084}
   - component: {fileID: 2525174218166023069}
   - component: {fileID: 1561165539060596928}
+  - component: {fileID: 3245978090086661695}
   m_Layer: 0
   m_Name: PlasticCrate01_Grey (1)
   m_TagString: Untagged
@@ -17480,6 +17526,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3245978090086661695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7115138523168844400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12b1f4524d325a44cb9731193edfa2d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  i_percent: 50
+  i_randNum: 0
 --- !u!1 &7115138524843826346
 GameObject:
   m_ObjectHideFlags: 0
@@ -17493,6 +17553,7 @@ GameObject:
   - component: {fileID: 8827858767171381366}
   - component: {fileID: 2525174219712283975}
   - component: {fileID: 6731216104845602929}
+  - component: {fileID: 3239447531939012221}
   m_Layer: 0
   m_Name: PlasticCrate01_Grey
   m_TagString: Untagged
@@ -17594,6 +17655,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3239447531939012221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7115138524843826346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12b1f4524d325a44cb9731193edfa2d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  i_percent: 50
+  i_randNum: 0
 --- !u!1 &7136361692117525650
 GameObject:
   m_ObjectHideFlags: 0

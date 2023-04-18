@@ -13,6 +13,14 @@ public class RoomNode
     public List<int> Children { get; set; } //직접 연결된 하위 노드
     public GameObject RoomObject { get; set; }
 
+    public StructCreation StructCreation
+    {
+        get => default;
+        set
+        {
+        }
+    }
+
     public RoomNode(int id, RoomNode parentNode = null)
     {
         Id = id;
@@ -116,8 +124,8 @@ public class StructCreation
 
     void PlaceSpecialRoom()
     {
-        // 엔드룸은 큐에 저장되어 있는데, 알고리즘상 엔드룸 중 가장 멀리 있는 것이 제일 마지막에 위치한다.
-        // 그 방을 층을 내려가는데 필요한 아이템이 나오는 방으로 배치한다.
+        //엔드룸은 큐에 저장되어 있는데, 알고리즘상 엔드룸 중 가장 멀리 있는 것이 제일 마지막에 위치한다.
+        //그 방을 층을 내려가는데 필요한 아이템이 나오는 방으로 배치한다.
         qEndRoom.Last.Value.RoomType = RoomType.KeyRoom;
         qEndRoom.RemoveLast();
 
@@ -128,6 +136,5 @@ public class StructCreation
 
         qEndRoom.First.Value.RoomType = RoomType.Shop; //그 다음은 상점
         qEndRoom.RemoveFirst();
-        // 필요한 경우, specialRoom.Id 값을 사용하여 해당 방에 특수 아이템 등을 할당할 수 있습니다.
     }
 }

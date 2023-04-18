@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
     RaycastHit hit;
     bool isHit;
     float detectionDistance = 0.2f;
-    LayerMask LM_InteractLayerMask; // 검출하고자 하는 레이어를 지정.
+    LayerMask LM_InteractLayerMask; //검출하고자 하는 레이어를 지정.
     GameObject GO_LastHitGO;
 
     public float horizontal;
@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
     //방 체크
     private int groundLayer;
 
-    // 이전 방의 이름과 게임 오브젝트
+    //이전 방의 이름과 게임 오브젝트
     [SerializeField] GameObject prevRoom;
 
     private void Awake()
@@ -102,7 +102,7 @@ public class PlayerController : MonoBehaviour
             }
 
 
-            // 우클릭을 누르고 있는 경우
+            //우클릭을 누르고 있는 경우
             if (Input.GetMouseButton(1))
             {
                 yaw += Input.GetAxis("Mouse X") * rotationSpeed;
@@ -113,15 +113,14 @@ public class PlayerController : MonoBehaviour
             Vector3 newCameraPosition = transform.position + rotation * offset;
             Camera.main.transform.position = newCameraPosition;
 
-            // 레이캐스팅을 사용하여 카메라와 플레이어 사이의 벽을 감지합니다.
+            //레이캐스팅을 사용하여 카메라와 플레이어 사이의 벽을 감지합니다.
             RaycastHit hit;
             if (Physics.Raycast(transform.position, (newCameraPosition - transform.position).normalized, out hit, defaultCameraDistance, wallLayer))
             {
-                // 벽을 감지한 경우, 카메라의 거리를 벽과 플레이어 사이로 조절합니다.
-                Camera.main.transform.position = hit.point + hit.normal * 0.2f; // 여기서 0.1f는 카메라와 벽 사이의 여유 공간입니다.
+                //벽을 감지한 경우, 카메라의 거리를 벽과 플레이어 사이로 조절합니다.
+                Camera.main.transform.position = hit.point + hit.normal * 0.2f; //여기서 0.1f는 카메라와 벽 사이의 여유 공간;
             }
 
-            // 기존 코드
             Camera.main.transform.LookAt(transform.position + Vector3.up);
             spriteBox.transform.rotation = Quaternion.Euler(0, Camera.main.transform.rotation.eulerAngles.y, 0);
 
@@ -202,20 +201,20 @@ public class PlayerController : MonoBehaviour
     protected void Move()
     {
         int size = 10;
-        // 플레이어의 위치
+        //플레이어의 위치
         Vector3 playerPos = transform.position;
 
-        // 플레이어가 있는 방의 인덱스 계산
+        //플레이어가 있는 방의 인덱스 계산
         int roomIndexX = Mathf.FloorToInt(((playerPos.x + 5) / size) + 5);
         int roomIndexY = Mathf.FloorToInt(((playerPos.z + 5) / size) + 4) * 10;
         int roomIndex = roomIndexX + roomIndexY;
 
-        // 현재 플레이어가 있는 방의 인덱스 출력
+        //현재 플레이어가 있는 방의 인덱스 출력
         Debug.Log("Current room index: " + roomIndex);
 
-        prevRoom.GetComponent<RoomController>().ChangeRoomState(false); // 이전 방의 상태를 변경
-        prevRoom = GameManager.Instance.GetComponent<RoomCreation>().roomMap[roomIndex].RoomObject; // 플레이어가 위치한 방의 오브젝트를 저장
-        prevRoom.GetComponent<RoomController>().ChangeRoomState(true); // 플레이어가 위치한 방의 상태를 변경
+        prevRoom.GetComponent<RoomController>().ChangeRoomState(false); //이전 방의 상태를 변경
+        prevRoom = GameManager.Instance.GetComponent<RoomCreation>().roomMap[roomIndex].RoomObject; //플레이어가 위치한 방의 오브젝트를 저장
+        prevRoom.GetComponent<RoomController>().ChangeRoomState(true); //플레이어가 위치한 방의 상태를 변경
 
         float currentMoveSpeed = moveSpeed;
         Vector3 velocity = new Vector3(direction.x, 0, direction.z);
@@ -227,57 +226,57 @@ public class PlayerController : MonoBehaviour
     {
         if (horizontal == 0 && vertical == 0)
         {
-            // 플레이어가 가만히 있을때
+            //플레이어가 가만히 있을때
             faceing = 5;
         }
         else if (horizontal == 1 && vertical == 1)
         {
-            // player is moving right and up (diagonal)
+            //player is moving right and up (diagonal)
             faceing = 9;
             spriteBox.GetComponent<Renderer>().material.SetTexture("_PlayerTexture", playerTexture[1]);
             spriteBox.transform.localScale = new Vector3(-1, 1, 0.01f);
         }
         else if (horizontal == 1 && vertical == -1)
         {
-            // player is moving right and down (diagonal)
+            //player is moving right and down (diagonal)
             faceing = 3;
             spriteBox.GetComponent<Renderer>().material.SetTexture("_PlayerTexture", playerTexture[3]);
             spriteBox.transform.localScale = new Vector3(-1, 1, 0.01f);
         }
         else if (horizontal == -1 && vertical == 1)
         {
-            // player is moving left and up (diagonal)
+            //player is moving left and up (diagonal)
             faceing = 7;
             spriteBox.GetComponent<Renderer>().material.SetTexture("_PlayerTexture", playerTexture[1]);
             spriteBox.transform.localScale = new Vector3(1, 1, 0.01f);
         }
         else if (horizontal == -1 && vertical == -1)
         {
-            // player is moving left and down (diagonal)
+            //player is moving left and down (diagonal)
             faceing = 1;
             spriteBox.GetComponent<Renderer>().material.SetTexture("_PlayerTexture", playerTexture[3]);
             spriteBox.transform.localScale = new Vector3(1, 1, 0.01f);
         }
         else if (horizontal == 1)
         {
-            // player is moving right
+            //player is moving right
             faceing = 6;
         }
         else if (horizontal == -1)
         {
-            // player is moving left
+            //player is moving left
             faceing = 4;
         }
         else if (vertical == 1)
         {
-            // player is moving ups
+            //player is moving ups
             faceing = 8;
             spriteBox.GetComponent<Renderer>().material.SetTexture("_PlayerTexture", playerTexture[0]);
             spriteBox.transform.localScale = new Vector3(1, 1, 0.01f);
         }
         else if (vertical == -1)
         {
-            // player is moving down
+            //player is moving down
             faceing = 2;
             spriteBox.GetComponent<Renderer>().material.SetTexture("_PlayerTexture", playerTexture[2]);
             spriteBox.transform.localScale = new Vector3(1, 1, 0.01f);
@@ -286,8 +285,8 @@ public class PlayerController : MonoBehaviour
 
     public void ResetSetting()
     {
-        prevRoom = GameManager.Instance.GetComponent<RoomCreation>().roomMap[45].RoomObject; // 플레이어가 위치한 방의 루트 오브젝트를 저장 (플레이어는 45번에 생성)
-        prevRoom.GetComponent<RoomController>().ChangeRoomState(true); // 플레이어가 위치한 방의 상태를 변경
+        prevRoom = GameManager.Instance.GetComponent<RoomCreation>().roomMap[45].RoomObject; //플레이어가 위치한 방의 루트 오브젝트를 저장 (플레이어는 45번에 생성)
+        prevRoom.GetComponent<RoomController>().ChangeRoomState(true); //플레이어가 위치한 방의 상태를 변경
         defaultCameraDistance = Vector3.Distance(Camera.main.transform.position, transform.position);
     }
 

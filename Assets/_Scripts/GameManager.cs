@@ -67,13 +67,13 @@ public class GameManager : MonoBehaviour
     {
         if (!b_useSeed)
         {
-            //½Ãµå¸¦ µû·Î ÁöÁ¤ÇÏÁö ¾Ê¾ÒÀ¸¸é »õ·Î ¸¸µé¾îÁØ´Ù.
+            //ì‹œë“œë¥¼ ë”°ë¡œ ì§€ì •í•˜ì§€ ì•Šì•˜ìœ¼ë©´ ìƒˆë¡œ ë§Œë“¤ì–´ì¤€ë‹¤.
             GetComponent<RoomCreation>().CreateSeed(ref s_seed);
         }
 
-        dict_randomObjects.Add("Object",     new Random(Convert.ToInt32(s_seed, 16) + 1)); //¿ÀºêÁ§Æ®¿ë ·£´ı ½Ãµå
-        dict_randomObjects.Add("Creature",   new Random(Convert.ToInt32(s_seed, 16) + 2)); //Å©¸®ÃÄ¿ë ·£´ı ½Ãµå
-        dict_randomObjects.Add("Room",       new Random(Convert.ToInt32(s_seed, 16) + 3)); //¹æ¹èÄ¡¿ë ·£´ı ½Ãµå
+        dict_randomObjects.Add("Object",     new Random(Convert.ToInt32(s_seed, 16) + 1)); //ì˜¤ë¸Œì íŠ¸ìš© ëœë¤ ì‹œë“œ
+        dict_randomObjects.Add("Creature",   new Random(Convert.ToInt32(s_seed, 16) + 2)); //í¬ë¦¬ì³ìš© ëœë¤ ì‹œë“œ
+        dict_randomObjects.Add("Room",       new Random(Convert.ToInt32(s_seed, 16) + 3)); //ë°©ë°°ì¹˜ìš© ëœë¤ ì‹œë“œ
         
         ResetLevel(i_level);
         go_player = Instantiate(go_playerPrefab);
@@ -89,17 +89,17 @@ public class GameManager : MonoBehaviour
     {
         if (!go_player.IsUnityNull()) go_player.GetComponent<Rigidbody>().useGravity = false;
         i_roomSize = 5 + Mathf.RoundToInt(level * 3.3f);
-        Debug.Log("±¸Á¶ »ı¼º ½ÃÀÛ - Size : " + i_roomSize);
-        GetComponent<RoomCreation>().InitStruct(Convert.ToInt32(s_seed, 16) + level, i_roomSize); //½Ãµå´Â 16Áø¼öÀÌÁö¸¸, ¾Ë°í¸®ÁòÀº 10Áø¼ö => ¹Ù²ã¼­ ³Ñ°ÜÁÜ
-        Debug.Log("±¸Á¶ »ı¼º ¿Ï·á - ¹èÄ¡ ½ÃÀÛ");
+        Debug.Log("êµ¬ì¡° ìƒì„± ì‹œì‘ - Size : " + i_roomSize);
+        GetComponent<RoomCreation>().InitStruct(Convert.ToInt32(s_seed, 16) + level, i_roomSize); //ì‹œë“œëŠ” 16ì§„ìˆ˜ì´ì§€ë§Œ, ì•Œê³ ë¦¬ì¦˜ì€ 10ì§„ìˆ˜ => ë°”ê¿”ì„œ ë„˜ê²¨ì¤Œ
+        Debug.Log("êµ¬ì¡° ìƒì„± ì™„ë£Œ - ë°°ì¹˜ ì‹œì‘");
         GetComponent<RoomCreation>().PlaceRoom();
-        Debug.Log("¹æ ¹èÄ¡ ¿Ï·á");
+        Debug.Log("ë°© ë°°ì¹˜ ì™„ë£Œ");
         GetComponent<RoomCreation>().roomMap[45].RoomObject.GetComponent<RoomController>().go_specialObject.GetComponent<TMP_Text>().text = "Level " + i_level;
         if (!go_player.IsUnityNull()) go_player.GetComponent<Rigidbody>().useGravity = true;
 
     }
 
-    public IEnumerator CurtainModify(bool open, float delay) //È­¸é ¾ÏÀü Ç®°Å³ª °É±â
+    public IEnumerator CurtainModify(bool open, float delay) //í™”ë©´ ì•”ì „ í’€ê±°ë‚˜ ê±¸ê¸°
     {
         Image IMG_blackPanel = GO_curtain.GetComponent<Image>();
         float elapsedTime = 0f;
@@ -126,13 +126,13 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
 
-        IMG_blackPanel.color = endColor; // ¿ÏÀüÈ÷ ºÒÅõ¸íÇÑ »óÅÂ·Î ¼³Á¤
+        IMG_blackPanel.color = endColor; //ì™„ì „íˆ ë¶ˆíˆ¬ëª…í•œ ìƒíƒœë¡œ ì„¤ì •
     }
 
-    public IEnumerator OpenElevator(GameObject[] obj, float duration, float CHANGE_LEVEL_DELAY, PlayerController pc_controller) //obj´Â ¿¤·¹º£ÀÌÅÍ ¾çÂÊ ¹® ¿ÀºêÁ§Æ® ÀúÀåµÇ¾îÀÖÀ½
+    public IEnumerator OpenElevator(GameObject[] obj, float duration, float CHANGE_LEVEL_DELAY, PlayerController pc_controller) //objëŠ” ì—˜ë ˆë² ì´í„° ì–‘ìª½ ë¬¸ ì˜¤ë¸Œì íŠ¸ ì €ì¥ë˜ì–´ìˆìŒ
     {
         pc_controller.b_camControll = true;
-        StartCoroutine(GameManager.Instance.CurtainModify(false, CHANGE_LEVEL_DELAY)); //È­¸é ¾ÏÀü
+        StartCoroutine(GameManager.Instance.CurtainModify(false, CHANGE_LEVEL_DELAY)); //í™”ë©´ ì•”ì „
         float elapsedTime = 0f;
 
         Vector3 obj1StartPosition = obj[0].transform.localPosition;
@@ -153,45 +153,50 @@ public class GameManager : MonoBehaviour
         }
 
         obj[0].transform.localPosition = obj1EndPosition;
-        obj[1].transform.localPosition = obj2EndPosition; //¿©±â±îÁö ¹® °ü·Ã ÄÚµå - ¿¤·¹º£ÀÌÅÍ ¹®ÀÌ ´İÈû
-        yield return new WaitForSeconds(CHANGE_LEVEL_DELAY - duration); //CHANGE_LEVEL_DELAY°¡ ¹®´İÈ÷´Â ½Ã°£º¸´Ù ±â´Ï±î ¾ÏÀü ¿Ï·áµÉ¶§±îÁö ±â´Ù¸²
+        obj[1].transform.localPosition = obj2EndPosition; //ì—¬ê¸°ê¹Œì§€ ë¬¸ ê´€ë ¨ ì½”ë“œ - ì—˜ë ˆë² ì´í„° ë¬¸ì´ ë‹«í˜
+        yield return new WaitForSeconds(CHANGE_LEVEL_DELAY - duration); //CHANGE_LEVEL_DELAYê°€ ë¬¸ë‹«íˆëŠ” ì‹œê°„ë³´ë‹¤ ê¸°ë‹ˆê¹Œ ì•”ì „ ì™„ë£Œë ë•Œê¹Œì§€ ê¸°ë‹¤ë¦¼
         GameManager.Instance.ResetLevel(++i_level);
-        yield return new WaitForSeconds(1f); //¹æ ¹Ù²î´Â ¸ğ½À º¸ÀÌÁö ¾Ê°Ô ¸ØÃß°í
-        StartCoroutine(CurtainModify(true, CHANGE_LEVEL_DELAY)); //¾ÏÀü Ç®¾îÁÖ°í
-        go_player.GetComponent<PlayerController>().ResetSetting(); //ÇÃ·¹ÀÌ¾î Á¶ÀÛºÎºĞ¿¡ ÇöÀç ¹æ °ü·Ã ÄÚµå ÃÊ±âÈ­½ÃÄÑÁØ´Ù.
+        yield return new WaitForSeconds(1f); //ë°© ë°”ë€ŒëŠ” ëª¨ìŠµ ë³´ì´ì§€ ì•Šê²Œ ë©ˆì¶”ê³ 
+        StartCoroutine(CurtainModify(true, CHANGE_LEVEL_DELAY)); //ì•”ì „ í’€ì–´ì£¼ê³ 
+        go_player.GetComponent<PlayerController>().ResetSetting(); //í”Œë ˆì´ì–´ ì¡°ì‘ë¶€ë¶„ì— í˜„ì¬ ë°© ê´€ë ¨ ì½”ë“œ ì´ˆê¸°í™”ì‹œì¼œì¤€ë‹¤.
         pc_controller.b_camControll = false;
     }
 
-    public GameObject GetRoomObject(SpecialRoomType roomType, int typeId = -1)
+    public GameObject GetRoomObject(RoomType roomType, int typeId = -1)
     {
         switch (roomType)
         {
-            case SpecialRoomType.Normal:
+            case RoomType.common:
                 if (typeId != -1)   return GO_roomPrefabs[typeId];
-                else                return GO_roomPrefabs[dict_randomObjects["Room"].Next(GO_roomPrefabs.Length)]; //¹«ÀÛÀ§ ±¸Á¶ ¹İÈ¯
+                else                return GO_roomPrefabs[dict_randomObjects["Room"].Next(GO_roomPrefabs.Length)]; //ë¬´ì‘ìœ„ êµ¬ì¡° ë°˜í™˜
 
-            case SpecialRoomType.StartRoom:
-                return              GO_startRoomPrefab; //½ÃÀÛ¹æÀº ÇÏ³ª
+            case RoomType.EndRoom:
+                if (typeId != -1)   return GO_roomPrefabs[typeId];
+                else                return GO_roomPrefabs[dict_randomObjects["Room"].Next(GO_roomPrefabs.Length)];
 
-            case SpecialRoomType.VerticalCorridor: //ÀÌ µÎ°³´Â °°Àº°É return
-            case SpecialRoomType.HorizontalCorridor:
+            case RoomType.StartRoom:
+                return              GO_startRoomPrefab; //ì‹œì‘ë°©ì€ í•˜ë‚˜
+
+            case RoomType.VerticalCorridor: //ì´ ë‘ê°œëŠ” ê°™ì€ê±¸ return
+            case RoomType.HorizontalCorridor:
                 if (typeId != -1)   return GO_corridorPrefabs[typeId];
                 else                return GO_corridorPrefabs[dict_randomObjects["Room"].Next(GO_roomPrefabs.Length)];
 
-            case SpecialRoomType.Crafting:
+            case RoomType.CraftingRoom:
                 if (typeId != -1)   return GO_craftingPrefabs[typeId];
                 else                return GO_craftingPrefabs[dict_randomObjects["Room"].Next(GO_roomPrefabs.Length)];
 
-            case SpecialRoomType.BossRoom:
+            case RoomType.KeyRoom:
                 if (typeId != -1)   return GO_bossRoomPrefabs[typeId];
                 else                return GO_bossRoomPrefabs[dict_randomObjects["Room"].Next(GO_roomPrefabs.Length)];
 
-            case SpecialRoomType.Shop:
+            case RoomType.Shop:
                 if (typeId != -1)   return GO_shopPrefabs[typeId];
                 else                return GO_shopPrefabs[dict_randomObjects["Room"].Next(GO_roomPrefabs.Length)];
 
             default:
-                                    return null;
+                if (typeId != -1)   return GO_roomPrefabs[typeId];
+                else                return GO_roomPrefabs[dict_randomObjects["Room"].Next(GO_roomPrefabs.Length)];
         }
     }
     

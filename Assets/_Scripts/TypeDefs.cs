@@ -100,6 +100,14 @@ namespace TypeDefs
             this.face = face;
         }
 
+        public Creatures Creatures
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         public float health = 100.0f;
         public float speed = 1.0f;
         public int defense = 5;
@@ -120,19 +128,6 @@ namespace TypeDefs
     }
     #endregion
 
-    #region RoomController
-    public enum SpecialRoomType
-    {
-        Normal,
-        StartRoom,
-        VerticalCorridor,
-        HorizontalCorridor,
-        Crafting,
-        BossRoom,
-        Shop
-    }
-    #endregion
-
     #region Interactable
     enum ObjectType
     {
@@ -143,12 +138,15 @@ namespace TypeDefs
     }
     #endregion
 
-    #region
+    #region Rooms
     public enum RoomType
     {
         empty,
         common,
         EndRoom,
+        StartRoom,
+        VerticalCorridor,
+        HorizontalCorridor,
         CraftingRoom,
         Shop,
         KeyRoom

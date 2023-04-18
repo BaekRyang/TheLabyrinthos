@@ -105,12 +105,12 @@ public class RoomCreation : MonoBehaviour
                     if (roomMap.ContainsKey(i - 1) && roomMap.ContainsKey(i + 1) && roomMap[i - 1].RoomType != 0 && roomMap[i + 1].RoomType != 0 && !roomMap.ContainsKey(i - 10) && !roomMap.ContainsKey(i + 10))
                     {
                         tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#f1c94f> -- </color>";
-                        tmpGO.GetComponent<RoomController>().RT_roomType = SpecialRoomType.HorizontalCorridor;
+                        tmpGO.GetComponent<RoomController>().RT_roomType = RoomType.HorizontalCorridor;
                     }
                     else if (roomMap.ContainsKey(i - 10) && roomMap.ContainsKey(i + 10) && roomMap[i - 10].RoomType != 0 && roomMap[i + 10].RoomType != 0 && !roomMap.ContainsKey(i - 1) && !roomMap.ContainsKey(i + 1))
                     {
                         tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#f1c94f> | </color>";
-                        tmpGO.GetComponent<RoomController>().RT_roomType = SpecialRoomType.VerticalCorridor;
+                        tmpGO.GetComponent<RoomController>().RT_roomType = RoomType.VerticalCorridor;
                     }
 
                 }
@@ -118,7 +118,7 @@ public class RoomCreation : MonoBehaviour
                 if (i == 45)
                 {
                     tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#16c60c> Start </color>";
-                    tmpGO.GetComponent<RoomController>().RT_roomType = SpecialRoomType.StartRoom;
+                    tmpGO.GetComponent<RoomController>().RT_roomType = RoomType.StartRoom;
                 }
                 else
                 {
@@ -129,24 +129,24 @@ public class RoomCreation : MonoBehaviour
                             break;
                         case RoomType.CraftingRoom:
                             tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#524f6a> Craft </color>";
-                            tmpGO.GetComponent<RoomController>().RT_roomType = SpecialRoomType.Crafting;
+                            tmpGO.GetComponent<RoomController>().RT_roomType = RoomType.CraftingRoom;
                             break;
                         case RoomType.Shop:
                             tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#efdb17> Shop </color>";
-                            tmpGO.GetComponent<RoomController>().RT_roomType = SpecialRoomType.Shop;
+                            tmpGO.GetComponent<RoomController>().RT_roomType = RoomType.Shop;
                             break;
                         case RoomType.KeyRoom:
                             tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#e74856> Key </color>";
-                            tmpGO.GetComponent<RoomController>().RT_roomType = SpecialRoomType.BossRoom;
+                            tmpGO.GetComponent<RoomController>().RT_roomType = RoomType.KeyRoom;
                             break;
                     }
                 }
 
-                // 각 방의 4방향을 조사하여 0이면 벽을, 1이면 문을
+                //각 방의 4방향을 조사하여 0이면 벽을, 1이면 문을
                 RoomNode currentNode = roomMap[i];
 
                 int parentDirection = -1;
-                if (currentNode.ParentNode != null) // 시작노드는 Root가 없으므로 제외
+                if (currentNode.ParentNode != null) //시작노드는 Root가 없으므로 제외
                 {
                     //상위 노드의 상대위치를 저장해둔다.
                     if (currentNode.ParentNode.Id == i - 1) parentDirection = 0;
@@ -155,8 +155,8 @@ public class RoomCreation : MonoBehaviour
                     else if (currentNode.ParentNode.Id == i + 10) parentDirection = 3;
                 }
 
-                // 문이 생기는 자리인데, 해당 방향이 상위 노드이면 문을 비워둔 벽 생성
-                // 이외에는 문이 생겨야하는지 조건에 따라 문 또는 벽을 생성
+                //문이 생기는 자리인데, 해당 방향이 상위 노드이면 문을 비워둔 벽 생성
+                //이외에는 문이 생겨야하는지 조건에 따라 문 또는 벽을 생성
 
                 //상(0)
                 bool shouldCreateWall = i > 90 || (!currentNode.Children.Contains(i + 10) && parentDirection != 3);

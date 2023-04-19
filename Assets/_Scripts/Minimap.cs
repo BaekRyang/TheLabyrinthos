@@ -12,9 +12,13 @@ public class Minimap : MonoBehaviour
 
     GameObject[] GO_rooms = new GameObject[100];
 
-    private void Start()
+    private void Awake()
     {
         instance = this;
+    }
+
+    private void Start()
+    {
         GO_roomPrefab.GetComponent<RectTransform>().sizeDelta = new Vector2(i_boxSize, i_boxSize);
         //만약 박스 사이즈 줄이면 프리팹의 크기도 줄여야 하니까
     }

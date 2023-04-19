@@ -97,7 +97,7 @@ public class GameManager : MonoBehaviour
         GetComponent<RoomCreation>().roomMap[45].RoomObject.GetComponent<RoomController>().go_specialObject.GetComponent<TMP_Text>().text = "Level " + i_level;
         if (!go_player.IsUnityNull()) go_player.GetComponent<Rigidbody>().useGravity = true;
 
-        Minimap.instance.CreateMinimap(GameManager.Instance.GetComponent<RoomCreation>().roomMap);
+        Minimap.instance.CreateMinimap(GetComponent<RoomCreation>().roomMap);
 
     }
 

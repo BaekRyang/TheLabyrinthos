@@ -117,10 +117,10 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5}
   - {x: 0.5, y: 0.5}
   - {x: 0.5, y: 0.5}
-  - {x: -0.5, y: 0.9960937}
-  - {x: 0.5, y: 0.9960937}
-  - {x: -0.5, y: -0.0039063096}
-  - {x: 0.5, y: -0.0039063096}
+  - {x: 0.5, y: 0.9960935}
+  - {x: 0.4999999, y: -0.0039063096}
+  - {x: -0.4999999, y: 0.9960937}
+  - {x: -0.5, y: -0.0039061308}
   m_Textures2: []
   m_Textures3: []
   m_Tangents:
@@ -132,10 +132,10 @@ MonoBehaviour:
   - {x: -0, y: -1, z: 0, w: 1}
   - {x: -0, y: -1, z: 0, w: 1}
   - {x: 0, y: -1, z: 0, w: 1}
-  - {x: 1, y: 0, z: 0, w: -1}
-  - {x: 1, y: 0, z: 0, w: -1}
-  - {x: 1, y: 0, z: 0, w: -1}
-  - {x: 1, y: 0, z: 0, w: -1}
+  - {x: -0.00000017881396, y: 0, z: 1, w: -1}
+  - {x: -0.00000017881396, y: 0, z: 1, w: -1}
+  - {x: -0.00000017881396, y: 0, z: 1, w: -1}
+  - {x: -0.00000017881396, y: 0, z: 1, w: -1}
   m_Colors: []
   m_UnwrapParameters:
     m_HardAngle: 88
@@ -834,7 +834,7 @@ PrefabInstance:
     - target: {fileID: 6256741638394314308, guid: 4be38c7cd7ae3934581511afdf45f307,
         type: 3}
       propertyPath: m_Layer
-      value: 11
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6256741638394314308, guid: 4be38c7cd7ae3934581511afdf45f307,
         type: 3}

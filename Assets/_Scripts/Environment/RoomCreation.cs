@@ -100,24 +100,30 @@ public class RoomCreation : MonoBehaviour
                                                             (-4 * iRoomSize) + (i / 10) * iRoomSize),                       //Z
                                                             Quaternion.identity);                                           //R
 
-                if (i % 10 != 0 && i % 10 != 9 && i > 9 && i < 90)
+                if (i % 10 != 0 && i % 10 != 9)
                 {
                     if (roomMap.ContainsKey(i - 1) && roomMap.ContainsKey(i + 1) && roomMap[i - 1].RoomType != 0 && roomMap[i + 1].RoomType != 0 && !roomMap.ContainsKey(i - 10) && !roomMap.ContainsKey(i + 10))
                     {
-                        tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#f1c94f> -- </color>";
+                        tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#f1c94f>--</color>";
                         tmpGO.GetComponent<RoomController>().RT_roomType = RoomType.HorizontalCorridor;
                     }
-                    else if (roomMap.ContainsKey(i - 10) && roomMap.ContainsKey(i + 10) && roomMap[i - 10].RoomType != 0 && roomMap[i + 10].RoomType != 0 && !roomMap.ContainsKey(i - 1) && !roomMap.ContainsKey(i + 1))
+                }
+
+                if (i > 9 && i < 90)
+                {
+                    if (roomMap.ContainsKey(i - 10) && roomMap.ContainsKey(i + 10) && roomMap[i - 10].RoomType != 0 && roomMap[i + 10].RoomType != 0 && !roomMap.ContainsKey(i - 1) && !roomMap.ContainsKey(i + 1))
                     {
-                        tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#f1c94f> | </color>";
+                        tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#f1c94f>|</color>";
                         tmpGO.GetComponent<RoomController>().RT_roomType = RoomType.VerticalCorridor;
                     }
-
                 }
+
+
+
 
                 if (i == 45)
                 {
-                    tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#16c60c> Start </color>";
+                    tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#16c60c>Start</color>";
                     tmpGO.GetComponent<RoomController>().RT_roomType = RoomType.StartRoom;
                 }
                 else
@@ -125,18 +131,18 @@ public class RoomCreation : MonoBehaviour
                     switch (roomMap[i].RoomType)
                     {
                         case RoomType.EndRoom:
-                            tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#3b78ff> End </color>";
+                            tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#3b78ff>End</color>";
                             break;
                         case RoomType.CraftingRoom:
-                            tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#524f6a> Craft </color>";
+                            tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#524f6a>Craft</color>";
                             tmpGO.GetComponent<RoomController>().RT_roomType = RoomType.CraftingRoom;
                             break;
                         case RoomType.Shop:
-                            tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#efdb17> Shop </color>";
+                            tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#efdb17>Shop</color>";
                             tmpGO.GetComponent<RoomController>().RT_roomType = RoomType.Shop;
                             break;
                         case RoomType.KeyRoom:
-                            tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#e74856> Key </color>";
+                            tmpGO.GetComponentInChildren<TMP_Text>().text = "<color=#e74856>Key</color>";
                             tmpGO.GetComponent<RoomController>().RT_roomType = RoomType.KeyRoom;
                             break;
                     }

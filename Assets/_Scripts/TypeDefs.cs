@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace TypeDefs
 {
@@ -47,6 +48,27 @@ namespace TypeDefs
         public TMP_Text percentage;
         public TMP_Text damage;
     }
+
+    public class UIModElements
+    {
+        public UIModElements(Image hp, Image tp, Transform hit)
+        {
+            hpSlider = hp;
+            tpSlider = tp;
+            hitImage = hit;
+        }
+
+        public Image hpSlider;
+        public Image tpSlider;
+        public Transform hitImage;
+    }
+
+    public enum ActionTypes
+    {
+        Attack,
+        Hited,
+        Avoid
+    }
     #endregion
 
     #region BattleAttacks
@@ -81,6 +103,9 @@ namespace TypeDefs
         public int defense = 5;
         public int prepareSpeed = 0;
         public int damage = 10;
+        public Sprite attackSprite;
+        public Sprite hitedSprite;
+        public Sprite avoidSprite;
     }
     #endregion
 
@@ -125,6 +150,9 @@ namespace TypeDefs
         public Sprite fullBody_Outer;
         public Sprite sideBody;
         public Sprite face;
+        public Sprite cut_Attack;
+        public Sprite cut_Hited;
+        public Sprite cut_Avoid;
     }
     #endregion
 

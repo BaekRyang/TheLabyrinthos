@@ -22,7 +22,7 @@ public class Creatures
     {
         C_default = new Creature[8];
         //초기값
-        C_default[0] = new Creature(8, 3, 50.0f, 1.0f, 0, new CreatureSpritePack());
+        C_default[0] = new Creature(8, 3, 50.0f, 0.8f, 0, new CreatureSpritePack());
 
         //초기값을 통하여 스텟 변화계산후 적용
         for (int i = 1; i < 8; i++)

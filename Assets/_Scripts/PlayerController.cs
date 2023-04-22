@@ -72,6 +72,7 @@ public class PlayerController : MonoBehaviour
     {
         playerTexture = Resources.LoadAll<Texture>("Sprites/Player");
         GO_minimapArrow = Minimap.instance.GO_arrow.GetComponent<RectTransform>();
+        GO_minimapArrow.transform.rotation = Quaternion.Euler(0, 0, Camera.main.transform.rotation.eulerAngles.y + (90 - Camera.main.transform.rotation.eulerAngles.y) * 2);
         ResetSetting();
     }
 
@@ -113,7 +114,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetMouseButton(1))
             {
                 yaw += Input.GetAxis("Mouse X") * rotationSpeed;
-                //GO_minimapArrow.transform.rotation = Quaternion.Euler(0, 0, -Camera.main.transform.rotation.eulerAngles.y);
+                GO_minimapArrow.transform.rotation = Quaternion.Euler(0, 0, Camera.main.transform.rotation.eulerAngles.y + (90 - Camera.main.transform.rotation.eulerAngles.y) * 2);
             }
 
             Quaternion rotation = Quaternion.Euler(25, yaw, 0);

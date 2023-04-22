@@ -43,9 +43,6 @@ public class GameManager : MonoBehaviour
     [Header("Level Controll")]
     public int i_level = 1;
 
-    [Header("DefaultCreatureSprite")]
-    [SerializeField] public CreatureSpritePack CSP_spritePack;
-
     [HideInInspector]
     public Dictionary<string, Random> dict_randomObjects = new Dictionary<string, Random>();
 

@@ -891,6 +891,9 @@ MonoBehaviour:
     fullBody_Outer: {fileID: 0}
     sideBody: {fileID: 0}
     face: {fileID: 0}
+    cut_Attack: {fileID: 0}
+    cut_Hited: {fileID: 0}
+    cut_Avoid: {fileID: 0}
   b_customCreature: 0
   CR_customCreature:
     damage: 0
@@ -904,6 +907,9 @@ MonoBehaviour:
       fullBody_Outer: {fileID: 0}
       sideBody: {fileID: 0}
       face: {fileID: 0}
+      cut_Attack: {fileID: 0}
+      cut_Hited: {fileID: 0}
+      cut_Avoid: {fileID: 0}
   i_randNum: 0
   b_isCreature: 0
   CR_creature:
@@ -918,6 +924,9 @@ MonoBehaviour:
       fullBody_Outer: {fileID: 0}
       sideBody: {fileID: 0}
       face: {fileID: 0}
+      cut_Attack: {fileID: 0}
+      cut_Hited: {fileID: 0}
+      cut_Avoid: {fileID: 0}
 --- !u!1 &546151051966362689
 GameObject:
   m_ObjectHideFlags: 0
@@ -3434,6 +3443,9 @@ MonoBehaviour:
     fullBody_Outer: {fileID: 0}
     sideBody: {fileID: 0}
     face: {fileID: 0}
+    cut_Attack: {fileID: 0}
+    cut_Hited: {fileID: 0}
+    cut_Avoid: {fileID: 0}
   b_customCreature: 0
   CR_customCreature:
     damage: 0
@@ -3447,6 +3459,9 @@ MonoBehaviour:
       fullBody_Outer: {fileID: 0}
       sideBody: {fileID: 0}
       face: {fileID: 0}
+      cut_Attack: {fileID: 0}
+      cut_Hited: {fileID: 0}
+      cut_Avoid: {fileID: 0}
   i_randNum: 0
   b_isCreature: 0
   CR_creature:
@@ -3461,6 +3476,9 @@ MonoBehaviour:
       fullBody_Outer: {fileID: 0}
       sideBody: {fileID: 0}
       face: {fileID: 0}
+      cut_Attack: {fileID: 0}
+      cut_Hited: {fileID: 0}
+      cut_Avoid: {fileID: 0}
 --- !u!1 &1260967229858945870
 GameObject:
   m_ObjectHideFlags: 0
@@ -8091,6 +8109,9 @@ MonoBehaviour:
     fullBody_Outer: {fileID: 0}
     sideBody: {fileID: 0}
     face: {fileID: 0}
+    cut_Attack: {fileID: 0}
+    cut_Hited: {fileID: 0}
+    cut_Avoid: {fileID: 0}
   b_customCreature: 0
   CR_customCreature:
     damage: 0
@@ -8104,6 +8125,9 @@ MonoBehaviour:
       fullBody_Outer: {fileID: 0}
       sideBody: {fileID: 0}
       face: {fileID: 0}
+      cut_Attack: {fileID: 0}
+      cut_Hited: {fileID: 0}
+      cut_Avoid: {fileID: 0}
   i_randNum: 0
   b_isCreature: 0
   CR_creature:
@@ -8118,6 +8142,9 @@ MonoBehaviour:
       fullBody_Outer: {fileID: 0}
       sideBody: {fileID: 0}
       face: {fileID: 0}
+      cut_Attack: {fileID: 0}
+      cut_Hited: {fileID: 0}
+      cut_Avoid: {fileID: 0}
 --- !u!1 &2657773165185812826
 GameObject:
   m_ObjectHideFlags: 0
@@ -17642,6 +17669,9 @@ MonoBehaviour:
     fullBody_Outer: {fileID: 0}
     sideBody: {fileID: 0}
     face: {fileID: 0}
+    cut_Attack: {fileID: 0}
+    cut_Hited: {fileID: 0}
+    cut_Avoid: {fileID: 0}
   b_customCreature: 0
   CR_customCreature:
     damage: 0
@@ -17655,6 +17685,9 @@ MonoBehaviour:
       fullBody_Outer: {fileID: 0}
       sideBody: {fileID: 0}
       face: {fileID: 0}
+      cut_Attack: {fileID: 0}
+      cut_Hited: {fileID: 0}
+      cut_Avoid: {fileID: 0}
   i_randNum: 0
   b_isCreature: 0
   CR_creature:
@@ -17669,6 +17702,9 @@ MonoBehaviour:
       fullBody_Outer: {fileID: 0}
       sideBody: {fileID: 0}
       face: {fileID: 0}
+      cut_Attack: {fileID: 0}
+      cut_Hited: {fileID: 0}
+      cut_Avoid: {fileID: 0}
 --- !u!1 &7115138524843826346
 GameObject:
   m_ObjectHideFlags: 0
@@ -17803,6 +17839,9 @@ MonoBehaviour:
     fullBody_Outer: {fileID: 0}
     sideBody: {fileID: 0}
     face: {fileID: 0}
+    cut_Attack: {fileID: 0}
+    cut_Hited: {fileID: 0}
+    cut_Avoid: {fileID: 0}
   b_customCreature: 0
   CR_customCreature:
     damage: 0
@@ -17816,6 +17855,9 @@ MonoBehaviour:
       fullBody_Outer: {fileID: 0}
       sideBody: {fileID: 0}
       face: {fileID: 0}
+      cut_Attack: {fileID: 0}
+      cut_Hited: {fileID: 0}
+      cut_Avoid: {fileID: 0}
   i_randNum: 0
   b_isCreature: 0
   CR_creature:
@@ -17830,6 +17872,9 @@ MonoBehaviour:
       fullBody_Outer: {fileID: 0}
       sideBody: {fileID: 0}
       face: {fileID: 0}
+      cut_Attack: {fileID: 0}
+      cut_Hited: {fileID: 0}
+      cut_Avoid: {fileID: 0}
 --- !u!1 &7136361692117525650
 GameObject:
   m_ObjectHideFlags: 0
@@ -22660,7 +22705,7 @@ PrefabInstance:
     - target: {fileID: 366859688749599108, guid: 7d33d931de800cd4c89b2450982ae20b,
         type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3696330672349281175, guid: 7d33d931de800cd4c89b2450982ae20b,
         type: 3}
@@ -22859,6 +22904,12 @@ PrefabInstance:
       propertyPath: CSP_spritePack.sideBody
       value: 
       objectReference: {fileID: 21300000, guid: 34e7e92f3abb483479aafba8406f5d4b,
+        type: 3}
+    - target: {fileID: 995910114333958288, guid: f2135fdedb6556c48908dc585cfba15c,
+        type: 3}
+      propertyPath: CSP_spritePack.cut_Attack
+      value: 
+      objectReference: {fileID: 21300000, guid: 63e72edab6b1bfc4e9a58f31db587585,
         type: 3}
     - target: {fileID: 995910114333958288, guid: f2135fdedb6556c48908dc585cfba15c,
         type: 3}

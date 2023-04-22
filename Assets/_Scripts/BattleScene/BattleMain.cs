@@ -9,19 +9,7 @@ using TypeDefs;
 using Slider = UnityEngine.UI.Slider;
 using Image = UnityEngine.UI.Image;
 
-public class UIModElements
-{
-    public UIModElements(Image hp, Image tp, Transform hit)
-    {
-        hpSlider = hp;
-        tpSlider = tp;
-        hitImage = hit;
-    }
-        
-    public Image hpSlider;
-    public Image tpSlider;
-    public Transform hitImage;
-}
+
 
 public class BattleMain : MonoBehaviour
 {
@@ -37,6 +25,7 @@ public class BattleMain : MonoBehaviour
 
     [Header("Set in Inspector")]
     [SerializeField] public GameObject GO_hitImage;
+    [SerializeField] public GameObject GO_action;
     [SerializeField] TMP_Text TMP_playerDamage;
     [SerializeField] TMP_Text TMP_EnemyDamage;
 
@@ -58,6 +47,9 @@ public class BattleMain : MonoBehaviour
     public Transform TF_playerHitAnchor;
     public Transform TF_enemyHitAnchor;
 
+    [SerializeField] Transform TF_playerAnimateAnchor;
+    [SerializeField] Transform TF_enemyAnimateAnchor;
+
     [Header("Set Automatically : SFX")]
     public AudioClip[] AC_playerAttackWeakPoint;
     public AudioClip[] AC_playerAttackThorax;
@@ -70,6 +62,7 @@ public class BattleMain : MonoBehaviour
     [HideInInspector] public Image IMG_enemyHP;
     [HideInInspector] public Image IMG_enemyTP;
 
+    //LerpColor용
     [HideInInspector] public UIModElements playerElements;
     [HideInInspector] public UIModElements enemyElements;
 
@@ -79,6 +72,8 @@ public class BattleMain : MonoBehaviour
     public Dictionary<Parts, DmgAccText> dict_dmgAccList = new Dictionary<Parts, DmgAccText>();
 
     protected float f_enemySpeed = 0.0f;
+
+    [Header("Set Automatically")]
     public Creature CR_Enemy;
     PlayerStats PS_playerStats;
 
@@ -262,6 +257,59 @@ public class BattleMain : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         GameManager.Instance.StartCoroutine(GameManager.Instance.CurtainModify(true, 1)); //BattleMain은 사라질거니까 GM에서 실행해준다.
         gameObject.SetActive(false);
+    }
+
+    public IEnumerator AnimateAction(ActionTypes acType, bool isPlayer)
+    {
+        GameObject tmpGO = Instantiate(GO_action);
+        Image tmpIMG = tmpGO.GetComponent<Image>();
+        RectTransform tmpRect = tmpGO.GetComponent<RectTransform>();
+        BattleAnimate tmpANI = tmpGO.GetComponent<BattleAnimate>();
+
+        if (isPlayer)   
+        {
+            tmpGO.transform.SetParent(TF_playerAnimateAnchor);
+            tmpANI.b_isPlayer = true;
+            switch (acType)
+            {
+                case ActionTypes.Attack:
+                    tmpIMG.sprite = null;
+                    break;
+                case ActionTypes.Hited:
+                    tmpIMG.sprite = null;
+                    break;
+                case ActionTypes.Avoid:
+                    tmpIMG.sprite = null;
+                    break;
+                default:
+                    break;
+            }
+            tmpRect.localPosition = new Vector2(1536, 0);
+        } else
+        {
+            tmpGO.transform.SetParent(TF_enemyAnimateAnchor);
+            switch (acType)
+            {
+                case ActionTypes.Attack:
+                    tmpIMG.sprite = CR_Enemy.spritePack.cut_Attack;
+                    break;
+                case ActionTypes.Hited:
+                    tmpIMG.sprite = CR_Enemy.spritePack.cut_Hited;
+                    break;
+                case ActionTypes.Avoid:
+                    tmpIMG.sprite = CR_Enemy.spritePack.cut_Avoid;
+                    break;
+                default:
+                    break;
+            }
+            tmpRect.localPosition = new Vector2(1536, 0);
+        }
+
+        yield return StartCoroutine(tmpANI.Run(false, 0.2f));
+
+        yield return StartCoroutine(BA_battleActions.LerpColor(tmpIMG, SliderColor.transparent, 0.5f, true));
+
+        Destroy(tmpGO);
     }
 
 }

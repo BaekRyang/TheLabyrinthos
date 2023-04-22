@@ -9,6 +9,7 @@ public class Minimap : MonoBehaviour
     [SerializeField] GameObject GO_roomPrefab;
     [SerializeField] GameObject GO_anchor;
     [SerializeField] public GameObject GO_arrow;
+    [SerializeField] public GameObject GO_minimapAnchor;
 
     GameObject[] GO_rooms;
 

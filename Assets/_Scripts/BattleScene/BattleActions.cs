@@ -126,7 +126,9 @@ public class BattleActions : MonoBehaviour
                         clip = BM_BattleMain.AC_playerAttackThorax[rand.Next(BM_BattleMain.AC_playerAttackThorax.Length)];
                         break;
                 }
-                
+
+                //StartCoroutine(BM_BattleMain.AnimateAction(ActionTypes.Attack, false));
+
                 //맞으면 타격음으로
             } 
             else
@@ -176,6 +178,8 @@ public class BattleActions : MonoBehaviour
                                         0.1f,
                                         BM_BattleMain.SPR_enemyAttack,
                                         clip));
+
+            StartCoroutine(BM_BattleMain.AnimateAction(ActionTypes.Attack, false));
         }
     }
 
@@ -204,7 +208,7 @@ public class BattleActions : MonoBehaviour
         targetElements.hpSlider.color = endColor;
     }
 
-    IEnumerator LerpColor(Image targetImage, SliderColor to, float duration, bool isEndColor) //이미지 인수로 하는 오버로딩
+    public IEnumerator LerpColor(Image targetImage, SliderColor to, float duration, bool isEndColor) //이미지 인수로 하는 오버로딩
     {
         Color startColor;
         Color endColor;

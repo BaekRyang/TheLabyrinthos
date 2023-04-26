@@ -94,10 +94,10 @@ public class BattleMain : MonoBehaviour
         SL_playerTP.value = 0;
         //StartBattleScene(ref GameManager.Instance.creatures.C_default[5]); //임시
 
-        IMG_playerHP = SL_playerHP.transform.Find("Fill Area").GetChild(0).GetComponent<Image>();
-        IMG_playerTP = SL_playerTP.transform.Find("Fill Area").GetChild(0).GetComponent<Image>();
-        IMG_enemyHP = SL_enemyHP.transform.Find("Fill Area").GetChild(0).GetComponent<Image>();
-        IMG_enemyTP = SL_enemyTP.transform.Find("Fill Area").GetChild(0).GetComponent<Image>();
+        IMG_playerHP = SL_playerHP.transform.Find("FILL_ MASK").GetChild(0).GetChild(0).GetComponent<Image>();
+        IMG_playerTP = SL_playerTP.transform.Find("FILL_ MASK").GetChild(0).GetChild(0).GetComponent<Image>();
+        IMG_enemyHP = SL_enemyHP.transform.Find("FILL_ MASK").GetChild(0).GetChild(0).GetComponent<Image>();
+        IMG_enemyTP = SL_enemyTP.transform.Find("FILL_ MASK").GetChild(0).GetChild(0).GetComponent<Image>();
 
         IMG_playerHP.color  = colors[(int)SliderColor.Hp_default];
         IMG_playerTP.color  = colors[(int)SliderColor.Tp_default];
@@ -169,11 +169,9 @@ public class BattleMain : MonoBehaviour
         BA_battleActions.CR_Enemy = CR_Enemy = CR_Opponent;
 
         //Enemy의 이미지를 사용하는 모든곳의 이미지를 해당 Enemy로 바꿔주고
-        IMG_enemyFullBodys[0].sprite = CR_Opponent.spritePack.face;
-        IMG_enemyFullBodys[1].sprite = CR_Opponent.spritePack.sideBody;
-        IMG_enemyFullBodys[2].sprite = CR_Opponent.spritePack.fullBody_WeakPoint;
-        IMG_enemyFullBodys[3].sprite = CR_Opponent.spritePack.fullBody_Thrax;
-        IMG_enemyFullBodys[4].sprite = CR_Opponent.spritePack.fullBody_Outer;
+        IMG_enemyFullBodys[0].sprite = CR_Opponent.spritePack.fullBody_WeakPoint;
+        IMG_enemyFullBodys[1].sprite = CR_Opponent.spritePack.fullBody_Thrax;
+        IMG_enemyFullBodys[2].sprite = CR_Opponent.spritePack.fullBody_Outer;
 
         //플레이어 스텟을 가져와서 저장한다. (플레이어는 일회용이 아니므로 ref 으로 넘어옴)
         PS_playerStats = GameManager.Instance.GetComponent<Player>().GetPlayerStats();

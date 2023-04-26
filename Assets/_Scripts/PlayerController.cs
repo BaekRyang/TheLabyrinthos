@@ -25,13 +25,13 @@ public class PlayerController : MonoBehaviour
 
     //카메라 회전
     float rotationSpeed = 2f;
-    float distanceFromPlayer = 5f;
+    float distanceFromPlayer = 1f;
 
     private Vector3 offset;
     public float yaw = 0;
 
-    float minZoomDistance = 3f;
-    float maxZoomDistance = 5f;
+    float minZoomDistance = 1f;
+    float maxZoomDistance = 1f;
 
     //카메라 벽 체크
     public LayerMask wallLayer;
@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         rigid = GetComponent<Rigidbody>();
-        offset = new Vector3(0, 1, -distanceFromPlayer);
+        offset = new Vector3(0, 1.8f, -distanceFromPlayer);
         LM_InteractLayerMask = (1 << LayerMask.NameToLayer("Interactable")) | (1 << LayerMask.NameToLayer("Door"));
         groundLayer = 1 << LayerMask.NameToLayer("Ground");
         wallLayer = (1 << LayerMask.NameToLayer("Wall")) | (1 << LayerMask.NameToLayer("Door"));
@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
                 distanceFromPlayer -= scrollInput * rotationSpeed;
                 distanceFromPlayer = Mathf.Clamp(distanceFromPlayer, minZoomDistance, maxZoomDistance);
                 offset = new Vector3(0, 1, -distanceFromPlayer);
-                Quaternion rot = Quaternion.Euler(25, yaw, 0);
+                Quaternion rot = Quaternion.Euler(8, yaw, 0);
                 defaultCameraDistance = Vector3.Distance(transform.position + rot * offset, transform.position);
             }
 
@@ -117,7 +117,7 @@ public class PlayerController : MonoBehaviour
                 GO_minimapArrow.transform.rotation = Quaternion.Euler(0, 0, Camera.main.transform.rotation.eulerAngles.y + (90 - Camera.main.transform.rotation.eulerAngles.y) * 2);
             }
 
-            Quaternion rotation = Quaternion.Euler(25, yaw, 0);
+            Quaternion rotation = Quaternion.Euler(8, yaw, 0);
             Vector3 newCameraPosition = transform.position + rotation * offset;
             Camera.main.transform.position = newCameraPosition;
 
@@ -129,7 +129,7 @@ public class PlayerController : MonoBehaviour
                 Camera.main.transform.position = hit.point + hit.normal * 0.2f; //여기서 0.1f는 카메라와 벽 사이의 여유 공간;
             }
 
-            Camera.main.transform.LookAt(transform.position + Vector3.up);
+            Camera.main.transform.LookAt(transform.position + Vector3.up * 1.8f);
             spriteBox.transform.rotation = Quaternion.Euler(0, Camera.main.transform.rotation.eulerAngles.y, 0);
 
 

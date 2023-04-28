@@ -238,7 +238,7 @@ public class BattleActions : MonoBehaviour
     IEnumerator LerpFill(UIModElements targetElements, float duration, Sprite hitSprite, AudioClip clip) //0에서 100까지 채우기
     {
         Random tmpRand = new Random();
-        GameObject tmpGO = GameObject.Instantiate(BM_BattleMain.GO_hitImage, targetElements.hitImage);
+        GameObject tmpGO = Instantiate(BM_BattleMain.GO_hitImage, targetElements.hitImage);
         Image hitImage = tmpGO.GetComponent<Image>();
         hitImage.sprite = hitSprite;
         hitImage.transform.localPosition = new Vector3(tmpRand.Next(-50, 50), tmpRand.Next(-150, 150), 0); //위치는 랜덤

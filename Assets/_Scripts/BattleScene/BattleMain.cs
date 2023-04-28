@@ -31,7 +31,6 @@ public class BattleMain : MonoBehaviour
 
     [SerializeField] Image[] IMG_enemyFullBodys = new Image[5]; //순서대로 얼굴, 측면, (풀바디) WeakPoint, Thorax, Outer
     [SerializeField] Image IMG_enemySideBody;
-    [SerializeField] Image IMG_enemyFace;
 
     public GameObject GO_actionList;
     public GameObject GO_attackList;

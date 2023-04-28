@@ -26,7 +26,11 @@ public class Interactable : MonoBehaviour
         {
             case ObjectType.MoveDoor:
                 //문 열때 페이드인/아웃 시키면서 문 반대쪽 점대칭 위치로 순간이동 시켜준다. (카메라도 돌려줌)
-                StartCoroutine(MoveCameraAroundDoor(transform.gameObject, obj as PlayerController));
+                StartCoroutine(OpenDoor(CHANGE_ROOM_DELAY, true));
+                this.enabled = false;
+                this.tag = "Untagged";
+                GetComponent<Outline>().enabled = false;
+                //StartCoroutine(MoveCameraAroundDoor(transform.gameObject, obj as PlayerController));
                 break;
 
             case ObjectType.Door:
@@ -49,12 +53,12 @@ public class Interactable : MonoBehaviour
                     crt_coroutine = null;
 
                     GameObject[] go_doors = { transform.parent.Find("Doors").GetChild(0).gameObject, transform.parent.Find("Doors").GetChild(1).gameObject };   //문 열기 위해서 문 객체 저장하고
-                    transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0, 8, 0)) ;                                    //키패드 초록색으로 바꾼뒤
+                    transform.GetChild(0).GetComponent<Renderer>().materials[1].SetColor("_EmissionColor", new Color(0, 8, 0));                                    //키패드 초록색으로 바꾼뒤
                     GameManager.Instance.StartCoroutine(GameManager.Instance.OpenElevator(go_doors, 1f, CHANGE_LEVEL_DELAY, obj as PlayerController));                                                                                                 //문열기 시작
                 } else
                 {
                     if (b_fading) f_fadePercent = 3f;                                                                                                           //3초간 Fading / 이미 Fading중에 또 누르면 시간만 초기화
-                    else crt_coroutine = StartCoroutine(ChangeColor(transform.GetChild(0).GetComponent<Renderer>().material, 3f, new Color(8, 0, 0)));          //Emission을 Intensity가 3인 빨간색을 주기 위하여 RGB 8,0,0으로 준다.
+                    else crt_coroutine = StartCoroutine(ChangeColor(transform.GetChild(0).GetComponent<Renderer>().materials[1], 3f, new Color(8, 0, 0)));          //Emission을 Intensity가 3인 빨간색을 주기 위하여 RGB 8,0,0으로 준다.
                 }
                 break;
 
@@ -64,54 +68,6 @@ public class Interactable : MonoBehaviour
             default:
                 break;
         }
-    }
-
-    IEnumerator MoveCameraAroundDoor(GameObject door, PlayerController player)
-    { //회전할 필요 없음 / 플레이어 위치만 설정해주면 알아서 위치가 잡힘
-      
-        StartCoroutine(OpenDoor(CHANGE_ROOM_DELAY, true));
-
-        //플레이어 입력을 잠금
-        player.b_camControll = true;
-
-        //화면 암전
-        StartCoroutine(GameManager.Instance.CurtainModify(false, CHANGE_ROOM_DELAY));
-        yield return new WaitForSeconds(CHANGE_ROOM_DELAY);
-        StartCoroutine(GameManager.Instance.CurtainModify(true, CHANGE_ROOM_DELAY));
-        
-        //카메라 회전 시키기
-        player.yaw += 180; //우클릭 회전기능때문에 해당 값을 180도 회전 시켜야 적용됨
-        StartCoroutine(MovePlayerThroughDoor(door, player));
-        //카메라의 상대 위치 계산
-
-        Vector3 cameraPosition = Camera.main.transform.position;
-        Vector3 relativeCameraPosition = new Vector3(door.transform.position.x - (cameraPosition.x - door.transform.position.x), cameraPosition.y, door.transform.position.z - (cameraPosition.z - door.transform.position.z));
-
-        //카메라를 180도 회전
-        Camera.main.transform.position = relativeCameraPosition;
-        Camera.main.transform.Rotate(0f, 180f, 0f);
-
-        //플레이어 입력을 풀어줌 (전투중이 아닐때)
-        if (!player.b_nowBattle) player.b_camControll = false;
-        yield return null;
-    }
-
-    IEnumerator MovePlayerThroughDoor(GameObject door, PlayerController player)
-    {
-        MeshRenderer meshRenderer = door.GetComponent<MeshRenderer>();
-        Vector3 doorCenter = meshRenderer.bounds.center;
-
-        //플레이어의 상대 위치 계산 (문 기준 좌표계 사용, Y축 값 유지)
-        Vector3 playerPosition = player.transform.position;
-        Vector3 relativePlayerPosition = -(playerPosition - doorCenter);
-        Vector3 newPosition = doorCenter + relativePlayerPosition;
-        newPosition.y = player.transform.position.y;
-
-        //플레이어를 문 기준 180도 회전한 위치로 이동
-        player.transform.position = newPosition;
-
-        player.CalcRoom(); //문 넘어갔으니까 현재위치 다시 계산
-        yield return null;
     }
 
     private IEnumerator OpenDoor(float delay = 1.5f, bool reuseable = false)
@@ -138,14 +94,15 @@ public class Interactable : MonoBehaviour
             yield return null;
         }
 
-        //재사용을 한다고 하면 문을 다시 닫아둔다.
-        if(!reuseable) transform.rotation = targetRotation;
-        else transform.rotation = startRotation;
+        ////재사용을 한다고 하면 문을 다시 닫아둔다.
+        //if(!reuseable) transform.rotation = targetRotation;
+        //else transform.rotation = startRotation;
 
     }
 
     private IEnumerator ChangeColor(Material mat, float duration, Color targetColor)
     {
+        
         f_fadePercent = duration;
         b_fading = true;
         Color originalColor = mat.GetColor("_EmissionColor");
@@ -159,7 +116,7 @@ public class Interactable : MonoBehaviour
         }
         b_fading = false;
 
-        mat.SetColor("_EmissionColor", originalColor);
+        mat.SetColor("_Emission Color", originalColor);
     }
 
 }

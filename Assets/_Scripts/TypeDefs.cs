@@ -148,8 +148,6 @@ namespace TypeDefs
         public Sprite fullBody_WeakPoint;
         public Sprite fullBody_Thrax;
         public Sprite fullBody_Outer;
-        public Sprite sideBody;
-        public Sprite face;
         public Sprite cut_Attack;
         public Sprite cut_Hited;
         public Sprite cut_Avoid;

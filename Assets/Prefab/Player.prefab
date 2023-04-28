@@ -87,6 +87,7 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 97711b5d71cf42541a80cb5178f2bf4d, type: 3}
   direction: {x: 0, y: 0, z: 0}
   b_camControll: 0
+  b_nowBattle: 0
   yaw: 0
   wallLayer:
     serializedVersion: 2
@@ -143,8 +144,8 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2271119612486156601}
-  m_Enabled: 1
-  m_CastShadows: 1
+  m_Enabled: 0
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0

@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject prevRoom;
     [SerializeField] GameObject prevRoomMinimap;
 
-    //임시
+    //미니맵 방향표시용
     private RectTransform GO_minimapArrow;
 
 
@@ -80,7 +80,6 @@ public class PlayerController : MonoBehaviour
         GO_minimapArrow = Minimap.instance.GO_arrow.GetComponent<RectTransform>();
         GO_minimapArrow.transform.rotation = Quaternion.Euler(0, 0, Camera.main.transform.rotation.eulerAngles.y + (90 - Camera.main.transform.rotation.eulerAngles.y) * 2);
         ResetSetting();
-        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()
@@ -98,6 +97,7 @@ public class PlayerController : MonoBehaviour
             CalcRoom(tmpIndex);
             roomIndex = tmpIndex;
         }
+        
         
 
         if (!b_camControll)

@@ -14,8 +14,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        //인벤토리 key, value 형식으로 사용
-        Dictionary<string, int> dict_inventory = new Dictionary<string, int>();
+        
     }
 
     void Update()

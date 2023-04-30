@@ -53,16 +53,18 @@ public class Interactable : MonoBehaviour
                     crt_coroutine = null;
 
                     GameObject[] go_doors = { transform.parent.Find("Doors").GetChild(0).gameObject, transform.parent.Find("Doors").GetChild(1).gameObject };   //문 열기 위해서 문 객체 저장하고
-                    transform.GetChild(0).GetComponent<Renderer>().materials[1].SetColor("_EmissionColor", new Color(0, 8, 0));                                    //키패드 초록색으로 바꾼뒤
+                    transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0, 8, 0));                                    //키패드 초록색으로 바꾼뒤
                     GameManager.Instance.StartCoroutine(GameManager.Instance.OpenElevator(go_doors, 1f, CHANGE_LEVEL_DELAY, obj as PlayerController));                                                                                                 //문열기 시작
                 } else
                 {
                     if (b_fading) f_fadePercent = 3f;                                                                                                           //3초간 Fading / 이미 Fading중에 또 누르면 시간만 초기화
-                    else crt_coroutine = StartCoroutine(ChangeColor(transform.GetChild(0).GetComponent<Renderer>().materials[1], 3f, new Color(8, 0, 0)));          //Emission을 Intensity가 3인 빨간색을 주기 위하여 RGB 8,0,0으로 준다.
+                    else crt_coroutine = StartCoroutine(ChangeColor(transform.GetChild(0).GetComponent<Renderer>().material, 3f, new Color(8, 0, 0)));          //Emission을 Intensity가 3인 빨간색을 주기 위하여 RGB 8,0,0으로 준다.
                 }
                 break;
 
             case ObjectType.Item:
+                GameManager.Instance.GetComponent<InventoryManager>().AddItem(GetComponent<ItemObject>().I_item); //아이템 인벤토리에 집어넣고
+                DestroyImmediate(this.gameObject);                                                                //아이템 오브젝트 삭제
                 break;
 
             default:

@@ -32,12 +32,12 @@ public class BattleMain : MonoBehaviour
     [SerializeField] Image[] IMG_enemyFullBodys = new Image[5]; //순서대로 얼굴, 측면, (풀바디) WeakPoint, Thorax, Outer
     [SerializeField] Image IMG_enemySideBody;
 
-    public GameObject GO_actionList;
-    public GameObject GO_attackList;
+    
 
     public Sprite SPR_playerAttack;
     public Sprite SPR_enemyAttack;
 
+    [Header("Set Automatically")]
     public Slider SL_playerHP;
     public Slider SL_playerTP;
     public Slider SL_enemyHP;
@@ -46,8 +46,11 @@ public class BattleMain : MonoBehaviour
     public Transform TF_playerHitAnchor;
     public Transform TF_enemyHitAnchor;
 
-    [SerializeField] Transform TF_playerAnimateAnchor;
-    [SerializeField] Transform TF_enemyAnimateAnchor;
+    public Transform TF_playerAnimateAnchor;
+    public Transform TF_enemyAnimateAnchor;
+
+    public GameObject GO_actionList;
+    public GameObject GO_attackList;
 
     [Header("Set Automatically : SFX")]
     public AudioClip[] AC_playerAttackWeakPoint;
@@ -90,8 +93,12 @@ public class BattleMain : MonoBehaviour
     void Start()
     {
         BA_battleActions = GetComponent<BattleActions>();
+
+        SL_playerHP = transform.Find("Character").Find("StatsArea").Find("HP").GetComponent<Slider>();
+        SL_playerTP = transform.Find("Character").Find("StatsArea").Find("TP").GetComponent<Slider>();
+        SL_enemyHP = transform.Find("Enemy").Find("StatsArea").Find("HP").GetComponent<Slider>();
+        SL_enemyTP = transform.Find("Enemy").Find("StatsArea").Find("TP").GetComponent<Slider>();
         SL_playerTP.value = 0;
-        //StartBattleScene(ref GameManager.Instance.creatures.C_default[5]); //임시
 
         IMG_playerHP = SL_playerHP.transform.Find("FILL_ MASK").GetChild(0).GetChild(0).GetComponent<Image>();
         IMG_playerTP = SL_playerTP.transform.Find("FILL_ MASK").GetChild(0).GetChild(0).GetComponent<Image>();
@@ -102,6 +109,14 @@ public class BattleMain : MonoBehaviour
         IMG_playerTP.color  = colors[(int)SliderColor.Tp_default];
         IMG_enemyHP.color   = colors[(int)SliderColor.Hp_default];
         IMG_enemyTP.color   = colors[(int)SliderColor.Tp_default];
+
+        TF_playerHitAnchor = transform.Find("Character").Find("HitEffect").transform;
+        TF_playerAnimateAnchor = transform.Find("Character").Find("Animate").transform;
+        TF_enemyHitAnchor = transform.Find("Enemy").Find("HitEffect").transform;
+        TF_enemyAnimateAnchor = transform.Find("Enemy").Find("Animate").transform;
+
+        GO_actionList = transform.Find("PlayerActions").gameObject;
+        GO_attackList = transform.Find("AttackTarget").gameObject;
 
         playerElements = new UIModElements(
             IMG_playerHP,
@@ -125,7 +140,7 @@ public class BattleMain : MonoBehaviour
                             new DmgAccText(GO_attackList.transform.GetChild(2).Find("Percentage").GetComponent<TMP_Text>(),
                                             GO_attackList.transform.GetChild(2).Find("Damage").GetComponent<TMP_Text>()));
 
-
+        
     }
 
     void Update()

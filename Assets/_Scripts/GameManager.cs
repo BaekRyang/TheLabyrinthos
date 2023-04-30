@@ -19,9 +19,14 @@ public class GameManager : MonoBehaviour
     public string s_seed = "-";
     public int i_roomSize = 0;
 
+    [Header("Set In Inspector")]
+    //UI요소
+    public GameObject GO_inventory;
     [Header("System Objects")]
     public GameObject GO_curtain;
     public GameObject GO_BattleCanvas;
+
+    [Header("Set Automatically")]
     public Creatures creatures;
     public Creature CR_levelDefault;
 
@@ -46,12 +51,15 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public Dictionary<string, Random> dict_randomObjects = new Dictionary<string, Random>();
 
+    
+
     void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
         }
+
         GO_startRoomPrefab =    Resources.Load   <GameObject>("RoomStructures/StartRoom/StartRoom");
         GO_roomPrefabs =        Resources.LoadAll<GameObject>("RoomStructures/Default");
         GO_corridorPrefabs =    Resources.LoadAll<GameObject>("RoomStructures/Corridor");
@@ -64,6 +72,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         if (!b_useSeed)
         {
             //시드를 따로 지정하지 않았으면 새로 만들어준다.
@@ -82,7 +91,26 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.Escape))
+        {
+            PlayerController PC_tmp = go_player.GetComponent<PlayerController>();
+            if (GO_inventory.activeSelf)
+            {
+                GetComponent<InventoryManager>().DestroyElements();
+                PC_tmp.b_camControll = false;
+                GO_inventory.SetActive(false);
+                Cursor.lockState = CursorLockMode.Locked;
+            } else
+            {
+                //아래값 0으로 안바꾸면 마지막 누른 버튼의 상태를 유지한다.
+                GetComponent<InventoryManager>().UpdateInventory();
+                PC_tmp.horizontal = 0;
+                PC_tmp.vertical = 0;
+                PC_tmp.b_camControll = true;
+                GO_inventory.SetActive(true);
+                Cursor.lockState = CursorLockMode.Confined;
+            }
+        }
     }
 
     public void ResetLevel(int level)

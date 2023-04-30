@@ -179,4 +179,14 @@ namespace TypeDefs
     }
     #endregion
 
+    #region Item
+    public enum ItemType
+    {
+        Undefined,
+        Weapon,
+        Disposable,
+        Food,
+        Other
+    }
+    #endregion
 }

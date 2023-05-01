@@ -97,6 +97,11 @@ public class GameManager : MonoBehaviour
             if (GO_inventory.activeSelf)
             {
                 GetComponent<InventoryManager>().DestroyElements();
+
+                var infoBox = InventoryManager.Instance.RT_infoBox;
+                infoBox.localScale = Vector3.zero;
+                infoBox.gameObject.SetActive(false);
+
                 PC_tmp.b_camControll = false;
                 GO_inventory.SetActive(false);
                 Cursor.lockState = CursorLockMode.Locked;

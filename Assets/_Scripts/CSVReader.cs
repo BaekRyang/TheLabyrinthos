@@ -29,10 +29,9 @@ public class CSVReader : MonoBehaviour
             }
             var data_value = data.Split(',');
 
-
-
             for (int i = 0; i < data_value.Length; i++)
             {
+                
                 if (data_value[i] == "Type") break;
                 switch (i)
                 {
@@ -55,7 +54,6 @@ public class CSVReader : MonoBehaviour
                             default:
                                 break;
                         }
-                        
                         break;
 
                     case 1:

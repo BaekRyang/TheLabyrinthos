@@ -17,7 +17,7 @@ public class Item
 
 public class Weapon : Item
 {
-    public ItemType IT_Type = ItemType.Weapon;
+    public string s_inspectText;
     public int i_damage;
     public int i_damageRange;
     public int i_preparedSpeed;

@@ -51,6 +51,9 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public Dictionary<string, Random> dict_randomObjects = new Dictionary<string, Random>();
 
+    [SerializeField] Slider SL_hpBar;
+    [SerializeField] Slider SL_expBar;
+
     
 
     void Awake()
@@ -86,6 +89,9 @@ public class GameManager : MonoBehaviour
         ResetLevel(i_level);
         go_player = Instantiate(go_playerPrefab);
         go_player.name = "Player";
+
+        ChangeStatsSlider(StatsType.Hp, GetComponent<Player>().GetPlayerStats().health);
+        ChangeStatsSlider(StatsType.Exp, GetComponent<Player>().GetPlayerStats().exp);
 
     }
 
@@ -235,5 +241,28 @@ public class GameManager : MonoBehaviour
                 else                return GO_roomPrefabs[dict_randomObjects["Room"].Next(GO_roomPrefabs.Length)];
         }
     }
-    
+
+    public void ChangeStatsSlider(StatsType statsType, float f_val)
+    {
+        switch (statsType)
+        {
+            case StatsType.Hp:
+                SL_hpBar.value = f_val;
+                break;
+            case StatsType.Tp:
+                break;
+            case StatsType.Damage:
+                break;
+            case StatsType.Defense:
+                break;
+            case StatsType.Speed:
+                break;
+            case StatsType.Exp:
+                SL_expBar.value = f_val;
+                break;
+            default:
+                break;
+        }
+    }
+
 }

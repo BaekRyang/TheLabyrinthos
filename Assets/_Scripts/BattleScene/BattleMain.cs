@@ -266,6 +266,8 @@ public class BattleMain : MonoBehaviour
         //전투씬 끄기
         PC_player.b_camControll = false;
         PC_player.ExitBattle();
+
+        GameManager.Instance.ChangeStatsSlider(StatsType.Hp, PS_playerStats.health);
         yield return new WaitForSeconds(0.5f);
         GameManager.Instance.StartCoroutine(GameManager.Instance.CurtainModify(true, 1)); //BattleMain은 사라질거니까 GM에서 실행해준다.
         gameObject.SetActive(false);

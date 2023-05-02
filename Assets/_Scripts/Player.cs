@@ -5,7 +5,7 @@ using TypeDefs;
 
 public class Player : MonoBehaviour
 {
-    PlayerStats PS_playerStats;
+    public PlayerStats PS_playerStats;
 
     void Awake()
     {

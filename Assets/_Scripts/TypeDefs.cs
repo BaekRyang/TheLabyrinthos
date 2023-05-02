@@ -12,7 +12,8 @@ namespace TypeDefs
         Tp,
         Damage,
         Defense,
-        Speed
+        Speed,
+        Exp,
     }
 
     public enum SliderColor
@@ -93,6 +94,7 @@ namespace TypeDefs
     #endregion
 
     #region Player
+    [Serializable]
     public class PlayerStats
     {
         //±âº» ½ºÅÝ

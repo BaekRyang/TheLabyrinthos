@@ -37,7 +37,8 @@ public class ItemObject : MonoBehaviour, IScrollHandler, IPointerEnterHandler, I
         if (this.I_item.IT_type == TypeDefs.ItemType.Weapon)
         {
             infoBox.GetChild(1).transform.localScale = Vector3.one;
-            infoBox.GetChild(1).GetComponentInChildren<TMP_Text>().text = I_item.s_description.Replace("\\n", "\n");
+            Weapon tmpWeapon = I_item as Weapon;
+            infoBox.GetChild(1).GetComponentInChildren<TMP_Text>().text = tmpWeapon.s_inspectText.Replace("\\n", "\n");
         }
         else infoBox.GetChild(1).transform.localScale = Vector3.zero;
 

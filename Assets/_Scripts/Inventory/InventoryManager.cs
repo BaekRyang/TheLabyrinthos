@@ -26,6 +26,7 @@ public class InventoryManager : MonoBehaviour
 
     [SerializeField] GameObject copyGO;
     [SerializeField] public RectTransform RT_infoBox;
+    [SerializeField] public RectTransform RT_descBox;
     private void Awake()
     {
         Instance = this;
@@ -132,19 +133,19 @@ public class InventoryManager : MonoBehaviour
 
     void CalcCellSize()
     {
-        while (TF_Weapons.childCount < 5) Instantiate(copyGO, TF_Weapons);
+        while (TF_Weapons.childCount < 6) Instantiate(copyGO, TF_Weapons);
         TF_Weapons.GetComponent<RectTransform>().sizeDelta = new Vector2(160 * TF_Weapons.childCount - 30, 0); //Cellsize + Spaceing * 칸 개수 만큼 칸 크기를 키워준다.
         TF_Weapons.GetComponent<RectTransform>().anchoredPosition = new Vector2(80 * TF_Weapons.childCount - 15, 0);
 
-        while (TF_Disposables.childCount < 5) Instantiate(copyGO, TF_Disposables);
+        while (TF_Disposables.childCount < 6) Instantiate(copyGO, TF_Disposables);
         TF_Disposables.GetComponent<RectTransform>().sizeDelta = new Vector2(160 * TF_Disposables.childCount - 30, 0);
         TF_Disposables.GetComponent<RectTransform>().anchoredPosition = new Vector2(80 * TF_Disposables.childCount - 15, 0);
 
-        while (TF_Foods.childCount < 5) Instantiate(copyGO, TF_Foods);
+        while (TF_Foods.childCount < 6) Instantiate(copyGO, TF_Foods);
         TF_Foods.GetComponent<RectTransform>().sizeDelta = new Vector2(160 * TF_Foods.childCount - 30, 0);
         TF_Foods.GetComponent<RectTransform>().anchoredPosition = new Vector2(80 * TF_Foods.childCount - 15, 0);
 
-        while (TF_Others.childCount < 5) Instantiate(copyGO, TF_Others);
+        while (TF_Others.childCount < 6) Instantiate(copyGO, TF_Others);
         TF_Others.GetComponent<RectTransform>().sizeDelta = new Vector2(160 * TF_Others.childCount - 30, 0);
         TF_Others.GetComponent<RectTransform>().anchoredPosition = new Vector2(80 * TF_Others.childCount - 15, 0);
     }

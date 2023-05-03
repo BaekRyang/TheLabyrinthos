@@ -15,7 +15,7 @@ public class SliderValue : MonoBehaviour
     [SerializeField] bool hasText = false;
     void Awake()
     {
-        if (hasText) text = transform.parent.Find("HPText").GetComponentInChildren<TMP_Text>();
+        if (hasText) text = transform.parent.GetComponentInChildren<TMP_Text>();
         sliderValue = GetComponent<Slider>();
     }
 

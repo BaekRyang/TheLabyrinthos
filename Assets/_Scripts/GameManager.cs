@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Slider SL_hpBar;
     [SerializeField] Slider SL_expBar;
 
+    [SerializeField] CanvasGroup CVSG_inventory; 
     
 
     void Awake()
@@ -99,28 +100,7 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.Escape))
         {
-            PlayerController PC_tmp = go_player.GetComponent<PlayerController>();
-            if (GO_inventory.activeSelf)
-            {
-                GetComponent<InventoryManager>().DestroyElements();
-
-                var infoBox = InventoryManager.Instance.RT_infoBox;
-                infoBox.localScale = Vector3.zero;
-                infoBox.gameObject.SetActive(false);
-
-                PC_tmp.b_camControll = false;
-                GO_inventory.SetActive(false);
-                Cursor.lockState = CursorLockMode.Locked;
-            } else
-            {
-                //아래값 0으로 안바꾸면 마지막 누른 버튼의 상태를 유지한다.
-                GetComponent<InventoryManager>().UpdateInventory();
-                PC_tmp.horizontal = 0;
-                PC_tmp.vertical = 0;
-                PC_tmp.b_camControll = true;
-                GO_inventory.SetActive(true);
-                Cursor.lockState = CursorLockMode.Confined;
-            }
+            StartCoroutine(Inventory(!GO_inventory.activeSelf));
         }
     }
 
@@ -263,6 +243,51 @@ public class GameManager : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    private IEnumerator Inventory(bool open)
+    {
+        PlayerController PC_tmp = go_player.GetComponent<PlayerController>();
+        if (!open)
+        {
+            PC_tmp.b_camControll = false;
+
+            var infoBox = InventoryManager.Instance.RT_infoBox;
+            infoBox.localScale = Vector3.zero;
+            infoBox.gameObject.SetActive(false);
+
+            yield return StartCoroutine(Lerp(CVSG_inventory, 1, 0, 0.3f));
+            GetComponent<InventoryManager>().DestroyElements();
+
+            GO_inventory.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        else
+        {
+            //아래값 0으로 안바꾸면 마지막 누른 버튼의 상태를 유지한다.
+            GetComponent<InventoryManager>().UpdateInventory();
+            PC_tmp.horizontal = 0;
+            PC_tmp.vertical = 0;
+            PC_tmp.b_camControll = true;
+            GO_inventory.SetActive(true);
+            Cursor.lockState = CursorLockMode.Confined;
+            StartCoroutine(Lerp(CVSG_inventory, 0, 1, 0.3f));
+        }
+        yield return null;
+    }
+
+    private IEnumerator Lerp(CanvasGroup target, float from, float to, float duration)
+    {
+        float elapsedTime = 0.0f;
+
+        while (elapsedTime < duration)
+        {
+            target.alpha = Mathf.Lerp(from, to, (elapsedTime / duration));
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        target.alpha = to;
     }
 
 }

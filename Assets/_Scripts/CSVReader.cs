@@ -101,7 +101,7 @@ public class CSVReader : MonoBehaviour
 
                         case 8:
                             tmpWeapon.f_accuracyMult = float.Parse(data_value[i]);
-                            if (tmpWeapon.f_accuracyMult > 1)
+                            if (tmpWeapon.f_accuracyMult != 1)
                                 tmpWeapon.s_inspectText += "\nACC : <color=#" + (tmpWeapon.f_accuracyMult < 1 ? negativeColor + ">" : positiveColor + ">+") + (tmpWeapon.f_accuracyMult * 100 - 100) + "%</color>";
                             break;
 

@@ -48,7 +48,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!114 &995910114333958288
 MonoBehaviour:
@@ -67,8 +67,9 @@ MonoBehaviour:
     fullBody_WeakPoint: {fileID: 0}
     fullBody_Thrax: {fileID: 0}
     fullBody_Outer: {fileID: 0}
-    sideBody: {fileID: 0}
-    face: {fileID: 0}
+    cut_Attack: {fileID: 0}
+    cut_Hited: {fileID: 0}
+    cut_Avoid: {fileID: 0}
   b_customCreature: 0
   CR_customCreature:
     damage: 0
@@ -80,8 +81,9 @@ MonoBehaviour:
       fullBody_WeakPoint: {fileID: 0}
       fullBody_Thrax: {fileID: 0}
       fullBody_Outer: {fileID: 0}
-      sideBody: {fileID: 0}
-      face: {fileID: 0}
+      cut_Attack: {fileID: 0}
+      cut_Hited: {fileID: 0}
+      cut_Avoid: {fileID: 0}
   i_randNum: 0
   b_isCreature: 1
   CR_creature:
@@ -94,8 +96,9 @@ MonoBehaviour:
       fullBody_WeakPoint: {fileID: 0}
       fullBody_Thrax: {fileID: 0}
       fullBody_Outer: {fileID: 0}
-      sideBody: {fileID: 0}
-      face: {fileID: 0}
+      cut_Attack: {fileID: 0}
+      cut_Hited: {fileID: 0}
+      cut_Avoid: {fileID: 0}
 --- !u!1 &2271119612486156601
 GameObject:
   m_ObjectHideFlags: 0

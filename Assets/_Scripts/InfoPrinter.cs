@@ -21,6 +21,8 @@ public class InfoPrinter : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         b_hover = true;
         if (this.name == "ItemCell(Clone)") return;
 
+        infoBox.gameObject.SetActive(true);
+
         infoBox.position = Input.mousePosition;
 
         infoBox.localScale = Vector3.one;

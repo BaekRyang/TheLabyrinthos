@@ -248,14 +248,15 @@ public class GameManager : MonoBehaviour
     private IEnumerator Inventory(bool open)
     {
         PlayerController PC_tmp = go_player.GetComponent<PlayerController>();
-        if (!open)
+        if (!open) //인벤끄기
         {
             PC_tmp.b_camControll = false;
 
             var infoBox = InventoryManager.Instance.RT_infoBox;
+            var infoBox2 = InventoryManager.Instance.RT_descBox;
             infoBox.localScale = Vector3.zero;
             infoBox.gameObject.SetActive(false);
-
+            infoBox2.gameObject.SetActive(false);
             yield return StartCoroutine(Lerp(CVSG_inventory, 1, 0, 0.3f));
             GetComponent<InventoryManager>().DestroyElements();
 

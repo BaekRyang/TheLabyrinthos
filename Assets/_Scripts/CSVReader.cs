@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using TypeDefs;
 using Unity.VisualScripting;
@@ -26,13 +27,13 @@ public class CSVReader : MonoBehaviour
     Food Food = new Food();
     Other Other = new Other();
 
-
-
     void Start()
     {
         WriteDelegate();
 
         LoadItems();
+
+        LoadCraftingTable();
     }
 
     private void WriteDelegate() //각 아이템을 Parsing 하는 코드 작성 : 사실 클래스 안에다가 만들면 더 간단한데
@@ -180,4 +181,53 @@ public class CSVReader : MonoBehaviour
             inspectText += $"\n{attributeName} : <color=#{color}>{(multiplier > 1 ? "+" : "")}{(multiplier * 100 - 100):F0}%</color>";
         }
     }
+
+    private void LoadCraftingTable()
+    {
+        Crafting C_crafting = GetComponent<Crafting>();
+        TextAsset textAsset = Resources.Load<TextAsset>("Craftings");
+        StringReader sReader = new StringReader(textAsset.text);
+
+        while (true)
+        {
+            string data = sReader.ReadLine();                      
+            if (data == null) break;                               
+
+            var data_value = data.Split(',');                      
+            if (data_value[0] == "CraftedID") continue;
+
+            for (int i = 0; i < data_value.Length; i++) {
+                switch (i)
+                {
+                    case 0:
+                        C_crafting.dict_craftingTable[int.Parse(data_value[0])] = new Dictionary<int, int>();
+                        break;
+
+                    default:
+                        if (string.IsNullOrWhiteSpace(data_value[i])) //만약 빈공간이 나왔다면 = 조합 아이템이 5개 미만인 경우
+                        {
+                            i = 100; //for문을 더 볼필요도 없음
+                            break;  
+                        }
+
+                        string[] s_recipeDetail = data_value[i].Split(".");     //(아이템 ID . 필요한 개수) 구조를 갖고있으므로 "."으로 쪼개주고.
+                        C_crafting.dict_craftingTable[int.Parse(data_value[0])][int.Parse(s_recipeDetail[0])] = int.Parse(s_recipeDetail[1]); //완성 아이템을 Key로 하는 Dict에 넣어준다.
+                        break;                                                                      
+                }
+            }
+        }
+
+        //var a = C_crafting.dict_craftingTable.Keys.ToList();
+
+        //for (int i = 0; i < C_crafting.dict_craftingTable.Count; i++)
+        //{
+        //    var b = C_crafting.dict_craftingTable[a[i]].Keys;
+        //    Debug.Log("ID " + a[i] + " 아이템 레시피 등록됨");
+        //    foreach (var item in C_crafting.dict_craftingTable[a[i]])
+        //    {
+        //        Debug.Log(item.Key + "가 " + item.Value + "개 필요");
+        //    }
+        //}
+    }
+
 }

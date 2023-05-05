@@ -26,12 +26,16 @@ public class Inventory : MonoBehaviour
         TF_Others =         transform.Find("Elements").GetChild(3).Find("Scroll View").GetChild(0).GetChild(0).GetComponent<Transform>();
     }
 
-    void Start()
+    public void LoadSetting()
     {
         tmpInventory = InventoryManager.Instance.dict_inventory;
         dict_items = InventoryManager.Instance.dict_items;
         dict_imgList = InventoryManager.Instance.dict_imgList;
-
+        return;
+    }
+    void Start()
+    {
+        
     }
 
     public void UpdateInventory()

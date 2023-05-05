@@ -40,7 +40,9 @@ public class InventoryManager : MonoBehaviour
     }
     void Start()
     {
+        GO_inventory.transform.Find("Inventory").GetComponent<Inventory>().LoadSetting();
         GO_inventory.SetActive(false);
+        GO_crafting.transform.Find("Inventory").GetComponent<Inventory>().LoadSetting();
         GO_crafting.SetActive(false);
     }
 

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
 using TypeDefs;
@@ -13,121 +14,170 @@ public class CSVReader : MonoBehaviour
     const string negativeColor = "FF0000";
 
     //StreamReader sReader;
-    TextAsset ItemFile;
+    TextAsset TextAsset;
     bool endOfFile = false;
 
-    [SerializeField] Item tmpItem;
-    Weapon tmpWeapon;
+
+    private Dictionary<ItemType, Item.ParseAttributes> parsingDelegates;
+
+    Item Item = new Item();
+    Weapon Weapon = new Weapon();
+    Disposable Disposable = new Disposable();
+    Food Food = new Food();
+    Other Other = new Other();
+
+
 
     void Start()
     {
-        InventoryManager iManager = GetComponent<InventoryManager>();
-        ItemFile = Resources.Load<TextAsset>("Items");
-        StringReader sReader = new StringReader(ItemFile.text);
+        WriteDelegate();
 
-        while (!endOfFile)
+        LoadItems();
+    }
+
+    private void WriteDelegate() //각 아이템을 Parsing 하는 코드 작성 : 사실 클래스 안에다가 만들면 더 간단한데
+                                 //아이템 Parsing을 CSVReader가 전부 하도록 하기 위해서 Delegate를 통해 할당해준다.
+    {
+        Item.parsing += (Item item, string[] dataValue, int startIndex) =>
         {
-            string data = sReader.ReadLine();
-            if (data == null)
+            Debug.Log("Parsing 할 데이터 없음");
+        };
+        Weapon.parsing += (Item baseItem, string[] dataValue, int startIndex) =>
+        {
+            Weapon item = baseItem as Weapon;
+            for (int i = 0; i < dataValue.Length - startIndex; i++)
             {
-                endOfFile = true;
-                break;
-            }
-            var data_value = data.Split(',');
-
-            for (int i = 0; i < data_value.Length; i++)
-            {
-                
-                if (data_value[i] == "Type") break;
                 switch (i)
                 {
                     case 0:
-                        tmpItem.IT_type = (ItemType)int.Parse(data_value[i]);
-                        switch (tmpItem.IT_type)
-                        {
-                            case ItemType.Weapon:
-                                tmpItem = new Weapon(tmpItem);
-                                break;
-                            case ItemType.Disposable:
-                                tmpItem = new Disposable(tmpItem);
-                                break;
-                            case ItemType.Food:
-                                tmpItem = new Foods(tmpItem);
-                                break;
-                            case ItemType.Other:
-                                tmpItem = new Others(tmpItem);
-                                break;
-                            default:
-                                break;
-                        }
+                        item.i_damageRange = int.Parse(dataValue[startIndex + i]);
                         break;
-
                     case 1:
-                        tmpItem.i_id = int.Parse(data_value[i]);
+                        item.i_damage = int.Parse(dataValue[startIndex + i]);
+                        item.s_inspectText += ("ATK : " + (item.i_damage - item.i_damageRange).ToString() + " ~ " + (item.i_damage + item.i_damageRange).ToString());
                         break;
-
                     case 2:
-                        tmpItem.s_name = data_value[i];
+                        item.f_speedMult = float.Parse(dataValue[startIndex + i]);
+                        AddPercentageText(ref item.s_inspectText, "SPD", item.f_speedMult);
                         break;
-
                     case 3:
-                        tmpItem.s_description = data_value[i];
+                        item.f_accuracyMult = float.Parse(dataValue[startIndex + i]);
+                        AddPercentageText(ref item.s_inspectText, "ACC", item.f_accuracyMult);
                         break;
-
                     case 4:
-                        tmpItem.b_useable = bool.Parse(data_value[i]);
+                        item.i_preparedSpeed = int.Parse(dataValue[startIndex + i]);
+                        if (item.i_preparedSpeed > 0)
+                            item.s_inspectText += "\nPPS : +" + item.i_preparedSpeed + "%";
                         break;
-                }
-
-                if (tmpItem.IT_type == ItemType.Weapon)
-                {
-                    tmpWeapon = tmpItem as Weapon; //무기로 바꾸기 위해 캐스팅
-                    switch (i)
-                    {
-                        case 5:
-                            tmpWeapon.i_damageRange = int.Parse(data_value[i]);
-                            break;
-
-                        case 6:
-                            tmpWeapon.i_damage = int.Parse(data_value[i]);
-                            tmpWeapon.s_inspectText += ("ATK : " + (tmpWeapon.i_damage - tmpWeapon.i_damageRange).ToString() + " ~ " + (tmpWeapon.i_damage + tmpWeapon.i_damageRange).ToString())/*.Replace("\\n", "\n")*/;
-                            break;
-
-                        case 7:
-                            tmpWeapon.f_speedMult = float.Parse(data_value[i]);
-                            if (tmpWeapon.f_speedMult != 1)
-                                tmpWeapon.s_inspectText += "\nSPD : <color=#" + (tmpWeapon.f_speedMult < 1 ? negativeColor + ">" : positiveColor + ">+") + (tmpWeapon.f_speedMult * 100 - 100) + "%</color>";
-                            break;
-
-                        case 8:
-                            tmpWeapon.f_accuracyMult = float.Parse(data_value[i]);
-                            if (tmpWeapon.f_accuracyMult != 1)
-                                tmpWeapon.s_inspectText += "\nACC : <color=#" + (tmpWeapon.f_accuracyMult < 1 ? negativeColor + ">" : positiveColor + ">+") + (tmpWeapon.f_accuracyMult * 100 - 100) + "%</color>";
-                            break;
-
-                        case 9:
-                            tmpWeapon.i_preparedSpeed = int.Parse(data_value[i]);
-                            if (tmpWeapon.i_preparedSpeed > 0)
-                                tmpWeapon.s_inspectText += "\nPPS : " + (tmpWeapon.i_preparedSpeed > 0 ? "+" + tmpWeapon.i_preparedSpeed + "%" : "");
-                            break;
-
-                        default:
-                            break;
-                    }
-                    tmpItem = tmpWeapon; //tmpWeapon에 설정된 값을 tmpItem에 적용
+                    case 5:
+                        item.i_durability = int.Parse(dataValue[startIndex + i]);
+                        item.s_inspectText += "\nDUR : " + item.i_durability;
+                        break;
                 }
 
             }
+        };
+        Disposable.parsing += (Item item, string[] dataValue, int startIndex) =>
+        {
+            return;
+        };
+        Other.parsing += (Item item, string[] dataValue, int startIndex) =>
+        {
+            return;
+        };
 
-            if (tmpItem.IT_type == ItemType.Undefined) continue;
-            iManager.dict_items.Add(tmpItem.i_id, tmpItem); //Id - Item 구조로 등록
-            iManager.i_itemCount++;
+        parsingDelegates = new Dictionary<ItemType, Item.ParseAttributes> //Delegate들을 저장할 Dictionary 아이템을 만들때 여기의 함수를 호출한다.
+        {
+            { ItemType.Undefined, Item.parsing },
+            { ItemType.Weapon, Weapon.parsing },
+            { ItemType.Disposable, Disposable.parsing },
+            { ItemType.Food, Food.parsing },
+            { ItemType.Other, Other.parsing }
+        };
+    }
+
+    private void LoadItems() //CSV를 읽는 기본 로직 처리
+    {
+        InventoryManager iManager = GetComponent<InventoryManager>();
+        TextAsset textAsset = Resources.Load<TextAsset>("Items");
+        StringReader sReader = new StringReader(textAsset.text);
+
+        while (true)
+        {
+            string data = sReader.ReadLine();                       //데이터를 한줄 읽는다.
+            if (data == null) break;                                //비어있으면 break
+
+            var data_value = data.Split(',');                       //CSV파일은 ","로 구분하므로 ,로 분할하고 분할된 각 값을 배열에 저장
+            if (data_value[0] == "Type") continue;                  //첫줄은 항목 유형 설명탭이므로 첫줄이면 건너뛴다. (이 CSV 파일에서는 1,1 에 Type이 있음)
+
+            Item tmpItem = ParseItem(data_value);                   //ParseItem을 호출하여 위에서 만든 배열을 넘겨준다.
+            if (tmpItem.IT_type == ItemType.Undefined) continue;    //만들어진 아이템의 종류가 Undefined 이면 정상적으로 만들어진 아이템이 아니므로 지나간다.
+
+            iManager.dict_items.Add(tmpItem.i_id, tmpItem);         //만들어진 아이템을 InventoryManager에 있는 아이템 목록을 저장하는 Dictionary에 저장한다.
+            iManager.i_itemCount++;                                 //만들어진 아이템 개수를 +1
             Debug.Log(tmpItem.s_name + " 등록됨");
         }
     }
 
-    void Update()
+    private Item ParseItem(string[] data_value)
     {
+        Item tmpItem = new Item();
 
+        for (int i = 0; i < data_value.Length; i++)                 //각 열의 데이터를 읽어서 아이템 데이터에 저장한다.
+        {
+            switch (i)
+            {
+                case 0:
+                    tmpItem.IT_type = (ItemType)int.Parse(data_value[i]);
+                    tmpItem = CreateSpecificItem(tmpItem);
+                    break;
+                case 1:
+                    tmpItem.i_id = int.Parse(data_value[i]);
+                    break;
+                case 2:
+                    tmpItem.s_name = data_value[i];
+                    break;
+                case 3:
+                    tmpItem.s_description = data_value[i];
+                    break;
+                case 4:
+                    tmpItem.b_useable = bool.Parse(data_value[i]);
+                    break;
+
+                default:                                                                        //아이템 공통 내용을 전부 작성했다면, 아이템 특수 내용을 작성한다. 이때 위에서 작성한 Dictionary를 사용한다.
+                    Item.ParseAttributes parseAttributes = parsingDelegates[tmpItem.IT_type];   //아이템 타입에 따라서 다른 함수를 호출해준다.
+                    parseAttributes?.Invoke(tmpItem, data_value, 5);                            //위 함수가 Null이 아니면 호출한다. tmpItem을 넘겨서 거기에 데이터를 저장한다.
+                    i = 100;                                                                    //그리고 for문을 종료시키기 위하여 i를 늘려준다.
+                    break;                                                                      //조건을 i < 5 를 써도 되지만, 그냥 이렇게 한다.
+            }
+        }
+
+        return tmpItem;
+    }
+
+    private Item CreateSpecificItem(Item item)
+    {
+        switch (item.IT_type)
+        {
+            case ItemType.Weapon:
+                return new Weapon(item);
+            case ItemType.Disposable:
+                return new Disposable(item);
+            case ItemType.Food:
+                return new Food(item);
+            case ItemType.Other:
+                return new Other(item);
+            default:
+                return item;
+        }
+    }
+
+    private void AddPercentageText(ref string inspectText, string attributeName, float multiplier)
+    {
+        if (multiplier != 1)
+        {
+            string color = multiplier < 1 ? negativeColor : positiveColor;
+            inspectText += $"\n{attributeName} : <color=#{color}>{(multiplier > 1 ? "+" : "")}{(multiplier * 100 - 100):F0}%</color>";
+        }
     }
 }

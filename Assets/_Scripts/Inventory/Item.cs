@@ -13,6 +13,9 @@ public class Item
     public ItemType IT_type;        //아이템 타입
     public bool b_useable;
     public Dele dele_itemEffect;    //아이템 효과(함수로)
+
+    public delegate void ParseAttributes(Item item, string[] dataValue, int startIndex); //CSV에서 파일을 읽어서 각 멤버 변수를 초기화 하는 코드가 들어갈 자리
+    public ParseAttributes parsing;
 }
 
 public class Weapon : Item
@@ -23,10 +26,15 @@ public class Weapon : Item
     public int i_preparedSpeed;
     public float f_speedMult;
     public float f_accuracyMult;
-
+    public int i_durability;
     public Weapon(Item item)
     {
         IT_type = item.IT_type;
+    }
+
+    public Weapon()
+    {
+        IT_type = ItemType.Weapon;
     }
 }
 
@@ -36,20 +44,34 @@ public class Disposable : Item
     {
         IT_type = item.IT_type;
     }
-}
 
-public class Foods : Item
-{
-    public Foods(Item item)
+    public Disposable()
     {
-        IT_type = item.IT_type;
+        IT_type = ItemType.Disposable;
     }
 }
 
-public class Others : Item
+public class Food : Item
 {
-    public Others(Item item)
+    public Food(Item item)
     {
         IT_type = item.IT_type;
+    }
+
+    public Food()
+    {
+        IT_type = ItemType.Food;
+    }
+}
+
+public class Other : Item
+{
+    public Other(Item item)
+    {
+        IT_type = item.IT_type;
+    }
+    public Other()
+    {
+        IT_type = ItemType.Disposable;
     }
 }

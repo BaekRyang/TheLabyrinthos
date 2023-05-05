@@ -19,9 +19,6 @@ public class GameManager : MonoBehaviour
     public string s_seed = "-";
     public int i_roomSize = 0;
 
-    [Header("Set In Inspector")]
-    //UI요소
-    public GameObject GO_inventory;
     [Header("System Objects")]
     public GameObject GO_curtain;
     public GameObject GO_BattleCanvas;
@@ -51,11 +48,9 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public Dictionary<string, Random> dict_randomObjects = new Dictionary<string, Random>();
 
+    [Header("InventoryUIs")]
     [SerializeField] Slider SL_hpBar;
     [SerializeField] Slider SL_expBar;
-
-    [SerializeField] CanvasGroup CVSG_inventory; 
-    
 
     void Awake()
     {
@@ -98,9 +93,10 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.Escape))
+        //UI 켜거나 끄기
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            StartCoroutine(Inventory(!GO_inventory.activeSelf));
+            Inventory(InventoryManager.Instance.GO_inventory.activeSelf);
         }
     }
 
@@ -245,10 +241,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private IEnumerator Inventory(bool open)
+    private void Inventory(bool isOpen)
     {
+        bool setClose = isOpen;
+        if (InventoryManager.Instance.GO_crafting.activeSelf) //만약 다른창이 켜져있으면 종료시킨다.
+        {
+            setClose = true;
+        }
+
         PlayerController PC_tmp = go_player.GetComponent<PlayerController>();
-        if (!open) //인벤끄기
+        if (setClose) //인벤끄기
         {
             PC_tmp.b_camControll = false;
 
@@ -257,38 +259,20 @@ public class GameManager : MonoBehaviour
             infoBox.localScale = Vector3.zero;
             infoBox.gameObject.SetActive(false);
             infoBox2.gameObject.SetActive(false);
-            yield return StartCoroutine(Lerp(CVSG_inventory, 1, 0, 0.3f));
-            GetComponent<InventoryManager>().DestroyElements();
-
-            GO_inventory.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
+            StartCoroutine(InventoryManager.Instance.CloseUI());
         }
         else
         {
             //아래값 0으로 안바꾸면 마지막 누른 버튼의 상태를 유지한다.
-            GetComponent<InventoryManager>().UpdateInventory();
             PC_tmp.horizontal = 0;
             PC_tmp.vertical = 0;
             PC_tmp.b_camControll = true;
-            GO_inventory.SetActive(true);
             Cursor.lockState = CursorLockMode.Confined;
-            StartCoroutine(Lerp(CVSG_inventory, 0, 1, 0.3f));
+            InventoryManager.Instance.OpenInventory();
         }
-        yield return null;
     }
 
-    private IEnumerator Lerp(CanvasGroup target, float from, float to, float duration)
-    {
-        float elapsedTime = 0.0f;
-
-        while (elapsedTime < duration)
-        {
-            target.alpha = Mathf.Lerp(from, to, (elapsedTime / duration));
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        target.alpha = to;
-    }
+    
 
 }

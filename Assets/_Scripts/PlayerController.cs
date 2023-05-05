@@ -190,7 +190,6 @@ public class PlayerController : MonoBehaviour
             {
                 if (GO_PrevInteracted != null)
                 {
-                    Debug.Log("OFF");
                     GO_PrevInteracted.GetComponent<Outline>().enabled = false;
                     GO_PrevInteracted = null;
                 }

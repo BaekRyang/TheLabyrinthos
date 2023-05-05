@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using TypeDefs;
+using System.Diagnostics;
+using Debug = UnityEngine.Debug;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -12,24 +13,22 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private int i_inventoryCount; //인스펙터 확인용
     [SerializeField] public int i_itemCount; //인스펙터 확인용
 
-
     //인벤토리 key, value 형식으로 사용
-    Dictionary<int, int> dict_inventory;
-    Dictionary<int, Sprite> dict_imgList = new Dictionary<int, Sprite>();
+    public Dictionary<int, int> dict_inventory;
+    public Dictionary<int, Sprite> dict_imgList = new Dictionary<int, Sprite>();
     public Dictionary<int, Item> dict_items;
 
-    [SerializeField] Transform TF_Weapons;
-    [SerializeField] Transform TF_Disposables;
-    [SerializeField] Transform TF_Foods;
-    [SerializeField] Transform TF_Others;
+    [Header("Set In Inspector")]
+    //UI요소
+    public GameObject GO_inventory;
+    public GameObject GO_crafting;
 
-
-    [SerializeField] GameObject copyGO;
     [SerializeField] public RectTransform RT_infoBox;
     [SerializeField] public RectTransform RT_descBox;
     private void Awake()
     {
         Instance = this;
+
         dict_items = new Dictionary<int, Item>();
         dict_inventory = new Dictionary<int, int>();
 
@@ -41,122 +40,55 @@ public class InventoryManager : MonoBehaviour
     }
     void Start()
     {
-        
+        GO_inventory.SetActive(false);
+        GO_crafting.SetActive(false);
     }
 
     void Update()
     {
-        i_inventoryCount = dict_inventory.Count;
+        
     }
 
-    public void UpdateInventory()
+    public void OpenInventory()
     {
-        var tmpInventory = dict_inventory;
+        GO_inventory.SetActive(true);
+        GO_inventory.transform.Find("Inventory").GetComponent<Inventory>().UpdateInventory();
+        StartCoroutine(LerpCanvas(GO_inventory.GetComponent<CanvasGroup>(), 0, 1, 0.3f));
 
-        foreach (KeyValuePair<int, int> kvp in tmpInventory)
+    }
+
+    public IEnumerator CloseUI()
+    {
+
+        if (GO_inventory.activeSelf)
         {
-            Item targetItem = dict_items[kvp.Key];
-            switch (targetItem.IT_type)
-            {
-                case ItemType.Weapon:
-                    {
-                        GameObject tmpGO;
-
-                        tmpGO = Instantiate(copyGO, TF_Weapons);
-                        tmpGO.GetComponent<ItemObject>().I_item = targetItem;
-
-                        Sprite tmpSPR;
-                        dict_imgList.TryGetValue(targetItem.i_id, out tmpSPR); //이미지 리스트에서 해당번호의 이미지를 가져온다.
-
-                        tmpGO.transform.GetChild(0).GetComponent<Image>().sprite = tmpSPR;
-                        tmpGO.name = targetItem.s_name;
-                        tmpGO.transform.GetChild(1).GetComponent<TMP_Text>().text = kvp.Value.ToString();
-                        tmpGO.transform.GetChild(1).gameObject.SetActive(true);
-                        break;
-                    }
-
-                case ItemType.Disposable:
-                    {
-                        GameObject tmpGO;
-
-                        tmpGO = Instantiate(copyGO, TF_Disposables);
-                        tmpGO.GetComponent<ItemObject>().I_item = targetItem;
-
-                        Sprite tmpSPR;
-                        dict_imgList.TryGetValue(targetItem.i_id, out tmpSPR);
-
-                        tmpGO.transform.GetChild(0).GetComponent<Image>().sprite = tmpSPR;
-                        tmpGO.name = targetItem.s_name;
-                        tmpGO.transform.GetChild(1).GetComponent<TMP_Text>().text = kvp.Value.ToString();
-                        tmpGO.transform.GetChild(1).gameObject.SetActive(true);
-                        break;
-                    }
-                case ItemType.Food:
-                    {
-                        GameObject tmpGO;
-
-                        tmpGO = Instantiate(copyGO, TF_Foods);
-                        tmpGO.GetComponent<ItemObject>().I_item = targetItem;
-
-                        Sprite tmpSPR;
-                        dict_imgList.TryGetValue(targetItem.i_id, out tmpSPR);
-
-                        tmpGO.transform.GetChild(0).GetComponent<Image>().sprite = tmpSPR;
-                        tmpGO.name = targetItem.s_name;
-                        tmpGO.transform.GetChild(1).GetComponent<TMP_Text>().text = kvp.Value.ToString();
-                        tmpGO.transform.GetChild(1).gameObject.SetActive(true);
-                        break;
-                    }
-                case ItemType.Other:
-                    {
-                        GameObject tmpGO;
-
-                        tmpGO = Instantiate(copyGO, TF_Others);
-                        tmpGO.GetComponent<ItemObject>().I_item = targetItem;
-
-                        Sprite tmpSPR;
-                        dict_imgList.TryGetValue(targetItem.i_id    , out tmpSPR);
-
-                        tmpGO.transform.GetChild(0).GetComponent<Image>().sprite = tmpSPR;
-                        tmpGO.name = targetItem.s_name;
-                        tmpGO.transform.GetChild(1).GetComponent<TMP_Text>().text = kvp.Value.ToString();
-                        tmpGO.transform.GetChild(1).gameObject.SetActive(true);
-                        break;
-                    }
-                default:
-                    break;
-            }
+            Debug.Log("CLOSE Inven");
+            yield return StartCoroutine(LerpCanvas(GO_inventory.GetComponent<CanvasGroup>(), 1, 0, 0.3f));
+            GO_inventory.transform.Find("Inventory").GetComponent<Inventory>().DestroyElements();
+            GO_inventory.SetActive(false);
+        }
+        else if (GO_crafting.activeSelf)
+        {
+            Debug.Log("CLOSE Craft");
+            yield return StartCoroutine(LerpCanvas(GO_crafting.GetComponent<CanvasGroup>(), 1, 0, 0.3f));
+            GO_crafting.transform.Find("Inventory").GetComponent<Inventory>().DestroyElements();
+            GO_crafting.SetActive(false);
         }
 
-        CalcCellSize();
     }
 
-    void CalcCellSize()
+    private IEnumerator LerpCanvas(CanvasGroup target, float from, float to, float duration)
     {
-        while (TF_Weapons.childCount < 6) Instantiate(copyGO, TF_Weapons);
-        TF_Weapons.GetComponent<RectTransform>().sizeDelta = new Vector2(160 * TF_Weapons.childCount - 30, 0); //Cellsize + Spaceing * 칸 개수 만큼 칸 크기를 키워준다.
-        TF_Weapons.GetComponent<RectTransform>().anchoredPosition = new Vector2(80 * TF_Weapons.childCount - 15, 0);
+        float elapsedTime = 0.0f;
 
-        while (TF_Disposables.childCount < 6) Instantiate(copyGO, TF_Disposables);
-        TF_Disposables.GetComponent<RectTransform>().sizeDelta = new Vector2(160 * TF_Disposables.childCount - 30, 0);
-        TF_Disposables.GetComponent<RectTransform>().anchoredPosition = new Vector2(80 * TF_Disposables.childCount - 15, 0);
+        while (elapsedTime < duration)
+        {
+            target.alpha = Mathf.Lerp(from, to, (elapsedTime / duration));
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
 
-        while (TF_Foods.childCount < 6) Instantiate(copyGO, TF_Foods);
-        TF_Foods.GetComponent<RectTransform>().sizeDelta = new Vector2(160 * TF_Foods.childCount - 30, 0);
-        TF_Foods.GetComponent<RectTransform>().anchoredPosition = new Vector2(80 * TF_Foods.childCount - 15, 0);
-
-        while (TF_Others.childCount < 6) Instantiate(copyGO, TF_Others);
-        TF_Others.GetComponent<RectTransform>().sizeDelta = new Vector2(160 * TF_Others.childCount - 30, 0);
-        TF_Others.GetComponent<RectTransform>().anchoredPosition = new Vector2(80 * TF_Others.childCount - 15, 0);
-    }
-
-    public void DestroyElements()
-    {
-        while (TF_Weapons.childCount > 0) DestroyImmediate(TF_Weapons.GetChild(0).gameObject);
-        while (TF_Disposables.childCount > 0) DestroyImmediate(TF_Disposables.GetChild(0).gameObject);
-        while (TF_Foods.childCount > 0) DestroyImmediate(TF_Foods.GetChild(0).gameObject);
-        while (TF_Others.childCount > 0) DestroyImmediate(TF_Others.GetChild(0).gameObject);
-
+        target.alpha = to;
     }
 
     public void AddItem(Item item, int amount = 1)

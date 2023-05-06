@@ -19,9 +19,7 @@ public class ItemObject : MonoBehaviour, IScrollHandler, IPointerEnterHandler, I
     private void Awake()
     {
         if (isUIElement)
-        {
             SR_parent = transform.parent.parent.parent.GetComponent<ScrollRect>();
-        }
     }
     public void OnScroll(PointerEventData eventData) //스크롤 요소때문에 이벤트를 넘겨준다.
     {
@@ -31,21 +29,24 @@ public class ItemObject : MonoBehaviour, IScrollHandler, IPointerEnterHandler, I
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (this.name == "ItemCell(Clone)") return;
+
         var infoBox = InventoryManager.Instance.RT_infoBox;
         infoBox.gameObject.SetActive(true);
 
-        if (this.I_item.IT_type == TypeDefs.ItemType.Weapon)
+        var textComponents = infoBox.GetComponentsInChildren<TMP_Text>();
+
+        if (I_item.IT_type == TypeDefs.ItemType.Weapon)
         {
             infoBox.GetChild(1).transform.localScale = Vector3.one;
             Weapon tmpWeapon = I_item as Weapon;
-            infoBox.GetChild(1).GetComponentInChildren<TMP_Text>().text = tmpWeapon.s_inspectText.Replace("\\n", "\n");
+            textComponents[1].text = tmpWeapon.s_inspectText.Replace("\\n", "\n");
         }
         else infoBox.GetChild(1).transform.localScale = Vector3.zero;
 
         infoBox.localScale = Vector3.one;
         infoBox.position = transform.position;
-        infoBox.GetChild(0).GetChild(0).GetComponentInChildren<TMP_Text>().text = I_item.s_name;
-        infoBox.GetChild(0).GetChild(1).GetComponentInChildren<TMP_Text>().text = I_item.s_description.Replace("\\n", "\n");
+        textComponents[0].text = I_item.s_name;
+        textComponents[1].text = I_item.s_description.Replace("\\n", "\n");
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -53,7 +54,5 @@ public class ItemObject : MonoBehaviour, IScrollHandler, IPointerEnterHandler, I
         var infoBox = InventoryManager.Instance.RT_infoBox;
         infoBox.GetChild(1).transform.localScale = Vector3.one;
         infoBox.localScale = Vector3.zero;
-
-        
     }
 }

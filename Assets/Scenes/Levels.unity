@@ -8355,8 +8355,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95b80aaaa9cb37743ba7ea4860c1183f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  b_useSeed: 0
-  s_seed: FC7B5C
+  b_useSeed: 1
+  s_seed: 9BDEC6
   i_roomSize: 0
   GO_curtain: {fileID: 1947326161}
   GO_BattleCanvas: {fileID: 997984183}
@@ -8429,6 +8429,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acf1907e1df60dc45904575bdeca68ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GO_recipeTab: {fileID: 3313019509975831892, guid: a74872e22c6859a47a8004da4aa6802b,
+    type: 3}
 --- !u!1 &1070788435
 GameObject:
   m_ObjectHideFlags: 0

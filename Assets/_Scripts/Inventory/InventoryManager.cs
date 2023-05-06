@@ -5,6 +5,7 @@ using UnityEngine;
 using TypeDefs;
 using System.Diagnostics;
 using Debug = UnityEngine.Debug;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 
 public class InventoryManager : MonoBehaviour
 {

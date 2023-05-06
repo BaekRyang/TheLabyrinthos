@@ -33,7 +33,7 @@ public class CSVReader : MonoBehaviour
 
         LoadItems();
 
-        LoadCraftingTable();
+        //LoadCraftingTable(); //Crafting이 호출함
     }
 
     private void WriteDelegate() //각 아이템을 Parsing 하는 코드 작성 : 사실 클래스 안에다가 만들면 더 간단한데
@@ -182,7 +182,7 @@ public class CSVReader : MonoBehaviour
         }
     }
 
-    private void LoadCraftingTable()
+    public void LoadCraftingTable()
     {
         Crafting C_crafting = GetComponent<Crafting>();
         TextAsset textAsset = Resources.Load<TextAsset>("Craftings");
@@ -216,18 +216,6 @@ public class CSVReader : MonoBehaviour
                 }
             }
         }
-
-        //var a = C_crafting.dict_craftingTable.Keys.ToList();
-
-        //for (int i = 0; i < C_crafting.dict_craftingTable.Count; i++)
-        //{
-        //    var b = C_crafting.dict_craftingTable[a[i]].Keys;
-        //    Debug.Log("ID " + a[i] + " 아이템 레시피 등록됨");
-        //    foreach (var item in C_crafting.dict_craftingTable[a[i]])
-        //    {
-        //        Debug.Log(item.Key + "가 " + item.Value + "개 필요");
-        //    }
-        //}
     }
 
 }

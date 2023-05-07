@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 namespace TypeDefs
 {
+
     #region BattleMain
     public enum StatsType
     {

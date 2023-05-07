@@ -10,16 +10,29 @@ public class ItemObject : MonoBehaviour, IScrollHandler, IPointerEnterHandler, I
 {
     ScrollRect SR_parent;
 
-    public bool isUIElement = false;    //인벤토리 UI인지 표시
-    public bool hasItem = false;        //인벤토리 UI 전용
+    public bool isInventoryUIElement = false;       //인벤토리 UI인지 표시
+    public bool hasItem = false;                    //인벤토리 UI 전용
 
     public Item I_item;
 
 
     private void Awake()
     {
-        if (isUIElement)
+        if (isInventoryUIElement)
             SR_parent = transform.parent.parent.parent.GetComponent<ScrollRect>();
+    }
+
+    public void UpdateItem(int amount = 1)
+    {
+        transform.GetChild(0).GetComponent<Image>().sprite = InventoryManager.Instance.dict_imgList[I_item.i_id];
+        if (amount > 2)
+        {
+            transform.GetChild(1).gameObject.SetActive(true);
+            transform.GetChild(1).GetComponent<TMP_Text>().text = amount.ToString();
+        } else
+        {
+            transform.GetChild(1).gameObject.SetActive(false);
+        }
     }
     public void OnScroll(PointerEventData eventData) //스크롤 요소때문에 이벤트를 넘겨준다.
     {
@@ -28,7 +41,7 @@ public class ItemObject : MonoBehaviour, IScrollHandler, IPointerEnterHandler, I
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (this.name == "ItemCell(Clone)") return;
+        if (I_item.IT_type == TypeDefs.ItemType.Undefined) return;
 
         var infoBox = InventoryManager.Instance.RT_infoBox;
         infoBox.gameObject.SetActive(true);

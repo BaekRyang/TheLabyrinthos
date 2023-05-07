@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Recipe : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class Recipe : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     public Item I_destItem;
     public Dictionary<int, int> dict_recipe;
@@ -57,5 +57,10 @@ public class Recipe : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         var infoBox = InventoryManager.Instance.RT_infoBox;
         infoBox.GetChild(1).transform.localScale = Vector3.one;
         infoBox.localScale = Vector3.zero;
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        GetComponentInParent<Crafting>().LoadItemToTable(I_destItem.i_id, dict_recipe);
     }
 }

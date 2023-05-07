@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -182,9 +183,9 @@ public class CSVReader : MonoBehaviour
         }
     }
 
-    public void LoadCraftingTable()
+    public IEnumerator LoadCraftingTable()
     {
-        Crafting C_crafting = GetComponent<Crafting>();
+        Crafting C_crafting = InventoryManager.Instance.GO_crafting.GetComponent<Crafting>();
         TextAsset textAsset = Resources.Load<TextAsset>("Craftings");
         StringReader sReader = new StringReader(textAsset.text);
 
@@ -216,6 +217,8 @@ public class CSVReader : MonoBehaviour
                 }
             }
         }
+
+        yield return null;
     }
 
 }

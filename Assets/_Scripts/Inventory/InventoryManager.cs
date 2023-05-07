@@ -44,7 +44,7 @@ public class InventoryManager : MonoBehaviour
         GO_inventory.transform.Find("Inventory").GetComponent<Inventory>().LoadSetting();
         GO_inventory.SetActive(false);
         GO_crafting.transform.Find("Inventory").GetComponent<Inventory>().LoadSetting();
-        GO_crafting.SetActive(false);
+        //GO_crafting.SetActive(false); //Crafting에서 로딩 다 끝나면 알아서 비활성화 한다.
     }
 
     void Update()

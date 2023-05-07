@@ -94,7 +94,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         //UI 켜거나 끄기
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.Escape))
         {
             Inventory(InventoryManager.Instance.GO_inventory.activeSelf);
         }
@@ -273,6 +273,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    
+    public void SystemButtonAction(string buttonType)
+    {
+        if (buttonType == "Exit")
+        {
+            Application.Quit();
+        }
+    }
 
 }

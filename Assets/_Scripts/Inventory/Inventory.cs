@@ -31,7 +31,6 @@ public class Inventory : MonoBehaviour
         tmpInventory = InventoryManager.Instance.dict_inventory;
         dict_items = InventoryManager.Instance.dict_items;
         dict_imgList = InventoryManager.Instance.dict_imgList;
-        return;
     }
     void Start()
     {
@@ -51,14 +50,16 @@ public class Inventory : MonoBehaviour
 
                         tmpGO = Instantiate(copyGO, TF_Weapons);
                         tmpGO.GetComponent<ItemObject>().I_item = targetItem;
-
-                        Sprite tmpSPR;
-                        dict_imgList.TryGetValue(targetItem.i_id, out tmpSPR); //이미지 리스트에서 해당번호의 이미지를 가져온다.
-
-                        tmpGO.transform.GetChild(0).GetComponent<Image>().sprite = tmpSPR;
                         tmpGO.name = targetItem.s_name;
-                        tmpGO.transform.GetChild(1).GetComponent<TMP_Text>().text = kvp.Value.ToString();
-                        tmpGO.transform.GetChild(1).gameObject.SetActive(true);
+                        tmpGO.GetComponent<ItemObject>().UpdateItem();
+
+                        //Sprite tmpSPR;
+                        //dict_imgList.TryGetValue(targetItem.i_id, out tmpSPR); //이미지 리스트에서 해당번호의 이미지를 가져온다.
+
+                        //tmpGO.transform.GetChild(0).GetComponent<Image>().sprite = tmpSPR;
+                        
+                        //tmpGO.transform.GetChild(1).GetComponent<TMP_Text>().text = kvp.Value.ToString();
+                        //tmpGO.transform.GetChild(1).gameObject.SetActive(true);
                         break;
                     }
 
@@ -68,14 +69,8 @@ public class Inventory : MonoBehaviour
 
                         tmpGO = Instantiate(copyGO, TF_Disposables);
                         tmpGO.GetComponent<ItemObject>().I_item = targetItem;
-
-                        Sprite tmpSPR;
-                        dict_imgList.TryGetValue(targetItem.i_id, out tmpSPR);
-
-                        tmpGO.transform.GetChild(0).GetComponent<Image>().sprite = tmpSPR;
                         tmpGO.name = targetItem.s_name;
-                        tmpGO.transform.GetChild(1).GetComponent<TMP_Text>().text = kvp.Value.ToString();
-                        tmpGO.transform.GetChild(1).gameObject.SetActive(true);
+                        tmpGO.GetComponent<ItemObject>().UpdateItem();
                         break;
                     }
                 case ItemType.Food:
@@ -84,14 +79,8 @@ public class Inventory : MonoBehaviour
 
                         tmpGO = Instantiate(copyGO, TF_Foods);
                         tmpGO.GetComponent<ItemObject>().I_item = targetItem;
-
-                        Sprite tmpSPR;
-                        dict_imgList.TryGetValue(targetItem.i_id, out tmpSPR);
-
-                        tmpGO.transform.GetChild(0).GetComponent<Image>().sprite = tmpSPR;
                         tmpGO.name = targetItem.s_name;
-                        tmpGO.transform.GetChild(1).GetComponent<TMP_Text>().text = kvp.Value.ToString();
-                        tmpGO.transform.GetChild(1).gameObject.SetActive(true);
+                        tmpGO.GetComponent<ItemObject>().UpdateItem();
                         break;
                     }
                 case ItemType.Other:
@@ -100,14 +89,8 @@ public class Inventory : MonoBehaviour
 
                         tmpGO = Instantiate(copyGO, TF_Others);
                         tmpGO.GetComponent<ItemObject>().I_item = targetItem;
-
-                        Sprite tmpSPR;
-                        dict_imgList.TryGetValue(targetItem.i_id, out tmpSPR);
-
-                        tmpGO.transform.GetChild(0).GetComponent<Image>().sprite = tmpSPR;
                         tmpGO.name = targetItem.s_name;
-                        tmpGO.transform.GetChild(1).GetComponent<TMP_Text>().text = kvp.Value.ToString();
-                        tmpGO.transform.GetChild(1).gameObject.SetActive(true);
+                        tmpGO.GetComponent<ItemObject>().UpdateItem();
                         break;
                     }
                 default:

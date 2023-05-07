@@ -32,9 +32,9 @@ public class Recipe : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
             infoBox.GetChild(1).transform.localScale = Vector3.one;
             Weapon tmpWeapon = I_destItem as Weapon;
             infoBox.GetChild(1).GetComponentInChildren<TMP_Text>().text = tmpWeapon.s_inspectText.Replace("\\n", "\n");
+            infoBox.GetChild(1).GetComponentInChildren<TMP_Text>().text += "\nDUR : " + tmpWeapon.i_durability + "/" + tmpWeapon.i_maxDurability;
         }
         else infoBox.GetChild(1).transform.localScale = Vector3.zero;
-        infoBox.GetChild(0).GetChild(1).GetComponentInChildren<TMP_Text>().text = "";
 
         infoBox.localScale = Vector3.one;
         infoBox.position = transform.position;

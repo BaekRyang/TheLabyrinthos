@@ -6,7 +6,7 @@ using TypeDefs;
 public class Player : MonoBehaviour
 {
     public PlayerStats PS_playerStats;
-
+    public Weapon WP_weapon;
     void Awake()
     {
         PS_playerStats = new PlayerStats();

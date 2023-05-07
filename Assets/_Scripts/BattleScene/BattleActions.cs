@@ -23,7 +23,8 @@ public class BattleActions : MonoBehaviour
     Dictionary<Parts, AttackPair> dict_attackTable = new Dictionary<Parts, AttackPair>();
 
     //정보를 받아와서 저장할 위치
-    private PlayerStats PS_player;
+    private Player P_player;
+    private PlayerStats PS_playerStats;
     public Creature CR_Enemy;
 
     BattleMain BM_BattleMain;
@@ -32,7 +33,8 @@ public class BattleActions : MonoBehaviour
     void Start()
     {
         //PlayerStats 클래스 객체 가져오기(참조로 가져온다)
-        PS_player = GameManager.Instance.GetComponent<Player>().GetPlayerStats();
+        P_player = GameManager.Instance.GetComponent<Player>();
+        PS_playerStats = P_player.GetPlayerStats();
 
         BM_BattleMain = GetComponent<BattleMain>();
 
@@ -93,14 +95,17 @@ public class BattleActions : MonoBehaviour
 
         if (b_IsPlayer)
         {
-            int accInt = (int)(BASE_ACCURACY * dict_attackTable[part].accuracy);
+            int accInt = (int)(BASE_ACCURACY * dict_attackTable[part].accuracy * P_player.WP_weapon.f_accuracyMult);
 
-            if (randInt-10 <   //랜덤 (0~100) - 임시로 10% 증가시킴
+            if (randInt <   //랜덤 (0~100)
                 accInt)     //기본 정확도 x 부위 정확도 계수
             {
-                float damage = (PS_player.damage *                                                  //플레이어 공격력
+                float damage = ((PS_playerStats.damage + P_player.WP_weapon.i_damage) *             //플레이어 공격력
                                 (dict_attackTable[part].damage) *                                   //부위 데미지 계수
                                 (1 - CR_Enemy.defense / (float)(CR_Enemy.defense + CONST_DEF)));    //방어력 계산
+
+                double d_damageRange = (double)(P_player.WP_weapon.i_damageRange);
+                damage += (float)(rand.NextDouble() * (d_damageRange * 2) - d_damageRange);
 
                 damage = Mathf.Round(damage * 10f) / 10f;
                 CR_Enemy.health -= damage;
@@ -126,10 +131,10 @@ public class BattleActions : MonoBehaviour
                         clip = BM_BattleMain.AC_playerAttackThorax[rand.Next(BM_BattleMain.AC_playerAttackThorax.Length)];
                         break;
                 }
+                //맞으면 타격음으로
 
                 //StartCoroutine(BM_BattleMain.AnimateAction(ActionTypes.Attack, false));
 
-                //맞으면 타격음으로
             } 
             else
             {
@@ -156,11 +161,11 @@ public class BattleActions : MonoBehaviour
             if (randInt <       //랜덤 (0~100)
                BASE_ACCURACY)   //**크리쳐별 정확도를 가져와서 써야함
             {
-                float damage = (CR_Enemy.damage * (1 - PS_player.defense / (float)(PS_player.defense + CONST_DEF)));
+                float damage = (CR_Enemy.damage * (1 - PS_playerStats.defense / (float)(PS_playerStats.defense + CONST_DEF)));
                 damage = Mathf.Round(damage * 10f) / 10f;
-                PS_player.health -= damage;
-                PS_player.health = Mathf.Round(PS_player.health * 10f) / 10f;
-                BM_BattleMain.ChangeSliderValue(true, StatsType.Hp, PS_player.health);
+                PS_playerStats.health -= damage;
+                PS_playerStats.health = Mathf.Round(PS_playerStats.health * 10f) / 10f;
+                BM_BattleMain.ChangeSliderValue(true, StatsType.Hp, PS_playerStats.health);
 
                 StartCoroutine(LerpColor(BM_BattleMain.playerElements,
                                             SliderColor.Hp_hilighted,
@@ -266,12 +271,15 @@ public class BattleActions : MonoBehaviour
     public void SetDmgNAcc() //공격 상세창 값 초기화용
     {
         var typeDict = BM_BattleMain.dict_dmgAccList;
-        typeDict[Parts.Weakpoint]   .percentage.text = (BASE_ACCURACY * dict_attackTable[Parts.Weakpoint] .accuracy).ToString() + "%";
-        typeDict[Parts.Thorax]      .percentage.text = (BASE_ACCURACY * dict_attackTable[Parts.Thorax]    .accuracy).ToString() + "%";
-        typeDict[Parts.Outer]       .percentage.text = (BASE_ACCURACY * dict_attackTable[Parts.Outer]     .accuracy).ToString() + "%";
+        typeDict[Parts.Weakpoint].percentage.text = Mathf.Clamp((BASE_ACCURACY * dict_attackTable[Parts.Weakpoint].accuracy * P_player.WP_weapon.f_accuracyMult), 0, 100).ToString() + "%";
+        typeDict[Parts.Thorax]   .percentage.text = Mathf.Clamp((BASE_ACCURACY * dict_attackTable[Parts.Thorax]   .accuracy * P_player.WP_weapon.f_accuracyMult), 0, 100).ToString() + "%";
+        typeDict[Parts.Outer]    .percentage.text = Mathf.Clamp((BASE_ACCURACY * dict_attackTable[Parts.Outer]    .accuracy * P_player.WP_weapon.f_accuracyMult), 0, 100).ToString() + "%";
 
-        typeDict[Parts.Weakpoint]   .damage.text = (PS_player.damage * dict_attackTable[Parts.Weakpoint]  .damage * (1 - CR_Enemy.defense / (float)(CR_Enemy.defense + CONST_DEF))).ToString("0.##") + " DMG";
-        typeDict[Parts.Thorax]      .damage.text = (PS_player.damage * dict_attackTable[Parts.Thorax]     .damage * (1 - CR_Enemy.defense / (float)(CR_Enemy.defense + CONST_DEF))).ToString("0.##") + " DMG";
-        typeDict[Parts.Outer]       .damage.text = (PS_player.damage * dict_attackTable[Parts.Outer]      .damage * (1 - CR_Enemy.defense / (float)(CR_Enemy.defense + CONST_DEF))).ToString("0.##") + " DMG";
+
+        var baseDamage = PS_playerStats.damage + P_player.WP_weapon.i_damage;
+        var creatureDef = 1 - CR_Enemy.defense / (float)(CR_Enemy.defense + CONST_DEF);
+        typeDict[Parts.Weakpoint]   .damage.text = ((baseDamage - P_player.WP_weapon.i_damageRange) * dict_attackTable[Parts.Weakpoint].damage * (creatureDef)).ToString("0.##") + " ~ " + ((baseDamage + P_player.WP_weapon.i_damageRange) * dict_attackTable[Parts.Weakpoint].damage * (creatureDef)).ToString("0.##") + " DMG";
+        typeDict[Parts.Thorax]      .damage.text = ((baseDamage - P_player.WP_weapon.i_damageRange) * dict_attackTable[Parts.Thorax]   .damage * (creatureDef)).ToString("0.##") + " ~ " + ((baseDamage + P_player.WP_weapon.i_damageRange) * dict_attackTable[Parts.Thorax]   .damage * (creatureDef)).ToString("0.##") + " DMG";
+        typeDict[Parts.Outer]       .damage.text = ((baseDamage - P_player.WP_weapon.i_damageRange) * dict_attackTable[Parts.Outer]    .damage * (creatureDef)).ToString("0.##") + " ~ " + ((baseDamage + P_player.WP_weapon.i_damageRange) * dict_attackTable[Parts.Outer]    .damage * (creatureDef)).ToString("0.##") + " DMG";
     }
 }

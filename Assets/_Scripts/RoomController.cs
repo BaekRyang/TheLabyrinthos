@@ -79,7 +79,8 @@ public class RoomController : MonoBehaviour
 
     public void DestroyCreature()
     {
-        b_hasCreature = false;
         Destroy(GO_creature);
+        b_hasCreature = false;
+        GO_creature = null;
     }
 }

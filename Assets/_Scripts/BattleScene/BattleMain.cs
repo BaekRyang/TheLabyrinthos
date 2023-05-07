@@ -77,6 +77,7 @@ public class BattleMain : MonoBehaviour
 
     [Header("Set Automatically")]
     public Creature CR_Enemy;
+    private Player P_player;
     PlayerStats PS_playerStats;
 
 
@@ -188,11 +189,13 @@ public class BattleMain : MonoBehaviour
         IMG_enemyFullBodys[2].sprite = CR_Opponent.spritePack.fullBody_Outer;
 
         //플레이어 스텟을 가져와서 저장한다. (플레이어는 일회용이 아니므로 ref 으로 넘어옴)
-        PS_playerStats = GameManager.Instance.GetComponent<Player>().GetPlayerStats();
+        P_player = GameManager.Instance.GetComponent<Player>();
+        PS_playerStats = P_player.GetPlayerStats();
 
         //행동 포인트관련 초기화 : 전투 중간에 변경될 일이 있을까? => 있으면 f_Speed같은 경우는 ref로 넘겨줘야함
         ChangeSliderValue(true, StatsType.Hp, PS_playerStats.health);   //체력바 플레이어 체력으로 초기화
-        SL_playerTP.value = PS_playerStats.prepareSpeed;                //플레이어 TP를 스텟으로 맞춰줌(선제공격용)
+        SL_playerTP.value = PS_playerStats.prepareSpeed                 //플레이어 TP를 스텟으로 맞춰줌(선제공격용)
+                            + P_player.WP_weapon.i_preparedSpeed;       //무기 스텟을 더해준다.
 
         SL_enemyHP.value = SL_enemyHP.maxValue = CR_Enemy.health;       //Enemt의 체력 초기값 설정 (MAX/NOW)
         SL_enemyTP.value = CR_Enemy.prepareSpeed;                       //Enemy의 TP 반영
@@ -227,7 +230,7 @@ public class BattleMain : MonoBehaviour
 
     public void UpdateDamageIndicator()
     {
-        TMP_playerDamage.text = "DMG\n" + PS_playerStats.damage;
+        TMP_playerDamage.text = "DMG\n" + (PS_playerStats.damage + P_player.WP_weapon.i_damage);
         TMP_EnemyDamage.text = "DMG\n" + CR_Enemy.damage;
     }
 

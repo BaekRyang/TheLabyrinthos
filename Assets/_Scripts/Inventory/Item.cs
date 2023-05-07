@@ -26,6 +26,7 @@ public class Weapon : Item
     public int i_preparedSpeed;
     public float f_speedMult;
     public float f_accuracyMult;
+    public int i_maxDurability;
     public int i_durability;
     public Weapon(Item item)
     {

@@ -2,6 +2,7 @@ using Mono.Cecil.Cil;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using TypeDefs;
 using UnityEngine;
 
@@ -115,10 +116,14 @@ public class Crafting : MonoBehaviour
             count++;
         }
 
-        if (unprepared != 0) 
+        if (unprepared != 0)
+        {
+            GO_indicator.GetComponentInChildren<TMP_Text>().text = "<color=#FF0000>재료가 부족합니다.</color>";
             GO_destItemCell.GetComponent<ItemObject>().TansparentItem(true);
+        }
         else
         {
+            GO_indicator.GetComponentInChildren<TMP_Text>().text = GO_destItemCell.GetComponent<ItemObject>().I_item.s_name;
             GO_destItemCell.GetComponent<ItemObject>().TansparentItem(false);
             GO_destItemCell.GetComponent<ItemObject>().b_canClick = true;
         }

@@ -47,33 +47,34 @@ public class CSVReader : MonoBehaviour
         Weapon.parsing += (Item baseItem, string[] dataValue, int startIndex) =>
         {
             Weapon item = baseItem as Weapon;
-            for (int i = 0; i < dataValue.Length - startIndex; i++)
+            for (int i = startIndex; i < dataValue.Length; i++)
             {
-                switch (i)
+                Debug.Log(i);
+                switch (i - 5)
                 {
                     case 0:
-                        item.i_damageRange = int.Parse(dataValue[startIndex + i]);
+                        item.i_damageRange = int.Parse(dataValue[i]);
                         break;
                     case 1:
-                        item.i_damage = int.Parse(dataValue[startIndex + i]);
+                        item.i_damage = int.Parse(dataValue[ i]);
                         item.s_inspectText += ("ATK : " + (item.i_damage - item.i_damageRange).ToString() + " ~ " + (item.i_damage + item.i_damageRange).ToString());
                         break;
                     case 2:
-                        item.f_speedMult = float.Parse(dataValue[startIndex + i]);
+                        item.f_speedMult = float.Parse(dataValue[i]);
                         AddPercentageText(ref item.s_inspectText, "SPD", item.f_speedMult);
                         break;
                     case 3:
-                        item.f_accuracyMult = float.Parse(dataValue[startIndex + i]);
+                        item.f_accuracyMult = float.Parse(dataValue[i]);
                         AddPercentageText(ref item.s_inspectText, "ACC", item.f_accuracyMult);
                         break;
                     case 4:
-                        item.i_preparedSpeed = int.Parse(dataValue[startIndex + i]);
+                        item.i_preparedSpeed = int.Parse(dataValue[i]);
                         if (item.i_preparedSpeed > 0)
                             item.s_inspectText += "\nPPS : +" + item.i_preparedSpeed + "%";
                         break;
                     case 5:
-                        item.i_durability = int.Parse(dataValue[startIndex + i]);
-                        item.s_inspectText += "\nDUR : " + item.i_durability;
+                        item.i_maxDurability = item.i_durability = int.Parse(dataValue[i]);
+                        //item.s_inspectText += "\nDUR : " + item.i_durability + "/" + item.i_maxDurability;
                         break;
                 }
 
@@ -124,7 +125,6 @@ public class CSVReader : MonoBehaviour
     private Item ParseItem(string[] data_value)
     {
         Item tmpItem = new Item();
-
         for (int i = 0; i < data_value.Length; i++)                 //각 열의 데이터를 읽어서 아이템 데이터에 저장한다.
         {
             switch (i)
@@ -213,7 +213,7 @@ public class CSVReader : MonoBehaviour
 
                         string[] s_recipeDetail = data_value[i].Split(".");     //(아이템 ID . 필요한 개수) 구조를 갖고있으므로 "."으로 쪼개주고.
                         C_crafting.dict_craftingTable[int.Parse(data_value[0])][int.Parse(s_recipeDetail[0])] = int.Parse(s_recipeDetail[1]); //완성 아이템을 Key로 하는 Dict에 넣어준다.
-                        break;                                                                      
+                        break;
                 }
             }
         }

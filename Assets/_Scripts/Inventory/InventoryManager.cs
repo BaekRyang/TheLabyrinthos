@@ -69,7 +69,8 @@ public class InventoryManager : MonoBehaviour
             GO_targetUI.transform.Find("Inventory").GetComponent<Inventory>().UpdateInventory();
             StartCoroutine(LerpCanvas(GO_targetUI.GetComponent<CanvasGroup>(), 0, 1, 0.3f));
         }
-        
+
+        GetComponent<Player>().WP_weapon = dict_items[0] as Weapon;
 
     }
 

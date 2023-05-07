@@ -66,7 +66,8 @@ public class ItemObject : MonoBehaviour, IScrollHandler, IPointerEnterHandler, I
         {
             infoBox.GetChild(1).transform.localScale = Vector3.one;
             Weapon tmpWeapon = I_item as Weapon;
-            textComponents[1].text = tmpWeapon.s_inspectText.Replace("\\n", "\n");
+            textComponents[2].text = tmpWeapon.s_inspectText.Replace("\\n", "\n");
+            textComponents[2].text += "\nDUR : " + tmpWeapon.i_durability + "/" + tmpWeapon.i_maxDurability;
         }
         else infoBox.GetChild(1).transform.localScale = Vector3.zero;
 
@@ -90,8 +91,5 @@ public class ItemObject : MonoBehaviour, IScrollHandler, IPointerEnterHandler, I
             GetComponentInParent<Crafting>().CraftItem();
             OnPointerExit(eventData);
         }
-            
-
-        
     }
 }

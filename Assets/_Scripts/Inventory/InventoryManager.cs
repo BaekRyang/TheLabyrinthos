@@ -19,6 +19,8 @@ public class InventoryManager : MonoBehaviour
     public Dictionary<int, Sprite> dict_imgList = new Dictionary<int, Sprite>();
     public Dictionary<int, Item> dict_items;
 
+    public bool b_UIOpen;
+
     [Header("Set In Inspector")]
     //UI요소
     public GameObject GO_inventory;
@@ -52,17 +54,27 @@ public class InventoryManager : MonoBehaviour
         
     }
 
-    public void OpenInventory()
+    public void OpenInventory(string target)
     {
-        GO_inventory.SetActive(true);
-        GO_inventory.transform.Find("Inventory").GetComponent<Inventory>().UpdateInventory();
-        StartCoroutine(LerpCanvas(GO_inventory.GetComponent<CanvasGroup>(), 0, 1, 0.3f));
+        b_UIOpen = true;
+        GameObject GO_targetUI = null;
+        if (target == "Inventory")
+            GO_targetUI = GO_inventory;
+        if (target == "Crafting")
+            GO_targetUI = GO_crafting;
+
+        if (target != null)
+        {
+            GO_targetUI.SetActive(true);
+            GO_targetUI.transform.Find("Inventory").GetComponent<Inventory>().UpdateInventory();
+            StartCoroutine(LerpCanvas(GO_targetUI.GetComponent<CanvasGroup>(), 0, 1, 0.3f));
+        }
+        
 
     }
 
     public IEnumerator CloseUI()
     {
-
         if (GO_inventory.activeSelf)
         {
             Debug.Log("CLOSE Inven");
@@ -75,8 +87,10 @@ public class InventoryManager : MonoBehaviour
             Debug.Log("CLOSE Craft");
             yield return StartCoroutine(LerpCanvas(GO_crafting.GetComponent<CanvasGroup>(), 1, 0, 0.3f));
             GO_crafting.transform.Find("Inventory").GetComponent<Inventory>().DestroyElements();
+            GO_crafting.GetComponent<Crafting>().ResetCells();
             GO_crafting.SetActive(false);
         }
+        b_UIOpen = false;
 
     }
 
@@ -124,6 +138,37 @@ public class InventoryManager : MonoBehaviour
     {
         if (dict_inventory.ContainsKey(item.i_id))      //해당 아이템을 가지고 있다면     
             return dict_inventory[item.i_id] >= amount; //아이템 개수가 amount 이상이면 true, 그렇지 않으면 false 반환
+        else return false;                         //해당 아이템을 가지고 있지 않다면 false 반환
+    }
+
+    public void AddItem(int item, int amount = 1)
+    {
+        if (dict_inventory.ContainsKey(item))   //해당 아이템을 이미 갖고있으면
+        {
+            dict_inventory[item] += amount;     //개수만큼 더해주고
+        }
+        else                                    //없으면
+        {
+            dict_inventory.Add(item, amount);   //새로 만들어준다.
+        }
+    }
+
+    public void RemoveItem(int item, int amount)
+    {
+        if (dict_inventory.ContainsKey(item))   //해당 아이템을 가지고 있다면
+        {
+            dict_inventory[item] -= amount;     //개수를 감소시키고
+            if (dict_inventory[item] <= 0)      //아이템 개수가 0 이하면
+            {
+                dict_inventory.Remove(item);    //딕셔너리에서 아이템을 제거
+            }
+        }
+    }
+
+    public bool HasItem(int item, int amount)
+    {
+        if (dict_inventory.ContainsKey(item))      //해당 아이템을 가지고 있다면     
+            return dict_inventory[item] >= amount; //아이템 개수가 amount 이상이면 true, 그렇지 않으면 false 반환
         else return false;                         //해당 아이템을 가지고 있지 않다면 false 반환
     }
 

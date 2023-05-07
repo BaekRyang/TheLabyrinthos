@@ -66,8 +66,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: f40f04c7346ebf548982cc5b427ddf9c, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -167,8 +167,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3076c2e333e57b741aae8ecf5b602237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isUIElement: 1
-  hasItem: 0
+  b_isInventoryUIElement: 1
+  b_canClick: 0
   I_item:
     i_id: 0
     s_name: 

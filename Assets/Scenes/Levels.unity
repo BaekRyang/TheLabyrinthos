@@ -3577,6 +3577,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ItemCell
       objectReference: {fileID: 0}
+    - target: {fileID: 6123744891066433719, guid: 85fc210efbb7d384d8980f3e595773f1,
+        type: 3}
+      propertyPath: isInventoryUIElement
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85fc210efbb7d384d8980f3e595773f1, type: 3}
 --- !u!224 &492126100 stripped
@@ -5403,6 +5408,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6123744891066433719, guid: 85fc210efbb7d384d8980f3e595773f1,
+        type: 3}
+      propertyPath: isInventoryUIElement
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85fc210efbb7d384d8980f3e595773f1, type: 3}
@@ -8512,6 +8522,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   i_inventoryCount: 0
   i_itemCount: 0
+  b_UIOpen: 0
   GO_inventory: {fileID: 908559618}
   GO_crafting: {fileID: 1150566430}
   RT_infoBox: {fileID: 322040279}
@@ -8791,6 +8802,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ItemCell (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6123744891066433719, guid: 85fc210efbb7d384d8980f3e595773f1,
+        type: 3}
+      propertyPath: isInventoryUIElement
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85fc210efbb7d384d8980f3e595773f1, type: 3}
 --- !u!224 &1082867592 stripped
@@ -8996,6 +9012,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6123744891066433719, guid: 85fc210efbb7d384d8980f3e595773f1,
+        type: 3}
+      propertyPath: isInventoryUIElement
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85fc210efbb7d384d8980f3e595773f1, type: 3}
@@ -9665,7 +9686,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   GO_indicator: {fileID: 0}
-  RTR_destItemCell: {fileID: 0}
+  GO_destItemCell: {fileID: 0}
   GO_resourceCells:
   - {fileID: 0}
   - {fileID: 0}
@@ -13145,11 +13166,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 282068468}
     m_Modifications:
-    - target: {fileID: 900480389135054779, guid: 85fc210efbb7d384d8980f3e595773f1,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4009503142233795427, guid: 85fc210efbb7d384d8980f3e595773f1,
         type: 3}
       propertyPath: m_Pivot.x
@@ -13260,10 +13276,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DestItem
       objectReference: {fileID: 0}
-    - target: {fileID: 6650172389416438336, guid: 85fc210efbb7d384d8980f3e595773f1,
+    - target: {fileID: 6123744891066433719, guid: 85fc210efbb7d384d8980f3e595773f1,
         type: 3}
-      propertyPath: m_Enabled
-      value: 1
+      propertyPath: isInventoryUIElement
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85fc210efbb7d384d8980f3e595773f1, type: 3}
@@ -14138,6 +14154,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ItemCell (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6123744891066433719, guid: 85fc210efbb7d384d8980f3e595773f1,
+        type: 3}
+      propertyPath: isInventoryUIElement
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85fc210efbb7d384d8980f3e595773f1, type: 3}

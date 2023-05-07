@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
-    Dictionary<int, int> tmpInventory;
+    Dictionary<int, int> dict_Inventory;
     Dictionary<int, Item> dict_items;
     Dictionary<int, Sprite> dict_imgList;
 
@@ -28,7 +28,7 @@ public class Inventory : MonoBehaviour
 
     public void LoadSetting()
     {
-        tmpInventory = InventoryManager.Instance.dict_inventory;
+        dict_Inventory = InventoryManager.Instance.dict_inventory;
         dict_items = InventoryManager.Instance.dict_items;
         dict_imgList = InventoryManager.Instance.dict_imgList;
     }
@@ -39,7 +39,7 @@ public class Inventory : MonoBehaviour
 
     public void UpdateInventory()
     {
-        foreach (KeyValuePair<int, int> kvp in tmpInventory)
+        foreach (KeyValuePair<int, int> kvp in dict_Inventory)
         {
             Item targetItem = dict_items[kvp.Key];
             switch (targetItem.IT_type)
@@ -51,15 +51,7 @@ public class Inventory : MonoBehaviour
                         tmpGO = Instantiate(copyGO, TF_Weapons);
                         tmpGO.GetComponent<ItemObject>().I_item = targetItem;
                         tmpGO.name = targetItem.s_name;
-                        tmpGO.GetComponent<ItemObject>().UpdateItem();
-
-                        //Sprite tmpSPR;
-                        //dict_imgList.TryGetValue(targetItem.i_id, out tmpSPR); //이미지 리스트에서 해당번호의 이미지를 가져온다.
-
-                        //tmpGO.transform.GetChild(0).GetComponent<Image>().sprite = tmpSPR;
-                        
-                        //tmpGO.transform.GetChild(1).GetComponent<TMP_Text>().text = kvp.Value.ToString();
-                        //tmpGO.transform.GetChild(1).gameObject.SetActive(true);
+                        tmpGO.GetComponent<ItemObject>().UpdateItem(kvp.Value);
                         break;
                     }
 
@@ -70,7 +62,7 @@ public class Inventory : MonoBehaviour
                         tmpGO = Instantiate(copyGO, TF_Disposables);
                         tmpGO.GetComponent<ItemObject>().I_item = targetItem;
                         tmpGO.name = targetItem.s_name;
-                        tmpGO.GetComponent<ItemObject>().UpdateItem();
+                        tmpGO.GetComponent<ItemObject>().UpdateItem(kvp.Value);
                         break;
                     }
                 case ItemType.Food:
@@ -80,7 +72,8 @@ public class Inventory : MonoBehaviour
                         tmpGO = Instantiate(copyGO, TF_Foods);
                         tmpGO.GetComponent<ItemObject>().I_item = targetItem;
                         tmpGO.name = targetItem.s_name;
-                        tmpGO.GetComponent<ItemObject>().UpdateItem();
+                        tmpGO.GetComponent<ItemObject>().UpdateItem(kvp.Value);
+                        Debug.Log(kvp.Value);
                         break;
                     }
                 case ItemType.Other:
@@ -90,7 +83,7 @@ public class Inventory : MonoBehaviour
                         tmpGO = Instantiate(copyGO, TF_Others);
                         tmpGO.GetComponent<ItemObject>().I_item = targetItem;
                         tmpGO.name = targetItem.s_name;
-                        tmpGO.GetComponent<ItemObject>().UpdateItem();
+                        tmpGO.GetComponent<ItemObject>().UpdateItem(kvp.Value);
                         break;
                     }
                 default:

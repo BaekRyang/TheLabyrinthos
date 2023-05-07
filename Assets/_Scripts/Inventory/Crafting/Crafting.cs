@@ -1,3 +1,4 @@
+using Mono.Cecil.Cil;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,8 +15,10 @@ public class Crafting : MonoBehaviour
     public RectTransform[] RTR_contents = new RectTransform[4];
 
     public GameObject GO_indicator;
-    public RectTransform RTR_destItemCell;
+    public GameObject GO_destItemCell;
     public GameObject[] GO_resourceCells = new GameObject[5];
+
+    private Dictionary<int, int> dict_targetRecipe;
 
     InventoryManager IM_manager;
 
@@ -26,13 +29,15 @@ public class Crafting : MonoBehaviour
 
         Transform tmp_CraftingArea = transform.Find("Crafting").Find("Elements").Find("CraftingArea");
         GO_indicator = tmp_CraftingArea.Find("Indicator").gameObject;
-        RTR_destItemCell = tmp_CraftingArea.Find("DestItem").GetComponent<RectTransform>();
+        GO_destItemCell = tmp_CraftingArea.Find("DestItem").gameObject;
 
         for (int i = 0; i < 5; i++)
         {
             GO_resourceCells[i] = tmp_CraftingArea.Find("Ingredients").GetChild(i).gameObject;
             GO_resourceCells[i].SetActive(false);
         }
+
+        GO_resourceCells[0].SetActive(true);
     }
     void Start()
     {
@@ -62,11 +67,13 @@ public class Crafting : MonoBehaviour
 
     public void LoadItemToTable(int destItemID, Dictionary<int,int> recipe)
     {
-        RTR_destItemCell.GetComponent<ItemObject>().I_item = IM_manager.dict_items[destItemID];
-        RTR_destItemCell.GetComponent<ItemObject>().UpdateItem();
+        GO_destItemCell.GetComponent<ItemObject>().I_item = IM_manager.dict_items[destItemID];
+        GO_destItemCell.GetComponent<ItemObject>().UpdateItem();
+
+        dict_targetRecipe = recipe;
 
         int count = 0;
-        foreach (var kvp in recipe)
+        foreach (var kvp in dict_targetRecipe)
         {
             GO_resourceCells[count].SetActive(true);
             GO_resourceCells[count].GetComponent<ItemObject>().I_item = IM_manager.dict_items[kvp.Key];
@@ -76,6 +83,64 @@ public class Crafting : MonoBehaviour
 
         for (int i = count; i < 5; i++)
             GO_resourceCells[i].SetActive(false); //안쓰는 칸은 꺼준다.
+
+        CalcCanCraft();
+    }
+
+    public void ResetCells()
+    {
+        GO_destItemCell.GetComponent<ItemObject>().I_item = null;
+        GO_destItemCell.GetComponent<ItemObject>().UpdateItem();
+        GO_destItemCell.GetComponent<ItemObject>().b_canClick = false;
+        GO_resourceCells[0].GetComponent<ItemObject>().I_item = null;
+        GO_resourceCells[0].GetComponent<ItemObject>().UpdateItem();
+
+        for (int i = 1; i < 5; i++)
+            GO_resourceCells[i].SetActive(false);
+    }
+
+    public void CalcCanCraft()
+    {
+        int count = 0;
+        int unprepared = 0;
+        foreach (var kvp in dict_targetRecipe)
+        {
+            if (!IM_manager.HasItem(kvp.Key, kvp.Value))
+            {
+                GO_resourceCells[count].GetComponent<ItemObject>().TansparentItem(true);
+                unprepared++;
+            }
+            else
+                GO_resourceCells[count].GetComponent<ItemObject>().TansparentItem(false);
+            count++;
+        }
+
+        if (unprepared != 0) 
+            GO_destItemCell.GetComponent<ItemObject>().TansparentItem(true);
+        else
+        {
+            GO_destItemCell.GetComponent<ItemObject>().TansparentItem(false);
+            GO_destItemCell.GetComponent<ItemObject>().b_canClick = true;
+        }
+            
+    }
+
+    public void CraftItem()
+    {
+        //재료 아이템 인벤에서 없애주고
+        foreach (var kvp in dict_targetRecipe)  
+            IM_manager.RemoveItem(kvp.Key, kvp.Value);
+
+        //완성품 넣어준다.
+        IM_manager.AddItem(GO_destItemCell.GetComponent<ItemObject>().I_item); 
+
+        //인벤토리 업데이트 해준다.
+        IM_manager.GO_crafting.transform.Find("Inventory").GetComponent<Inventory>().DestroyElements(); 
+        IM_manager.GO_crafting.transform.Find("Inventory").GetComponent<Inventory>().UpdateInventory(); 
+
+        //제작대는 비워준다.
+        ResetCells();
+
     }
 
     void Update()

@@ -95,9 +95,10 @@ public class GameManager : MonoBehaviour
     {
         //UI 켜거나 끄기
         if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.Escape))
-        {
-            Inventory(InventoryManager.Instance.GO_inventory.activeSelf);
-        }
+            Inventory("Inventory");
+
+        if (Input.GetKeyDown(KeyCode.E))
+            Inventory("Crafting");
     }
 
     public void ResetLevel(int level)
@@ -241,16 +242,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Inventory(bool isOpen)
+    private void Inventory(string targetUI)
     {
-        bool setClose = isOpen;
-        if (InventoryManager.Instance.GO_crafting.activeSelf) //만약 다른창이 켜져있으면 종료시킨다.
-        {
-            setClose = true;
-        }
+        bool b_setClose = InventoryManager.Instance.b_UIOpen;
 
         PlayerController PC_tmp = go_player.GetComponent<PlayerController>();
-        if (setClose) //인벤끄기
+        if (b_setClose) //인벤끄기
         {
             PC_tmp.b_camControll = false;
 
@@ -269,7 +266,7 @@ public class GameManager : MonoBehaviour
             PC_tmp.vertical = 0;
             PC_tmp.b_camControll = true;
             Cursor.lockState = CursorLockMode.Confined;
-            InventoryManager.Instance.OpenInventory();
+            InventoryManager.Instance.OpenInventory(targetUI);
         }
     }
 

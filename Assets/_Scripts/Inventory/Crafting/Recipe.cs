@@ -43,7 +43,7 @@ public class Recipe : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < resourceCount.Length; i++)
         {
-            sb.Append(InventoryManager.Instance.dict_items[resourceID[i]].s_name + " " + resourceCount[i] + "°³");
+            sb.Append(InventoryManager.Instance.dict_items[resourceID[i]].s_name + " " + resourceCount[i] + "ê°œ");
             if (i != resourceCount.Length - 1)
             {
                 sb.Append("\n");

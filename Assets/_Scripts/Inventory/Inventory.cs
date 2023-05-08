@@ -97,7 +97,7 @@ public class Inventory : MonoBehaviour
     void CalcCellSize()
     {
         while (TF_Weapons.childCount < 6) Instantiate(copyGO, TF_Weapons);
-        TF_Weapons.GetComponent<RectTransform>().sizeDelta = new Vector2(160 * TF_Weapons.childCount - 30, 0); //Cellsize + Spaceing * Ä­ °³¼ö ¸¸Å­ Ä­ Å©±â¸¦ Å°¿öÁØ´Ù.
+        TF_Weapons.GetComponent<RectTransform>().sizeDelta = new Vector2(160 * TF_Weapons.childCount - 30, 0); //Cellsize + Spaceing * ì¹¸ ê°œìˆ˜ ë§Œí¼ ì¹¸ í¬ê¸°ë¥¼ í‚¤ì›Œì¤€ë‹¤.
         TF_Weapons.GetComponent<RectTransform>().anchoredPosition = new Vector2(80 * TF_Weapons.childCount - 15, 0);
 
         while (TF_Disposables.childCount < 6) Instantiate(copyGO, TF_Disposables);

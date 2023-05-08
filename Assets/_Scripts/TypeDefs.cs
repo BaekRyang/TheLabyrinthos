@@ -98,7 +98,7 @@ namespace TypeDefs
     [Serializable]
     public class PlayerStats
     {
-        //±âº» ½ºÅÝ
+        //ê¸°ë³¸ ìŠ¤í…Ÿ
         public float health = 100.0f;
         public float maxHealth = 100.0f;
         public float exp = 1.0f;

@@ -7,14 +7,15 @@ public delegate void Dele();
 [Serializable]
 public class Item
 {
-    public int i_id;                  //¾ÆÀÌÅÛ ½Äº°¿ë ¾ÆÀÌµğ
-    public string s_name;           //¾ÆÀÌÅÛ ÀÌ¸§
-    public string s_description;    //¾ÆÀÌÅÛ ¼³¸í
-    public ItemType IT_type;        //¾ÆÀÌÅÛ Å¸ÀÔ
+    public int i_id;                  //ì•„ì´í…œ ì‹ë³„ìš© ì•„ì´ë””
+    public string s_name;           //ì•„ì´í…œ ì´ë¦„
+    public string s_description;    //ì•„ì´í…œ ì„¤ëª…
+    public ItemType IT_type;        //ì•„ì´í…œ íƒ€ì…
     public bool b_useable;
-    public Dele dele_itemEffect;    //¾ÆÀÌÅÛ È¿°ú(ÇÔ¼ö·Î)
 
-    public delegate void ParseAttributes(Item item, string[] dataValue, int startIndex); //CSV¿¡¼­ ÆÄÀÏÀ» ÀĞ¾î¼­ °¢ ¸â¹ö º¯¼ö¸¦ ÃÊ±âÈ­ ÇÏ´Â ÄÚµå°¡ µé¾î°¥ ÀÚ¸®
+    public Dele dele_itemEffect;    //ì•„ì´í…œ íš¨ê³¼(í•¨ìˆ˜ë¡œ)
+
+    public delegate void ParseAttributes(Item item, string[] dataValue, int startIndex); //CSVì—ì„œ íŒŒì¼ì„ ì½ì–´ì„œ ê° ë©¤ë²„ ë³€ìˆ˜ë¥¼ ì´ˆê¸°í™” í•˜ëŠ” ì½”ë“œê°€ ë“¤ì–´ê°ˆ ìë¦¬
     public ParseAttributes parsing;
 }
 

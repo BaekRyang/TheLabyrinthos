@@ -21,23 +21,23 @@ public class Minimap : MonoBehaviour
     private void Start()
     {
         GO_roomPrefab.GetComponent<RectTransform>().sizeDelta = new Vector2(i_boxSize, i_boxSize);
-        //¸¸¾à ¹Ú½º »çÀÌÁî ÁÙÀÌ¸é ÇÁ¸®ÆÕÀÇ Å©±âµµ ÁÙ¿©¾ß ÇÏ´Ï±î
+        //ë§Œì•½ ë°•ìŠ¤ ì‚¬ì´ì¦ˆ ì¤„ì´ë©´ í”„ë¦¬íŒ¹ì˜ í¬ê¸°ë„ ì¤„ì—¬ì•¼ í•˜ë‹ˆê¹Œ
     }
 
 
     public void CreateMinimap(Dictionary<int, RoomNode> map)
     {
-        if (GO_anchor.transform.childCount > 0) //¸¸¾à ±âÁ¸¿¡ »ç¿ëÇÏ´ø ¹Ì´Ï¸Ê ¿ÀºêÁ§Æ®°¡ ³²¾ÆÀÖÀ¸¸é
+        if (GO_anchor.transform.childCount > 0) //ë§Œì•½ ê¸°ì¡´ì— ì‚¬ìš©í•˜ë˜ ë¯¸ë‹ˆë§µ ì˜¤ë¸Œì íŠ¸ê°€ ë‚¨ì•„ìˆìœ¼ë©´
         {
             foreach (Transform child in GO_anchor.transform)
             {
                 Destroy(child.gameObject);
             }
-            //ÀüºÎ »ç¶óÁú¶§ ±îÁö DestroyÇÑ´Ù.
+            //ì „ë¶€ ì‚¬ë¼ì§ˆë•Œ ê¹Œì§€ Destroyí•œë‹¤.
         }
-        GO_rooms = new GameObject[100]; //ÀÌÀü¿¡ ÀÖ´ø µ¥ÀÌÅÍ´Â ÃÊ±âÈ­
+        GO_rooms = new GameObject[100]; //ì´ì „ì— ìˆë˜ ë°ì´í„°ëŠ” ì´ˆê¸°í™”
 
-        for (int i = 0; i < 100; i++) //·¹º§ ·Îµù¶§ ÇÑ¹ø¸¸ ½ÇÇàµÇ´Ï±î 100°³ ´Ù µ¹¸°´Ù.
+        for (int i = 0; i < 100; i++) //ë ˆë²¨ ë¡œë”©ë•Œ í•œë²ˆë§Œ ì‹¤í–‰ë˜ë‹ˆê¹Œ 100ê°œ ë‹¤ ëŒë¦°ë‹¤.
         {
             if (!map.ContainsKey(i)) continue;
             else
@@ -46,10 +46,10 @@ public class Minimap : MonoBehaviour
                 GO_rooms[i].transform.localPosition = new Vector3(  ((-5 * i_boxSize) + (i % 10) * i_boxSize),
                                                                     ((-4 * i_boxSize) + (i / 10) * i_boxSize),
                                                                         0);
-                //¹æ »ı¼ºÇÏ´Â ¾Ë°í¸®ÁòÀÌ¶û µ¿ÀÏÇÏ°Ô ¹Ì´Ï¸Ê¿¡ ¿ÀºêÁ§Æ®¸¦ ºÙ¿©³õ´Â´Ù.
-                //localPositionÀº Instantiate¶§ ¼³Á¤ÇÒ ¼ö ¾ø¾î¼­ ³ª´©¾î¼­ ¼³Á¤ÇÑ´Ù.
+                //ë°© ìƒì„±í•˜ëŠ” ì•Œê³ ë¦¬ì¦˜ì´ë‘ ë™ì¼í•˜ê²Œ ë¯¸ë‹ˆë§µì— ì˜¤ë¸Œì íŠ¸ë¥¼ ë¶™ì—¬ë†“ëŠ”ë‹¤.
+                //localPositionì€ Instantiateë•Œ ì„¤ì •í•  ìˆ˜ ì—†ì–´ì„œ ë‚˜ëˆ„ì–´ì„œ ì„¤ì •í•œë‹¤.
 
-                GO_rooms[i].name = i.ToString(); //½Äº°¿ë
+                GO_rooms[i].name = i.ToString(); //ì‹ë³„ìš©
             }
         }
 
@@ -62,11 +62,11 @@ public class Minimap : MonoBehaviour
     }
 
     public void SetAnchor(int roomIdx)
-    { //¹æÀ» ÀÌµ¿ÇÒ¶§ ¾ğÁ¦³ª ÇÃ·¹ÀÌ¾î°¡ ÀÖ´Â ¹æÀÌ ¹Ì´Ï¸Ê ÇÑ °¡¿îµ¥¿¡ ¿Àµµ·Ï ÇÑ´Ù.
+    { //ë°©ì„ ì´ë™í• ë•Œ ì–¸ì œë‚˜ í”Œë ˆì´ì–´ê°€ ìˆëŠ” ë°©ì´ ë¯¸ë‹ˆë§µ í•œ ê°€ìš´ë°ì— ì˜¤ë„ë¡ í•œë‹¤.
         GO_anchor.transform.localPosition = new Vector3(-((-5 * i_boxSize) + (roomIdx % 10) * i_boxSize),
                                                         -((-4 * i_boxSize) + (roomIdx / 10) * i_boxSize),
                                                            0);
-        //±×³É »ı¼º ¾Ë°í¸®Áò ¹æÇâÀ» ¹İ´ë·Î ÇÏ¸é µÊ
+        //ê·¸ëƒ¥ ìƒì„± ì•Œê³ ë¦¬ì¦˜ ë°©í–¥ì„ ë°˜ëŒ€ë¡œ í•˜ë©´ ë¨
         return;
     }
 }

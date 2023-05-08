@@ -26,8 +26,8 @@ public class ObjectController : MonoBehaviour
             {
                 if (b_customCreature)
                 {
-                    Creature tmpCR = GameManager.Instance.CR_levelDefault; //º£ÀÌ½º Å©¸®ÃÄ
-                    CR_creature = new Creature( //»õ·Î ¸¸µé¾î¼­ ÇÒ´ç
+                    Creature tmpCR = GameManager.Instance.CR_levelDefault; //ë² ì´ìŠ¤ í¬ë¦¬ì³
+                    CR_creature = new Creature( //ìƒˆë¡œ ë§Œë“¤ì–´ì„œ í• ë‹¹
                         tmpCR.damage * CR_customCreature.damage,
                         tmpCR.defense * CR_customCreature.defense,
                         tmpCR.health * CR_customCreature.health,
@@ -36,7 +36,7 @@ public class ObjectController : MonoBehaviour
                         tmpCR.spritePack = CSP_spritePack
                         );
                 } else
-                {   //Ä¿½ºÅÒ Å©¸®ÃÄ ¾Æ´Ï¸é ÇØ´ç ·¹º§ ±âº» ½ºÅİ
+                {   //ì»¤ìŠ¤í…€ í¬ë¦¬ì³ ì•„ë‹ˆë©´ í•´ë‹¹ ë ˆë²¨ ê¸°ë³¸ ìŠ¤í…Ÿ
                     CR_creature = new Creature(GameManager.Instance.CR_levelDefault, CSP_spritePack);
                 }
                 

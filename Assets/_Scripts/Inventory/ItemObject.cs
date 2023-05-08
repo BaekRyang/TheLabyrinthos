@@ -11,8 +11,8 @@ public class ItemObject : MonoBehaviour, IScrollHandler, IPointerEnterHandler, I
 {
     ScrollRect SR_parent;
 
-    public bool b_isInventoryUIElement = false;       //ÀÎº¥Åä¸® UIÀÎÁö Ç¥½Ã
-                                                      //Á¶ÇÕ´ë¿¡¼­µµ ÀÌ°Å ¾²´Ï±î ÀÖ´Â ¼³Á¤
+    public bool b_isInventoryUIElement = false;       //ì¸ë²¤í† ë¦¬ UIì¸ì§€ í‘œì‹œ
+                                                      //ì¡°í•©ëŒ€ì—ì„œë„ ì´ê±° ì“°ë‹ˆê¹Œ ìˆëŠ” ì„¤ì •
     public bool b_canClick = false;
     public Item I_item;
 
@@ -47,7 +47,7 @@ public class ItemObject : MonoBehaviour, IScrollHandler, IPointerEnterHandler, I
             transform.GetChild(0).GetComponent<Image>().color = new Color(1, 1, 1, 1);
     }
 
-    public void OnScroll(PointerEventData eventData) //½ºÅ©·Ñ ¿ä¼Ò¶§¹®¿¡ ÀÌº¥Æ®¸¦ ³Ñ°ÜÁØ´Ù.
+    public void OnScroll(PointerEventData eventData) //ìŠ¤í¬ë¡¤ ìš”ì†Œë•Œë¬¸ì— ì´ë²¤íŠ¸ë¥¼ ë„˜ê²¨ì¤€ë‹¤.
     {
         if(!SR_parent.IsUnityNull())
             SR_parent.OnScroll(eventData);

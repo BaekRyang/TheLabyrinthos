@@ -16,13 +16,13 @@ public class BattleAnimate : MonoBehaviour
         int loc = 1536;
         if (isPlayer)
         {
-            // isPlayer°¡ trueÀÎ °æ¿ì ¾Æ¹«°Íµµ ÇÏÁö ¾Ê½À´Ï´Ù.
+            // isPlayerê°€ trueì¸ ê²½ìš° ì•„ë¬´ê²ƒë„ í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.
         }
         else
         {
-            transform.localPosition = new Vector2(loc, 0); // localPosition °ªÀ» ÃÊ±âÈ­ÇÕ´Ï´Ù.
+            transform.localPosition = new Vector2(loc, 0); // localPosition ê°’ì„ ì´ˆê¸°í™”í•©ë‹ˆë‹¤.
 
-            // duration µ¿¾È localPosition °ªÀ» 0À¸·Î Interpolate ÇÕ´Ï´Ù.
+            // duration ë™ì•ˆ localPosition ê°’ì„ 0ìœ¼ë¡œ Interpolate í•©ë‹ˆë‹¤.
             float time = 0f;
             Vector2 startPos = transform.localPosition;
             Vector2 endPos = Vector2.zero;
@@ -33,7 +33,7 @@ public class BattleAnimate : MonoBehaviour
                 transform.localPosition = Vector2.Lerp(startPos, endPos, t);
                 yield return null;
             }
-            transform.localPosition = endPos; // localPosition °ªÀ» ÃÖÁ¾°ªÀ¸·Î ¼³Á¤ÇÕ´Ï´Ù.
+            transform.localPosition = endPos; // localPosition ê°’ì„ ìµœì¢…ê°’ìœ¼ë¡œ ì„¤ì •í•©ë‹ˆë‹¤.
         }
     }
 }

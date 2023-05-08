@@ -34,15 +34,15 @@ public class CSVReader : MonoBehaviour
 
         LoadItems();
 
-        //LoadCraftingTable(); //CraftingÀÌ È£ÃâÇÔ
+        //LoadCraftingTable(); //Craftingì´ í˜¸ì¶œí•¨
     }
 
-    private void WriteDelegate() //°¢ ¾ÆÀÌÅÛÀ» Parsing ÇÏ´Â ÄÚµå ÀÛ¼º : »ç½Ç Å¬·¡½º ¾È¿¡´Ù°¡ ¸¸µé¸é ´õ °£´ÜÇÑµ¥
-                                 //¾ÆÀÌÅÛ ParsingÀ» CSVReader°¡ ÀüºÎ ÇÏµµ·Ï ÇÏ±â À§ÇØ¼­ Delegate¸¦ ÅëÇØ ÇÒ´çÇØÁØ´Ù.
+    private void WriteDelegate() //ê° ì•„ì´í…œì„ Parsing í•˜ëŠ” ì½”ë“œ ì‘ì„± : ì‚¬ì‹¤ í´ë˜ìŠ¤ ì•ˆì—ë‹¤ê°€ ë§Œë“¤ë©´ ë” ê°„ë‹¨í•œë°
+                                 //ì•„ì´í…œ Parsingì„ CSVReaderê°€ ì „ë¶€ í•˜ë„ë¡ í•˜ê¸° ìœ„í•´ì„œ Delegateë¥¼ í†µí•´ í• ë‹¹í•´ì¤€ë‹¤.
     {
         Item.parsing += (Item item, string[] dataValue, int startIndex) =>
         {
-            Debug.Log("Parsing ÇÒ µ¥ÀÌÅÍ ¾øÀ½");
+            Debug.Log("Parsing í•  ë°ì´í„° ì—†ìŒ");
         };
         Weapon.parsing += (Item baseItem, string[] dataValue, int startIndex) =>
         {
@@ -89,7 +89,7 @@ public class CSVReader : MonoBehaviour
             return;
         };
 
-        parsingDelegates = new Dictionary<ItemType, Item.ParseAttributes> //DelegateµéÀ» ÀúÀåÇÒ Dictionary ¾ÆÀÌÅÛÀ» ¸¸µé¶§ ¿©±âÀÇ ÇÔ¼ö¸¦ È£ÃâÇÑ´Ù.
+        parsingDelegates = new Dictionary<ItemType, Item.ParseAttributes> //Delegateë“¤ì„ ì €ì¥í•  Dictionary ì•„ì´í…œì„ ë§Œë“¤ë•Œ ì—¬ê¸°ì˜ í•¨ìˆ˜ë¥¼ í˜¸ì¶œí•œë‹¤.
         {
             { ItemType.Undefined, Item.parsing },
             { ItemType.Weapon, Weapon.parsing },
@@ -99,7 +99,7 @@ public class CSVReader : MonoBehaviour
         };
     }
 
-    private void LoadItems() //CSV¸¦ ÀĞ´Â ±âº» ·ÎÁ÷ Ã³¸®
+    private void LoadItems() //CSVë¥¼ ì½ëŠ” ê¸°ë³¸ ë¡œì§ ì²˜ë¦¬
     {
         InventoryManager iManager = GetComponent<InventoryManager>();
         TextAsset textAsset = Resources.Load<TextAsset>("Items");
@@ -107,25 +107,25 @@ public class CSVReader : MonoBehaviour
 
         while (true)
         {
-            string data = sReader.ReadLine();                       //µ¥ÀÌÅÍ¸¦ ÇÑÁÙ ÀĞ´Â´Ù.
-            if (data == null) break;                                //ºñ¾îÀÖÀ¸¸é break
+            string data = sReader.ReadLine();                       //ë°ì´í„°ë¥¼ í•œì¤„ ì½ëŠ”ë‹¤.
+            if (data == null) break;                                //ë¹„ì–´ìˆìœ¼ë©´ break
 
-            var data_value = data.Split(',');                       //CSVÆÄÀÏÀº ","·Î ±¸ºĞÇÏ¹Ç·Î ,·Î ºĞÇÒÇÏ°í ºĞÇÒµÈ °¢ °ªÀ» ¹è¿­¿¡ ÀúÀå
-            if (data_value[0] == "Type") continue;                  //Ã¹ÁÙÀº Ç×¸ñ À¯Çü ¼³¸íÅÇÀÌ¹Ç·Î Ã¹ÁÙÀÌ¸é °Ç³Ê¶Ú´Ù. (ÀÌ CSV ÆÄÀÏ¿¡¼­´Â 1,1 ¿¡ TypeÀÌ ÀÖÀ½)
+            var data_value = data.Split(',');                       //CSVíŒŒì¼ì€ ","ë¡œ êµ¬ë¶„í•˜ë¯€ë¡œ ,ë¡œ ë¶„í• í•˜ê³  ë¶„í• ëœ ê° ê°’ì„ ë°°ì—´ì— ì €ì¥
+            if (data_value[0] == "Type") continue;                  //ì²«ì¤„ì€ í•­ëª© ìœ í˜• ì„¤ëª…íƒ­ì´ë¯€ë¡œ ì²«ì¤„ì´ë©´ ê±´ë„ˆë›´ë‹¤. (ì´ CSV íŒŒì¼ì—ì„œëŠ” 1,1 ì— Typeì´ ìˆìŒ)
 
-            Item tmpItem = ParseItem(data_value);                   //ParseItemÀ» È£ÃâÇÏ¿© À§¿¡¼­ ¸¸µç ¹è¿­À» ³Ñ°ÜÁØ´Ù.
-            if (tmpItem.IT_type == ItemType.Undefined) continue;    //¸¸µé¾îÁø ¾ÆÀÌÅÛÀÇ Á¾·ù°¡ Undefined ÀÌ¸é Á¤»óÀûÀ¸·Î ¸¸µé¾îÁø ¾ÆÀÌÅÛÀÌ ¾Æ´Ï¹Ç·Î Áö³ª°£´Ù.
+            Item tmpItem = ParseItem(data_value);                   //ParseItemì„ í˜¸ì¶œí•˜ì—¬ ìœ„ì—ì„œ ë§Œë“  ë°°ì—´ì„ ë„˜ê²¨ì¤€ë‹¤.
+            if (tmpItem.IT_type == ItemType.Undefined) continue;    //ë§Œë“¤ì–´ì§„ ì•„ì´í…œì˜ ì¢…ë¥˜ê°€ Undefined ì´ë©´ ì •ìƒì ìœ¼ë¡œ ë§Œë“¤ì–´ì§„ ì•„ì´í…œì´ ì•„ë‹ˆë¯€ë¡œ ì§€ë‚˜ê°„ë‹¤.
 
-            iManager.dict_items.Add(tmpItem.i_id, tmpItem);         //¸¸µé¾îÁø ¾ÆÀÌÅÛÀ» InventoryManager¿¡ ÀÖ´Â ¾ÆÀÌÅÛ ¸ñ·ÏÀ» ÀúÀåÇÏ´Â Dictionary¿¡ ÀúÀåÇÑ´Ù.
-            iManager.i_itemCount++;                                 //¸¸µé¾îÁø ¾ÆÀÌÅÛ °³¼ö¸¦ +1
-            Debug.Log(tmpItem.s_name + " µî·ÏµÊ");
+            iManager.dict_items.Add(tmpItem.i_id, tmpItem);         //ë§Œë“¤ì–´ì§„ ì•„ì´í…œì„ InventoryManagerì— ìˆëŠ” ì•„ì´í…œ ëª©ë¡ì„ ì €ì¥í•˜ëŠ” Dictionaryì— ì €ì¥í•œë‹¤.
+            iManager.i_itemCount++;                                 //ë§Œë“¤ì–´ì§„ ì•„ì´í…œ ê°œìˆ˜ë¥¼ +1
+            Debug.Log(tmpItem.s_name + " ë“±ë¡ë¨");
         }
     }
 
     private Item ParseItem(string[] data_value)
     {
         Item tmpItem = new Item();
-        for (int i = 0; i < data_value.Length; i++)                 //°¢ ¿­ÀÇ µ¥ÀÌÅÍ¸¦ ÀĞ¾î¼­ ¾ÆÀÌÅÛ µ¥ÀÌÅÍ¿¡ ÀúÀåÇÑ´Ù.
+        for (int i = 0; i < data_value.Length; i++)                 //ê° ì—´ì˜ ë°ì´í„°ë¥¼ ì½ì–´ì„œ ì•„ì´í…œ ë°ì´í„°ì— ì €ì¥í•œë‹¤.
         {
             switch (i)
             {
@@ -146,11 +146,11 @@ public class CSVReader : MonoBehaviour
                     tmpItem.b_useable = bool.Parse(data_value[i]);
                     break;
 
-                default:                                                                        //¾ÆÀÌÅÛ °øÅë ³»¿ëÀ» ÀüºÎ ÀÛ¼ºÇß´Ù¸é, ¾ÆÀÌÅÛ Æ¯¼ö ³»¿ëÀ» ÀÛ¼ºÇÑ´Ù. ÀÌ¶§ À§¿¡¼­ ÀÛ¼ºÇÑ Dictionary¸¦ »ç¿ëÇÑ´Ù.
-                    Item.ParseAttributes parseAttributes = parsingDelegates[tmpItem.IT_type];   //¾ÆÀÌÅÛ Å¸ÀÔ¿¡ µû¶ó¼­ ´Ù¸¥ ÇÔ¼ö¸¦ È£ÃâÇØÁØ´Ù.
-                    parseAttributes?.Invoke(tmpItem, data_value, 5);                            //À§ ÇÔ¼ö°¡ NullÀÌ ¾Æ´Ï¸é È£ÃâÇÑ´Ù. tmpItemÀ» ³Ñ°Ü¼­ °Å±â¿¡ µ¥ÀÌÅÍ¸¦ ÀúÀåÇÑ´Ù.
-                    i = 100;                                                                    //±×¸®°í for¹®À» Á¾·á½ÃÅ°±â À§ÇÏ¿© i¸¦ ´Ã·ÁÁØ´Ù.
-                    break;                                                                      //Á¶°ÇÀ» i < 5 ¸¦ ½áµµ µÇÁö¸¸, ±×³É ÀÌ·¸°Ô ÇÑ´Ù.
+                default:                                                                        //ì•„ì´í…œ ê³µí†µ ë‚´ìš©ì„ ì „ë¶€ ì‘ì„±í–ˆë‹¤ë©´, ì•„ì´í…œ íŠ¹ìˆ˜ ë‚´ìš©ì„ ì‘ì„±í•œë‹¤. ì´ë•Œ ìœ„ì—ì„œ ì‘ì„±í•œ Dictionaryë¥¼ ì‚¬ìš©í•œë‹¤.
+                    Item.ParseAttributes parseAttributes = parsingDelegates[tmpItem.IT_type];   //ì•„ì´í…œ íƒ€ì…ì— ë”°ë¼ì„œ ë‹¤ë¥¸ í•¨ìˆ˜ë¥¼ í˜¸ì¶œí•´ì¤€ë‹¤.
+                    parseAttributes?.Invoke(tmpItem, data_value, 5);                            //ìœ„ í•¨ìˆ˜ê°€ Nullì´ ì•„ë‹ˆë©´ í˜¸ì¶œí•œë‹¤. tmpItemì„ ë„˜ê²¨ì„œ ê±°ê¸°ì— ë°ì´í„°ë¥¼ ì €ì¥í•œë‹¤.
+                    i = 100;                                                                    //ê·¸ë¦¬ê³  forë¬¸ì„ ì¢…ë£Œì‹œí‚¤ê¸° ìœ„í•˜ì—¬ ië¥¼ ëŠ˜ë ¤ì¤€ë‹¤.
+                    break;                                                                      //ì¡°ê±´ì„ i < 5 ë¥¼ ì¨ë„ ë˜ì§€ë§Œ, ê·¸ëƒ¥ ì´ë ‡ê²Œ í•œë‹¤.
             }
         }
 
@@ -205,14 +205,14 @@ public class CSVReader : MonoBehaviour
                         break;
 
                     default:
-                        if (string.IsNullOrWhiteSpace(data_value[i])) //¸¸¾à ºó°ø°£ÀÌ ³ª¿Ô´Ù¸é = Á¶ÇÕ ¾ÆÀÌÅÛÀÌ 5°³ ¹Ì¸¸ÀÎ °æ¿ì
+                        if (string.IsNullOrWhiteSpace(data_value[i])) //ë§Œì•½ ë¹ˆê³µê°„ì´ ë‚˜ì™”ë‹¤ë©´ = ì¡°í•© ì•„ì´í…œì´ 5ê°œ ë¯¸ë§Œì¸ ê²½ìš°
                         {
-                            i = 100; //for¹®À» ´õ º¼ÇÊ¿äµµ ¾øÀ½
+                            i = 100; //forë¬¸ì„ ë” ë³¼í•„ìš”ë„ ì—†ìŒ
                             break;  
                         }
 
-                        string[] s_recipeDetail = data_value[i].Split(".");     //(¾ÆÀÌÅÛ ID . ÇÊ¿äÇÑ °³¼ö) ±¸Á¶¸¦ °®°íÀÖÀ¸¹Ç·Î "."À¸·Î ÂÉ°³ÁÖ°í.
-                        C_crafting.dict_craftingTable[int.Parse(data_value[0])][int.Parse(s_recipeDetail[0])] = int.Parse(s_recipeDetail[1]); //¿Ï¼º ¾ÆÀÌÅÛÀ» Key·Î ÇÏ´Â Dict¿¡ ³Ö¾îÁØ´Ù.
+                        string[] s_recipeDetail = data_value[i].Split(".");     //(ì•„ì´í…œ ID . í•„ìš”í•œ ê°œìˆ˜) êµ¬ì¡°ë¥¼ ê°–ê³ ìˆìœ¼ë¯€ë¡œ "."ìœ¼ë¡œ ìª¼ê°œì£¼ê³ .
+                        C_crafting.dict_craftingTable[int.Parse(data_value[0])][int.Parse(s_recipeDetail[0])] = int.Parse(s_recipeDetail[1]); //ì™„ì„± ì•„ì´í…œì„ Keyë¡œ í•˜ëŠ” Dictì— ë„£ì–´ì¤€ë‹¤.
                         break;
                 }
             }

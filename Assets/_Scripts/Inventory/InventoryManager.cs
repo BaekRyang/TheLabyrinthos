@@ -11,10 +11,10 @@ public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance;
 
-    [SerializeField] private int i_inventoryCount; //ÀÎ½ºÆåÅÍ È®ÀÎ¿ë
-    [SerializeField] public int i_itemCount; //ÀÎ½ºÆåÅÍ È®ÀÎ¿ë
+    [SerializeField] private int i_inventoryCount; //ì¸ìŠ¤í™í„° í™•ì¸ìš©
+    [SerializeField] public int i_itemCount; //ì¸ìŠ¤í™í„° í™•ì¸ìš©
 
-    //ÀÎº¥Åä¸® key, value Çü½ÄÀ¸·Î »ç¿ë
+    //ì¸ë²¤í† ë¦¬ key, value í˜•ì‹ìœ¼ë¡œ ì‚¬ìš©
     public Dictionary<int, int> dict_inventory;
     public Dictionary<int, Sprite> dict_imgList = new Dictionary<int, Sprite>();
     public Dictionary<int, Item> dict_items;
@@ -22,7 +22,7 @@ public class InventoryManager : MonoBehaviour
     public bool b_UIOpen;
 
     [Header("Set In Inspector")]
-    //UI¿ä¼Ò
+    //UIìš”ì†Œ
     public GameObject GO_inventory;
     public GameObject GO_crafting;
 
@@ -46,7 +46,7 @@ public class InventoryManager : MonoBehaviour
         GO_inventory.transform.Find("Inventory").GetComponent<Inventory>().LoadSetting();
         GO_inventory.SetActive(false);
         GO_crafting.transform.Find("Inventory").GetComponent<Inventory>().LoadSetting();
-        //GO_crafting.SetActive(false); //Crafting¿¡¼­ ·Îµù ´Ù ³¡³ª¸é ¾Ë¾Æ¼­ ºñÈ°¼ºÈ­ ÇÑ´Ù.
+        //GO_crafting.SetActive(false); //Craftingì—ì„œ ë¡œë”© ë‹¤ ëë‚˜ë©´ ì•Œì•„ì„œ ë¹„í™œì„±í™” í•œë‹¤.
     }
 
     void Update()
@@ -111,66 +111,64 @@ public class InventoryManager : MonoBehaviour
 
     public void AddItem(Item item, int amount = 1)
     {
-        if (dict_inventory.ContainsKey(item.i_id))   //ÇØ´ç ¾ÆÀÌÅÛÀ» ÀÌ¹Ì °®°íÀÖÀ¸¸é
+        if (dict_inventory.ContainsKey(item.i_id))   //í•´ë‹¹ ì•„ì´í…œì„ ì´ë¯¸ ê°–ê³ ìˆìœ¼ë©´
         {
             Debug.Log(item.s_name + " + " + amount);
-            dict_inventory[item.i_id] += amount;     //°³¼ö¸¸Å­ ´õÇØÁÖ°í
+            dict_inventory[item.i_id] += amount;     //ê°œìˆ˜ë§Œí¼ ë”í•´ì£¼ê³ 
         }
-        else                                    //¾øÀ¸¸é
+        else                                         //ì—†ìœ¼ë©´
         {
             Debug.Log(item.s_name + " New " + amount);
-            dict_inventory.Add(item.i_id, amount);   //»õ·Î ¸¸µé¾îÁØ´Ù.
+            dict_inventory.Add(item.i_id, amount);   //ìƒˆë¡œ ë§Œë“¤ì–´ì¤€ë‹¤.
         }
     }
 
     public void RemoveItem(Item item, int amount)
     {
-        if (dict_inventory.ContainsKey(item.i_id))   //ÇØ´ç ¾ÆÀÌÅÛÀ» °¡Áö°í ÀÖ´Ù¸é
+        if (dict_inventory.ContainsKey(item.i_id))   //í•´ë‹¹ ì•„ì´í…œì„ ê°€ì§€ê³  ìˆë‹¤ë©´
         {        
-            dict_inventory[item.i_id] -= amount;     //°³¼ö¸¦ °¨¼Ò½ÃÅ°°í
-            if (dict_inventory[item.i_id] <= 0)      //¾ÆÀÌÅÛ °³¼ö°¡ 0 ÀÌÇÏ¸é
-            {           
-                dict_inventory.Remove(item.i_id);    //µñ¼Å³Ê¸®¿¡¼­ ¾ÆÀÌÅÛÀ» Á¦°Å
-            }
+            dict_inventory[item.i_id] -= amount;     //ê°œìˆ˜ë¥¼ ê°ì†Œì‹œí‚¤ê³ 
+            if (dict_inventory[item.i_id] <= 0)      //ì•„ì´í…œ ê°œìˆ˜ê°€ 0 ì´í•˜ë©´     
+                dict_inventory.Remove(item.i_id);    //ë”•ì…”ë„ˆë¦¬ì—ì„œ ì•„ì´í…œì„ ì œê±°
         }
     }
 
     public bool HasItem(Item item, int amount)
     {
-        if (dict_inventory.ContainsKey(item.i_id))      //ÇØ´ç ¾ÆÀÌÅÛÀ» °¡Áö°í ÀÖ´Ù¸é     
-            return dict_inventory[item.i_id] >= amount; //¾ÆÀÌÅÛ °³¼ö°¡ amount ÀÌ»óÀÌ¸é true, ±×·¸Áö ¾ÊÀ¸¸é false ¹İÈ¯
-        else return false;                         //ÇØ´ç ¾ÆÀÌÅÛÀ» °¡Áö°í ÀÖÁö ¾Ê´Ù¸é false ¹İÈ¯
+        if (dict_inventory.ContainsKey(item.i_id))      //í•´ë‹¹ ì•„ì´í…œì„ ê°€ì§€ê³  ìˆë‹¤ë©´     
+            return dict_inventory[item.i_id] >= amount; //ì•„ì´í…œ ê°œìˆ˜ê°€ amount ì´ìƒì´ë©´ true, ê·¸ë ‡ì§€ ì•Šìœ¼ë©´ false ë°˜í™˜
+        else return false;                              //í•´ë‹¹ ì•„ì´í…œì„ ê°€ì§€ê³  ìˆì§€ ì•Šë‹¤ë©´ false ë°˜í™˜
     }
 
     public void AddItem(int item, int amount = 1)
     {
-        if (dict_inventory.ContainsKey(item))   //ÇØ´ç ¾ÆÀÌÅÛÀ» ÀÌ¹Ì °®°íÀÖÀ¸¸é
+        if (dict_inventory.ContainsKey(item))   //í•´ë‹¹ ì•„ì´í…œì„ ì´ë¯¸ ê°–ê³ ìˆìœ¼ë©´
         {
-            dict_inventory[item] += amount;     //°³¼ö¸¸Å­ ´õÇØÁÖ°í
+            dict_inventory[item] += amount;     //ê°œìˆ˜ë§Œí¼ ë”í•´ì£¼ê³ 
         }
-        else                                    //¾øÀ¸¸é
+        else                                    //ì—†ìœ¼ë©´
         {
-            dict_inventory.Add(item, amount);   //»õ·Î ¸¸µé¾îÁØ´Ù.
+            dict_inventory.Add(item, amount);   //ìƒˆë¡œ ë§Œë“¤ì–´ì¤€ë‹¤.
         }
     }
 
     public void RemoveItem(int item, int amount)
     {
-        if (dict_inventory.ContainsKey(item))   //ÇØ´ç ¾ÆÀÌÅÛÀ» °¡Áö°í ÀÖ´Ù¸é
+        if (dict_inventory.ContainsKey(item))   //í•´ë‹¹ ì•„ì´í…œì„ ê°€ì§€ê³  ìˆë‹¤ë©´
         {
-            dict_inventory[item] -= amount;     //°³¼ö¸¦ °¨¼Ò½ÃÅ°°í
-            if (dict_inventory[item] <= 0)      //¾ÆÀÌÅÛ °³¼ö°¡ 0 ÀÌÇÏ¸é
+            dict_inventory[item] -= amount;     //ê°œìˆ˜ë¥¼ ê°ì†Œì‹œí‚¤ê³ 
+            if (dict_inventory[item] <= 0)      //ì•„ì´í…œ ê°œìˆ˜ê°€ 0 ì´í•˜ë©´
             {
-                dict_inventory.Remove(item);    //µñ¼Å³Ê¸®¿¡¼­ ¾ÆÀÌÅÛÀ» Á¦°Å
+                dict_inventory.Remove(item);    //ë”•ì…”ë„ˆë¦¬ì—ì„œ ì•„ì´í…œì„ ì œê±°
             }
         }
     }
 
     public bool HasItem(int item, int amount)
     {
-        if (dict_inventory.ContainsKey(item))      //ÇØ´ç ¾ÆÀÌÅÛÀ» °¡Áö°í ÀÖ´Ù¸é     
-            return dict_inventory[item] >= amount; //¾ÆÀÌÅÛ °³¼ö°¡ amount ÀÌ»óÀÌ¸é true, ±×·¸Áö ¾ÊÀ¸¸é false ¹İÈ¯
-        else return false;                         //ÇØ´ç ¾ÆÀÌÅÛÀ» °¡Áö°í ÀÖÁö ¾Ê´Ù¸é false ¹İÈ¯
+        if (dict_inventory.ContainsKey(item))      //í•´ë‹¹ ì•„ì´í…œì„ ê°€ì§€ê³  ìˆë‹¤ë©´     
+            return dict_inventory[item] >= amount; //ì•„ì´í…œ ê°œìˆ˜ê°€ amount ì´ìƒì´ë©´ true, ê·¸ë ‡ì§€ ì•Šìœ¼ë©´ false ë°˜í™˜
+        else return false;                         //í•´ë‹¹ ì•„ì´í…œì„ ê°€ì§€ê³  ìˆì§€ ì•Šë‹¤ë©´ false ë°˜í™˜
     }
 
 }

@@ -57,9 +57,7 @@ public class MainScene : MonoBehaviour
             }
         }
         else if (button == "StartGame")
-        {
             StartGame();
-        }
     }
 
     public void StartGame()

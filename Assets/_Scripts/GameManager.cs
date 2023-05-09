@@ -72,10 +72,15 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        if (!b_useSeed)
+        GameObject data = GameObject.Find("DataPacker");
+        
+        if (!data.GetComponent<DataCarrier>().useSeed)
         {
             //시드를 따로 지정하지 않았으면 새로 만들어준다.
             GetComponent<RoomCreation>().CreateSeed(ref s_seed);
+        } else
+        {
+            s_seed = data.GetComponent<DataCarrier>().seed;
         }
 
         dict_randomObjects.Add("Object",     new Random(Convert.ToInt32(s_seed, 16) + 1)); //오브젝트용 랜덤 시드

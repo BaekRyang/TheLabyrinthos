@@ -2,8 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
@@ -16,6 +19,13 @@ public class MainScene : MonoBehaviour
 
     [SerializeField] GameObject[] GO_lights;
     [SerializeField] Light[] LIT_lights;
+    [SerializeField] Volume VOL_volume;
+
+    [SerializeField] GameObject GO_targetPosition;
+    [SerializeField] GameObject GO_defaultPosition;
+
+    [SerializeField] GameObject GO_whiteBoard;
+    Material[] MAT_logos = new Material[2];
 
     bool b_loaded = false;
 
@@ -31,6 +41,9 @@ public class MainScene : MonoBehaviour
             GO_lights[i] = GO_lights[i].transform.GetChild(0).gameObject;
             LIT_lights[i] = GO_lights[i].GetComponent<Light>();
         }
+
+        MAT_logos[0] = GO_whiteBoard.transform.GetChild(0).GetChild(0).GetComponent<Renderer>().material;
+        MAT_logos[1] = GO_whiteBoard.transform.GetChild(0).GetChild(1).GetComponent<Renderer>().material;
     }
 
     void Update()
@@ -48,28 +61,43 @@ public class MainScene : MonoBehaviour
                 transform.GetChild(2).gameObject.SetActive(false);
                 CanvasGroup tmpCG = GO_mainUI.GetComponent<CanvasGroup>();
                 GO_mainUI.SetActive(true);
-                StartCoroutine(LerpValue(alpha => tmpCG.alpha = alpha, 0, 1, 1));
-                StartCoroutine(LerpValue((intense) => {
+                StartCoroutine(LerpValue<float>(alpha => tmpCG.alpha = alpha, 0, 1, 1, Mathf.Lerp));
+                StartCoroutine(LerpValue<float>((intense) => {
                     for (int i = 0; i < 12; i++)
                         LIT_lights[i].intensity = intense;
                     return;
-                }, 0, 5, 3));
+                }, 0, 5, 3, Mathf.Lerp));
             }
         }
         else if (button == "StartGame")
+<<<<<<< Updated upstream
             StartGame();
+=======
+        {
+            StartCoroutine(LerpValue(value => Camera.main.transform.position = value, GO_defaultPosition.transform.position, GO_targetPosition.transform.position, 1, Vector3.Lerp, EaseOutSine));
+            StartCoroutine(LerpValue(value => Camera.main.transform.rotation = value, GO_defaultPosition.transform.rotation, GO_targetPosition.transform.rotation, 1, Quaternion.Lerp, EaseOutSine));
+            DepthOfField dof;
+            VOL_volume.profile.TryGet(out dof);
+
+            StartCoroutine(LerpValue(value => dof.focusDistance.value = value, 5, 0.2f, 1, Mathf.Lerp));
+            StartCoroutine(LerpValue(value => dof.aperture.value = value, 15, 32f, 1, Mathf.Lerp));
+
+            StartCoroutine(LerpValue(value => MAT_logos[0].color = value, Color.white, new Color(1, 1, 1, 0), 0.5f, Color.Lerp));
+            StartCoroutine(LerpValue(value => MAT_logos[1].color = value, Color.white, new Color(1, 1, 1, 0), 0.5f, Color.Lerp));
+        } 
+>>>>>>> Stashed changes
     }
 
     public void StartGame()
     {
-        StartCoroutine(LerpValue(volume => AS_mainLoop.volume = volume, 1, 0, 2));
+        StartCoroutine(LerpValue<float>(volume => AS_mainLoop.volume = volume, 1, 0, 2, Mathf.Lerp));
         StartCoroutine(CurtainModify(false, 3));
     }
     
     private IEnumerator Open()
     {
         yield return new WaitForSeconds(1);
-        StartCoroutine(LerpValue(volume => AS_mainLoop.volume = volume, 0, 1, 4));
+        StartCoroutine(LerpValue<float>(volume => AS_mainLoop.volume = volume, 0, 1, 4, Mathf.Lerp));
         yield return new WaitForSeconds(1);
         StartCoroutine(CurtainModify(true, 3));
         yield return new WaitForSeconds(3);
@@ -111,21 +139,44 @@ public class MainScene : MonoBehaviour
         }
     }
 
-    private IEnumerator LerpValue(Action<float> valueSetter, float from, float to, float duration)
-                                 //람다식을 매개변수로 가져와서 사용한다.
+    private IEnumerator LerpValue<T>(
+        Action<T> valueSetter,                      //람다 함수
+        T from,                                     //from
+        T to,                                       //to
+        float duration,                             //보간 시간
+        Func<T, T, float, T> lerpFunction,   //보간 함수
+        Func<float, float> easingFunction = null)   //이징 함수
     {
+
+        if (easingFunction == null) //없으면 선형보간
+            easingFunction = Linear;
+
         float elapsedTime = 0.0f;
-        
+
         while (elapsedTime < duration)
         {
-            //LerpValue(volume => AS_mainLoop.volume = volume, 0, 1, 4)
-            //          volume                                          => LerpValue에서 Mathf.Lerp를 해서 나온 값을 volume으로 전달한다.
-            //                    AS_mainLoop.volume = volume =>        => param volume을 AS_mainLoop.volume 에 넣어준다.                     
-            valueSetter(Mathf.Lerp(from, to, (elapsedTime / duration)));
+            float t = elapsedTime / duration;
+            float easedT = easingFunction(t);
+            valueSetter(lerpFunction(from, to, easedT));
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
         valueSetter(to);
+    }
+
+    private float Linear(float t) //선형보간
+    {
+        return t;
+    }
+
+    private float EaseOutSine(float t)
+    {
+        return Mathf.Sin(Mathf.Pow(t, 0.5f) * Mathf.PI / 2);
+    }   
+
+    private float EaseInSine(float t)
+    {
+        return 1 - Mathf.Cos((t * Mathf.PI) / 2);
     }
 }

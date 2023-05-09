@@ -10,10 +10,14 @@ public class Flickering : MonoBehaviour
     public float maxInterval = 3.0f;
 
     private Light lightComponent;
+    public Material lightMaterial;
+    public Color lightColor;
 
     private void Start()
     {
         lightComponent = GetComponent<Light>();
+        lightMaterial = transform.parent.GetChild(0).GetComponent<Renderer>().material;
+        lightColor = lightMaterial.GetColor("_EmissionColor");
         StartCoroutine(FlickerLight());
     }
 
@@ -21,10 +25,13 @@ public class Flickering : MonoBehaviour
     {
         while (true)
         {
-            lightComponent.enabled = !lightComponent.enabled;
+            lightComponent.intensity = 50;
             float flickerDuration = Random.Range(minFlickerTime, maxFlickerTime);
+            transform.parent.GetChild(0).GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.gray);
             yield return new WaitForSeconds(flickerDuration);
-            lightComponent.enabled = !lightComponent.enabled;
+            lightComponent.intensity = 200;
+            transform.parent.GetChild(0).GetComponent<Renderer>().material.SetColor("_EmissionColor", lightColor);
+
             float interval = Random.Range(minInterval, maxInterval);
             yield return new WaitForSeconds(interval);
         }

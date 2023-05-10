@@ -82,17 +82,26 @@ public class MainScene : MonoBehaviour
             }
         }
         else if (button == "StartGame")
+            StartCoroutine(Zoom(true));
+        else if (button == "LoadLevel")
+            StartCoroutine(CurtainModify(false, 3));
+        else if (button == "BacktoMenu")
+            StartCoroutine(Zoom(false));
+    }
+
+    private IEnumerator Zoom(bool zoom)
+    {
+        if (zoom)
         {
             StartCoroutine(LerpValue(value => Camera.main.transform.position = value, GO_defaultPosition.transform.position, GO_targetPosition.transform.position, 1, Vector3.Lerp, EaseOutSine));
             StartCoroutine(LerpValue(value => Camera.main.transform.rotation = value, GO_defaultPosition.transform.rotation, GO_targetPosition.transform.rotation, 1, Quaternion.Lerp, EaseOutSine));
             DepthOfField dof;
             VOL_volume.profile.TryGet(out dof);
 
-            StartCoroutine(LerpValue(value => dof.focusDistance.value = value, 5, 0.2f, 1, Mathf.Lerp));
-            StartCoroutine(LerpValue(value => dof.aperture.value = value, 15, 32f, 1, Mathf.Lerp));
+            StartCoroutine(LerpValue(value => dof.focusDistance.value = value, 6, 2.5f, 1, Mathf.Lerp));
 
             StartCoroutine(LerpValue(value => MAT_logos[0].color = value, Color.white, new Color(1, 1, 1, 0), 0.5f, Color.Lerp));
-            StartCoroutine(LerpValue(value => MAT_logos[1].color = value, Color.white, new Color(1, 1, 1, 0), 0.5f, Color.Lerp));
+            yield return StartCoroutine(LerpValue(value => MAT_logos[1].color = value, Color.white, new Color(1, 1, 1, 0), 0.5f, Color.Lerp));
 
             GO_mainUI.transform.Find("NewGameSetting").gameObject.SetActive(true);
             var tmpCG = GO_mainUI.transform.Find("NewGameSetting").GetComponent<CanvasGroup>();
@@ -100,27 +109,25 @@ public class MainScene : MonoBehaviour
             StartCoroutine(LerpValue(value => tmpCG.alpha = value, 0, 1f, 1f, Mathf.Lerp, EaseOutSine));
             StartCoroutine(LerpValue(value => tmpCG2.alpha = value, 1, 0f, 1f, Mathf.Lerp, EaseOutSine));
             GO_mainUI.transform.Find("MainTabs").gameObject.SetActive(false);
-        } else if (button == "LoadLevel")
-            StartCoroutine(CurtainModify(false, 3));
-        else if (button == "BacktoMenu")
+        }
+        else
         {
+            var tmpCG = GO_mainUI.transform.Find("NewGameSetting").GetComponent<CanvasGroup>();
+            StartCoroutine(LerpValue(value => tmpCG.alpha = value, 1, 0f, 0.3f, Mathf.Lerp));
+            GO_mainUI.transform.Find("NewGameSetting").gameObject.SetActive(false);
+
+            GO_mainUI.transform.Find("MainTabs").gameObject.SetActive(true);
+            var tmpCG2 = GO_mainUI.transform.Find("MainTabs").GetComponent<CanvasGroup>();
+            StartCoroutine(LerpValue(value => tmpCG2.alpha = value, 0, 1f, 0.5f, Mathf.Lerp));
             StartCoroutine(LerpValue(value => Camera.main.transform.position = value, GO_targetPosition.transform.position, GO_defaultPosition.transform.position, 1, Vector3.Lerp, EaseOutSine));
             StartCoroutine(LerpValue(value => Camera.main.transform.rotation = value, GO_targetPosition.transform.rotation, GO_defaultPosition.transform.rotation, 1, Quaternion.Lerp, EaseOutSine));
             DepthOfField dof;
             VOL_volume.profile.TryGet(out dof);
 
-            StartCoroutine(LerpValue(value => dof.focusDistance.value = value, 0.2f, 5, 1, Mathf.Lerp));
-            StartCoroutine(LerpValue(value => dof.aperture.value = value, 32, 15f, 1, Mathf.Lerp));
+            StartCoroutine(LerpValue(value => dof.focusDistance.value = value, 2.5f, 6, 1, Mathf.Lerp));
 
             StartCoroutine(LerpValue(value => MAT_logos[0].color = value, new Color(1, 1, 1, 0), Color.white, 0.5f, Color.Lerp));
             StartCoroutine(LerpValue(value => MAT_logos[1].color = value, new Color(1, 1, 1, 0), Color.white, 0.5f, Color.Lerp));
-
-            GO_mainUI.transform.Find("MainTabs").gameObject.SetActive(true);
-            var tmpCG = GO_mainUI.transform.Find("NewGameSetting").GetComponent<CanvasGroup>();
-            var tmpCG2 = GO_mainUI.transform.Find("MainTabs").GetComponent<CanvasGroup>();
-            StartCoroutine(LerpValue(value => tmpCG.alpha = value, 1, 0f, 0.5f, Mathf.Lerp));
-            StartCoroutine(LerpValue(value => tmpCG2.alpha = value, 0, 1f, 0.5f, Mathf.Lerp));
-            GO_mainUI.transform.Find("NewGameSetting").gameObject.SetActive(false);
         }
     }
 

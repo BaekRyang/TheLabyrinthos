@@ -64,7 +64,7 @@ AudioMixerController:
   m_UpdateMode: 0
   m_ExposedParameters:
   - guid: 5c6316d127679144a9e3ca4270941378
-    name: BGM
+    name: Music
   - guid: 7078120a859a5d0478d60e229c136a4a
     name: Master
   - guid: 34cdc95e66482724ebf429de95f86de2
@@ -124,6 +124,7 @@ AudioMixerSnapshotController:
   m_FloatValues:
     263ef861575aa824c90664bac29c2923: 361
     5af3af8109ca9dc44af1400dcd9319f0: -14.9
+    5c6316d127679144a9e3ca4270941378: 4
     3b81d302dcf09754aa54b2d41779719e: 0
     a8ac1036529d39944aa5a7f38963c02f: 0.886
     1ff362a67125e894a93c3ba77f9981a2: 2.3
@@ -133,8 +134,10 @@ AudioMixerSnapshotController:
     7a669de8965d5b14d9775c708d0fb9f2: 123
     e4a30c29a3c45d94dbf90f2aeb7f3a03: 0.377
     f87510b99fb453a4d8794e140097f1a9: 0
+    7078120a859a5d0478d60e229c136a4a: 4
     244949bcb4a09d349b329ef729d74b06: 2810
     d23b1bfd7c9aa9c46b16ff7408b7f95f: 1
+    34cdc95e66482724ebf429de95f86de2: 4
     ce3be78e6a5bf4343908c4eca6df1d78: 0.216
     a6bf69afe13aae440aafb7f30a1735f1: 7.76
   m_TransitionOverrides: {}
@@ -144,7 +147,7 @@ AudioMixerGroupController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BGM
+  m_Name: Music
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: c78c526a7c2bb6f4eb6eeb053e3a211b
   m_Children: []

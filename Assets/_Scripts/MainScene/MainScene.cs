@@ -81,7 +81,7 @@ public class MainScene : MonoBehaviour
                     for (int i = 0; i < 12; i++)
                         LIT_lights[i].intensity = intense;
                     return;
-                }, 0, 5, 3, Mathf.Lerp));
+                }, 0.1f, 5, 3, Mathf.Lerp));
             }
         }
         else if (button == "StartGame")
@@ -115,7 +115,7 @@ public class MainScene : MonoBehaviour
             StartCoroutine(LerpValue(value => dof.focusDistance.value = value, 6, 2.5f, 1, Mathf.Lerp));
 
             StartCoroutine(LerpValue(value => MAT_logos[0].color = value, Color.white, new Color(1, 1, 1, 0), 0.5f, Color.Lerp));
-            StartCoroutine(LerpValue(value => MAT_logos[1].color = value, Color.white, new Color(1, 1, 1, 0), 0.5f, Color.Lerp));
+            yield return StartCoroutine(LerpValue(value => MAT_logos[1].color = value, Color.white, new Color(1, 1, 1, 0), 0.5f, Color.Lerp));
 
             GO_mainUI.transform.Find("NewGameSetting").gameObject.SetActive(true);
             var tmpCG = GO_mainUI.transform.Find("NewGameSetting").GetComponent<CanvasGroup>();

@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
     public bool b_camControll = false;
     public bool b_nowBattle = false;
 
-    //카메라 회전
+    //카메라 회전 및 움직임
     float rotationSpeed = 2f;
     float distanceFromPlayer = 1f;
 
@@ -36,6 +36,9 @@ public class PlayerController : MonoBehaviour
 
     float minZoomDistance = 1f;
     float maxZoomDistance = 1f;
+
+    private Vector3 previousPosition;
+    private Quaternion previousRotation;
 
     //카메라 벽 체크
     public LayerMask wallLayer;
@@ -132,11 +135,7 @@ public class PlayerController : MonoBehaviour
             // pitch값 범위 제한
             pitch = Mathf.Clamp(pitch, -80f, 80f);
 
-            // 카메라 회전
-            Quaternion rotation = Quaternion.Euler(pitch, yaw, 0);
-
-            Camera.main.transform.position = transform.position + Vector3.up * 1.65f;
-            Camera.main.transform.rotation = rotation;
+            
 
             GO_minimapArrow.transform.rotation = Quaternion.Euler(0, 0, Camera.main.transform.rotation.eulerAngles.y + (90 - Camera.main.transform.rotation.eulerAngles.y) * 2);
 
@@ -197,6 +196,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
     private void FixedUpdate()
     {
         if (horizontal == 0 && vertical == 0)
@@ -206,6 +206,12 @@ public class PlayerController : MonoBehaviour
         {
             Move();
         }
+
+        // 카메라 회전
+        Quaternion rotation = Quaternion.Euler(pitch, yaw, 0);
+
+        Camera.main.transform.position = transform.position + Vector3.up * 1.65f;
+        Camera.main.transform.rotation = rotation;
 
     }
 

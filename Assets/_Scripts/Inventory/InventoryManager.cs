@@ -1,11 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using TypeDefs;
-using System.Diagnostics;
 using Debug = UnityEngine.Debug;
-using UnityEditorInternal.Profiling.Memory.Experimental;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -45,6 +41,7 @@ public class InventoryManager : MonoBehaviour
     {
         GO_inventory.transform.Find("Inventory").GetComponent<Inventory>().LoadSetting();
         GO_inventory.SetActive(false);
+        GetComponent<Player>().WP_weapon = dict_items[0] as Weapon; //임시로 아이템 넣어주기
         GO_crafting.transform.Find("Inventory").GetComponent<Inventory>().LoadSetting();
         //GO_crafting.SetActive(false); //Crafting에서 로딩 다 끝나면 알아서 비활성화 한다.
     }
@@ -70,7 +67,7 @@ public class InventoryManager : MonoBehaviour
             StartCoroutine(LerpCanvas(GO_targetUI.GetComponent<CanvasGroup>(), 0, 1, 0.3f));
         }
 
-        GetComponent<Player>().WP_weapon = dict_items[0] as Weapon;
+        
 
     }
 

@@ -28,10 +28,11 @@ public class MainScene : MonoBehaviour
     [SerializeField] GameObject[] GO_cameras;
 
     bool b_loaded = false;
-
+     
     void Start()
     {
-        Screen.SetResolution(1920, 1080, true);
+        Screen.SetResolution(1920, 1080, Screen.fullScreenMode);
+        //Screen.SetResolution(2560, 1440, true);
         StartCoroutine(Open());
         dataCarrier = GameObject.Find("DataPacker").GetComponent<DataCarrier>();
         DontDestroyOnLoad(dataCarrier);
@@ -93,7 +94,10 @@ public class MainScene : MonoBehaviour
         else if (button == "BacktoMenu_ST")
             StartCoroutine(MoveMenu(3));
         else if (button == "LoadLevel")
-            StartCoroutine(CurtainModify(false, 3));
+            StartCoroutine(CurtainModify(false, 2, true));
+        else if (button == "Exit")
+            StartCoroutine(CurtainModify(false, 1, false, true));
+            
     }
 
     public void StartGame()
@@ -182,13 +186,13 @@ public class MainScene : MonoBehaviour
         yield return new WaitForSeconds(1);
         StartCoroutine(LerpValue<float>(volume => AS_mainLoop.volume = volume, 0, 1, 4, Mathf.Lerp));
         yield return new WaitForSeconds(1);
-        StartCoroutine(CurtainModify(true, 3));
+        StartCoroutine(CurtainModify(true, 2));
         yield return new WaitForSeconds(3);
         b_loaded = true;
     }
 
 
-    public IEnumerator CurtainModify(bool open, float delay) //화면 암전 풀거나 걸기
+    public IEnumerator CurtainModify(bool open, float delay, bool loadScene = false, bool quit = false) //화면 암전 풀거나 걸기
     {
         float elapsedTime = 0f;
 
@@ -216,10 +220,18 @@ public class MainScene : MonoBehaviour
 
         I_curtain.color = endColor;
 
-        if (!open)
+        if (loadScene)
         {
-            SceneManager.LoadScene("Levels");   
+            yield return StartCoroutine(LerpValue<float>(volume => AS_mainLoop.volume = volume, 1, 0, 1, Mathf.Lerp));
+            SceneManager.LoadScene("Levels");
         }
+            
+        if (quit)
+        {
+            yield return StartCoroutine(LerpValue<float>(volume => AS_mainLoop.volume = volume, 1, 0, 1, Mathf.Lerp));
+            Application.Quit();
+        }
+            
     }
 
     private IEnumerator LerpValue<T>(

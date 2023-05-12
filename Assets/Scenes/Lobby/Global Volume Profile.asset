@@ -1,5 +1,33 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-1452502035811768337
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66f335fb1ffd8684294ad653bf1c7564, type: 3}
+  m_Name: ColorAdjustments
+  m_EditorClassIdentifier: 
+  active: 1
+  postExposure:
+    m_OverrideState: 1
+    m_Value: 1
+  contrast:
+    m_OverrideState: 0
+    m_Value: 0
+  colorFilter:
+    m_OverrideState: 1
+    m_Value: {r: 0.75529414, g: 0.8392157, b: 0.8090564, a: 1}
+  hueShift:
+    m_OverrideState: 1
+    m_Value: 20
+  saturation:
+    m_OverrideState: 0
+    m_Value: 0
 --- !u!114 &-802866638183098182
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -58,6 +86,7 @@ MonoBehaviour:
   - {fileID: 4485020110763088050}
   - {fileID: 4553467651571156237}
   - {fileID: 506291487976126939}
+  - {fileID: -1452502035811768337}
 --- !u!114 &506291487976126939
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -70,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c01700fd266d6914ababb731e09af2eb, type: 3}
   m_Name: DepthOfField
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   mode:
     m_OverrideState: 1
     m_Value: 2

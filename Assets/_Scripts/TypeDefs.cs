@@ -163,7 +163,8 @@ namespace TypeDefs
         MoveDoor,
         Door,
         Elevator,
-        Item
+        Item,
+        CraftingTable
     }
     #endregion
 

@@ -67,6 +67,9 @@ public class Interactable : MonoBehaviour
                 DestroyImmediate(this.gameObject);                                                                //아이템 오브젝트 삭제
                 break;
 
+            case ObjectType.CraftingTable:
+                break;
+
             default:
                 break;
         }

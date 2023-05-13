@@ -57,7 +57,7 @@ public class RoomController : MonoBehaviour
                 Destroy(transform.GetChild(i).gameObject);
             }
         }
-        GameObject GO_Struct = GameObject.Instantiate(GM.GetRoomObject(RT_roomType), transform.position, Quaternion.identity);
+        GameObject GO_Struct = Instantiate(GM.GetRoomObject(RT_roomType), transform.position, Quaternion.identity);
         if (RT_roomType == RoomType.HorizontalCorridor)
             GO_Struct.transform.Rotate(new Vector3(0, 90, 0)); //세로방은 90도 회전
         GO_Struct.transform.SetParent(transform);

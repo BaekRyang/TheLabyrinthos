@@ -209,19 +209,19 @@ public class GameManager : MonoBehaviour
             case RoomType.VerticalCorridor: //이 두개는 같은걸 return
             case RoomType.HorizontalCorridor:
                 if (typeId != -1)   return GO_corridorPrefabs[typeId];
-                else                return GO_corridorPrefabs[dict_randomObjects["Room"].Next(GO_roomPrefabs.Length)];
+                else                return GO_corridorPrefabs[dict_randomObjects["Room"].Next(GO_corridorPrefabs.Length)];
 
             case RoomType.CraftingRoom:
                 if (typeId != -1)   return GO_craftingPrefabs[typeId];
-                else                return GO_craftingPrefabs[dict_randomObjects["Room"].Next(GO_roomPrefabs.Length)];
+                else                return GO_craftingPrefabs[dict_randomObjects["Room"].Next(GO_craftingPrefabs.Length)];
 
             case RoomType.KeyRoom:
                 if (typeId != -1)   return GO_bossRoomPrefabs[typeId];
-                else                return GO_bossRoomPrefabs[dict_randomObjects["Room"].Next(GO_roomPrefabs.Length)];
+                else                return GO_bossRoomPrefabs[dict_randomObjects["Room"].Next(GO_bossRoomPrefabs.Length)];
 
             case RoomType.Shop:
                 if (typeId != -1)   return GO_shopPrefabs[typeId];
-                else                return GO_shopPrefabs[dict_randomObjects["Room"].Next(GO_roomPrefabs.Length)];
+                else                return GO_shopPrefabs[dict_randomObjects["Room"].Next(GO_shopPrefabs.Length)];
 
             default:
                 if (typeId != -1)   return GO_roomPrefabs[typeId];

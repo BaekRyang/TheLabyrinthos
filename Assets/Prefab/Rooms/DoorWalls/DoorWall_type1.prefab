@@ -458,6 +458,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
+  mode: 1
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 1
 --- !u!114 &190942014570424683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -471,8 +474,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
-  outlineColor: {r: 0, g: 0.33333334, b: 1, a: 1}
-  outlineWidth: 3
+  outlineColor: {r: 1, g: 0.8352941, b: 0, a: 1}
+  outlineWidth: 2
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []

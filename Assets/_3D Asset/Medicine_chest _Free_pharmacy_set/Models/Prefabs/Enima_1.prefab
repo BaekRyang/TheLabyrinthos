@@ -12,7 +12,10 @@ GameObject:
   - component: {fileID: 8350351720746660962}
   - component: {fileID: 6532026399670527382}
   - component: {fileID: 6744637263640415857}
-  m_Layer: 0
+  - component: {fileID: -2369232623937351676}
+  - component: {fileID: -7302867082330926812}
+  - component: {fileID: -4722228566030642608}
+  m_Layer: 10
   m_Name: Enima_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,6 +32,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -52,10 +56,12 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -80,6 +86,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!64 &6744637263640415857
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -94,3 +101,84 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -3052380596624429556, guid: 939be2488f4742449be3c0baff75d676, type: 3}
+--- !u!114 &-2369232623937351676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2118890623154974451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75e9a907cb2e9da43bef6cd397d0cf59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 3
+  mode: 1
+  outlineColor: {r: 1, g: 0.8352941, b: 0, a: 1}
+  outlineWidth: 1
+--- !u!114 &-7302867082330926812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2118890623154974451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12b1f4524d325a44cb9731193edfa2d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  i_percent: 40
+  CSP_spritePack:
+    fullBody_WeakPoint: {fileID: 0}
+    fullBody_Thrax: {fileID: 0}
+    fullBody_Outer: {fileID: 0}
+    cut_Attack: {fileID: 0}
+    cut_Hited: {fileID: 0}
+    cut_Avoid: {fileID: 0}
+  b_customCreature: 0
+  CR_customCreature:
+    damage: 0
+    defense: 0
+    health: 0
+    speed: 0
+    prepareSpeed: 0
+    spritePack:
+      fullBody_WeakPoint: {fileID: 0}
+      fullBody_Thrax: {fileID: 0}
+      fullBody_Outer: {fileID: 0}
+      cut_Attack: {fileID: 0}
+      cut_Hited: {fileID: 0}
+      cut_Avoid: {fileID: 0}
+  i_randNum: 0
+  b_isCreature: 0
+  CR_creature:
+    damage: 0
+    defense: 0
+    health: 0
+    speed: 0
+    prepareSpeed: 0
+    spritePack:
+      fullBody_WeakPoint: {fileID: 0}
+      fullBody_Thrax: {fileID: 0}
+      fullBody_Outer: {fileID: 0}
+      cut_Attack: {fileID: 0}
+      cut_Hited: {fileID: 0}
+      cut_Avoid: {fileID: 0}
+--- !u!54 &-4722228566030642608
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2118890623154974451}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

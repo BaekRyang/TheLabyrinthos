@@ -295,27 +295,30 @@ MonoBehaviour:
   m_RendererInfo:
   - renderer: {fileID: 8763491570386796893}
     lightmapIndex: 0
-    lightmapOffsetScale: {x: 0.20512448, y: 0.20512448, z: -0.00410249, w: 0.78726625}
+    lightmapOffsetScale: {x: 0.2046205, y: 0.2046205, z: 0.1961029, w: 0.782283}
   - renderer: {fileID: 7430234329188284938}
-    lightmapIndex: 0
-    lightmapOffsetScale: {x: 0.10278992, y: 0.10278992, z: 0.8381194, w: 0.1922476}
+    lightmapIndex: 1
+    lightmapOffsetScale: {x: 0.10229336, y: 0.10229336, z: 0.08534746, w: 0.33984375}
   - renderer: {fileID: 2638543239142762884}
-    lightmapIndex: 0
-    lightmapOffsetScale: {x: 0.08491437, y: 0.08491437, z: 0.45208368, w: 0.6861548}
+    lightmapIndex: 1
+    lightmapOffsetScale: {x: 0.08491437, y: 0.08491437, z: 0.36544725, w: 0.12720796}
   - renderer: {fileID: 7314023993679446308}
-    lightmapIndex: 0
-    lightmapOffsetScale: {x: 0.014262947, y: 0.014262947, z: 0.56504077, w: 0.98508275}
+    lightmapIndex: 1
+    lightmapOffsetScale: {x: 0.014262947, y: 0.014262947, z: 0.1739294, w: 0.66169274}
   - renderer: {fileID: 7430234327786931075}
     lightmapIndex: 0
-    lightmapOffsetScale: {x: 0.032091632, y: 0.032091632, z: 0.86864066, w: 0.15733375}
+    lightmapOffsetScale: {x: 0.03158224, y: 0.03158224, z: 0.80405587, w: 0.15854804}
   - renderer: {fileID: 8763491569881408482}
     lightmapIndex: 0
-    lightmapOffsetScale: {x: 0.008132866, y: 0.008132866, z: 0.036937367, w: 0.99091303}
+    lightmapOffsetScale: {x: 0.008132866, y: 0.008132866, z: 0.34901348, w: 0.986408}
   m_Lightmaps:
   - {fileID: 2800000, guid: 06457a42111d3a8438218159f7280dcd, type: 3}
+  - {fileID: 2800000, guid: c1b721602bf068e4d9ebb7c7ed214f9e, type: 3}
   m_LightmapsDir:
   - {fileID: 2800000, guid: a7c647a43967dca488f404d9f17f33cd, type: 3}
+  - {fileID: 2800000, guid: 114fbd43a8c026f469a3ffede8543f7c, type: 3}
   m_ShadowMasks:
+  - {fileID: 0}
   - {fileID: 0}
   m_LightInfo:
   - light: {fileID: 8763491568414307962}
@@ -545,7 +548,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1879
+  m_VersionIndex: 1912
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -735,7 +738,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2078856470, guid: b2d55f22268694247970c378d05e2687, type: 3}
       propertyPath: m_VersionIndex
-      value: 1967
+      value: 2000
       objectReference: {fileID: 0}
     - target: {fileID: 2078856470, guid: b2d55f22268694247970c378d05e2687, type: 3}
       propertyPath: m_SelectedEdges.Array.size
@@ -893,7 +896,7 @@ PrefabInstance:
     - target: {fileID: 2198693297586107727, guid: b2d55f22268694247970c378d05e2687,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 3375
+      value: 3408
       objectReference: {fileID: 0}
     - target: {fileID: 2198693297586107760, guid: b2d55f22268694247970c378d05e2687,
         type: 3}
@@ -918,7 +921,7 @@ PrefabInstance:
     - target: {fileID: 2198693297647353226, guid: b2d55f22268694247970c378d05e2687,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 3392
+      value: 3425
       objectReference: {fileID: 0}
     - target: {fileID: 2198693297647353226, guid: b2d55f22268694247970c378d05e2687,
         type: 3}
@@ -1058,7 +1061,7 @@ PrefabInstance:
     - target: {fileID: 2198693298852618511, guid: b2d55f22268694247970c378d05e2687,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 3411
+      value: 3444
       objectReference: {fileID: 0}
     - target: {fileID: 2198693298852618511, guid: b2d55f22268694247970c378d05e2687,
         type: 3}
@@ -1173,7 +1176,7 @@ PrefabInstance:
     - target: {fileID: 2198693298853350646, guid: b2d55f22268694247970c378d05e2687,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 5471
+      value: 5504
       objectReference: {fileID: 0}
     - target: {fileID: 2198693298853350646, guid: b2d55f22268694247970c378d05e2687,
         type: 3}
@@ -1423,7 +1426,7 @@ PrefabInstance:
     - target: {fileID: 3556073299153750804, guid: b2d55f22268694247970c378d05e2687,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 3408
+      value: 3441
       objectReference: {fileID: 0}
     - target: {fileID: 3556073299153750804, guid: b2d55f22268694247970c378d05e2687,
         type: 3}
@@ -1458,7 +1461,7 @@ PrefabInstance:
     - target: {fileID: 6404236651545874905, guid: b2d55f22268694247970c378d05e2687,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 825
+      value: 858
       objectReference: {fileID: 0}
     - target: {fileID: 6464733323443445389, guid: b2d55f22268694247970c378d05e2687,
         type: 3}
@@ -1528,7 +1531,7 @@ PrefabInstance:
     - target: {fileID: 8735212377365178167, guid: b2d55f22268694247970c378d05e2687,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 1576
+      value: 1609
       objectReference: {fileID: 0}
     - target: {fileID: 8735212377365178167, guid: b2d55f22268694247970c378d05e2687,
         type: 3}

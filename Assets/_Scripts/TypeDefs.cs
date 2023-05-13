@@ -162,7 +162,7 @@ namespace TypeDefs
     {
         MoveDoor,
         Door,
-        Elevator,
+        Keypad,
         Item,
         CraftingTable
     }

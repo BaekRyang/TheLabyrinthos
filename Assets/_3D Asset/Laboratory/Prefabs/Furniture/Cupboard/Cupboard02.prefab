@@ -362,9 +362,10 @@ GameObject:
   - component: {fileID: 5996531431621918301}
   - component: {fileID: 1560241332530505991}
   - component: {fileID: 5743114738390869267}
-  m_Layer: 0
+  - component: {fileID: 1552135280903573113}
+  m_Layer: 10
   m_Name: CupboardDoor
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -449,6 +450,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.4000013, y: 0.040003, z: 1.0625007}
   m_Center: {x: -0.0000006854534, y: -0.020000491, z: 0.43125}
+--- !u!114 &1552135280903573113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4971736309726924269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75e9a907cb2e9da43bef6cd397d0cf59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 4
+  mode: 1
+  outlineColor: {r: 0.5137255, g: 1, b: 0.5686275, a: 1}
+  outlineWidth: 10
 --- !u!1 &7829511415794028671
 GameObject:
   m_ObjectHideFlags: 0

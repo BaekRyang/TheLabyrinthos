@@ -149,14 +149,13 @@ public class PlayerController : MonoBehaviour
             RaycastHit chit;
             if (Physics.Raycast(ray, out chit, 50, LM_InteractLayerMask))
             {
-                if (chit.transform.CompareTag("Interactable"))
+                if (chit.transform.GetComponent<Interactable>() != null)
                 {
-                    if (Vector3.Distance(chit.transform.position, transform.position) < 2)
+                    //if (Vector3.Distance(chit.transform.position, transform.position) < 2)
+                    if ((chit.transform.position - transform.position).sqrMagnitude < 4) //연산을 줄이기 위해 sqrMagnitue 사용
                     {
                         if (GO_PrevInteracted != null && GO_PrevInteracted != chit.transform.gameObject)
-                        {
                             GO_PrevInteracted.GetComponent<Outline>().enabled = false;
-                        }
                         GO_PrevInteracted = chit.transform.gameObject;
 
                         chit.transform.GetComponent<Outline>().enabled = true;
@@ -168,17 +167,11 @@ public class PlayerController : MonoBehaviour
                             chit.transform.GetComponent<Interactable>().Run(this);
                         }
                     }
-                    else
-                    {
-                        if (Input.GetMouseButtonDown(0))
-                        {
-                        }
-                    }
                 }
                 else
-                {
+                {   //해당 물체가 Interactable한 오브젝트가 아니면 끄기
                     if (GO_PrevInteracted != null)
-                    {
+                    { 
                         GO_PrevInteracted.GetComponent<Outline>().enabled = false;
                         GO_PrevInteracted = null;
                     }
@@ -234,6 +227,12 @@ public class PlayerController : MonoBehaviour
 
     public void CalcRoom(int roomIndex)
     {
+        if (!GameManager.Instance.GetComponent<RoomCreation>().roomMap.ContainsKey(roomIndex))
+        {
+            Debug.Log("존재하지 않는 방");
+            return;
+        }
+            
         prevRoom.GetComponent<RoomController>().ChangeRoomState(false); //이전 방의 상태를 변경
         prevRoom = GameManager.Instance.GetComponent<RoomCreation>().roomMap[roomIndex].RoomObject; //플레이어가 위치한 방의 오브젝트를 저장
         prevRoom.GetComponent<RoomController>().ChangeRoomState(true); //플레이어가 위치한 방의 상태를 변경

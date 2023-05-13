@@ -34,13 +34,9 @@ public class RoomCreation : MonoBehaviour
     //벽이나 문을 판정후 생성
     {
         if (condition)
-        {
-            GameObject.Instantiate(RoomWall, position, rotation, parent);
-        }
+            Instantiate(RoomWall, position, rotation, parent);
         else
-        {
-            GameObject.Instantiate(RoomDoor_t1, position, rotation, parent);
-        }
+            Instantiate(RoomDoor_t1, position, rotation, parent);
     }
 
     public void InitStruct(int seed, int roomCount)

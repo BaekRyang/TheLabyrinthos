@@ -55,9 +55,7 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         if (Instance == null)
-        {
             Instance = this;
-        }
 
         GO_startRoomPrefab =    Resources.Load   <GameObject>("RoomStructures/StartRoom/StartRoom");
         GO_roomPrefabs =        Resources.LoadAll<GameObject>("RoomStructures/Default");
@@ -73,17 +71,25 @@ public class GameManager : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         GameObject data = GameObject.Find("DataPacker");
-        
-        if (!data.GetComponent<DataCarrier>().useSeed)
+
+        if (!data.IsUnityNull())
         {
-            //시드를 따로 지정하지 않았으면 새로 만들어준다.
-            GetComponent<RoomCreation>().CreateSeed(ref s_seed);
+            if (!data.GetComponent<DataCarrier>().useSeed)
+                //시드를 따로 지정하지 않았으면 새로 만들어준다.
+                GetComponent<RoomCreation>().CreateSeed(ref s_seed);
+            else
+                s_seed = data.GetComponent<DataCarrier>().seed;
+
+            Destroy(data);
         } else
         {
-            s_seed = data.GetComponent<DataCarrier>().seed;
+            if (!b_useSeed)
+                //시드를 따로 지정하지 않았으면 새로 만들어준다.
+                GetComponent<RoomCreation>().CreateSeed(ref s_seed);
         }
+        
 
-        Destroy(data);
+        
 
         dict_randomObjects.Add("Object",     new Random(Convert.ToInt32(s_seed, 16) + 1)); //오브젝트용 랜덤 시드
         dict_randomObjects.Add("Creature",   new Random(Convert.ToInt32(s_seed, 16) + 2)); //크리쳐용 랜덤 시드
@@ -103,9 +109,6 @@ public class GameManager : MonoBehaviour
         //UI 켜거나 끄기
         if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.Escape))
             Inventory("Inventory");
-
-        if (Input.GetKeyDown(KeyCode.E))
-            Inventory("Crafting");
     }
 
     public void ResetLevel(int level)
@@ -133,7 +136,7 @@ public class GameManager : MonoBehaviour
         
         Color startColor = IMG_blackPanel.color;
         Color endColor = IMG_blackPanel.color;
-        if(open)
+        if (open)
         {
             startColor.a = 1f;
             endColor.a = 0f;
@@ -158,7 +161,7 @@ public class GameManager : MonoBehaviour
     public IEnumerator OpenElevator(GameObject[] obj, float duration, float CHANGE_LEVEL_DELAY, PlayerController pc_controller) //obj는 엘레베이터 양쪽 문 오브젝트 저장되어있음
     {
         pc_controller.b_camControll = true;
-        StartCoroutine(GameManager.Instance.CurtainModify(false, CHANGE_LEVEL_DELAY)); //화면 암전
+        StartCoroutine(Instance.CurtainModify(false, CHANGE_LEVEL_DELAY)); //화면 암전
         float elapsedTime = 0f;
 
         Vector3 obj1StartPosition = obj[0].transform.localPosition;
@@ -249,7 +252,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Inventory(string targetUI)
+    public void Inventory(string targetUI)
     {
         bool b_setClose = InventoryManager.Instance.b_UIOpen;
 

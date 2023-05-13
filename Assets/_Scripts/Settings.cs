@@ -11,8 +11,7 @@ public class Settings : MonoBehaviour
     public void SetVolume(Slider slider)
     {
         string target = slider.transform.parent.parent.name;
-        audioMixer.SetFloat(target, Mathf.Log10(slider.value/100)*20+10);
-        Debug.Log(Mathf.Log10(slider.value / 100) * 20+10);
+        audioMixer.SetFloat(target, Mathf.Log10(slider.value / 100) * 20 + 10);
     }
 
     public void SetResolution(string resolution)
@@ -39,10 +38,7 @@ public class Settings : MonoBehaviour
 
     public void SetVsync(bool use)
     {
-        if (use)
-            QualitySettings.vSyncCount = 1;
-        else
-            QualitySettings.vSyncCount = 0;
+        QualitySettings.vSyncCount = use ? 1 : 0;
     }
     public void SetFrameLimit(int frame)
     {

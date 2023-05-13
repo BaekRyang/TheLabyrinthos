@@ -15,9 +15,21 @@ public class Interactable : MonoBehaviour
     Coroutine crt_coroutine = null;
     [Header("This Object Type")]
     [SerializeField] ObjectType type;
+    [SerializeField] Outline.Mode mode = Outline.Mode.OutlineVisible;
+    [SerializeField] Color outlineColor = Color.white;
+    [SerializeField] float outlineWidth = 1f;
+
 
     private void Start()
     {
+        if (gameObject.GetComponent<Outline>() == null)
+        {
+            Outline tmpOutline = gameObject.AddComponent<Outline>();
+            tmpOutline.Instruct(mode, outlineColor, outlineWidth);
+
+            tmpOutline.enabled =
+                (type == ObjectType.CraftingTable) ? true : false;
+        }
     }
 
     public void Run(object obj = null)
@@ -25,23 +37,19 @@ public class Interactable : MonoBehaviour
         switch (type)
         {
             case ObjectType.MoveDoor:
-                //문 열때 페이드인/아웃 시키면서 문 반대쪽 점대칭 위치로 순간이동 시켜준다. (카메라도 돌려줌)
                 StartCoroutine(OpenDoor(CHANGE_ROOM_DELAY, true));
-                this.enabled = false;
-                this.tag = "Untagged";
+                enabled = false;
                 GetComponent<Outline>().enabled = false;
-                //StartCoroutine(MoveCameraAroundDoor(transform.gameObject, obj as PlayerController));
                 break;
 
             case ObjectType.Door:
                 StartCoroutine(OpenDoor());
-                this.enabled = false;
-                this.tag = "Untagged";
+                enabled = false;
                 GetComponent<Outline>().enabled = false;
                 //문은 한번 열었으면 일반 오브젝트로 바꿔준다.
                 break;
 
-            case ObjectType.Elevator:
+            case ObjectType.Keypad:
                 if (GameManager.Instance.b_hasKey)
                 {
                     //키패트 라이팅 정보 초기화
@@ -49,25 +57,37 @@ public class Interactable : MonoBehaviour
                     f_fadePercent = 0;
 
                     //코루틴도 종료
-                    if(!crt_coroutine.IsUnityNull()) StopCoroutine(crt_coroutine);
+                    if (!crt_coroutine.IsUnityNull())
+                        StopCoroutine(crt_coroutine);
                     crt_coroutine = null;
 
-                    GameObject[] go_doors = { transform.parent.Find("Doors").GetChild(0).gameObject, transform.parent.Find("Doors").GetChild(1).gameObject };   //문 열기 위해서 문 객체 저장하고
-                    transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0, 8, 0));                                    //키패드 초록색으로 바꾼뒤
+                    //문 열기 위해서 문 객체 저장하고
+                    GameObject[] go_doors =  {
+                        transform.parent.Find("Doors").GetChild(0).gameObject,
+                        transform.parent.Find("Doors").GetChild(1).gameObject };
+
+                    //키패드 초록색으로 바꾼뒤
+                    transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0, 8, 0));                                    
                     GameManager.Instance.StartCoroutine(GameManager.Instance.OpenElevator(go_doors, 1f, CHANGE_LEVEL_DELAY, obj as PlayerController));                                                                                                 //문열기 시작
                 } else
                 {
-                    if (b_fading) f_fadePercent = 3f;                                                                                                           //3초간 Fading / 이미 Fading중에 또 누르면 시간만 초기화
-                    else crt_coroutine = StartCoroutine(ChangeColor(transform.GetChild(0).GetComponent<Renderer>().material, 3f, new Color(8, 0, 0)));          //Emission을 Intensity가 3인 빨간색을 주기 위하여 RGB 8,0,0으로 준다.
+                    if (b_fading)
+                        f_fadePercent = 3f; //3초간 Fading, 이미 Fading중에 또 누르면 시간만 초기화
+                    else 
+                        crt_coroutine = StartCoroutine(ChangeColor(transform.GetChild(0).GetComponent<Renderer>().material, 3f, new Color(8, 0, 0)));          //Emission을 Intensity가 3인 빨간색을 주기 위하여 RGB 8,0,0으로 준다.
                 }
                 break;
 
             case ObjectType.Item:
-                GameManager.Instance.GetComponent<InventoryManager>().AddItem(GetComponent<ItemObject>().I_item); //아이템 인벤토리에 집어넣고
-                DestroyImmediate(this.gameObject);                                                                //아이템 오브젝트 삭제
+                //아이템 인벤토리에 집어넣고
+                GameManager.Instance.GetComponent<InventoryManager>().AddItem(GetComponent<ItemObject>().I_item);
+
+                //아이템 오브젝트 삭제
+                DestroyImmediate(gameObject);                                                                
                 break;
 
             case ObjectType.CraftingTable:
+                GameManager.Instance.Inventory("Crafting");
                 break;
 
             default:

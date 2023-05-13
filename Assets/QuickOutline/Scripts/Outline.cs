@@ -1,4 +1,4 @@
-﻿//
+//
 //  Outline.cs
 //  QuickOutline
 //
@@ -306,4 +306,11 @@ public class Outline : MonoBehaviour {
         break;
     }
   }
+
+    public void Instruct(Mode mode, Color color, float width)
+    {
+        outlineMode = mode;
+        outlineColor = color;
+        outlineWidth = width;
+    }
 }

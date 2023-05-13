@@ -68,22 +68,19 @@ public class MainScene : MonoBehaviour
 
     public void ButtonAction(string button)
     {
-        if (button == "ClickToStart")
+        if (button == "ClickToStart" && b_loaded)
         {
-            if (b_loaded)
+            transform.GetChild(0).gameObject.SetActive(false);
+            transform.GetChild(2).gameObject.SetActive(false);
+            CanvasGroup tmpCG = GO_mainUI.GetComponent<CanvasGroup>();
+            GO_mainUI.SetActive(true);
+            StartCoroutine(LerpValue(alpha => tmpCG.alpha = alpha, 0, 1f, 1, Mathf.Lerp));
+            StartCoroutine(LerpValue((intense) =>
             {
-                transform.GetChild(0).gameObject.SetActive(false);
-                transform.GetChild(2).gameObject.SetActive(false);
-                CanvasGroup tmpCG = GO_mainUI.GetComponent<CanvasGroup>();
-                GO_mainUI.SetActive(true);
-                StartCoroutine(LerpValue<float>(alpha => tmpCG.alpha = alpha, 0, 1, 1, Mathf.Lerp));
-                StartCoroutine(LerpValue<float>((intense) =>
-                {
-                    for (int i = 0; i < 12; i++)
-                        LIT_lights[i].intensity = intense;
-                    return;
-                }, 0.1f, 5, 3, Mathf.Lerp));
-            }
+                for (int i = 0; i < 12; i++)
+                    LIT_lights[i].intensity = intense;
+                return;
+            }, 0.1f, 5, 3, Mathf.Lerp));
         }
         else if (button == "StartGame")
             StartCoroutine(MoveMenu(0));
@@ -102,7 +99,7 @@ public class MainScene : MonoBehaviour
 
     public void StartGame()
     {
-        StartCoroutine(LerpValue<float>(volume => AS_mainLoop.volume = volume, 1, 0, 2, Mathf.Lerp));
+        StartCoroutine(LerpValue(volume => AS_mainLoop.volume = volume, 1, 0f, 2, Mathf.Lerp));
         StartCoroutine(CurtainModify(false, 3));
     }
 

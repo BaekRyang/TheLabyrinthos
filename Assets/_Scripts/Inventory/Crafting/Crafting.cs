@@ -113,7 +113,6 @@ public class Crafting : MonoBehaviour
         GO_destItemCell.GetComponent<ItemObject>().I_item = null;
         GO_destItemCell.GetComponent<ItemObject>().UpdateItem();
         GO_destItemCell.GetComponent<ItemObject>().b_canClick = false;
-        
 
         for (int i = 0; i < 5; i++)
         {

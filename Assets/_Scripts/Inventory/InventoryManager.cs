@@ -131,21 +131,15 @@ public class InventoryManager : MonoBehaviour
             if (!dict_weaponInventory.ContainsKey(item.i_id))
                 //해당 무기를 이미 갖고있지 않으면 리스트를 만들어준다.
                 dict_weaponInventory.Add(item.i_id, new List<Weapon>());
-            
             //그 다음 리스트에 아이템을 추가해준다.
             dict_weaponInventory[item.i_id].Add(new Weapon(item as Weapon));
-
             return;
         }
 
         if (dict_inventory.ContainsKey(item.i_id))   //해당 아이템을 이미 갖고있으면
-        {
             dict_inventory[item.i_id] += amount;     //개수만큼 더해주고
-        }
         else                                         //없으면
-        {
             dict_inventory.Add(item.i_id, amount);   //새로 만들어준다.
-        }
     }
 
     public void RemoveItem(Item item, int amount = 1)
@@ -168,9 +162,7 @@ public class InventoryManager : MonoBehaviour
         {
             dict_inventory[item.i_id] -= amount;     //개수를 감소시키고
             if (dict_inventory[item.i_id] <= 0)      //아이템 개수가 0 이하면
-            {
                 dict_inventory.Remove(item.i_id);    //딕셔너리에서 아이템을 제거
-            }
         }
     }
 

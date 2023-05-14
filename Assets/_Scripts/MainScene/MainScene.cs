@@ -74,8 +74,8 @@ public class MainScene : MonoBehaviour
             transform.GetChild(2).gameObject.SetActive(false);
             CanvasGroup tmpCG = GO_mainUI.GetComponent<CanvasGroup>();
             GO_mainUI.SetActive(true);
-            StartCoroutine(LerpValue(alpha => tmpCG.alpha = alpha, 0, 1f, 1, Mathf.Lerp));
-            StartCoroutine(LerpValue((intense) =>
+            StartCoroutine(Lerp.LerpValue(alpha => tmpCG.alpha = alpha, 0, 1f, 1, Mathf.Lerp));
+            StartCoroutine(Lerp.LerpValue((intense) =>
             {
                 for (int i = 0; i < 12; i++)
                     LIT_lights[i].intensity = intense;
@@ -99,7 +99,7 @@ public class MainScene : MonoBehaviour
 
     public void StartGame()
     {
-        StartCoroutine(LerpValue(volume => AS_mainLoop.volume = volume, 1, 0f, 2, Mathf.Lerp));
+        StartCoroutine(Lerp.LerpValue(volume => AS_mainLoop.volume = volume, 1, 0f, 2, Mathf.Lerp));
         StartCoroutine(CurtainModify(false, 3));
     }
 
@@ -113,34 +113,34 @@ public class MainScene : MonoBehaviour
             DepthOfField dof;
             VOL_volume.profile.TryGet(out dof);
 
-            StartCoroutine(LerpValue(value => dof.focusDistance.value = value, 6, 2.5f, 1, Mathf.Lerp));
+            StartCoroutine(Lerp.LerpValue(value => dof.focusDistance.value = value, 6, 2.5f, 1, Mathf.Lerp));
 
-            StartCoroutine(LerpValue(value => MAT_logos[0].color = value, Color.white, new Color(1, 1, 1, 0), 0.5f, Color.Lerp));
-            yield return StartCoroutine(LerpValue(value => MAT_logos[1].color = value, Color.white, new Color(1, 1, 1, 0), 0.5f, Color.Lerp));
+            StartCoroutine(Lerp.LerpValue(value => MAT_logos[0].color = value, Color.white, new Color(1, 1, 1, 0), 0.5f, Color.Lerp));
+            yield return StartCoroutine(Lerp.LerpValue(value => MAT_logos[1].color = value, Color.white, new Color(1, 1, 1, 0), 0.5f, Color.Lerp));
 
             GO_mainUI.transform.Find("NewGameSetting").gameObject.SetActive(true);
             var tmpCG = GO_mainUI.transform.Find("NewGameSetting").GetComponent<CanvasGroup>();
             var tmpCG2 = GO_mainUI.transform.Find("MainTabs").GetComponent<CanvasGroup>();
-            StartCoroutine(LerpValue(value => tmpCG.alpha = value, 0, 1f, 1f, Mathf.Lerp, EaseOutSine));
-            StartCoroutine(LerpValue(value => tmpCG2.alpha = value, 1, 0f, 1f, Mathf.Lerp, EaseOutSine));
+            StartCoroutine(Lerp.LerpValue(value => tmpCG.alpha = value, 0, 1f, 1f, Mathf.Lerp, Lerp.EaseOutSine));
+            StartCoroutine(Lerp.LerpValue(value => tmpCG2.alpha = value, 1, 0f, 1f, Mathf.Lerp, Lerp.EaseOutSine));
             yield return null;
         } else if (type == 1)
         {
             GO_cameras[0].SetActive(true);
             GO_cameras[1].SetActive(false);
             var tmpCG = GO_mainUI.transform.Find("NewGameSetting").GetComponent<CanvasGroup>();
-            yield return StartCoroutine(LerpValue(value => tmpCG.alpha = value, 1, 0f, 0.3f, Mathf.Lerp));
+            yield return StartCoroutine(Lerp.LerpValue(value => tmpCG.alpha = value, 1, 0f, 0.3f, Mathf.Lerp));
             tmpCG.gameObject.SetActive(false);
 
             var tmpCG2 = GO_mainUI.transform.Find("MainTabs").GetComponent<CanvasGroup>();
-            StartCoroutine(LerpValue(value => tmpCG2.alpha = value, 0, 1f, 0.5f, Mathf.Lerp));
+            StartCoroutine(Lerp.LerpValue(value => tmpCG2.alpha = value, 0, 1f, 0.5f, Mathf.Lerp));
             DepthOfField dof;
             VOL_volume.profile.TryGet(out dof);
 
-            StartCoroutine(LerpValue(value => dof.focusDistance.value = value, 2.5f, 6, 1, Mathf.Lerp));
+            StartCoroutine(Lerp.LerpValue(value => dof.focusDistance.value = value, 2.5f, 6, 1, Mathf.Lerp));
 
-            StartCoroutine(LerpValue(value => MAT_logos[0].color = value, new Color(1, 1, 1, 0), Color.white, 0.5f, Color.Lerp));
-            StartCoroutine(LerpValue(value => MAT_logos[1].color = value, new Color(1, 1, 1, 0), Color.white, 0.5f, Color.Lerp));
+            StartCoroutine(Lerp.LerpValue(value => MAT_logos[0].color = value, new Color(1, 1, 1, 0), Color.white, 0.5f, Color.Lerp));
+            StartCoroutine(Lerp.LerpValue(value => MAT_logos[1].color = value, new Color(1, 1, 1, 0), Color.white, 0.5f, Color.Lerp));
             yield return null;
         } else if (type == 2)
         {
@@ -150,14 +150,14 @@ public class MainScene : MonoBehaviour
             DepthOfField dof;
             VOL_volume.profile.TryGet(out dof);
 
-            StartCoroutine(LerpValue(value => dof.focusDistance.value = value, 6, 2.5f, 1, Mathf.Lerp));
-            StartCoroutine(LerpValue(value => dof.focalLength.value = value, 300, 100f, 1, Mathf.Lerp));
+            StartCoroutine(Lerp.LerpValue(value => dof.focusDistance.value = value, 6, 2.5f, 1, Mathf.Lerp));
+            StartCoroutine(Lerp.LerpValue(value => dof.focalLength.value = value, 300, 100f, 1, Mathf.Lerp));
 
             GO_mainUI.transform.Find("Settings").gameObject.SetActive(true);
             var tmpCG = GO_mainUI.transform.Find("Settings").GetComponent<CanvasGroup>();
             var tmpCG2 = GO_mainUI.transform.Find("MainTabs").GetComponent<CanvasGroup>();
-            StartCoroutine(LerpValue(value => tmpCG.alpha = value, 0, 1f, 1f, Mathf.Lerp, EaseOutSine));
-            StartCoroutine(LerpValue(value => tmpCG2.alpha = value, 1, 0f, 1f, Mathf.Lerp, EaseOutSine));
+            StartCoroutine(Lerp.LerpValue(value => tmpCG.alpha = value, 0, 1f, 1f, Mathf.Lerp, Lerp.EaseOutSine));
+            StartCoroutine(Lerp.LerpValue(value => tmpCG2.alpha = value, 1, 0f, 1f, Mathf.Lerp, Lerp.EaseOutSine));
             yield return null;
         }
         else if (type == 3)
@@ -165,23 +165,23 @@ public class MainScene : MonoBehaviour
             GO_cameras[0].SetActive(true);
             GO_cameras[2].SetActive(false);
             var tmpCG = GO_mainUI.transform.Find("Settings").GetComponent<CanvasGroup>();
-            yield return StartCoroutine(LerpValue(value => tmpCG.alpha = value, 1, 0f, 0.3f, Mathf.Lerp));
+            yield return StartCoroutine(Lerp.LerpValue(value => tmpCG.alpha = value, 1, 0f, 0.3f, Mathf.Lerp));
             tmpCG.gameObject.SetActive(false);
 
             var tmpCG2 = GO_mainUI.transform.Find("MainTabs").GetComponent<CanvasGroup>();
-            StartCoroutine(LerpValue(value => tmpCG2.alpha = value, 0, 1f, 0.5f, Mathf.Lerp));
+            StartCoroutine(Lerp.LerpValue(value => tmpCG2.alpha = value, 0, 1f, 0.5f, Mathf.Lerp));
             DepthOfField dof;
             VOL_volume.profile.TryGet(out dof);
 
-            StartCoroutine(LerpValue(value => dof.focusDistance.value = value, 2.5f, 6, 1, Mathf.Lerp));
-            StartCoroutine(LerpValue(value => dof.focalLength.value = value, 100, 300f, 1, Mathf.Lerp));
+            StartCoroutine(Lerp.LerpValue(value => dof.focusDistance.value = value, 2.5f, 6, 1, Mathf.Lerp));
+            StartCoroutine(Lerp.LerpValue(value => dof.focalLength.value = value, 100, 300f, 1, Mathf.Lerp));
             yield return null;
         }
     }
     private IEnumerator Open()
     {
         yield return new WaitForSeconds(1);
-        StartCoroutine(LerpValue<float>(volume => AS_mainLoop.volume = volume, 0, 1, 4, Mathf.Lerp));
+        StartCoroutine(Lerp.LerpValue<float>(volume => AS_mainLoop.volume = volume, 0, 1, 4, Mathf.Lerp));
         yield return new WaitForSeconds(1);
         StartCoroutine(CurtainModify(true, 2));
         yield return new WaitForSeconds(3);
@@ -219,56 +219,17 @@ public class MainScene : MonoBehaviour
 
         if (loadScene)
         {
-            yield return StartCoroutine(LerpValue<float>(volume => AS_mainLoop.volume = volume, 1, 0, 1, Mathf.Lerp));
+            yield return StartCoroutine(Lerp.LerpValue<float>(volume => AS_mainLoop.volume = volume, 1, 0, 1, Mathf.Lerp));
             SceneManager.LoadScene("Levels");
         }
             
         if (quit)
         {
-            yield return StartCoroutine(LerpValue<float>(volume => AS_mainLoop.volume = volume, 1, 0, 1, Mathf.Lerp));
+            yield return StartCoroutine(Lerp.LerpValue<float>(volume => AS_mainLoop.volume = volume, 1, 0, 1, Mathf.Lerp));
             Application.Quit();
         }
             
+        
     }
 
-    private IEnumerator LerpValue<T>(
-        Action<T> valueSetter,                      //람다 함수
-        T from,                                     //from
-        T to,                                       //to
-        float duration,                             //보간 시간
-        Func<T, T, float, T> lerpFunction,   //보간 함수
-        Func<float, float> easingFunction = null)   //이징 함수
-    {
-
-        if (easingFunction == null) //없으면 선형보간
-            easingFunction = Linear;
-
-        float elapsedTime = 0.0f;
-
-        while (elapsedTime < duration)
-        {
-            float t = elapsedTime / duration;
-            float easedT = easingFunction(t);
-            valueSetter(lerpFunction(from, to, easedT));
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        valueSetter(to);
-    }
-
-    private float Linear(float t) //선형보간
-    {
-        return t;
-    }
-
-    private float EaseOutSine(float t)
-    {
-        return Mathf.Sin(Mathf.Pow(t, 0.5f) * Mathf.PI / 2);
-    }   
-
-    private float EaseInSine(float t)
-    {
-        return 1 - Mathf.Cos((t * Mathf.PI) / 2);
-    }
 }

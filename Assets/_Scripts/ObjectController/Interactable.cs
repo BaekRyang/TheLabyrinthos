@@ -40,12 +40,14 @@ public class Interactable : MonoBehaviour
                 StartCoroutine(OpenDoor(CHANGE_ROOM_DELAY, true));
                 enabled = false;
                 GetComponent<Outline>().enabled = false;
+                gameObject.layer = LayerMask.NameToLayer("Default");
                 break;
 
             case ObjectType.Door:
                 StartCoroutine(OpenDoor());
                 enabled = false;
                 GetComponent<Outline>().enabled = false;
+                gameObject.layer = LayerMask.NameToLayer("Default");
                 //문은 한번 열었으면 일반 오브젝트로 바꿔준다.
                 break;
 

@@ -117,10 +117,10 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5}
   - {x: 0.5, y: 0.5}
   - {x: 0.5, y: 0.5}
-  - {x: 1.5, y: 2.9960938}
-  - {x: 2.5, y: 2.9960938}
-  - {x: 1.5, y: 1.9960938}
-  - {x: 2.5, y: 1.9960938}
+  - {x: -0.5, y: 0.9960937}
+  - {x: 0.5, y: 0.9960937}
+  - {x: -0.5, y: -0.0039063096}
+  - {x: 0.5, y: -0.0039063096}
   m_Textures2: []
   m_Textures3: []
   m_Tangents:
@@ -1654,7 +1654,7 @@ PrefabInstance:
     - target: {fileID: 4971736309726924269, guid: aea55fece87574849b87eefcb249c388,
         type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aea55fece87574849b87eefcb249c388, type: 3}

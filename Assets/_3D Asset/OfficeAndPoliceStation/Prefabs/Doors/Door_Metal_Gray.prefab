@@ -44,7 +44,6 @@ GameObject:
   - component: {fileID: 991959009394926000}
   - component: {fileID: 8407412315322274944}
   - component: {fileID: 8882282102403214458}
-  - component: {fileID: 4871663082519114307}
   - component: {fileID: 9206365064378601444}
   m_Layer: 10
   m_Name: Door_Metal_Gray_mesh
@@ -131,27 +130,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.0014123, y: 2.2925208, z: 0.06}
   m_Center: {x: -0.50669247, y: 1.1505481, z: -0.026598142}
---- !u!95 &4871663082519114307
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8073335383527333307}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 369b116fc84eb2149b319b8d752f3286, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &9206365064378601444
 MonoBehaviour:
   m_ObjectHideFlags: 0

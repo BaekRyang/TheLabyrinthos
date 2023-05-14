@@ -106,7 +106,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4513296300684466}
-  - component: {fileID: 111925422235762406}
   m_Layer: 0
   m_Name: Elevator_Doors
   m_TagString: Untagged
@@ -131,23 +130,6 @@ Transform:
   m_Father: {fileID: 4901519904686354}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!111 &111925422235762406
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1436871772507276}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations:
-  - {fileID: 7400000, guid: 7a9ec990aaca49344917f2d1198f8569, type: 2}
-  - {fileID: 7400000, guid: 48a44847fda3b2b4aa306e2d0e1ca405, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 0
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!1 &1567644783704794
 GameObject:
   m_ObjectHideFlags: 0

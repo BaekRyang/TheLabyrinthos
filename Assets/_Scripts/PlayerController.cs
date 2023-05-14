@@ -88,22 +88,9 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        int size = 10;
-        //플레이어의 위치
-        Vector3 playerPos = transform.position;
-
         //플레이어가 있는 방의 인덱스 계산
-        int roomIndexX = Mathf.FloorToInt(((playerPos.x + 5) / size) + 5);
-        int roomIndexY = Mathf.FloorToInt(((playerPos.z + 5) / size) + 4) * 10;
-        int tmpIndex = roomIndexX + roomIndexY;
-        if (roomIndex != tmpIndex)
-        {
-            CalcRoom(tmpIndex);
-            roomIndex = tmpIndex;
-        }
+        CalcPlayerRoomIndex();
         
-        
-
         if (!b_camControll)
         {
             horizontal = Input.GetAxisRaw("Horizontal");
@@ -111,80 +98,30 @@ public class PlayerController : MonoBehaviour
 
             if (Mathf.Abs(horizontal) > 0.01f || Mathf.Abs(vertical) > 0.01f)
             {
-                // 카메라 방향 기준으로 방향 계산
+                //카메라 방향 기준으로 방향 계산
                 direction = Camera.main.transform.forward * vertical + Camera.main.transform.right * horizontal;
-                direction.y = 0; // 수직 방향으로 이동하지 않도록 y축 값을 0으로 설정
+                direction.y = 0; //수직 방향으로 이동하지 않도록 y축 값을 0으로 설정
                 direction.Normalize();
                 Debug.DrawRay(transform.position, direction, Color.yellow);
             }
 
-            // 마우스 휠
-            float scrollInput = Input.GetAxis("Mouse ScrollWheel");
-            if (Mathf.Abs(scrollInput) > 0.01f)
-            {
-                distanceFromPlayer -= scrollInput * rotationSpeed;
-                distanceFromPlayer = Mathf.Clamp(distanceFromPlayer, minZoomDistance, maxZoomDistance);
-                offset = new Vector3(0, 1, -distanceFromPlayer);
-                Quaternion rot = Quaternion.Euler(pitch, yaw, 0);
-                defaultCameraDistance = Vector3.Distance(transform.position + rot * offset, transform.position);
-            }
-
-            // 마우스 이동에 따라 pitch값과 yaw값 변경
+            //마우스 이동에 따라 pitch값과 yaw값 변경
             pitch -= Input.GetAxis("Mouse Y") * rotationSpeed;
             yaw += Input.GetAxis("Mouse X") * rotationSpeed;
 
-            // pitch값 범위 제한
+            //pitch값 범위 제한
             pitch = Mathf.Clamp(pitch, -80f, 80f);
 
-            GO_minimapArrow.transform.rotation = Quaternion.Euler(0, 0, Camera.main.transform.rotation.eulerAngles.y + (90 - Camera.main.transform.rotation.eulerAngles.y) * 2);
+            GO_minimapArrow.transform.rotation = 
+                Quaternion.Euler(   0,
+                                    0,
+                                    Camera.main.transform.rotation.eulerAngles.y + (90 - Camera.main.transform.rotation.eulerAngles.y) * 2);
 
             spriteBox.transform.rotation = Quaternion.Euler(0, yaw, 0);
 
-
-            //LookAt();  
-
-            //Click Check
-
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit chit;
-            if (Physics.Raycast(ray, out chit, 50, LM_InteractLayerMask))
-            {
-                if (chit.transform.GetComponent<Interactable>() != null)
-                {
-                    //if (Vector3.Distance(chit.transform.position, transform.position) < 2)
-                    if ((chit.transform.position - transform.position).sqrMagnitude < 4) //연산을 줄이기 위해 sqrMagnitue 사용
-                    {
-                        if (GO_PrevInteracted != null && GO_PrevInteracted != chit.transform.gameObject)
-                            GO_PrevInteracted.GetComponent<Outline>().enabled = false;
-                        GO_PrevInteracted = chit.transform.gameObject;
-
-                        chit.transform.GetComponent<Outline>().enabled = true;
-                        if (Input.GetMouseButtonDown(0))
-                        {
-                            //Interactable 한 Object를 클릭했을때 처리
-                            horizontal = 0;
-                            vertical = 0;
-                            chit.transform.GetComponent<Interactable>().Run(this);
-                        }
-                    }
-                }
-                else
-                {   //해당 물체가 Interactable한 오브젝트가 아니면 끄기
-                    if (GO_PrevInteracted != null)
-                    { 
-                        GO_PrevInteracted.GetComponent<Outline>().enabled = false;
-                        GO_PrevInteracted = null;
-                    }
-                }
-            }
-            else
-            {
-                if (GO_PrevInteracted != null)
-                {
-                    GO_PrevInteracted.GetComponent<Outline>().enabled = false;
-                    GO_PrevInteracted = null;
-                }
-            }
+            //대상 체크
+            InteractCalc();
+            
         }
     }
 
@@ -192,12 +129,9 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         if (horizontal == 0 && vertical == 0)
-        {
             rigid.velocity = Vector3.zero;
-        } else
-        {
+        else
             Move();
-        }
 
         // 카메라 회전
         Quaternion rotation = Quaternion.Euler(pitch, yaw, 0);
@@ -215,6 +149,53 @@ public class PlayerController : MonoBehaviour
         rigid.velocity = velocity * currentMoveSpeed;
     }
 
+    private void InteractCalc()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit rcastHit;
+
+        bool isNotFirstInteract = GO_PrevInteracted != null;
+        // 만약 레이캐스트가 히트하지 않았거나, 오브젝트가 상호작용 가능한 것이 아니라면
+        if (!Physics.Raycast(ray, out rcastHit, 50, LM_InteractLayerMask) || rcastHit.transform?.GetComponent<Interactable>() == null)
+        {
+            if (isNotFirstInteract)
+            {
+                GO_PrevInteracted.GetComponent<Outline>().enabled = false;
+                GO_PrevInteracted = null;
+            }
+            return;
+        }
+
+        //이 시점에서는 오브젝트가 상호작용 가능하다는 것이 확실함
+        //거리가 너무 멀다면
+        if ((rcastHit.transform.position - transform.position).sqrMagnitude >= 4)
+        {
+            if (isNotFirstInteract)
+            {
+                GO_PrevInteracted.GetComponent<Outline>().enabled = false;
+                GO_PrevInteracted = null;
+            }
+            return;
+        }
+            
+
+        if (isNotFirstInteract && GO_PrevInteracted != rcastHit.transform.gameObject)
+            GO_PrevInteracted.GetComponent<Outline>().enabled = false;
+
+        GO_PrevInteracted = rcastHit.transform.gameObject;
+        GO_PrevInteracted.GetComponent<Outline>().enabled = true;
+
+        //만약 마우스 버튼이 눌려지지 않았다면
+        if (!Input.GetMouseButtonDown(0))
+            return;
+
+        //이동 데이터를 초기화 시켜준다.
+        horizontal = 0;
+        vertical = 0;
+        GO_PrevInteracted.GetComponent<Interactable>().Run(this);
+
+    }
+
     public void ResetSetting()
     {
         prevRoom = GameManager.Instance.GetComponent<RoomCreation>().roomMap[45].RoomObject; //플레이어가 위치한 방의 루트 오브젝트를 저장 (플레이어는 45번에 생성)
@@ -225,7 +206,23 @@ public class PlayerController : MonoBehaviour
         defaultCameraDistance = Vector3.Distance(Camera.main.transform.position, transform.position);
     }
 
-    public void CalcRoom(int roomIndex)
+    public void CalcPlayerRoomIndex()
+    {
+        int size = 10;
+
+        Vector3 playerPos = transform.position;
+
+        int roomIndexX = Mathf.FloorToInt(((playerPos.x + 5) / size) + 5);
+        int roomIndexY = Mathf.FloorToInt(((playerPos.z + 5) / size) + 4) * 10;
+        int tmpIndex = roomIndexX + roomIndexY;
+        if (roomIndex != tmpIndex)
+        {
+            UpdateRoomEnter(tmpIndex);
+            roomIndex = tmpIndex;
+        }
+    }
+
+    public void UpdateRoomEnter(int roomIndex)
     {
         if (!GameManager.Instance.GetComponent<RoomCreation>().roomMap.ContainsKey(roomIndex))
         {

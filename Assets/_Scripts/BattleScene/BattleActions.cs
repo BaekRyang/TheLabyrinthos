@@ -104,7 +104,7 @@ public class BattleActions : MonoBehaviour
                                 (dict_attackTable[part].damage) *                                   //부위 데미지 계수
                                 (1 - CR_Enemy.defense / (float)(CR_Enemy.defense + CONST_DEF)));    //방어력 계산
 
-                double d_damageRange = (double)(P_player.WP_weapon.i_damageRange);
+                double d_damageRange = P_player.WP_weapon.i_damageRange;
                 damage += (float)(rand.NextDouble() * (d_damageRange * 2) - d_damageRange);
 
                 damage = Mathf.Round(damage * 10f) / 10f;
@@ -115,7 +115,7 @@ public class BattleActions : MonoBehaviour
                 StartCoroutine(LerpColor(BM_BattleMain.enemyElements,   //해당 Target의 Image를
                                             SliderColor.Hp_hilighted,   //해당 색으로 바꿨다가
                                             1f));                       //해당 초 동안 돌아온다.
-
+                //맞으면 타격음으로
                 switch (part)
                 {
                     case Parts.Weakpoint:
@@ -131,15 +131,14 @@ public class BattleActions : MonoBehaviour
                         clip = BM_BattleMain.AC_playerAttackThorax[rand.Next(BM_BattleMain.AC_playerAttackThorax.Length)];
                         break;
                 }
-                //맞으면 타격음으로
 
-                //StartCoroutine(BM_BattleMain.AnimateAction(ActionTypes.Attack, false));
-
+                P_player.WP_weapon.i_durability--;  //내구도 하나 빼주고
+                P_player.ConsumeTurn();             //턴 하나 소모
             } 
             else
             {
-                clip = BM_BattleMain.AC_playerMissed[rand.Next(BM_BattleMain.AC_playerMissed.Length)];
                 //빗나가면 다른 소리로
+                clip = BM_BattleMain.AC_playerMissed[rand.Next(BM_BattleMain.AC_playerMissed.Length)];
             }
 
             Debug.Log("Player : " + randInt + " > " + accInt);

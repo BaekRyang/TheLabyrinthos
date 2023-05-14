@@ -22,6 +22,8 @@ public class Crafting : MonoBehaviour
 
     InventoryManager IM_manager;
 
+    Inventory InventoryUI;
+
     void Awake()
     {
         for (int i = 0; i < 4; i++)
@@ -42,6 +44,7 @@ public class Crafting : MonoBehaviour
     void Start()
     {
         IM_manager = InventoryManager.Instance;
+        InventoryUI = IM_manager.GO_crafting.transform.Find("Inventory").GetComponent<Inventory>();
         StartCoroutine(LoadRecipe());
     }
 
@@ -76,11 +79,28 @@ public class Crafting : MonoBehaviour
         int count = 0;
         foreach (var kvp in dict_targetRecipe) //재료 칸에 레시피 따라서 올리고 업데이트
         {
-            GO_resourceCells[count].SetActive(true);
-            GO_resourceCells[count].GetComponent<ItemObject>().I_item = IM_manager.dict_items[kvp.Key];
+            //셀 켜주고
+            GO_resourceCells[count].SetActive(true); 
+
+            //재료가 만약 무기이면서 소유를 하고있다면 그 중 첫번째를 올린다.
+            if (kvp.Key < 100 && IM_manager.HasItem(kvp.Key))
+            {
+                GO_resourceCells[count].GetComponent<ItemObject>().I_item = IM_manager.GetWeaponInstance(kvp.Key);
+                IM_manager.RemoveItem(kvp.Key);
+            }
+            else
+            {
+                //무기인데 소유중이 아니거나, 무기가 아닌경우는 원본을 올린다.
+                GO_resourceCells[count].GetComponent<ItemObject>().I_item = IM_manager.dict_items[kvp.Key];
+                IM_manager.RemoveItem(kvp.Key, kvp.Value);
+            }
+                
             GO_resourceCells[count].GetComponent<ItemObject>().UpdateItem(kvp.Value);
             count++;
         }
+
+        InventoryUI.DestroyElements();
+        InventoryUI.UpdateInventory();
 
         for (int i = count; i < 5; i++)
             GO_resourceCells[i].SetActive(false); //안쓰는 칸은 꺼준다.
@@ -93,6 +113,21 @@ public class Crafting : MonoBehaviour
         GO_destItemCell.GetComponent<ItemObject>().I_item = null;
         GO_destItemCell.GetComponent<ItemObject>().UpdateItem();
         GO_destItemCell.GetComponent<ItemObject>().b_canClick = false;
+        
+
+        for (int i = 0; i < 5; i++)
+        {
+            if (GO_resourceCells[i].activeSelf)
+            {
+                IM_manager.AddItem(
+                    //올라간 아이템을
+                    GO_resourceCells[i].GetComponent<ItemObject>().I_item, 
+
+                    //개수만큼 인벤에 다시 넣는다.
+                    int.Parse(GO_resourceCells[i].transform.GetChild(1).GetComponent<TMP_Text>().text));
+            }
+        }
+
         GO_resourceCells[0].GetComponent<ItemObject>().I_item = null;
         GO_resourceCells[0].GetComponent<ItemObject>().UpdateItem();
 
@@ -133,15 +168,17 @@ public class Crafting : MonoBehaviour
     public void CraftItem() //아이템 제작 메서드
     {
         //재료 아이템 인벤에서 없애주고
-        foreach (var kvp in dict_targetRecipe)  
-            IM_manager.RemoveItem(kvp.Key, kvp.Value);
+        //foreach (var kvp in dict_targetRecipe)
+        //    IM_manager.RemoveItem(kvp.Key, kvp.Value);
+
+        /* 재료 아이템은 조합대에 올릴때 인벤에서 사라짐 */
 
         //완성품 넣어준다.
-        IM_manager.AddItem(GO_destItemCell.GetComponent<ItemObject>().I_item); 
+        IM_manager.AddItem(GO_destItemCell.GetComponent<ItemObject>().I_item);
 
         //인벤토리 업데이트 해준다.
-        IM_manager.GO_crafting.transform.Find("Inventory").GetComponent<Inventory>().DestroyElements(); 
-        IM_manager.GO_crafting.transform.Find("Inventory").GetComponent<Inventory>().UpdateInventory(); 
+        InventoryUI.DestroyElements();
+        InventoryUI.UpdateInventory(); 
 
         //제작대는 비워준다.
         ResetCells();

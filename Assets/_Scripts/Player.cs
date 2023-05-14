@@ -26,6 +26,12 @@ public class Player : MonoBehaviour
     {
         return ref PS_playerStats;
     }
+
+    public void ConsumeTurn()
+    {
+        //내구도 하나 빼주기
+        WP_weapon.i_durability--;
+    }
 }
 
 

@@ -88,9 +88,6 @@ public class GameManager : MonoBehaviour
                 GetComponent<RoomCreation>().CreateSeed(ref s_seed);
         }
         
-
-        
-
         dict_randomObjects.Add("Object",     new Random(Convert.ToInt32(s_seed, 16) + 1)); //오브젝트용 랜덤 시드
         dict_randomObjects.Add("Creature",   new Random(Convert.ToInt32(s_seed, 16) + 2)); //크리쳐용 랜덤 시드
         dict_randomObjects.Add("Room",       new Random(Convert.ToInt32(s_seed, 16) + 3)); //방배치용 랜덤 시드

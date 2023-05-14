@@ -38,6 +38,25 @@ public class Weapon : Item
     {
         IT_type = ItemType.Weapon;
     }
+
+    public Weapon(Weapon other) //복사 생성자
+    {
+        i_id = other.i_id;
+        s_name = other.s_name;
+        s_description = other.s_description;
+        IT_type = other.IT_type;
+        b_useable = other.b_useable;
+        dele_itemEffect = other.dele_itemEffect;
+
+        s_inspectText = other.s_inspectText;
+        i_damage = other.i_damage;
+        i_damageRange = other.i_damageRange;
+        i_preparedSpeed = other.i_preparedSpeed;
+        f_speedMult = other.f_speedMult;
+        f_accuracyMult = other.f_accuracyMult;
+        i_maxDurability = other.i_maxDurability;
+        i_durability = other.i_durability;
+    }
 }
 
 public class Disposable : Item

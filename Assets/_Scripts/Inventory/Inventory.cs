@@ -39,6 +39,19 @@ public class Inventory : MonoBehaviour
 
     public void UpdateInventory()
     {
+        foreach (var weaponList in InventoryManager.Instance.dict_weaponInventory)
+        {
+            foreach (var weapon in weaponList.Value)
+            {
+                GameObject tmpGO;
+
+                tmpGO = Instantiate(copyGO, TF_Weapons);
+                tmpGO.GetComponent<ItemObject>().I_item = weapon;
+                tmpGO.name = weapon.s_name;
+                tmpGO.GetComponent<ItemObject>().UpdateItem();
+            }
+        }
+
         foreach (KeyValuePair<int, int> kvp in dict_Inventory)
         {
             Item targetItem = dict_items[kvp.Key];
@@ -46,12 +59,12 @@ public class Inventory : MonoBehaviour
             {
                 case ItemType.Weapon:
                     {
-                        GameObject tmpGO;
+                        //GameObject tmpGO;
 
-                        tmpGO = Instantiate(copyGO, TF_Weapons);
-                        tmpGO.GetComponent<ItemObject>().I_item = targetItem;
-                        tmpGO.name = targetItem.s_name;
-                        tmpGO.GetComponent<ItemObject>().UpdateItem(kvp.Value);
+                        //tmpGO = Instantiate(copyGO, TF_Weapons);
+                        //tmpGO.GetComponent<ItemObject>().I_item = targetItem;
+                        //tmpGO.name = targetItem.s_name;
+                        //tmpGO.GetComponent<ItemObject>().UpdateItem(kvp.Value);
                         break;
                     }
 

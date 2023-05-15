@@ -44,4 +44,9 @@ public class Settings : MonoBehaviour
     {
         Application.targetFrameRate = frame;
     }
+
+    public void Resume()
+    {
+        GameManager.Instance.SystemButtonAction("Resume");
+    }
 }

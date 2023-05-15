@@ -52,6 +52,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] Slider SL_hpBar;
     [SerializeField] Slider SL_expBar;
 
+    [Header("Setting UI")]
+    [SerializeField] GameObject settings;
+
     void Awake()
     {
         if (Instance == null)
@@ -279,10 +282,27 @@ public class GameManager : MonoBehaviour
 
     public void SystemButtonAction(string buttonType)
     {
-        if (buttonType == "Exit")
+        if (buttonType == "Setting")
         {
-            Application.Quit();
+            if (settings.activeSelf)
+            {
+                buttonType = "Resume";
+            } else
+            {
+                settings.SetActive(true);
+                CanvasGroup canvasAlpha = settings.GetComponent<CanvasGroup>();
+                StartCoroutine(Lerp.LerpValue<float>(value => canvasAlpha.alpha = value, 0, 1, 0.3f, Mathf.Lerp, Lerp.EaseOutSine));
+            }
         }
+
+        if (buttonType == "Resume")
+        {
+            CanvasGroup canvasAlpha = settings.GetComponent<CanvasGroup>();
+            StartCoroutine(Lerp.LerpValueAfter<float>(value => canvasAlpha.alpha = value, 1, 0, 0.3f, Mathf.Lerp, Lerp.EaseOutSine, () => settings.gameObject.SetActive(false)));
+        }
+
+        if (buttonType == "Exit")
+            Application.Quit();
     }
 
 }

@@ -29,6 +29,20 @@ public static class Lerp
         valueSetter(to);
     }
 
+    public static IEnumerator LerpValueAfter<T>(
+        Action<T> valueSetter,                      //람다 함수
+        T from,                                     //from
+        T to,                                       //to
+        float duration,                             //보간 시간
+        Func<T, T, float, T> lerpFunction,          //보간 함수
+        Func<float, float> easingFunction,          //이징 함수
+        Action afterFunc = null)                    //Lerp 종료 후 동작
+    {
+        yield return LerpValue(valueSetter, from, to, duration, lerpFunction, easingFunction);
+
+        afterFunc?.Invoke();
+    }
+
     public static float Linear(float t) //선형보간
     {
         return t;

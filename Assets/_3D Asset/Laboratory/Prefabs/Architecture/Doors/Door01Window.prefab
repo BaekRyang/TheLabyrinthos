@@ -115,6 +115,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  mode: 0
-  outlineColor: {r: 1, g: 0.8333334, b: 0, a: 1}
-  outlineWidth: 2
+  mode: 1
+  enabledOutlineColor: {r: 0, g: 1, b: 0.40784314, a: 1}
+  disabledOutlineColor: {r: 0, g: 0, b: 1, a: 1}
+  enabledOutlineWidth: 2
+  disabledOutlineWidth: 0.5

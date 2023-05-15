@@ -160,7 +160,7 @@ public class PlayerController : MonoBehaviour
         {
             if (isNotFirstInteract)
             {
-                GO_PrevInteracted.GetComponent<Outline>().enabled = false;
+                GO_PrevInteracted.GetComponent<Interactable>().ChangeState(false);
                 GO_PrevInteracted = null;
             }
             return;
@@ -172,7 +172,7 @@ public class PlayerController : MonoBehaviour
         {
             if (isNotFirstInteract)
             {
-                GO_PrevInteracted.GetComponent<Outline>().enabled = false;
+                GO_PrevInteracted.GetComponent<Interactable>().ChangeState(false);
                 GO_PrevInteracted = null;
             }
             return;
@@ -180,10 +180,10 @@ public class PlayerController : MonoBehaviour
             
 
         if (isNotFirstInteract && GO_PrevInteracted != rcastHit.transform.gameObject)
-            GO_PrevInteracted.GetComponent<Outline>().enabled = false;
+            GO_PrevInteracted.GetComponent<Interactable>().ChangeState(false);
 
         GO_PrevInteracted = rcastHit.transform.gameObject;
-        GO_PrevInteracted.GetComponent<Outline>().enabled = true;
+        GO_PrevInteracted.GetComponent<Interactable>().ChangeState(true);
 
         //만약 마우스 버튼이 눌려지지 않았다면
         if (!Input.GetMouseButtonDown(0))

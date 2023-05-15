@@ -70,6 +70,9 @@ public class Crafting : MonoBehaviour
 
     public void LoadItemToTable(int destItemID, Dictionary<int,int> recipe) //레시피 클릭하면 위에 올리는 메서드
     {
+        //올리기 전에 전부 지워주고
+        ResetCells(true);
+
         //완성품 칸 업데이트
         GO_destItemCell.GetComponent<ItemObject>().I_item = IM_manager.dict_items[destItemID];
         GO_destItemCell.GetComponent<ItemObject>().UpdateItem();
@@ -86,13 +89,14 @@ public class Crafting : MonoBehaviour
             if (kvp.Key < 100 && IM_manager.HasItem(kvp.Key))
             {
                 GO_resourceCells[count].GetComponent<ItemObject>().I_item = IM_manager.GetWeaponInstance(kvp.Key);
+                GO_resourceCells[count].GetComponent<ItemObject>().hasItem = true;
                 IM_manager.RemoveItem(kvp.Key);
             }
             else
             {
                 //무기인데 소유중이 아니거나, 무기가 아닌경우는 원본을 올린다.
                 GO_resourceCells[count].GetComponent<ItemObject>().I_item = IM_manager.dict_items[kvp.Key];
-                IM_manager.RemoveItem(kvp.Key, kvp.Value);
+                GO_resourceCells[count].GetComponent<ItemObject>().hasItem = IM_manager.RemoveItem(kvp.Key, kvp.Value);
             }
                 
             GO_resourceCells[count].GetComponent<ItemObject>().UpdateItem(kvp.Value);
@@ -108,22 +112,29 @@ public class Crafting : MonoBehaviour
         CalcCanCraft();
     }
 
-    public void ResetCells() //제작 칸을 전부 비우고 초기화 한다.
+    public void ResetCells(bool returnItem) //제작 칸을 전부 비우고 초기화 한다.
     {
+        if (GO_resourceCells[0].GetComponent<ItemObject>().I_item == null)
+            return;
+
+
         GO_destItemCell.GetComponent<ItemObject>().I_item = null;
         GO_destItemCell.GetComponent<ItemObject>().UpdateItem();
         GO_destItemCell.GetComponent<ItemObject>().b_canClick = false;
 
-        for (int i = 0; i < 5; i++)
+        if (returnItem)
         {
-            if (GO_resourceCells[i].activeSelf)
+            for (int i = 0; i < 5; i++)
             {
-                IM_manager.AddItem(
-                    //올라간 아이템을
-                    GO_resourceCells[i].GetComponent<ItemObject>().I_item, 
+                if (GO_resourceCells[i].activeSelf && GO_resourceCells[i].GetComponent<ItemObject>().hasItem)
+                {
+                    IM_manager.AddItem(
+                        //올라간 아이템을
+                        GO_resourceCells[i].GetComponent<ItemObject>().I_item,
 
-                    //개수만큼 인벤에 다시 넣는다.
-                    int.Parse(GO_resourceCells[i].transform.GetChild(1).GetComponent<TMP_Text>().text));
+                        //개수만큼 인벤에 다시 넣는다.
+                        int.Parse(GO_resourceCells[i].transform.GetChild(1).GetComponent<TMP_Text>().text));
+                }
             }
         }
 
@@ -140,13 +151,13 @@ public class Crafting : MonoBehaviour
         int unprepared = 0;
         foreach (var kvp in dict_targetRecipe)
         {
-            if (!IM_manager.HasItem(kvp.Key, kvp.Value))
+            if (GO_resourceCells[count].GetComponent<ItemObject>().hasItem)
+                GO_resourceCells[count].GetComponent<ItemObject>().TansparentItem(false);
+            else
             {
                 GO_resourceCells[count].GetComponent<ItemObject>().TansparentItem(true);
                 unprepared++; //없으면 반투명시키고, 카운트 증가
             }
-            else
-                GO_resourceCells[count].GetComponent<ItemObject>().TansparentItem(false);
             count++;
         }
 
@@ -180,7 +191,7 @@ public class Crafting : MonoBehaviour
         InventoryUI.UpdateInventory(); 
 
         //제작대는 비워준다.
-        ResetCells();
+        ResetCells(false);
 
     }
 

@@ -16,19 +16,49 @@ public class Interactable : MonoBehaviour
     [Header("This Object Type")]
     [SerializeField] ObjectType type;
     [SerializeField] Outline.Mode mode = Outline.Mode.OutlineVisible;
-    [SerializeField] Color outlineColor = Color.white;
-    [SerializeField] float outlineWidth = 1f;
+    [SerializeField] Color enabledOutlineColor = Color.white;
+    [SerializeField] Color disabledOutlineColor = Color.white;
+    [SerializeField] float enabledOutlineWidth = 1f;
+    [SerializeField] float disabledOutlineWidth = 1f;
 
+
+    private void Awake()
+    {
+        enabledOutlineColor = new Color(0, 1, 0.4078431f, 1);
+        switch (type)
+        {
+            case ObjectType.MoveDoor:
+            case ObjectType.Door:
+                disabledOutlineColor = new Color(0, 0, 1, 0.05f);
+                enabledOutlineWidth = 4;
+                disabledOutlineWidth = 4;
+                break;
+            case ObjectType.Keypad:
+                disabledOutlineColor = new Color(0.5f, 1, 0, 0.05f);
+                enabledOutlineWidth = 4;
+                disabledOutlineWidth = 4;
+                break;
+            case ObjectType.Item:
+                disabledOutlineColor = new Color(1, 1, 0, 0.05f);
+                enabledOutlineWidth = 4;
+                disabledOutlineWidth = 4;
+                break;
+            case ObjectType.CraftingTable:
+                disabledOutlineColor = new Color(0, 1, 0.75f, 0.05f);
+                enabledOutlineWidth = 4;
+                disabledOutlineWidth = 6;
+                break;
+            default:
+                break;
+        }
+    }
 
     private void Start()
     {
         if (gameObject.GetComponent<Outline>() == null)
         {
             Outline tmpOutline = gameObject.AddComponent<Outline>();
-            tmpOutline.Instruct(mode, outlineColor, outlineWidth);
-
-            tmpOutline.enabled =
-                (type == ObjectType.CraftingTable) ? true : false;
+            tmpOutline.Instruct(mode, disabledOutlineColor, disabledOutlineWidth);
         }
     }
 
@@ -69,13 +99,14 @@ public class Interactable : MonoBehaviour
                         transform.parent.Find("Doors").GetChild(1).gameObject };
 
                     //키패드 초록색으로 바꾼뒤
-                    transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0, 8, 0));                                    
+                    transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0, 8, 0));
                     GameManager.Instance.StartCoroutine(GameManager.Instance.OpenElevator(go_doors, 1f, CHANGE_LEVEL_DELAY, obj as PlayerController));                                                                                                 //문열기 시작
-                } else
+                }
+                else
                 {
                     if (b_fading)
                         f_fadePercent = 3f; //3초간 Fading, 이미 Fading중에 또 누르면 시간만 초기화
-                    else 
+                    else
                         crt_coroutine = StartCoroutine(ChangeColor(transform.GetChild(0).GetComponent<Renderer>().material, 3f, new Color(8, 0, 0)));          //Emission을 Intensity가 3인 빨간색을 주기 위하여 RGB 8,0,0으로 준다.
                 }
                 break;
@@ -85,7 +116,7 @@ public class Interactable : MonoBehaviour
                 GameManager.Instance.GetComponent<InventoryManager>().AddItem(GetComponent<ItemObject>().I_item);
 
                 //아이템 오브젝트 삭제
-                DestroyImmediate(gameObject);                                                                
+                DestroyImmediate(gameObject);
                 break;
 
             case ObjectType.CraftingTable:
@@ -129,7 +160,7 @@ public class Interactable : MonoBehaviour
 
     private IEnumerator ChangeColor(Material mat, float duration, Color targetColor)
     {
-        
+
         f_fadePercent = duration;
         b_fading = true;
         Color originalColor = mat.GetColor("_EmissionColor");
@@ -146,4 +177,11 @@ public class Interactable : MonoBehaviour
         mat.SetColor("_Emission Color", originalColor);
     }
 
+    public void ChangeState(bool enabled)
+    {
+        Outline outline = GetComponent<Outline>();
+
+        outline.OutlineColor = enabled ? enabledOutlineColor : disabledOutlineColor;
+        outline.OutlineWidth = enabled ? enabledOutlineWidth : disabledOutlineWidth;
+    }
 }

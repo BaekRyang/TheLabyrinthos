@@ -21823,10 +21823,10 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5}
   - {x: 0.5, y: 0.5}
   - {x: 0.5, y: 0.5}
-  - {x: 1.5, y: 0.9960937}
-  - {x: 2.5, y: 0.9960937}
-  - {x: 1.5, y: -0.0039063096}
-  - {x: 2.5, y: -0.0039063096}
+  - {x: -0.5, y: 0.9960937}
+  - {x: 0.5, y: 0.9960937}
+  - {x: -0.5, y: -0.0039063096}
+  - {x: 0.5, y: -0.0039063096}
   m_Textures2: []
   m_Textures3: []
   m_Tangents:
@@ -23375,6 +23375,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8042492706425407404}
     m_Modifications:
+    - target: {fileID: -6110196462599722677, guid: 7d33d931de800cd4c89b2450982ae20b,
+        type: 3}
+      propertyPath: mode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 366859688749599108, guid: 7d33d931de800cd4c89b2450982ae20b,
         type: 3}
       propertyPath: m_Name

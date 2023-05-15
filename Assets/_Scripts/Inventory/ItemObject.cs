@@ -16,6 +16,9 @@ public class ItemObject : MonoBehaviour, IScrollHandler, IPointerEnterHandler, I
     public bool b_canClick = false;
     public Item I_item;
 
+    //조합대 전용
+    public bool hasItem = false;
+
     private void Awake()
     {
         if (b_isInventoryUIElement)
@@ -55,7 +58,7 @@ public class ItemObject : MonoBehaviour, IScrollHandler, IPointerEnterHandler, I
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (I_item.IT_type == TypeDefs.ItemType.Undefined) return;
+        if (I_item == null || I_item.IT_type == TypeDefs.ItemType.Undefined) return;
 
         var infoBox = InventoryManager.Instance.RT_infoBox;
         infoBox.gameObject.SetActive(true);

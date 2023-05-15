@@ -53,7 +53,7 @@ public class MainScene : MonoBehaviour
         if (sender.GetComponent<TMP_InputField>().text.Length != 6)
         {
             sender.GetComponent<TMP_InputField>().text = "";
-            sender.transform.GetChild(0).Find("Placeholder").GetComponent<TMP_Text>().text = "시드는 <b>6자리 HEX</b>이여야 합니다.";
+            sender.transform.GetChild(0).Find("Placeholder").GetComponent<TMP_Text>().text = "시드는 <color=white>6자리 HEX</color>이여야 합니다.";
         }
         else
         {

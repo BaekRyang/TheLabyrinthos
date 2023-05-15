@@ -32,7 +32,6 @@ public class BattleActions : MonoBehaviour
 
     void Start()
     {
-        //PlayerStats 클래스 객체 가져오기(참조로 가져온다)
         P_player = GameManager.Instance.GetComponent<Player>();
         PS_playerStats = P_player.GetPlayerStats();
 

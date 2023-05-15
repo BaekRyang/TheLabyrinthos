@@ -464,8 +464,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 4
   mode: 1
-  outlineColor: {r: 0.5137255, g: 1, b: 0.5686275, a: 1}
-  outlineWidth: 10
+  enabledOutlineColor: {r: 0, g: 1, b: 0.40784314, a: 1}
+  disabledOutlineColor: {r: 0, g: 0, b: 1, a: 1}
+  enabledOutlineWidth: 4
+  disabledOutlineWidth: 4
 --- !u!1 &7829511415794028671
 GameObject:
   m_ObjectHideFlags: 0

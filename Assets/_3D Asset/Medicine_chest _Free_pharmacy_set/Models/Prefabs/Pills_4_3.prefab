@@ -115,8 +115,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 3
   mode: 1
-  outlineColor: {r: 1, g: 0.8352941, b: 0, a: 1}
-  outlineWidth: 1
+  enabledOutlineColor: {r: 0, g: 1, b: 0.40784314, a: 1}
+  disabledOutlineColor: {r: 1, g: 1, b: 0, a: 1}
+  enabledOutlineWidth: 2
+  disabledOutlineWidth: 1
 --- !u!114 &6952604250037125455
 MonoBehaviour:
   m_ObjectHideFlags: 0

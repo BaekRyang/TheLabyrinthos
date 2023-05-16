@@ -20,11 +20,7 @@ public class RoomCreation : MonoBehaviour
 
     GameObject go_roomsRoot;
 
-    void Start()
-    {
-        
-    }
-    public void CreateSeed(ref string uSeed)
+    public void CreateSeed(out string uSeed)
     {
         Random random = new Random();
         uSeed = random.Next(0x000000, 0xFFFFFF).ToString("X"); //6자리 16진수 시드 생성
@@ -33,10 +29,7 @@ public class RoomCreation : MonoBehaviour
     private void CreateWallOrDoor(Transform parent, Vector3 position, Quaternion rotation, bool condition)
     //벽이나 문을 판정후 생성
     {
-        if (condition)
-            Instantiate(RoomWall, position, rotation, parent);
-        else
-            Instantiate(RoomDoor_t1, position, rotation, parent);
+        Instantiate(condition ? RoomWall : RoomDoor_t1, position, rotation, parent);
     }
 
     public void InitStruct(int seed, int roomCount)
@@ -54,7 +47,7 @@ public class RoomCreation : MonoBehaviour
                 break;
             }
 
-            if ((structCreation.Run(RoomCount, ref roomMap, seed, cnt)))
+            if (structCreation.Run(RoomCount, ref roomMap, seed, cnt))
             {
                 Debug.Log("CREATED");
                 break;
@@ -72,11 +65,11 @@ public class RoomCreation : MonoBehaviour
 
     public void PlaceRoom()
     {
-        if (!go_roomsRoot.IsDestroyed()) Destroy(go_roomsRoot); //이전게 남아있으면 Destory한다.
+        if (!go_roomsRoot.IsDestroyed()) Destroy(go_roomsRoot); //이전게 남아있으면 Destroy 한다.
         go_roomsRoot = new GameObject("Rooms");
 
         //방 구조 베이스 생성
-        for (int i = 0; i < 100; i++)
+        for (var i = 0; i < 100; i++)
         {
             if (!roomMap.ContainsKey(i)) //key가 없으면 아무것도 없는곳임
             {
@@ -84,11 +77,11 @@ public class RoomCreation : MonoBehaviour
             }
             else
             {
-                GameObject tmpGO = GameObject.Instantiate(
+                var tmpGO = Instantiate(
                                                             RoomBase,
                                                             new Vector3((-5 * iRoomSize) + (i % 10) * iRoomSize,            //X
                                                             0,                                                              //Y
-                                                            (-4 * iRoomSize) + (i / 10) * iRoomSize),                       //Z
+                                                            (-4 * iRoomSize) + i / 10 * iRoomSize),                       //Z
                                                             Quaternion.identity);                                           //R
 
                 if (i % 10 != 0 && i % 10 != 9)
@@ -140,9 +133,9 @@ public class RoomCreation : MonoBehaviour
                 }
 
                 //각 방의 4방향을 조사하여 0이면 벽을, 1이면 문을
-                RoomNode currentNode = roomMap[i];
+                var currentNode = roomMap[i];
 
-                int parentDirection = -1;
+                var parentDirection = -1;
                 if (currentNode.ParentNode != null) //시작노드는 Root가 없으므로 제외
                 {
                     //상위 노드의 상대위치를 저장해둔다.
@@ -153,10 +146,9 @@ public class RoomCreation : MonoBehaviour
                 }
 
                 //문이 생기는 자리인데, 해당 방향이 상위 노드이면 문을 비워둔 벽 생성
-                //이외에는 문이 생겨야하는지 조건에 따라 문 또는 벽을 생성
-
+                //이외에는 문이 생겨야하는지 조건에 따라 문 또는 벽을 생성)
                 //상(0)
-                bool shouldCreateWall = i > 90 || (!currentNode.Children.Contains(i + 10) && parentDirection != 3);
+                var shouldCreateWall = i > 90 || (!currentNode.Children.Contains(i + 10) && parentDirection != 3);
                 if (!shouldCreateWall && parentDirection == 3) GameObject.Instantiate(RoomNoDoor, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 0, 0)), tmpGO.transform);
                 else CreateWallOrDoor(tmpGO.transform, tmpGO.transform.position, Quaternion.Euler(new Vector3(0, 0, 0)), shouldCreateWall);
 

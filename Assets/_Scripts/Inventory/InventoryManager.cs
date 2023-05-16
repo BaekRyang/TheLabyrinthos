@@ -89,23 +89,54 @@ public class InventoryManager : MonoBehaviour
 
     }
 
-    public IEnumerator CloseUI()
+    public void CloseUI()
     {
         if (GO_inventory.activeSelf)
         {
-            Debug.Log("CLOSE Inven");
-            yield return StartCoroutine(LerpCanvas(GO_inventory.GetComponent<CanvasGroup>(), 1, 0, 0.3f));
-            GO_inventory.transform.Find("Inventory").GetComponent<Inventory>().DestroyElements();
-            GO_inventory.SetActive(false);
+            StartCoroutine(Lerp.LerpValueAfter(value => GO_inventory.GetComponent<CanvasGroup>().alpha = value,
+                1,
+                0f,
+                0.3f,
+                Mathf.Lerp,
+                null,
+                () =>
+                {
+                    GO_inventory.transform.Find("Inventory").GetComponent<Inventory>().DestroyElements();
+                    GO_inventory.SetActive(false);
+                }
+                ));
         }
-        else if (GO_crafting.activeSelf)
+        
+        if (GO_crafting.activeSelf)
         {
-            Debug.Log("CLOSE Craft");
-            yield return StartCoroutine(LerpCanvas(GO_crafting.GetComponent<CanvasGroup>(), 1, 0, 0.3f));
-            GO_crafting.transform.Find("Inventory").GetComponent<Inventory>().DestroyElements();
-            GO_crafting.GetComponent<Crafting>().ResetCells(true);
-            GO_crafting.SetActive(false);
+            StartCoroutine(Lerp.LerpValueAfter(value => GO_crafting.GetComponent<CanvasGroup>().alpha = value,
+                1,
+                0f,
+                0.3f,
+                Mathf.Lerp,
+                null,
+                () =>
+                {
+                    GO_crafting.transform.Find("Inventory").GetComponent<Inventory>().DestroyElements();
+                    GO_crafting.GetComponent<Crafting>().ResetCells(true);
+                    GO_crafting.SetActive(false);
+                }
+            ));
         }
+
+        if (GameManager.Instance.settings.activeSelf)
+        {
+            StartCoroutine(Lerp.LerpValueAfter(value => GameManager.Instance.settings.GetComponent<CanvasGroup>().alpha = value,
+                1,
+                0f,
+                0.3f,
+                Mathf.Lerp,
+                null,
+                () =>
+                    GameManager.Instance.settings.SetActive(false)
+                ));
+        }
+        
         b_UIOpen = false;
 
     }

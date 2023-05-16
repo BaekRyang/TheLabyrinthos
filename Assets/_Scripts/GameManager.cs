@@ -53,12 +53,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] Slider SL_expBar;
 
     [Header("Setting UI")]
-    [SerializeField] GameObject settings;
+    [SerializeField] public GameObject settings;
 
     void Awake()
     {
-        if (Instance == null)
-            Instance = this;
+
+        Instance ??= this;
 
         GO_startRoomPrefab =    Resources.Load   <GameObject>("RoomStructures/StartRoom/StartRoom");
         GO_roomPrefabs =        Resources.LoadAll<GameObject>("RoomStructures/Default");
@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
         {
             if (!data.GetComponent<DataCarrier>().useSeed)
                 //시드를 따로 지정하지 않았으면 새로 만들어준다.
-                GetComponent<RoomCreation>().CreateSeed(ref s_seed);
+                GetComponent<RoomCreation>().CreateSeed(out s_seed);
             else
                 s_seed = data.GetComponent<DataCarrier>().seed;
 
@@ -88,7 +88,7 @@ public class GameManager : MonoBehaviour
         {
             if (!b_useSeed)
                 //시드를 따로 지정하지 않았으면 새로 만들어준다.
-                GetComponent<RoomCreation>().CreateSeed(ref s_seed);
+                GetComponent<RoomCreation>().CreateSeed(out s_seed);
         }
         
         dict_randomObjects.Add("Object",     new Random(Convert.ToInt32(s_seed, 16) + 1)); //오브젝트용 랜덤 시드
@@ -267,7 +267,7 @@ public class GameManager : MonoBehaviour
             infoBox.gameObject.SetActive(false);
             infoBox2.gameObject.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
-            StartCoroutine(InventoryManager.Instance.CloseUI());
+            InventoryManager.Instance.CloseUI();
         }
         else
         {

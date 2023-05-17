@@ -15,30 +15,43 @@ public class InventoryManager : MonoBehaviour
     public Dictionary<int, int> dict_inventory;
     public Dictionary<int, List<Weapon>> dict_weaponInventory;
     public Dictionary<int, Sprite> dict_imgList = new Dictionary<int, Sprite>();
+    public Sprite emptyItem;
+    public Sprite spriteNotFounded;
     public Dictionary<int, Item> dict_items;
 
     public bool b_UIOpen;
+    public Inventory openedInventory;
 
     [Header("Set In Inspector")]
     //UI요소
     public GameObject GO_inventory;
     public GameObject GO_crafting;
 
-    [SerializeField] public RectTransform RT_infoBox;
-    [SerializeField] public RectTransform RT_descBox;
+    public Crafting crafting;
+
+    public RectTransform RT_infoBox;
+    public RectTransform RT_descBox;
+    public ItemActionHandler itemActionHandler;
 
     private void Awake()
     {
         Instance = this;
 
+        crafting = GO_crafting.GetComponent<Crafting>();
+        
         dict_items = new Dictionary<int, Item>();
         dict_inventory = new Dictionary<int, int>();
         dict_weaponInventory = new Dictionary<int, List<Weapon>>();
         var tmpArray = Resources.LoadAll<Sprite>("Sprites/Items");
+        
         for (int i = 0; i < tmpArray.Length; i++)
         {
             dict_imgList.Add(int.Parse(tmpArray[i].name), tmpArray[i]);
         }
+
+        emptyItem = dict_imgList[-1];
+        spriteNotFounded = dict_imgList[-2];
+        
     }
     void Start()
     {
@@ -46,12 +59,12 @@ public class InventoryManager : MonoBehaviour
         GO_inventory.SetActive(false);
 
         GetComponent<Player>().WP_weapon = new Weapon(dict_items[0] as Weapon); //임시로 아이템 넣어주기
-        AddItem(dict_items[0]);
-        AddItem(dict_items[1]);
-        AddItem(dict_items[1]);
-        AddItem(dict_items[2]);
-        AddItem(dict_items[2]);
-        AddItem(dict_items[2]);
+
+        foreach (KeyValuePair<int, Item> kvp in dict_items)
+        {
+            AddItem(kvp.Value);
+        }
+        
         GetComponent<Player>().WP_weapon.i_durability = 1;
 
         dict_weaponInventory[1][0].i_durability = 10;
@@ -81,7 +94,8 @@ public class InventoryManager : MonoBehaviour
         if (target != null)
         {
             GO_targetUI.SetActive(true);
-            GO_targetUI.transform.Find("Inventory").GetComponent<Inventory>().UpdateInventory();
+            openedInventory = GO_targetUI.transform.Find("Inventory").GetComponent<Inventory>();
+            openedInventory.UpdateInventory();
             StartCoroutine(LerpCanvas(GO_targetUI.GetComponent<CanvasGroup>(), 0, 1, 0.3f));
         }
 

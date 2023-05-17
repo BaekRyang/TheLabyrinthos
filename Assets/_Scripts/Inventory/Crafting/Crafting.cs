@@ -102,8 +102,7 @@ public class Crafting : MonoBehaviour
             GO_resourceCells[count].GetComponent<ItemObject>().UpdateItem(kvp.Value);
             count++;
         }
-
-        InventoryUI.DestroyElements();
+        
         InventoryUI.UpdateInventory();
 
         for (int i = count; i < 5; i++)
@@ -187,8 +186,7 @@ public class Crafting : MonoBehaviour
         IM_manager.AddItem(GO_destItemCell.GetComponent<ItemObject>().I_item);
 
         //인벤토리 업데이트 해준다.
-        InventoryUI.DestroyElements();
-        InventoryUI.UpdateInventory(); 
+        InventoryUI.UpdateInventory(15, true); 
 
         //제작대는 비워준다.
         ResetCells(false);

@@ -1,36 +1,49 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using TypeDefs;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class ItemObject : MonoBehaviour, IScrollHandler, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
 {
     ScrollRect SR_parent;
 
-    public bool b_isInventoryUIElement = false;       //인벤토리 UI인지 표시
+    [FormerlySerializedAs("b_isInventoryUIElement")] [Header("For Inventory Actions")]
+    public bool shouldTransperScrollEventToRoot = false;       //인벤토리 UI인지 표시
                                                       //조합대에서도 이거 쓰니까 있는 설정
     public bool b_canClick = false;
+    
+    [Header("Item value : id를 기준으로 사용됨")]
     public Item I_item;
 
-    //조합대 전용
+    [Header("For Crafting Actions")]
     public bool hasItem = false;
 
     private void Awake()
     {
-        if (b_isInventoryUIElement)
+        if (shouldTransperScrollEventToRoot)
             SR_parent = transform.parent.parent.parent.GetComponent<ScrollRect>();
     }
 
     public void UpdateItem(int amount = 1)
     {
-        if (I_item == null)
-            transform.GetChild(0).GetComponent<Image>().sprite = InventoryManager.Instance.dict_imgList[-1];
-        else 
-            transform.GetChild(0).GetComponent<Image>().sprite = InventoryManager.Instance.dict_imgList[I_item.i_id];
+        bool isEmptyCell = I_item.IsUnityNull();
+        
+        if (isEmptyCell)
+        {
+            transform.GetChild(0).GetComponent<Image>().sprite = InventoryManager.Instance.emptyItem;
+            return;
+        }
+
+        bool isSpriteExist = InventoryManager.Instance.dict_imgList.TryGetValue(I_item.i_id, out Sprite foundedSprite);
+
+        transform.GetChild(0).GetComponent<Image>().sprite =
+            isSpriteExist ? foundedSprite : InventoryManager.Instance.spriteNotFounded;
 
         if (amount > 1)
         {
@@ -89,10 +102,17 @@ public class ItemObject : MonoBehaviour, IScrollHandler, IPointerEnterHandler, I
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (b_canClick)
+        Debug.Log("Clicked");
+        if (!b_canClick)
+            return;
+
+        if (gameObject.name == "DestItem")
         {
-            GetComponentInParent<Crafting>().CraftItem();
+            InventoryManager.Instance.crafting.CraftItem();
             OnPointerExit(eventData);
+            return;
         }
+
+        InventoryManager.Instance.itemActionHandler.LoadItem(ref I_item, transform.position);
     }
 }

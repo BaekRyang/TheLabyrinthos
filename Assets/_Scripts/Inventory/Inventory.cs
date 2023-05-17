@@ -15,42 +15,52 @@ public class Inventory : MonoBehaviour
     public Transform TF_Disposables;
     public Transform TF_Foods;
     public Transform TF_Others;
-
+    
+    int maxChildCount = 6;
+    int cellSize      = 160;
+    int spacing       = 20;
+    int offset        = 80;
+    
     [SerializeField] GameObject copyGO;
 
     void Awake()
     {
-        TF_Weapons =        transform.Find("Elements").GetChild(0).Find("Scroll View").GetChild(0).GetChild(0).GetComponent<Transform>();
-        TF_Disposables =    transform.Find("Elements").GetChild(1).Find("Scroll View").GetChild(0).GetChild(0).GetComponent<Transform>();
-        TF_Foods =          transform.Find("Elements").GetChild(2).Find("Scroll View").GetChild(0).GetChild(0).GetComponent<Transform>();
-        TF_Others =         transform.Find("Elements").GetChild(3).Find("Scroll View").GetChild(0).GetChild(0).GetComponent<Transform>();
+        TF_Weapons     = transform.Find("Elements").GetChild(0).Find("Scroll View").GetChild(0).GetChild(0).GetComponent<Transform>();
+        TF_Disposables = transform.Find("Elements").GetChild(1).Find("Scroll View").GetChild(0).GetChild(0).GetComponent<Transform>();
+        TF_Foods       = transform.Find("Elements").GetChild(2).Find("Scroll View").GetChild(0).GetChild(0).GetComponent<Transform>();
+        TF_Others      = transform.Find("Elements").GetChild(3).Find("Scroll View").GetChild(0).GetChild(0).GetComponent<Transform>();
     }
 
     public void LoadSetting()
     {
         dict_Inventory = InventoryManager.Instance.dict_inventory;
-        dict_items = InventoryManager.Instance.dict_items;
-        dict_imgList = InventoryManager.Instance.dict_imgList;
+        dict_items     = InventoryManager.Instance.dict_items;
+        dict_imgList   = InventoryManager.Instance.dict_imgList;
     }
+
     void Start()
     {
-        
     }
 
-    public void UpdateInventory()
+    public void UpdateInventory(byte target = 15, bool destroyElements = true)
     {
-        foreach (var weaponList in InventoryManager.Instance.dict_weaponInventory)
-        {
-            foreach (var weapon in weaponList.Value)
-            {
-                GameObject tmpGO;
+        if (destroyElements)
+            DestroyElements();
 
-                tmpGO = Instantiate(copyGO, TF_Weapons);
-                tmpGO.GetComponent<ItemObject>().I_item = weapon;
-                tmpGO.name = weapon.s_name;
-                tmpGO.GetComponent<ItemObject>().UpdateItem();
+        if ((target & (1 << 3)) != 0)
+        {
+            foreach (var weaponList in InventoryManager.Instance.dict_weaponInventory)
+            {
+                foreach (var weapon in weaponList.Value)
+                {
+                    GameObject tmpGO = Instantiate(copyGO, TF_Weapons);
+                    tmpGO.GetComponent<ItemObject>().I_item = weapon;
+                    tmpGO.name                              = weapon.s_name;
+                    tmpGO.GetComponent<ItemObject>().UpdateItem();
+                }
             }
         }
+
 
         foreach (KeyValuePair<int, int> kvp in dict_Inventory)
         {
@@ -70,37 +80,41 @@ public class Inventory : MonoBehaviour
 
                 case ItemType.Disposable:
                     {
-                        GameObject tmpGO;
+                        if ((target & (1 << 2)) != 0)
+                        {
+                            GameObject tmpGO = Instantiate(copyGO, TF_Disposables);
+                            tmpGO.GetComponent<ItemObject>().I_item = targetItem;
+                            tmpGO.name                              = targetItem.s_name;
+                            tmpGO.GetComponent<ItemObject>().UpdateItem(kvp.Value);
+                        }
 
-                        tmpGO = Instantiate(copyGO, TF_Disposables);
-                        tmpGO.GetComponent<ItemObject>().I_item = targetItem;
-                        tmpGO.name = targetItem.s_name;
-                        tmpGO.GetComponent<ItemObject>().UpdateItem(kvp.Value);
                         break;
                     }
                 case ItemType.Food:
                     {
-                        GameObject tmpGO;
+                        if ((target & (1 << 1)) != 0)
+                        {
+                            GameObject tmpGO = Instantiate(copyGO, TF_Foods);
+                            tmpGO.GetComponent<ItemObject>().I_item = targetItem;
+                            tmpGO.name                              = targetItem.s_name;
+                            tmpGO.GetComponent<ItemObject>().UpdateItem(kvp.Value);
+                            Debug.Log(kvp.Value);
+                        }
 
-                        tmpGO = Instantiate(copyGO, TF_Foods);
-                        tmpGO.GetComponent<ItemObject>().I_item = targetItem;
-                        tmpGO.name = targetItem.s_name;
-                        tmpGO.GetComponent<ItemObject>().UpdateItem(kvp.Value);
-                        Debug.Log(kvp.Value);
                         break;
                     }
                 case ItemType.Other:
                     {
-                        GameObject tmpGO;
+                        if ((target & (1 << 0)) != 0)
+                        {
+                            GameObject tmpGO = Instantiate(copyGO, TF_Others);
+                            tmpGO.GetComponent<ItemObject>().I_item = targetItem;
+                            tmpGO.name                              = targetItem.s_name;
+                            tmpGO.GetComponent<ItemObject>().UpdateItem(kvp.Value);
+                        }
 
-                        tmpGO = Instantiate(copyGO, TF_Others);
-                        tmpGO.GetComponent<ItemObject>().I_item = targetItem;
-                        tmpGO.name = targetItem.s_name;
-                        tmpGO.GetComponent<ItemObject>().UpdateItem(kvp.Value);
                         break;
                     }
-                default:
-                    break;
             }
         }
 
@@ -109,21 +123,25 @@ public class Inventory : MonoBehaviour
 
     void CalcCellSize()
     {
-        while (TF_Weapons.childCount < 6) Instantiate(copyGO, TF_Weapons);
-        TF_Weapons.GetComponent<RectTransform>().sizeDelta = new Vector2(160 * TF_Weapons.childCount - 30, 0); //Cellsize + Spaceing * 칸 개수 만큼 칸 크기를 키워준다.
-        TF_Weapons.GetComponent<RectTransform>().anchoredPosition = new Vector2(80 * TF_Weapons.childCount - 15, 0);
+        int maxChildCount = 6;
+        int cellSize      = 160;
+        int spacing       = 30;
+        int offset        = 80;
 
-        while (TF_Disposables.childCount < 6) Instantiate(copyGO, TF_Disposables);
-        TF_Disposables.GetComponent<RectTransform>().sizeDelta = new Vector2(160 * TF_Disposables.childCount - 30, 0);
-        TF_Disposables.GetComponent<RectTransform>().anchoredPosition = new Vector2(80 * TF_Disposables.childCount - 15, 0);
+        UpdateLayout(TF_Weapons);
+        UpdateLayout(TF_Disposables);
+        UpdateLayout(TF_Foods);
+        UpdateLayout(TF_Others);
+    }
+    
+    void UpdateLayout(Transform transform)
+    {
+        while (transform.childCount < maxChildCount)
+            Instantiate(copyGO, transform);
 
-        while (TF_Foods.childCount < 6) Instantiate(copyGO, TF_Foods);
-        TF_Foods.GetComponent<RectTransform>().sizeDelta = new Vector2(160 * TF_Foods.childCount - 30, 0);
-        TF_Foods.GetComponent<RectTransform>().anchoredPosition = new Vector2(80 * TF_Foods.childCount - 15, 0);
-
-        while (TF_Others.childCount < 6) Instantiate(copyGO, TF_Others);
-        TF_Others.GetComponent<RectTransform>().sizeDelta = new Vector2(160 * TF_Others.childCount - 30, 0);
-        TF_Others.GetComponent<RectTransform>().anchoredPosition = new Vector2(80 * TF_Others.childCount - 15, 0);
+        RectTransform rectTransform = transform.GetComponent<RectTransform>();
+        rectTransform.sizeDelta        = new Vector2(cellSize * transform.childCount - spacing,           0);
+        rectTransform.anchoredPosition = new Vector2(cellSize / 2 * transform.childCount - (spacing / 2), 0);
     }
 
     public void DestroyElements()
@@ -132,6 +150,5 @@ public class Inventory : MonoBehaviour
         while (TF_Disposables.childCount > 0) DestroyImmediate(TF_Disposables.GetChild(0).gameObject);
         while (TF_Foods.childCount > 0) DestroyImmediate(TF_Foods.GetChild(0).gameObject);
         while (TF_Others.childCount > 0) DestroyImmediate(TF_Others.GetChild(0).gameObject);
-
     }
 }

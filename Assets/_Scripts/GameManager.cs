@@ -31,16 +31,16 @@ public class GameManager : MonoBehaviour
     public bool b_hasKey = false;
 
     [Header("Player Prefab")]
-    [SerializeField] GameObject go_playerPrefab;
+    [SerializeField] private GameObject go_playerPrefab;
     [NonSerialized] public GameObject go_player;
 
     [Header("Room Struct Prefabs")]
-    [SerializeField] GameObject GO_startRoomPrefab;
-    [SerializeField] GameObject[] GO_roomPrefabs;
-    [SerializeField] GameObject[] GO_corridorPrefabs;
-    [SerializeField] GameObject[] GO_craftingPrefabs;
-    [SerializeField] GameObject[] GO_bossRoomPrefabs;
-    [SerializeField] GameObject[] GO_shopPrefabs;
+    [SerializeField] private GameObject GO_startRoomPrefab;
+    [SerializeField] private GameObject[] GO_roomPrefabs;
+    [SerializeField] private GameObject[] GO_corridorPrefabs;
+    [SerializeField] private GameObject[] GO_craftingPrefabs;
+    [SerializeField] private GameObject[] GO_bossRoomPrefabs;
+    [SerializeField] private GameObject[] GO_shopPrefabs;
 
     [Header("Level Controll")]
     public int i_level = 1;
@@ -49,11 +49,12 @@ public class GameManager : MonoBehaviour
     public Dictionary<string, Random> dict_randomObjects = new Dictionary<string, Random>();
 
     [Header("InventoryUIs")]
-    [SerializeField] Slider SL_hpBar;
-    [SerializeField] Slider SL_expBar;
+    [SerializeField] private Slider SL_hpBar;
+    [SerializeField] private Slider SL_expBar;
 
     [Header("Setting UI")]
     [SerializeField] public GameObject settings;
+    
 
     void Awake()
     {

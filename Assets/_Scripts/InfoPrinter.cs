@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -8,7 +6,7 @@ public class InfoPrinter : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 {
     [SerializeField] string s_name;
     [SerializeField] string s_desc;
-    bool b_hover = false;
+    bool b_hover;
     RectTransform infoBox;
 
     void Start()
@@ -19,7 +17,7 @@ public class InfoPrinter : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public void OnPointerEnter(PointerEventData eventData)
     {
         b_hover = true;
-        if (this.name == "ItemCell(Clone)") return;
+        if (name == "ItemCell(Clone)") return;
 
         infoBox.gameObject.SetActive(true);
 

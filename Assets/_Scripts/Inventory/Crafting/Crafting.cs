@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
-using TypeDefs;
 using UnityEngine;
 
 public class Crafting : MonoBehaviour
@@ -186,7 +185,7 @@ public class Crafting : MonoBehaviour
         IM_manager.AddItem(GO_destItemCell.GetComponent<ItemObject>().I_item);
 
         //인벤토리 업데이트 해준다.
-        InventoryUI.UpdateInventory(15, true); 
+        InventoryUI.UpdateInventory(); 
 
         //제작대는 비워준다.
         ResetCells(false);

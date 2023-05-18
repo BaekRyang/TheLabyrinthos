@@ -1,9 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using TypeDefs;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
@@ -98,7 +95,6 @@ public class Inventory : MonoBehaviour
                             tmpGO.GetComponent<ItemObject>().I_item = targetItem;
                             tmpGO.name                              = targetItem.s_name;
                             tmpGO.GetComponent<ItemObject>().UpdateItem(kvp.Value);
-                            Debug.Log(kvp.Value);
                         }
 
                         break;

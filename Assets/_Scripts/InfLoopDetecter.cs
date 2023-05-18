@@ -1,18 +1,20 @@
-using UnityEngine;
 using System;
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
+using UnityEditor;
 
 /// <summary> 무한 루프 검사 및 방지(에디터 전용) </summary>
 public static class InfLoopDetector
 {
     private static string prevPoint = "";
-    private static int detectionCount = 0;
+    private static int detectionCount;
     private const int DetectionThreshold = 100000;
 
-    [System.Diagnostics.Conditional("UNITY_EDITOR")]
+    [Conditional("UNITY_EDITOR")]
     public static void Run(
-        [System.Runtime.CompilerServices.CallerMemberName] string mn = "",
-        [System.Runtime.CompilerServices.CallerFilePath] string fp = "",
-        [System.Runtime.CompilerServices.CallerLineNumber] int ln = 0
+        [CallerMemberName] string mn = "",
+        [CallerFilePath] string fp = "",
+        [CallerLineNumber] int ln = 0
     )
     {
         string currentPoint = $"{fp}:{ln}, {mn}()";
@@ -29,10 +31,10 @@ public static class InfLoopDetector
     }
 
 #if UNITY_EDITOR
-    [UnityEditor.InitializeOnLoadMethod]
+    [InitializeOnLoadMethod]
     private static void Init()
     {
-        UnityEditor.EditorApplication.update += () =>
+        EditorApplication.update += () =>
         {
             detectionCount = 0;
         };

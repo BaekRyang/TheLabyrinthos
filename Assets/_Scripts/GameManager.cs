@@ -1,23 +1,20 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
 using TMPro;
+using TypeDefs;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.ProBuilder.MeshOperations;
 using UnityEngine.UI;
-using static UnityEngine.UIElements.UxmlAttributeDescription;
 using Random = System.Random;
-using TypeDefs;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     [Header("Seed")]
-    public bool b_useSeed = false;
+    public bool b_useSeed;
     public string s_seed = "-";
-    public int i_roomSize = 0;
+    public int i_roomSize;
 
     [Header("System Objects")]
     public GameObject GO_curtain;
@@ -26,10 +23,7 @@ public class GameManager : MonoBehaviour
     [Header("Set Automatically")]
     public Creatures creatures;
     public Creature CR_levelDefault;
-
-    [Header("Test Keys")]
-    public bool b_hasKey = false;
-
+    
     [Header("Player Prefab")]
     [SerializeField] private GameObject go_playerPrefab;
     [NonSerialized] public GameObject go_player;
@@ -40,13 +34,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject[] GO_corridorPrefabs;
     [SerializeField] private GameObject[] GO_craftingPrefabs;
     [SerializeField] private GameObject[] GO_bossRoomPrefabs;
+    
+    [Header("Test Keys")]
+    public bool b_hasKey;
     [SerializeField] private GameObject[] GO_shopPrefabs;
 
     [Header("Level Controll")]
     public int i_level = 1;
 
-    [HideInInspector]
-    public Dictionary<string, Random> dict_randomObjects = new Dictionary<string, Random>();
+    [HideInInspector] public Dictionary<string, Random> dict_randomObjects = new Dictionary<string, Random>();
 
     [Header("InventoryUIs")]
     [SerializeField] private Slider SL_hpBar;
@@ -58,7 +54,6 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-
         Instance ??= this;
 
         GO_startRoomPrefab =    Resources.Load   <GameObject>("RoomStructures/StartRoom/StartRoom");
@@ -185,7 +180,7 @@ public class GameManager : MonoBehaviour
         obj[0].transform.localPosition = obj1EndPosition;
         obj[1].transform.localPosition = obj2EndPosition; //여기까지 문 관련 코드 - 엘레베이터 문이 닫힘
         yield return new WaitForSeconds(CHANGE_LEVEL_DELAY - duration); //CHANGE_LEVEL_DELAY가 문닫히는 시간보다 기니까 암전 완료될때까지 기다림
-        GameManager.Instance.ResetLevel(++i_level);
+        Instance.ResetLevel(++i_level);
         yield return new WaitForSeconds(1f); //방 바뀌는 모습 보이지 않게 멈추고
         StartCoroutine(CurtainModify(true, CHANGE_LEVEL_DELAY)); //암전 풀어주고
         go_player.GetComponent<PlayerController>().ResetSetting(); //플레이어 조작부분에 현재 방 관련 코드 초기화시켜준다.
@@ -198,11 +193,11 @@ public class GameManager : MonoBehaviour
         {
             case RoomType.common:
                 if (typeId != -1)   return GO_roomPrefabs[typeId];
-                else                return GO_roomPrefabs[dict_randomObjects["Room"].Next(GO_roomPrefabs.Length)]; //무작위 구조 반환
+                return GO_roomPrefabs[dict_randomObjects["Room"].Next(GO_roomPrefabs.Length)]; //무작위 구조 반환
 
             case RoomType.EndRoom:
                 if (typeId != -1)   return GO_roomPrefabs[typeId];
-                else                return GO_roomPrefabs[dict_randomObjects["Room"].Next(GO_roomPrefabs.Length)];
+                return GO_roomPrefabs[dict_randomObjects["Room"].Next(GO_roomPrefabs.Length)];
 
             case RoomType.StartRoom:
                 return              GO_startRoomPrefab; //시작방은 하나
@@ -210,23 +205,23 @@ public class GameManager : MonoBehaviour
             case RoomType.VerticalCorridor: //이 두개는 같은걸 return
             case RoomType.HorizontalCorridor:
                 if (typeId != -1)   return GO_corridorPrefabs[typeId];
-                else                return GO_corridorPrefabs[dict_randomObjects["Room"].Next(GO_corridorPrefabs.Length)];
+                return GO_corridorPrefabs[dict_randomObjects["Room"].Next(GO_corridorPrefabs.Length)];
 
             case RoomType.CraftingRoom:
                 if (typeId != -1)   return GO_craftingPrefabs[typeId];
-                else                return GO_craftingPrefabs[dict_randomObjects["Room"].Next(GO_craftingPrefabs.Length)];
+                return GO_craftingPrefabs[dict_randomObjects["Room"].Next(GO_craftingPrefabs.Length)];
 
             case RoomType.KeyRoom:
                 if (typeId != -1)   return GO_bossRoomPrefabs[typeId];
-                else                return GO_bossRoomPrefabs[dict_randomObjects["Room"].Next(GO_bossRoomPrefabs.Length)];
+                return GO_bossRoomPrefabs[dict_randomObjects["Room"].Next(GO_bossRoomPrefabs.Length)];
 
             case RoomType.Shop:
                 if (typeId != -1)   return GO_shopPrefabs[typeId];
-                else                return GO_shopPrefabs[dict_randomObjects["Room"].Next(GO_shopPrefabs.Length)];
+                return GO_shopPrefabs[dict_randomObjects["Room"].Next(GO_shopPrefabs.Length)];
 
             default:
                 if (typeId != -1)   return GO_roomPrefabs[typeId];
-                else                return GO_roomPrefabs[dict_randomObjects["Room"].Next(GO_roomPrefabs.Length)];
+                return GO_roomPrefabs[dict_randomObjects["Room"].Next(GO_roomPrefabs.Length)];
         }
     }
 
@@ -247,8 +242,6 @@ public class GameManager : MonoBehaviour
                 break;
             case StatsType.Exp:
                 SL_expBar.value = f_val;
-                break;
-            default:
                 break;
         }
     }
@@ -292,14 +285,14 @@ public class GameManager : MonoBehaviour
             {
                 settings.SetActive(true);
                 CanvasGroup canvasAlpha = settings.GetComponent<CanvasGroup>();
-                StartCoroutine(Lerp.LerpValue<float>(value => canvasAlpha.alpha = value, 0, 1, 0.3f, Mathf.Lerp, Lerp.EaseOutSine));
+                StartCoroutine(Lerp.LerpValue<float>(value => canvasAlpha.alpha = value, 0, 1, 0.3f, Mathf.Lerp, Lerp.EaseOut));
             }
         }
 
         if (buttonType == "Resume")
         {
             CanvasGroup canvasAlpha = settings.GetComponent<CanvasGroup>();
-            StartCoroutine(Lerp.LerpValueAfter<float>(value => canvasAlpha.alpha = value, 1, 0, 0.3f, Mathf.Lerp, Lerp.EaseOutSine, () => settings.gameObject.SetActive(false)));
+            StartCoroutine(Lerp.LerpValueAfter<float>(value => canvasAlpha.alpha = value, 1, 0, 0.3f, Mathf.Lerp, Lerp.EaseOut, () => settings.gameObject.SetActive(false)));
         }
 
         if (buttonType == "Exit")

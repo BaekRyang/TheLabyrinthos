@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TypeDefs;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -30,7 +27,8 @@ public class ItemActionHandler : MonoBehaviour, IPointerExitHandler
 
         if (action == "Wear")
         {
-            Debug.Log("장착");
+            InventoryManager.Instance.Wear(ref focusedItem);
+            
             OnPointerExit(null);
             return;
         }

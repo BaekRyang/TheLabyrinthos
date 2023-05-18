@@ -125,6 +125,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1828926832383184720}
     m_Modifications:
+    - target: {fileID: -6860895033569716450, guid: 877add96c1c1228478d21648bf83c496,
+        type: 3}
+      propertyPath: m_CookingOptions
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 877add96c1c1228478d21648bf83c496, type: 3}
       propertyPath: m_Name
       value: SM_BeerBottle
@@ -185,22 +190,3 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 377152483295735385}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &377152483295635705 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100000, guid: 877add96c1c1228478d21648bf83c496,
-    type: 3}
-  m_PrefabInstance: {fileID: 377152483295735385}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &5032541085066538925
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 377152483295635705}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.08025077, y: 0.28292292, z: 0.07905501}
-  m_Center: {x: -0.000000074505806, y: 0.14149019, z: 0.000014647841}

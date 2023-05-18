@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -23,11 +22,11 @@ public class MainScene : MonoBehaviour
     [SerializeField] GameObject GO_defaultPosition;
 
     [SerializeField] GameObject GO_whiteBoard;
-    Material[] MAT_logos = new Material[2];
+    private          Material   MAT_logos;
 
     [SerializeField] GameObject[] GO_cameras;
 
-    bool b_loaded = false;
+    bool b_loaded;
      
     void Start()
     {
@@ -44,8 +43,7 @@ public class MainScene : MonoBehaviour
             LIT_lights[i] = GO_lights[i].GetComponent<Light>();
         }
 
-        MAT_logos[0] = GO_whiteBoard.transform.GetChild(0).GetChild(0).GetComponent<Renderer>().material;
-        MAT_logos[1] = GO_whiteBoard.transform.GetChild(0).GetChild(1).GetComponent<Renderer>().material;
+        MAT_logos = GO_whiteBoard.transform.GetChild(0).GetChild(0).GetComponent<Renderer>().material;
     }
 
     public void CheckSeed(GameObject sender)
@@ -75,11 +73,10 @@ public class MainScene : MonoBehaviour
             CanvasGroup tmpCG = GO_mainUI.GetComponent<CanvasGroup>();
             GO_mainUI.SetActive(true);
             StartCoroutine(Lerp.LerpValue(alpha => tmpCG.alpha = alpha, 0, 1f, 1, Mathf.Lerp));
-            StartCoroutine(Lerp.LerpValue((intense) =>
+            StartCoroutine(Lerp.LerpValue(intense =>
             {
                 for (int i = 0; i < 12; i++)
                     LIT_lights[i].intensity = intense;
-                return;
             }, 0.1f, 5, 3, Mathf.Lerp));
         }
         else if (button == "StartGame")
@@ -115,14 +112,13 @@ public class MainScene : MonoBehaviour
 
             StartCoroutine(Lerp.LerpValue(value => dof.focusDistance.value = value, 6, 2.5f, 1, Mathf.Lerp));
 
-            StartCoroutine(Lerp.LerpValue(value => MAT_logos[0].color = value, Color.white, new Color(1, 1, 1, 0), 0.5f, Color.Lerp));
-            yield return StartCoroutine(Lerp.LerpValue(value => MAT_logos[1].color = value, Color.white, new Color(1, 1, 1, 0), 0.5f, Color.Lerp));
+            yield return StartCoroutine(Lerp.LerpValue(value => MAT_logos.color = value, Color.white, new Color(1, 1, 1, 0), 0.5f, Color.Lerp));
 
             GO_mainUI.transform.Find("NewGameSetting").gameObject.SetActive(true);
             var tmpCG = GO_mainUI.transform.Find("NewGameSetting").GetComponent<CanvasGroup>();
             var tmpCG2 = GO_mainUI.transform.Find("MainTabs").GetComponent<CanvasGroup>();
-            StartCoroutine(Lerp.LerpValue(value => tmpCG.alpha = value, 0, 1f, 1f, Mathf.Lerp, Lerp.EaseOutSine));
-            StartCoroutine(Lerp.LerpValue(value => tmpCG2.alpha = value, 1, 0f, 1f, Mathf.Lerp, Lerp.EaseOutSine));
+            StartCoroutine(Lerp.LerpValue(value => tmpCG.alpha = value, 0, 1f, 1f, Mathf.Lerp, Lerp.EaseOut));
+            StartCoroutine(Lerp.LerpValue(value => tmpCG2.alpha = value, 1, 0f, 1f, Mathf.Lerp, Lerp.EaseOut));
             yield return null;
         } else if (type == 1)
         {
@@ -139,8 +135,7 @@ public class MainScene : MonoBehaviour
 
             StartCoroutine(Lerp.LerpValue(value => dof.focusDistance.value = value, 2.5f, 6, 1, Mathf.Lerp));
 
-            StartCoroutine(Lerp.LerpValue(value => MAT_logos[0].color = value, new Color(1, 1, 1, 0), Color.white, 0.5f, Color.Lerp));
-            StartCoroutine(Lerp.LerpValue(value => MAT_logos[1].color = value, new Color(1, 1, 1, 0), Color.white, 0.5f, Color.Lerp));
+            StartCoroutine(Lerp.LerpValue(value => MAT_logos.color = value, new Color(1, 1, 1, 0), Color.white, 0.5f, Color.Lerp));
             yield return null;
         } else if (type == 2)
         {
@@ -156,8 +151,8 @@ public class MainScene : MonoBehaviour
             GO_mainUI.transform.Find("Settings").gameObject.SetActive(true);
             var tmpCG = GO_mainUI.transform.Find("Settings").GetComponent<CanvasGroup>();
             var tmpCG2 = GO_mainUI.transform.Find("MainTabs").GetComponent<CanvasGroup>();
-            StartCoroutine(Lerp.LerpValue(value => tmpCG.alpha = value, 0, 1f, 1f, Mathf.Lerp, Lerp.EaseOutSine));
-            StartCoroutine(Lerp.LerpValue(value => tmpCG2.alpha = value, 1, 0f, 1f, Mathf.Lerp, Lerp.EaseOutSine));
+            StartCoroutine(Lerp.LerpValue(value => tmpCG.alpha = value, 0, 1f, 1f, Mathf.Lerp, Lerp.EaseOut));
+            StartCoroutine(Lerp.LerpValue(value => tmpCG2.alpha = value, 1, 0f, 1f, Mathf.Lerp, Lerp.EaseOut));
             yield return null;
         }
         else if (type == 3)

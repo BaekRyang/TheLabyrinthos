@@ -1,12 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography;
+using TypeDefs;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = System.Random;
-using TypeDefs;
-
-
 
 public class BattleActions : MonoBehaviour
 {
@@ -20,6 +17,9 @@ public class BattleActions : MonoBehaviour
     const float OUTER_DMG       = 0.80f;
     const float OUTER_ACC       = 1.30f;
 
+    private float                 weakpointACC;
+    private float                 thoraxACC;
+    private float                 outerACC;
     Dictionary<Parts, AttackPair> dict_attackTable = new Dictionary<Parts, AttackPair>();
 
     //정보를 받아와서 저장할 위치
@@ -41,6 +41,10 @@ public class BattleActions : MonoBehaviour
         dict_attackTable.Add(Parts.Thorax, new AttackPair(THORAX_DMG, THORAX_ACC));
         dict_attackTable.Add(Parts.Outer, new AttackPair(OUTER_DMG, OUTER_ACC));
 
+        weakpointACC = BASE_ACCURACY * dict_attackTable[Parts.Weakpoint].accuracy;
+        thoraxACC    = BASE_ACCURACY * dict_attackTable[Parts.Thorax].accuracy;
+        outerACC     = BASE_ACCURACY * dict_attackTable[Parts.Outer].accuracy;
+        
         gameObject.SetActive(false); //전부 로딩 되면 오브젝트 끄기
     }
     void Update()
@@ -80,9 +84,6 @@ public class BattleActions : MonoBehaviour
             case "Attack_Back":
                 BM_BattleMain.GO_attackList.SetActive(false);
                 BM_BattleMain.GO_actionList.SetActive(true);
-                break;
-
-            default:
                 break;
         }
     }
@@ -130,8 +131,7 @@ public class BattleActions : MonoBehaviour
                         clip = BM_BattleMain.AC_playerAttackThorax[rand.Next(BM_BattleMain.AC_playerAttackThorax.Length)];
                         break;
                 }
-
-                P_player.WP_weapon.i_durability--;  //내구도 하나 빼주고
+                
                 P_player.ConsumeTurn();             //턴 하나 소모
             } 
             else
@@ -269,9 +269,9 @@ public class BattleActions : MonoBehaviour
     public void SetDmgNAcc() //공격 상세창 값 초기화용
     {
         var typeDict = BM_BattleMain.dict_dmgAccList;
-        typeDict[Parts.Weakpoint].percentage.text = Mathf.Clamp((BASE_ACCURACY * dict_attackTable[Parts.Weakpoint].accuracy * P_player.WP_weapon.f_accuracyMult), 0, 100).ToString() + "%";
-        typeDict[Parts.Thorax]   .percentage.text = Mathf.Clamp((BASE_ACCURACY * dict_attackTable[Parts.Thorax]   .accuracy * P_player.WP_weapon.f_accuracyMult), 0, 100).ToString() + "%";
-        typeDict[Parts.Outer]    .percentage.text = Mathf.Clamp((BASE_ACCURACY * dict_attackTable[Parts.Outer]    .accuracy * P_player.WP_weapon.f_accuracyMult), 0, 100).ToString() + "%";
+        typeDict[Parts.Weakpoint].percentage.text = Mathf.Clamp((weakpointACC * P_player.WP_weapon.f_accuracyMult), 0, 100) + "%";
+        typeDict[Parts.Thorax]   .percentage.text = Mathf.Clamp((thoraxACC * P_player.WP_weapon.f_accuracyMult), 0, 100) + "%";
+        typeDict[Parts.Outer]    .percentage.text = Mathf.Clamp((outerACC * P_player.WP_weapon.f_accuracyMult), 0, 100) + "%";
 
 
         var baseDamage = PS_playerStats.damage + P_player.WP_weapon.i_damage;

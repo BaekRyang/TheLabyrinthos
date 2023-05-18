@@ -1,14 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using TypeDefs;
 using UnityEngine;
 using UnityEngine.UI;
-using TypeDefs;
-
 //같은 이름의 클래스가 두개라서 고정
-using Slider = UnityEngine.UI.Slider;
-using Image = UnityEngine.UI.Image;
-
 
 
 public class BattleMain : MonoBehaviour
@@ -73,7 +69,7 @@ public class BattleMain : MonoBehaviour
 
     public Dictionary<Parts, DmgAccText> dict_dmgAccList = new Dictionary<Parts, DmgAccText>();
 
-    protected float f_enemySpeed = 0.0f;
+    protected float f_enemySpeed;
 
     [Header("Set Automatically")]
     public Creature CR_Enemy;
@@ -151,7 +147,7 @@ public class BattleMain : MonoBehaviour
 
             //speed를 기반으로 증가량을 계산.
             //0~100까지 증가량은 속도 1.0 기준으로 3초가 걸린다.
-            float tmp_playerIncrement = Time.deltaTime * PS_playerStats.speed * (100 / f_turnDelay);
+            float tmp_playerIncrement = Time.deltaTime * PS_playerStats.speed * P_player.WP_weapon.f_speedMult * (100 / f_turnDelay);
             float tmp_enemyIncrement = Time.deltaTime * f_enemySpeed * (100 / f_turnDelay);
 
             //증가량만큼 더해주고
@@ -223,8 +219,6 @@ public class BattleMain : MonoBehaviour
                 break;
             case StatsType.Speed:
                 break;
-            default:
-                break;
         }
     }
 
@@ -265,12 +259,18 @@ public class BattleMain : MonoBehaviour
         b_playerReady = false;
         ChangeSliderValue(true, StatsType.Tp, 0);
         ChangeSliderValue(false, StatsType.Tp, 0);
+        
+        //인벤토리 내부 값 업데이트
+        InventoryManager.Instance.equipedItem.UpdateUI();
+        InventoryManager.Instance.stats.UpdateUI();
 
         //전투씬 끄기
         PC_player.b_camControll = false;
         PC_player.ExitBattle();
 
+        //외부 상시 스텟바 업데이트
         GameManager.Instance.ChangeStatsSlider(StatsType.Hp, PS_playerStats.health);
+
         yield return new WaitForSeconds(0.5f);
         GameManager.Instance.StartCoroutine(GameManager.Instance.CurtainModify(true, 1)); //BattleMain은 사라질거니까 GM에서 실행해준다.
         gameObject.SetActive(false);
@@ -298,8 +298,6 @@ public class BattleMain : MonoBehaviour
                 case ActionTypes.Avoid:
                     tmpIMG.sprite = null;
                     break;
-                default:
-                    break;
             }
             tmpRect.localPosition = new Vector2(1536, 0);
         } else
@@ -315,8 +313,6 @@ public class BattleMain : MonoBehaviour
                     break;
                 case ActionTypes.Avoid:
                     tmpIMG.sprite = CR_Enemy.spritePack.cut_Avoid;
-                    break;
-                default:
                     break;
             }
             tmpRect.localPosition = new Vector2(1536, 0);

@@ -1,14 +1,8 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text.RegularExpressions;
 using TypeDefs;
-using Unity.VisualScripting;
 using UnityEngine;
-
-
 
 public class CSVReader : MonoBehaviour
 {
@@ -40,11 +34,11 @@ public class CSVReader : MonoBehaviour
     private void WriteDelegate() //각 아이템을 Parsing 하는 코드 작성 : 사실 클래스 안에다가 만들면 더 간단한데
                                  //아이템 Parsing을 CSVReader가 전부 하도록 하기 위해서 Delegate를 통해 할당해준다.
     {
-        Item.parsing += (Item item, string[] dataValue, int startIndex) =>
+        Item.parsing += (item, dataValue, startIndex) =>
         {
             Debug.Log("Parsing 할 데이터 없음");
         };
-        Weapon.parsing += (Item baseItem, string[] dataValue, int startIndex) =>
+        Weapon.parsing += (baseItem, dataValue, startIndex) =>
         {
             Weapon item = baseItem as Weapon;
             for (int i = startIndex; i < dataValue.Length; i++)
@@ -57,7 +51,7 @@ public class CSVReader : MonoBehaviour
                         break;
                     case 1:
                         item.i_damage = int.Parse(dataValue[ i]);
-                        item.s_inspectText += ("ATK : " + (item.i_damage - item.i_damageRange).ToString() + " ~ " + (item.i_damage + item.i_damageRange).ToString());
+                        item.s_inspectText += ("ATK : " + (item.i_damage - item.i_damageRange) + " ~ " + (item.i_damage + item.i_damageRange));
                         break;
                     case 2:
                         item.f_speedMult = float.Parse(dataValue[i]);
@@ -80,13 +74,11 @@ public class CSVReader : MonoBehaviour
 
             }
         };
-        Disposable.parsing += (Item item, string[] dataValue, int startIndex) =>
+        Disposable.parsing += (item, dataValue, startIndex) =>
         {
-            return;
         };
-        Other.parsing += (Item item, string[] dataValue, int startIndex) =>
+        Other.parsing += (item, dataValue, startIndex) =>
         {
-            return;
         };
 
         parsingDelegates = new Dictionary<ItemType, Item.ParseAttributes> //Delegate들을 저장할 Dictionary 아이템을 만들때 여기의 함수를 호출한다.

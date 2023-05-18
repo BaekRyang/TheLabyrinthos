@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -40,20 +39,15 @@ public class Minimap : MonoBehaviour
         for (int i = 0; i < 100; i++) //레벨 로딩때 한번만 실행되니까 100개 다 돌린다.
         {
             if (!map.ContainsKey(i)) continue;
-            else
-            {
-                GO_rooms[i] = Instantiate(GO_roomPrefab, GO_anchor.transform);
-                GO_rooms[i].transform.localPosition = new Vector3(  ((-5 * i_boxSize) + (i % 10) * i_boxSize),
-                                                                    ((-4 * i_boxSize) + (i / 10) * i_boxSize),
-                                                                        0);
-                //방 생성하는 알고리즘이랑 동일하게 미니맵에 오브젝트를 붙여놓는다.
-                //localPosition은 Instantiate때 설정할 수 없어서 나누어서 설정한다.
+            GO_rooms[i] = Instantiate(GO_roomPrefab, GO_anchor.transform);
+            GO_rooms[i].transform.localPosition = new Vector3(  ((-5 * i_boxSize) + (i % 10) * i_boxSize),
+                ((-4 * i_boxSize) + (i / 10) * i_boxSize),
+                0);
+            //방 생성하는 알고리즘이랑 동일하게 미니맵에 오브젝트를 붙여놓는다.
+            //localPosition은 Instantiate때 설정할 수 없어서 나누어서 설정한다.
 
-                GO_rooms[i].name = i.ToString(); //식별용
-            }
+            GO_rooms[i].name = i.ToString(); //식별용
         }
-
-        return;
     }
 
     public GameObject GetRoom(int roomNum)
@@ -67,6 +61,5 @@ public class Minimap : MonoBehaviour
                                                         -((-4 * i_boxSize) + (roomIdx / 10) * i_boxSize),
                                                            0);
         //그냥 생성 알고리즘 방향을 반대로 하면 됨
-        return;
     }
 }

@@ -118,29 +118,29 @@ namespace TypeDefs
     {
         public Creature(int atk, int def, float hp, float spd, int pspd, CreatureSpritePack csp)
         {
-            this.damage = atk;
-            this.defense = def;
-            this.health = hp;
-            this.speed = spd;
-            this.prepareSpeed = pspd;
-            this.spritePack = csp;
+            damage = atk;
+            defense = def;
+            health = hp;
+            speed = spd;
+            prepareSpeed = pspd;
+            spritePack = csp;
         }
 
         public Creature(Creature creature, CreatureSpritePack csp)
         {
-            this.health = creature.health;
-            this.speed = creature.speed;
-            this.defense = creature.defense;
-            this.prepareSpeed = creature.prepareSpeed;
-            this.damage = creature.damage;
-            this.spritePack = csp;
+            health = creature.health;
+            speed = creature.speed;
+            defense = creature.defense;
+            prepareSpeed = creature.prepareSpeed;
+            damage = creature.damage;
+            spritePack = csp;
         }
 
         public int damage = 1;
         public int defense = 5;
         public float health = 100.0f;
         public float speed = 1.0f;
-        public int prepareSpeed = 0;
+        public int prepareSpeed;
         public CreatureSpritePack spritePack;
         //Sprite attackSprite = null;
     }

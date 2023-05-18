@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using UnityEngine;
 using TypeDefs;
+using UnityEngine;
 
 public class RoomController : MonoBehaviour
 {
@@ -12,7 +9,7 @@ public class RoomController : MonoBehaviour
     [SerializeField] GameObject ceilings;
     [SerializeField] public GameObject go_specialObject;
     [SerializeField] public RoomType RT_roomType;
-    [SerializeField] public bool b_hasCreature = false;
+    [SerializeField] public bool b_hasCreature;
     [SerializeField] public Creature CR_creature;
     [SerializeField] public GameObject GO_creature;
 
@@ -30,7 +27,7 @@ public class RoomController : MonoBehaviour
 
     public void SortObjects()
     {
-        transform.name = "Room_" + index.ToString();
+        transform.name = "Room_" + index;
         for (int i = 0; i < transform.childCount; i++)
         {
             if (transform.GetChild(i).name.StartsWith("DoorWall"))
@@ -51,7 +48,7 @@ public class RoomController : MonoBehaviour
                     //그 외의 오브젝트를 찾음
                     else
                         //해당 오브젝트를 현재 게임 오브젝트의 하위로 이동
-                        transform.GetChild(i).GetChild(0).parent = this.transform;
+                        transform.GetChild(i).GetChild(0).parent = transform;
                 }
                 //Instantiate로 생성된 게임 오브젝트를 삭제
                 Destroy(transform.GetChild(i).gameObject);

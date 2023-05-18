@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditorInternal.Profiling.Memory.Experimental;
+using TypeDefs;
+using Unity.VisualScripting;
 using UnityEngine;
-using Debug = UnityEngine.Debug;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -17,6 +17,7 @@ public class InventoryManager : MonoBehaviour
     public Dictionary<int, Sprite> dict_imgList = new Dictionary<int, Sprite>();
     public Sprite emptyItem;
     public Sprite spriteNotFounded;
+    public Sprite weaponSpriteNotFounded;
     public Dictionary<int, Item> dict_items;
 
     public bool b_UIOpen;
@@ -29,9 +30,11 @@ public class InventoryManager : MonoBehaviour
 
     public Crafting crafting;
 
-    public RectTransform RT_infoBox;
-    public RectTransform RT_descBox;
+    public RectTransform     RT_infoBox;
+    public RectTransform     RT_descBox;
     public ItemActionHandler itemActionHandler;
+    public EquipedItem       equipedItem;
+    public Stats             stats;
 
     private void Awake()
     {
@@ -51,30 +54,24 @@ public class InventoryManager : MonoBehaviour
 
         emptyItem = dict_imgList[-1];
         spriteNotFounded = dict_imgList[-2];
+        weaponSpriteNotFounded = dict_imgList[-3];
         
     }
     void Start()
     {
         GO_inventory.transform.Find("Inventory").GetComponent<Inventory>().LoadSetting();
         GO_inventory.SetActive(false);
-
-        GetComponent<Player>().WP_weapon = new Weapon(dict_items[0] as Weapon); //임시로 아이템 넣어주기
-
-        foreach (KeyValuePair<int, Item> kvp in dict_items)
-        {
-            AddItem(kvp.Value);
-        }
         
-        GetComponent<Player>().WP_weapon.i_durability = 1;
+        foreach (KeyValuePair<int, Item> kvp in dict_items)
+            AddItem(kvp.Value);
 
-        dict_weaponInventory[1][0].i_durability = 10;
-        dict_weaponInventory[2][0].i_durability = 10;
-
-        dict_weaponInventory[1][1].i_durability = 15;
-        dict_weaponInventory[2][1].i_durability = 15;
+        GetComponent<Player>().WP_weapon = dict_weaponInventory[0][0];
 
         GO_crafting.transform.Find("Inventory").GetComponent<Inventory>().LoadSetting();
         //GO_crafting.SetActive(false); //Crafting에서 로딩 다 끝나면 알아서 비활성화 한다.
+        
+        equipedItem.UpdateUI();
+        stats.UpdateUI();
     }
 
     void Update()
@@ -98,9 +95,7 @@ public class InventoryManager : MonoBehaviour
             openedInventory.UpdateInventory();
             StartCoroutine(LerpCanvas(GO_targetUI.GetComponent<CanvasGroup>(), 0, 1, 0.3f));
         }
-
         
-
     }
 
     public void CloseUI()
@@ -171,7 +166,7 @@ public class InventoryManager : MonoBehaviour
 
     public void AddItem(Item item, int amount = 1)
     {
-        if (item.IT_type == TypeDefs.ItemType.Weapon)
+        if (item.IT_type == ItemType.Weapon)
         {
             if (!dict_weaponInventory.ContainsKey(item.i_id))
                 //해당 무기를 이미 갖고있지 않으면 리스트를 만들어준다.
@@ -189,7 +184,7 @@ public class InventoryManager : MonoBehaviour
 
     public bool RemoveItem(Item item, int amount = 1)
     {
-        if (item.IT_type == TypeDefs.ItemType.Weapon)
+        if (item.IT_type == ItemType.Weapon)
         {
             //인자로 들어온 해당 아이템을 삭제한다.
             if (dict_weaponInventory[item.i_id].Contains(item as Weapon))
@@ -201,8 +196,8 @@ public class InventoryManager : MonoBehaviour
                     dict_weaponInventory.Remove(item.i_id);
                 return true;
             }
-            else
-                return false;
+
+            return false;
         }
 
         if (dict_inventory.ContainsKey(item.i_id))   //해당 아이템을 가지고 있다면
@@ -212,25 +207,23 @@ public class InventoryManager : MonoBehaviour
                 dict_inventory.Remove(item.i_id);    //딕셔너리에서 아이템을 제거
             return true;
         }
-        else
-            return false;
+
+        return false;
     }
 
 
     public bool HasItem(Item item, int amount = 1)
     {
-        if (item.IT_type == TypeDefs.ItemType.Weapon)
+        if (item.IT_type == ItemType.Weapon)
         {
             if (dict_weaponInventory.ContainsKey(item.i_id))
                 return true;
-            else
-                return false;
+            return false;
         }
 
         if (dict_inventory.ContainsKey(item.i_id))      //해당 아이템을 가지고 있다면     
             return dict_inventory[item.i_id] >= amount; //아이템 개수가 amount 이상이면 true, 그렇지 않으면 false 반환
-        else 
-            return false;                              //해당 아이템을 가지고 있지 않다면 false 반환
+        return false;                              //해당 아이템을 가지고 있지 않다면 false 반환
     }
 
 
@@ -254,7 +247,7 @@ public class InventoryManager : MonoBehaviour
 
     public bool RemoveItem(int item, int amount = 1)
     {
-        if (item < 100) 
+        if (item < 100)
         {
             //무기는 무조건 맨 앞에 있던걸 지운다.
             if (dict_weaponInventory.ContainsKey(item) && dict_weaponInventory[item].Count > 0)
@@ -266,9 +259,9 @@ public class InventoryManager : MonoBehaviour
                     dict_weaponInventory.Remove(item);  // 해당 무기 아이템 리스트가 비어있으면 딕셔너리에서 제거
                 return true;
             }
-            else
-                return false;
-            
+
+            return false;
+
         }
 
         if (dict_inventory.ContainsKey(item))   //해당 아이템을 가지고 있다면
@@ -277,9 +270,9 @@ public class InventoryManager : MonoBehaviour
             if (dict_inventory[item] <= 0)      //아이템 개수가 0 이하면
                 dict_inventory.Remove(item);    //딕셔너리에서 아이템을 제거
             return true;
-        } 
-        else
-            return false;
+        }
+
+        return false;
     }
 
     public bool HasItem(int item, int amount = 1)
@@ -288,22 +281,36 @@ public class InventoryManager : MonoBehaviour
         {
             if (dict_weaponInventory.ContainsKey(item))
                 return true;
-            else
-                return false;
+            return false;
         }
 
         if (dict_inventory.ContainsKey(item))      //해당 아이템을 가지고 있다면     
             return dict_inventory[item] >= amount; //아이템 개수가 amount 이상이면 true, 그렇지 않으면 false 반환
-        else
-            return false;                         //해당 아이템을 가지고 있지 않다면 false 반환
+        return false;                         //해당 아이템을 가지고 있지 않다면 false 반환
+    }
+
+    public Sprite GetImage(int id)
+    {
+        bool isSpriteExist = dict_imgList.TryGetValue(id, out Sprite foundedSprite);
+
+        return isSpriteExist ? foundedSprite : spriteNotFounded;
     }
 
     public Item GetWeaponInstance(int id)
     {
-        if (HasItem(id, 1))
+        if (HasItem(id))
             //해당 아이템을 갖고있다면 제일 처음 아이템을 반환한다.
             return dict_weaponInventory[id][0];
 
         return null;
+    }
+
+    public void Wear(ref Item item)
+    {
+        Player player = GetComponent<Player>();
+        player.WP_weapon = item as Weapon;
+        
+        equipedItem.UpdateUI();
+        stats.UpdateUI();
     }
 }

@@ -48,13 +48,18 @@ public static class Lerp
         return t;
     }
 
-    public static float EaseOutSine(float t)
+    public static float EaseOut(float t)
     {
         return Mathf.Sin(Mathf.Pow(t, 0.5f) * Mathf.PI / 2);
     }
 
-    public static float EaseInSine(float t)
+    public static float EaseIn(float t)
     {
         return 1 - Mathf.Cos((t * Mathf.PI) / 2);
+    }
+    
+    public static float EaseInOut(float t)
+    {
+        return -0.5f * (Mathf.Cos(Mathf.PI * t) - 1);
     }
 }

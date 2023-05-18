@@ -1,18 +1,17 @@
 using System.Collections;
+using TypeDefs;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
-using TypeDefs;
 
 public class Interactable : MonoBehaviour
 {
     const float CHANGE_ROOM_DELAY = 1f;
     const float CHANGE_LEVEL_DELAY = 3f;
 
-    float f_fadePercent = 0;
-    bool b_fading = false;
+    float f_fadePercent;
+    bool b_fading;
 
-    Coroutine crt_coroutine = null;
+    Coroutine crt_coroutine;
     [Header("This Object Type")]
     [SerializeField] ObjectType type;
     [SerializeField] Outline.Mode mode = Outline.Mode.OutlineVisible;
@@ -47,8 +46,6 @@ public class Interactable : MonoBehaviour
                 disabledOutlineColor = new Color(0, 1, 0.75f, 0.05f);
                 enabledOutlineWidth = 4;
                 disabledOutlineWidth = 6;
-                break;
-            default:
                 break;
         }
     }
@@ -121,9 +118,6 @@ public class Interactable : MonoBehaviour
 
             case ObjectType.CraftingTable:
                 GameManager.Instance.Inventory("Crafting");
-                break;
-
-            default:
                 break;
         }
     }

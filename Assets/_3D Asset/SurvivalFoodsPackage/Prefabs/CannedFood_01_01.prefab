@@ -125,6 +125,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4171172480734311367}
     m_Modifications:
+    - target: {fileID: -6860895033569716450, guid: 118dd8353baea8a4cafc4c2397e20388,
+        type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 118dd8353baea8a4cafc4c2397e20388, type: 3}
       propertyPath: m_Name
       value: SM_CannedFood_01
@@ -179,25 +184,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 118dd8353baea8a4cafc4c2397e20388, type: 3}
---- !u!1 &4313758186390328428 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100000, guid: 118dd8353baea8a4cafc4c2397e20388,
-    type: 3}
-  m_PrefabInstance: {fileID: 4313758186390360780}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &9221544400941823336
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4313758186390328428}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.079907306, y: 0.097391635, z: 0.081139974}
-  m_Center: {x: -0.0004737489, y: 0.04874406, z: -0.000002000481}
 --- !u!4 &4313758186390489164 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 118dd8353baea8a4cafc4c2397e20388,

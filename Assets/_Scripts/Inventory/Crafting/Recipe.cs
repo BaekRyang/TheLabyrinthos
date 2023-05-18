@@ -1,8 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using TMPro;
+using TypeDefs;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -16,7 +16,7 @@ public class Recipe : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
 
     public void RunSetting(InventoryManager IM_manager)
     {
-        transform.GetChild(0).GetComponent<Image>().sprite = IM_manager.dict_imgList[I_destItem.i_id];
+        transform.GetChild(0).GetComponent<Image>().sprite  = IM_manager.GetImage(I_destItem.i_id);
         transform.GetChild(1).GetComponent<TMP_Text>().text = I_destItem.s_name;
 
         resourceID = dict_recipe.Keys.ToArray();
@@ -27,7 +27,7 @@ public class Recipe : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
         var infoBox = InventoryManager.Instance.RT_infoBox;
         infoBox.gameObject.SetActive(true);
 
-        if (I_destItem.IT_type == TypeDefs.ItemType.Weapon)
+        if (I_destItem.IT_type == ItemType.Weapon)
         {
             infoBox.GetChild(1).transform.localScale = Vector3.one;
             Weapon tmpWeapon = I_destItem as Weapon;

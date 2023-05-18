@@ -1,9 +1,7 @@
 using System.Collections.Generic;
-using System;
+using TypeDefs;
 using UnityEngine;
 using Random = System.Random;
-using TypeDefs;
-
 
 public class RoomNode
 {
@@ -34,7 +32,7 @@ public class StructCreation
 {
     int iFirstRoom = 45;
     int iMaxRoom = 5;
-    int iCreateRoomCount = 0;
+    int iCreateRoomCount;
     Random rand;
 
     Queue<RoomNode> qRoomIdx = new Queue<RoomNode>();

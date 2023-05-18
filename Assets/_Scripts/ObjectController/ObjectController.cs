@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using TypeDefs;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ObjectController : MonoBehaviour
@@ -10,12 +7,12 @@ public class ObjectController : MonoBehaviour
     [Range(0, 100)]
     [SerializeField] int i_percent = 100;
     [SerializeField] CreatureSpritePack CSP_spritePack;
-    [SerializeField] bool b_customCreature = false;
+    [SerializeField] bool b_customCreature;
     [SerializeField] Creature CR_customCreature;
 
     [Header("Set Automatically")]
     [SerializeField] int i_randNum;
-    [SerializeField] bool b_isCreature = false;
+    [SerializeField] bool b_isCreature;
     [SerializeField] Creature CR_creature;
 
     void Start()

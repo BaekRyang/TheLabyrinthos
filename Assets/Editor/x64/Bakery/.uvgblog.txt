@@ -1,0 +1,1514 @@
+2023-5-19
+Rendering UV GBuffer for RoomTest_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for RoomTest_LMA1 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for RoomTest_VLM 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LM0.lz4" 2 0 0 0
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LMA1.lz4" 2 0 1 0
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM" 4 0 2 comp_2.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 2 "gi_RoomTest_VLM0.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM00.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA10.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 2 "gi_RoomTest_VLM1.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM01.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA11.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 2 "gi_RoomTest_VLM2.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM02.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA12.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 2 "gi_RoomTest_VLM3.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM03.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA13.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_final" 4 16 2 "gi_RoomTest_VLM4.bin" "RoomTest_VLM_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_final" 4 16 0 "gi_RoomTest_LM04.bin" "RoomTest_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_final" 4 16 1 "gi_RoomTest_LMA14.bin" "RoomTest_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "RoomTest_LM0_final_HDR.lz4"
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" 64 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "1" "RoomTest_LMA1_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LM0_final.hdr" 1024
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LMA1_final.hdr" 1024
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 1024x1024: 1
+Num alphas of 2048x1024: 2
+Num alphas of 2048x2048: 3
+Done
+Rendering UV GBuffer for RoomTest_LM0 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for RoomTest_LMA1 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for RoomTest_VLM 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LM0.lz4" 2 0 0 0
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LMA1.lz4" 2 0 1 0
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM" 4 0 2 comp_2.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 2 "gi_RoomTest_VLM0.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM00.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA10.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 2 "gi_RoomTest_VLM1.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM01.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA11.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 2 "gi_RoomTest_VLM2.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM02.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA12.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 2 "gi_RoomTest_VLM3.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM03.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA13.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_final" 4 16 2 "gi_RoomTest_VLM4.bin" "RoomTest_VLM_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_final" 4 16 0 "gi_RoomTest_LM04.bin" "RoomTest_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_final" 4 16 1 "gi_RoomTest_LMA14.bin" "RoomTest_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "RoomTest_LM0_final_HDR.lz4"
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" 64 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "1" "RoomTest_LMA1_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LM0_final.hdr" 1024
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LMA1_final.hdr" 1024
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 1024x1024: 1
+Num alphas of 2048x1024: 2
+Num alphas of 2048x2048: 3
+Done
+Rendering UV GBuffer for RoomTest_LM0 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for RoomTest_LMA1 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for RoomTest_VLM 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LM0.lz4" 2 0 0 0
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LMA1.lz4" 2 0 1 0
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM" 4 0 2 comp_2.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 2 "gi_RoomTest_VLM0.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM00.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA10.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 2 "gi_RoomTest_VLM1.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM01.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA11.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 2 "gi_RoomTest_VLM2.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM02.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA12.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 2 "gi_RoomTest_VLM3.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM03.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA13.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_final" 4 16 2 "gi_RoomTest_VLM4.bin" "RoomTest_VLM_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_final" 4 16 0 "gi_RoomTest_LM04.bin" "RoomTest_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_final" 4 16 1 "gi_RoomTest_LMA14.bin" "RoomTest_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "RoomTest_LM0_final_HDR.lz4"
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" 64 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "1" "RoomTest_LMA1_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LM0_final.hdr" 1024
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LMA1_final.hdr" 1024
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 1024x1024: 1
+Num alphas of 2048x1024: 2
+Num alphas of 2048x2048: 3
+Done
+Rendering UV GBuffer for RoomTest_LM0 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for RoomTest_LMA1 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for RoomTest_VLM 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LM0.lz4" 2 0 0 0
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LMA1.lz4" 2 0 1 0
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM" 4 0 2 comp_2.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 2 "gi_RoomTest_VLM0.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM00.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA10.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 2 "gi_RoomTest_VLM1.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM01.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA11.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 2 "gi_RoomTest_VLM2.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM02.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA12.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 2 "gi_RoomTest_VLM3.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM03.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA13.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_final" 4 16 2 "gi_RoomTest_VLM4.bin" "RoomTest_VLM_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_final" 4 16 0 "gi_RoomTest_LM04.bin" "RoomTest_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_final" 4 16 1 "gi_RoomTest_LMA14.bin" "RoomTest_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "RoomTest_LM0_final_HDR.lz4"
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" 64 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "1" "RoomTest_LMA1_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LM0_final.hdr" 1024
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LMA1_final.hdr" 1024
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 1024x1024: 1
+Num alphas of 2048x1024: 2
+Num alphas of 2048x2048: 3
+Done
+Rendering UV GBuffer for RoomTest_LM0 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for RoomTest_LMA1 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for RoomTest_VLM 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LM0.lz4" 2 0 0 0
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LMA1.lz4" 2 0 1 0
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM" 4 0 2 comp_2.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 2 "gi_RoomTest_VLM0.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM00.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA10.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 2 "gi_RoomTest_VLM1.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM01.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA11.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 2 "gi_RoomTest_VLM2.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM02.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA12.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 2 "gi_RoomTest_VLM3.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM03.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA13.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_final" 4 16 2 "gi_RoomTest_VLM4.bin" "RoomTest_VLM_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_final" 4 16 0 "gi_RoomTest_LM04.bin" "RoomTest_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_final" 4 16 1 "gi_RoomTest_LMA14.bin" "RoomTest_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "RoomTest_LM0_final_HDR.lz4"
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" 64 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "1" "RoomTest_LMA1_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LM0_final.hdr" 1024
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LMA1_final.hdr" 1024
+2023-5-19
+Rendering UV GBuffer for RoomTest_LM0 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for RoomTest_LMA1 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for RoomTest_VLM 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LM0.lz4" 2 0 0 0
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LMA1.lz4" 2 0 1 0
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM" 4 0 2 comp_2.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 2 "gi_RoomTest_VLM0.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM00.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA10.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 2 "gi_RoomTest_VLM1.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM01.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA11.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 2 "gi_RoomTest_VLM2.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM02.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA12.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 2 "gi_RoomTest_VLM3.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM03.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA13.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_final" 4 16 2 "gi_RoomTest_VLM4.bin" "RoomTest_VLM_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_final" 4 16 0 "gi_RoomTest_LM04.bin" "RoomTest_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_final" 4 16 1 "gi_RoomTest_LMA14.bin" "RoomTest_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "RoomTest_LM0_final_HDR.lz4"
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" 64 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "1" "RoomTest_LMA1_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LM0_final.hdr" 1024
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LMA1_final.hdr" 1024
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 1024x1024: 1
+Num alphas of 2048x1024: 2
+Num alphas of 2048x2048: 3
+Done
+Rendering UV GBuffer for RoomTest_LM0 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for RoomTest_LMA1 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for RoomTest_VLM 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LM0.lz4" 2 0 0 0
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LMA1.lz4" 2 0 1 0
+Running ftraceRTX sun "C:\Users\grayw\AppData\Local\Temp\frender" "light_1_2" 4 0 2 direct0.bin
+Running ftraceRTX sun "C:\Users\grayw\AppData\Local\Temp\frender" "light_2_2" 4 0 2 direct1.bin
+Running ftraceRTX sun "C:\Users\grayw\AppData\Local\Temp\frender" "light_3_2" 4 0 2 direct2.bin
+Running ftraceRTX sun "C:\Users\grayw\AppData\Local\Temp\frender" "light_4_2" 4 0 2 direct3.bin
+Running ftraceRTX sun "C:\Users\grayw\AppData\Local\Temp\frender" "light_5_2" 4 0 2 direct4.bin
+Running ftraceRTX sun "C:\Users\grayw\AppData\Local\Temp\frender" "light_6_2" 4 0 2 direct5.bin
+Running ftraceRTX sun "C:\Users\grayw\AppData\Local\Temp\frender" "light_7_2" 4 0 2 direct6.bin
+Running ftraceRTX sun "C:\Users\grayw\AppData\Local\Temp\frender" "light_8_2" 4 0 2 direct7.bin
+Running ftraceRTX sun "C:\Users\grayw\AppData\Local\Temp\frender" "light_9_2" 4 0 2 direct8.bin
+Running ftraceRTX sun "C:\Users\grayw\AppData\Local\Temp\frender" "light_10_2" 4 0 2 direct9.bin
+Running ftraceRTX sun "C:\Users\grayw\AppData\Local\Temp\frender" "light_11_2" 4 0 2 direct10.bin
+Running ftraceRTX sun "C:\Users\grayw\AppData\Local\Temp\frender" "light_12_2" 4 0 2 direct11.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM" 4 0 2 comp_2.bin
+Running ftraceRTX sun "C:\Users\grayw\AppData\Local\Temp\frender" "light_1_0" 4 0 0 direct0.bin
+Running ftraceRTX sun "C:\Users\grayw\AppData\Local\Temp\frender" "light_2_0" 4 0 0 direct1.bin
+Running ftraceRTX sun "C:\Users\grayw\AppData\Local\Temp\frender" "light_3_0" 4 0 0 direct2.bin
+Running ftraceRTX sun "C:\Users\grayw\AppData\Local\Temp\frender" "light_4_0" 4 0 0 direct3.bin
+Running ftraceRTX sun "C:\Users\grayw\AppData\Local\Temp\frender" "light_5_0" 4 0 0 direct4.bin
+Running ftraceRTX sun "C:\Users\grayw\AppData\Local\Temp\frender" "light_6_0" 4 0 0 direct5.bin
+Running ftraceRTX sun "C:\Users\grayw\AppData\Local\Temp\frender" "light_7_0" 4 0 0 direct6.bin
+Running ftraceRTX sun "C:\Users\grayw\AppData\Local\Temp\frender" "light_8_0" 4 0 0 direct7.bin
+Running ftraceRTX sun "C:\Users\grayw\AppData\Local\Temp\frender" "light_9_0" 4 0 0 direct8.bin
+Running ftraceRTX sun "C:\Users\grayw\AppData\Local\Temp\frender" "light_10_0" 4 0 0 direct9.bin
+Running ftraceRTX sun "C:\Users\grayw\AppData\Local\Temp\frender" "light_11_0" 4 0 0 direct10.bin
+Running ftraceRTX sun "C:\Users\grayw\AppData\Local\Temp\frender" "light_12_0" 4 0 0 direct11.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX sun "C:\Users\grayw\AppData\Local\Temp\frender" "light_1_1" 4 0 1 direct0.bin
+Running ftraceRTX sun "C:\Users\grayw\AppData\Local\Temp\frender" "light_2_1" 4 0 1 direct1.bin
+Running ftraceRTX sun "C:\Users\grayw\AppData\Local\Temp\frender" "light_3_1" 4 0 1 direct2.bin
+Running ftraceRTX sun "C:\Users\grayw\AppData\Local\Temp\frender" "light_4_1" 4 0 1 direct3.bin
+Running ftraceRTX sun "C:\Users\grayw\AppData\Local\Temp\frender" "light_5_1" 4 0 1 direct4.bin
+Running ftraceRTX sun "C:\Users\grayw\AppData\Local\Temp\frender" "light_6_1" 4 0 1 direct5.bin
+Running ftraceRTX sun "C:\Users\grayw\AppData\Local\Temp\frender" "light_7_1" 4 0 1 direct6.bin
+Running ftraceRTX sun "C:\Users\grayw\AppData\Local\Temp\frender" "light_8_1" 4 0 1 direct7.bin
+Running ftraceRTX sun "C:\Users\grayw\AppData\Local\Temp\frender" "light_9_1" 4 0 1 direct8.bin
+Running ftraceRTX sun "C:\Users\grayw\AppData\Local\Temp\frender" "light_10_1" 4 0 1 direct9.bin
+Running ftraceRTX sun "C:\Users\grayw\AppData\Local\Temp\frender" "light_11_1" 4 0 1 direct10.bin
+Running ftraceRTX sun "C:\Users\grayw\AppData\Local\Temp\frender" "light_12_1" 4 0 1 direct11.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 2 "gi_RoomTest_VLM0.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM00.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA10.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 2 "gi_RoomTest_VLM1.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM01.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA11.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 2 "gi_RoomTest_VLM2.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM02.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA12.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 2 "gi_RoomTest_VLM3.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM03.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA13.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_final" 4 16 2 "gi_RoomTest_VLM4.bin" "RoomTest_VLM_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_final" 4 16 0 "gi_RoomTest_LM04.bin" "RoomTest_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_final" 4 16 1 "gi_RoomTest_LMA14.bin" "RoomTest_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "RoomTest_LM0_final_HDR.lz4"
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" 64 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "1" "RoomTest_LMA1_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LM0_final.hdr" 1024
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LMA1_final.hdr" 1024
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 1024x1024: 1
+Num alphas of 2048x1024: 2
+Num alphas of 2048x2048: 3
+Done
+Rendering UV GBuffer for RoomTest_LM0 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for RoomTest_LMA1 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for RoomTest_VLM 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LM0.lz4" 2 0 0 0
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LMA1.lz4" 2 0 1 0
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM" 4 0 2 comp_2.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_11" 4 0 0 batchpointlight_0_0_11.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 2 "gi_RoomTest_VLM0.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM00.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA10.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 2 "gi_RoomTest_VLM1.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM01.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA11.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 2 "gi_RoomTest_VLM2.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM02.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA12.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 2 "gi_RoomTest_VLM3.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM03.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA13.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_final" 4 16 2 "gi_RoomTest_VLM4.bin" "RoomTest_VLM_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_final" 4 16 0 "gi_RoomTest_LM04.bin" "RoomTest_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_final" 4 16 1 "gi_RoomTest_LMA14.bin" "RoomTest_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "RoomTest_LM0_final_HDR.lz4"
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" 64 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "1" "RoomTest_LMA1_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LM0_final.hdr" 1024
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LMA1_final.hdr" 1024
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 1024x1024: 1
+Num alphas of 2048x1024: 2
+Num alphas of 2048x2048: 3
+Done
+Rendering UV GBuffer for RoomTest_LM0 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for RoomTest_LMA1 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for RoomTest_VLM 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LM0.lz4" 2 0 0 0
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LMA1.lz4" 2 0 1 0
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM" 4 0 2 comp_2.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_11" 4 0 0 batchpointlight_0_0_11.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 2 "gi_RoomTest_VLM0.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM00.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA10.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 2 "gi_RoomTest_VLM1.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM01.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA11.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 2 "gi_RoomTest_VLM2.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM02.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA12.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 2 "gi_RoomTest_VLM3.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM03.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA13.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_final" 4 16 2 "gi_RoomTest_VLM4.bin" "RoomTest_VLM_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_final" 4 16 0 "gi_RoomTest_LM04.bin" "RoomTest_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_final" 4 16 1 "gi_RoomTest_LMA14.bin" "RoomTest_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "RoomTest_LM0_final_HDR.lz4"
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" 64 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "1" "RoomTest_LMA1_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LM0_final.hdr" 1024
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LMA1_final.hdr" 1024
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 1024x1024: 1
+Num alphas of 2048x1024: 2
+Num alphas of 2048x2048: 3
+Done
+Rendering UV GBuffer for RoomTest_LM0 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for RoomTest_LMA1 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for RoomTest_VLM 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LM0.lz4" 2 0 0 0
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LMA1.lz4" 2 0 1 0
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM" 4 0 2 comp_2.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_11" 4 0 0 batchpointlight_0_0_11.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 2 "gi_RoomTest_VLM0.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM00.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA10.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 2 "gi_RoomTest_VLM1.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM01.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA11.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 2 "gi_RoomTest_VLM2.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM02.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA12.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 2 "gi_RoomTest_VLM3.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM03.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA13.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_final" 4 16 2 "gi_RoomTest_VLM4.bin" "RoomTest_VLM_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_final" 4 16 0 "gi_RoomTest_LM04.bin" "RoomTest_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_final" 4 16 1 "gi_RoomTest_LMA14.bin" "RoomTest_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "RoomTest_LM0_final_HDR.lz4"
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" 64 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "1" "RoomTest_LMA1_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LM0_final.hdr" 1024
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LMA1_final.hdr" 1024
+ASSERT: texcoord.x >= 0 && texcoord.y >= 0 xatlas.cpp 8496
+ASSERT: texcoord.x >= 0 && texcoord.y >= 0 xatlas.cpp 8496
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 1024x1024: 1
+Num alphas of 2048x1024: 2
+Num alphas of 2048x2048: 3
+Done
+Rendering UV GBuffer for RoomTest_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for RoomTest_VLM 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LM0.lz4" 2 0 0 0
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM" 4 0 1 comp_1.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_11" 4 0 0 batchpointlight_0_0_11.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 1 "gi_RoomTest_VLM0.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM00.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 1 "gi_RoomTest_VLM1.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM01.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 1 "gi_RoomTest_VLM2.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM02.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 1 "gi_RoomTest_VLM3.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM03.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_final" 4 16 1 "gi_RoomTest_VLM4.bin" "RoomTest_VLM_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_final" 4 16 0 "gi_RoomTest_LM04.bin" "RoomTest_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "RoomTest_LM0_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LM0_final.hdr" 1024
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 2048x2048: 1
+Done
+Rendering UV GBuffer for RoomTest_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LM0.lz4" 2 0 0 0
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_3" 4 0 0 batchpointlight_0_0_3.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM00.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM01.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM02.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM03.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_final" 4 16 0 "gi_RoomTest_LM04.bin" "RoomTest_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" 1024 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "RoomTest_LM0_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LM0_final.hdr" 1024
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+ASSERT: texcoord.x >= 0 && texcoord.y >= 0 xatlas.cpp 8496
+ASSERT: texcoord.x >= 0 && texcoord.y >= 0 xatlas.cpp 8496
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 1024x1024: 1
+Num alphas of 2048x1024: 2
+Num alphas of 2048x2048: 3
+Done
+Rendering UV GBuffer for RoomTest_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for RoomTest_VLM 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LM0.lz4" 2 0 0 0
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM" 4 0 1 comp_1.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_11" 4 0 0 batchpointlight_0_0_11.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 1 "gi_RoomTest_VLM0.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM00.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 1 "gi_RoomTest_VLM1.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM01.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 1 "gi_RoomTest_VLM2.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM02.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 1 "gi_RoomTest_VLM3.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM03.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_final" 4 16 1 "gi_RoomTest_VLM4.bin" "RoomTest_VLM_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_final" 4 16 0 "gi_RoomTest_LM04.bin" "RoomTest_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "RoomTest_LM0_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LM0_final.hdr" 1024
+ASSERT: texcoord.x >= 0 && texcoord.y >= 0 xatlas.cpp 8496
+ASSERT: texcoord.x >= 0 && texcoord.y >= 0 xatlas.cpp 8496
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 1024x1024: 1
+Num alphas of 2048x1024: 2
+Num alphas of 2048x2048: 3
+Done
+Rendering UV GBuffer for RoomTest_LM0 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for RoomTest_VLM 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LM0.lz4" 2 0 0 0
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM" 4 0 1 comp_1.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_11" 4 0 0 batchpointlight_0_0_11.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 1 "gi_RoomTest_VLM0.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM00.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 1 "gi_RoomTest_VLM1.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM01.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 1 "gi_RoomTest_VLM2.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM02.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 1 "gi_RoomTest_VLM3.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM03.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_final" 4 16 1 "gi_RoomTest_VLM4.bin" "RoomTest_VLM_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_final" 4 16 0 "gi_RoomTest_LM04.bin" "RoomTest_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "RoomTest_LM0_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LM0_final.hdr" 1024
+ASSERT: texcoord.x >= 0 && texcoord.y >= 0 xatlas.cpp 8496
+ASSERT: texcoord.x >= 0 && texcoord.y >= 0 xatlas.cpp 8496
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 1024x1024: 1
+Num alphas of 2048x1024: 2
+Num alphas of 2048x2048: 3
+Done
+Rendering UV GBuffer for RoomTest_LM0 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for RoomTest_VLM 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LM0.lz4" 2 0 0 0
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM" 4 0 1 comp_1.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_11" 4 0 0 batchpointlight_0_0_11.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 1 "gi_RoomTest_VLM0.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM00.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 1 "gi_RoomTest_VLM1.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM01.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 1 "gi_RoomTest_VLM2.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM02.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_diffuse" 4 16 1 "gi_RoomTest_VLM3.bin" "RoomTest_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM03.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_VLM_final" 4 16 1 "gi_RoomTest_VLM4.bin" "RoomTest_VLM_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_final" 4 16 0 "gi_RoomTest_LM04.bin" "RoomTest_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "RoomTest_LM0_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LM0_final.hdr" 1024
+ASSERT: texcoord.x >= 0 && texcoord.y >= 0 xatlas.cpp 8496
+ASSERT: texcoord.x >= 0 && texcoord.y >= 0 xatlas.cpp 8496
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 1024x1024: 1
+Done
+Rendering UV GBuffer for RoomTest_LM0 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for RoomTest_LMA1 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LM0.lz4" 2 0 0 0
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LMA1.lz4" 2 0 1 0
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM00.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA10.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM01.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA11.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM02.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA12.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM03.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA13.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_final" 4 16 0 "gi_RoomTest_LM04.bin" "RoomTest_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_final" 4 16 1 "gi_RoomTest_LMA14.bin" "RoomTest_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" 512 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "RoomTest_LM0_final_HDR.lz4"
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" 16 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "1" "RoomTest_LMA1_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LM0_final.hdr" 1024
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LMA1_final.hdr" 1024
+ASSERT: texcoord.x >= 0 && texcoord.y >= 0 xatlas.cpp 8496
+ASSERT: texcoord.x >= 0 && texcoord.y >= 0 xatlas.cpp 8496
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 1024x1024: 1
+Done
+Rendering UV GBuffer for RoomTest_LM0 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for RoomTest_LMA1 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LM0.lz4" 2 0 0 0
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LMA1.lz4" 2 0 1 0
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_0" 4 0 0 batchpointlight_0_0_0.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_1_0_0" 4 0 1 batchpointlight_1_0_0.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM00.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA10.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM01.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA11.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM02.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA12.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM03.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA13.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_final" 4 16 0 "gi_RoomTest_LM04.bin" "RoomTest_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_final" 4 16 1 "gi_RoomTest_LMA14.bin" "RoomTest_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" 512 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "RoomTest_LM0_final_HDR.lz4"
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" 16 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "1" "RoomTest_LMA1_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LM0_final.hdr" 1024
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LMA1_final.hdr" 1024
+ASSERT: texcoord.x >= 0 && texcoord.y >= 0 xatlas.cpp 8496
+ASSERT: texcoord.x >= 0 && texcoord.y >= 0 xatlas.cpp 8496
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 1024x1024: 1
+Done
+Rendering UV GBuffer for RoomTest_LM0 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for RoomTest_LMA1 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LM0.lz4" 2 0 0 0
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LMA1.lz4" 2 0 1 0
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_0" 4 0 0 batchpointlight_0_0_0.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_1_0_0" 4 0 1 batchpointlight_1_0_0.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM00.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA10.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM01.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA11.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM02.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA12.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM03.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA13.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_final" 4 16 0 "gi_RoomTest_LM04.bin" "RoomTest_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_final" 4 16 1 "gi_RoomTest_LMA14.bin" "RoomTest_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" 512 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "RoomTest_LM0_final_HDR.lz4"
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" 16 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "1" "RoomTest_LMA1_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LM0_final.hdr" 1024
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LMA1_final.hdr" 1024
+ASSERT: texcoord.x >= 0 && texcoord.y >= 0 xatlas.cpp 8496
+ASSERT: texcoord.x >= 0 && texcoord.y >= 0 xatlas.cpp 8496
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 1024x1024: 1
+Done
+Rendering UV GBuffer for RoomTest_LM0 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for RoomTest_LMA1 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LM0.lz4" 2 0 0 0
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LMA1.lz4" 2 0 1 0
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_0" 4 0 0 batchpointlight_0_0_0.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_1_0_0" 4 0 1 batchpointlight_1_0_0.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM00.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA10.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM01.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA11.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM02.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA12.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM03.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA13.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_final" 4 16 0 "gi_RoomTest_LM04.bin" "RoomTest_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_final" 4 16 1 "gi_RoomTest_LMA14.bin" "RoomTest_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" 512 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "RoomTest_LM0_final_HDR.lz4"
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" 16 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "1" "RoomTest_LMA1_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LM0_final.hdr" 1024
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LMA1_final.hdr" 1024
+ASSERT: texcoord.x >= 0 && texcoord.y >= 0 xatlas.cpp 8496
+ASSERT: texcoord.x >= 0 && texcoord.y >= 0 xatlas.cpp 8496
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 1024x1024: 1
+Done
+Rendering UV GBuffer for RoomTest_LM0 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for RoomTest_LMA1 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LM0.lz4" 2 0 0 0
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LMA1.lz4" 2 0 1 0
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_1" 4 0 0 batchpointlight_0_0_1.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_1_0_1" 4 0 1 batchpointlight_1_0_1.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM00.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA10.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM01.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA11.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM02.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA12.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM03.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA13.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_final" 4 16 0 "gi_RoomTest_LM04.bin" "RoomTest_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_final" 4 16 1 "gi_RoomTest_LMA14.bin" "RoomTest_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" 512 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "RoomTest_LM0_final_HDR.lz4"
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" 16 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "1" "RoomTest_LMA1_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LM0_final.hdr" 1024
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LMA1_final.hdr" 1024
+ASSERT: texcoord.x >= 0 && texcoord.y >= 0 xatlas.cpp 8496
+ASSERT: texcoord.x >= 0 && texcoord.y >= 0 xatlas.cpp 8496
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 4096x4096: 1
+Done
+Rendering UV GBuffer for RoomTest_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for RoomTest_LMA1 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LM0.lz4" 2 0 0 0
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LMA1.lz4" 2 0 1 0
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_1" 4 0 0 batchpointlight_0_0_1.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_1_0_1" 4 0 1 batchpointlight_1_0_1.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM00.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA10.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM01.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA11.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM02.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA12.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM03.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA13.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_final" 4 16 0 "gi_RoomTest_LM04.bin" "RoomTest_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_final" 4 16 1 "gi_RoomTest_LMA14.bin" "RoomTest_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" 512 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "RoomTest_LM0_final_HDR.lz4"
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" 16 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "1" "RoomTest_LMA1_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LM0_final.hdr" 1024
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LMA1_final.hdr" 1024
+ASSERT: texcoord.x >= 0 && texcoord.y >= 0 xatlas.cpp 8496
+ASSERT: texcoord.x >= 0 && texcoord.y >= 0 xatlas.cpp 8496
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 4096x4096: 1
+Done
+Rendering UV GBuffer for RoomTest_LM0 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for RoomTest_LMA1 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LM0.lz4" 2 0 0 0
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LMA1.lz4" 2 0 1 0
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_1" 4 0 0 batchpointlight_0_0_1.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_1_0_1" 4 0 1 batchpointlight_1_0_1.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM00.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA10.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM01.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA11.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM02.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA12.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM03.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA13.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_final" 4 16 0 "gi_RoomTest_LM04.bin" "RoomTest_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_final" 4 16 1 "gi_RoomTest_LMA14.bin" "RoomTest_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" 512 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "RoomTest_LM0_final_HDR.lz4"
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" 16 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "1" "RoomTest_LMA1_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LM0_final.hdr" 1024
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LMA1_final.hdr" 1024
+ASSERT: texcoord.x >= 0 && texcoord.y >= 0 xatlas.cpp 8496
+ASSERT: texcoord.x >= 0 && texcoord.y >= 0 xatlas.cpp 8496
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 4096x4096: 1
+Done
+Rendering UV GBuffer for RoomTest_LM0 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for RoomTest_LMA1 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for RoomTest_LMA2 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LM0.lz4" 2 0 0 0
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LMA1.lz4" 2 0 1 0
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LMA2.lz4" 2 0 2 0
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_1" 4 0 0 batchpointlight_0_0_1.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_1_0_1" 4 0 1 batchpointlight_1_0_1.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_2_0_1" 4 0 2 batchpointlight_2_0_1.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA2" 4 0 2 comp_2.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM00.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA10.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA2_diffuse" 4 16 2 "gi_RoomTest_LMA20.bin" "RoomTest_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM01.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA11.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA2_diffuse" 4 16 2 "gi_RoomTest_LMA21.bin" "RoomTest_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM02.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA12.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA2_diffuse" 4 16 2 "gi_RoomTest_LMA22.bin" "RoomTest_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM03.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA13.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA2_diffuse" 4 16 2 "gi_RoomTest_LMA23.bin" "RoomTest_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_final" 4 16 0 "gi_RoomTest_LM04.bin" "RoomTest_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_final" 4 16 1 "gi_RoomTest_LMA14.bin" "RoomTest_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA2_final" 4 16 2 "gi_RoomTest_LMA24.bin" "RoomTest_LMA2_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" 256 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "RoomTest_LM0_final_HDR.lz4"
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" 256 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "1" "RoomTest_LMA1_final_HDR.lz4"
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA2_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA2_final_HDR.lz4" 256 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "2" "RoomTest_LMA2_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LM0_final.hdr" 1024
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LMA1_final.hdr" 1024
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA2_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LMA2_final.hdr" 1024
+ASSERT: texcoord.x >= 0 && texcoord.y >= 0 xatlas.cpp 8496
+ASSERT: texcoord.x >= 0 && texcoord.y >= 0 xatlas.cpp 8496
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 4096x4096: 1
+Done
+Rendering UV GBuffer for RoomTest_LM0 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for RoomTest_LMA1 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for RoomTest_LMA2 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LM0.lz4" 2 0 0 0
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LMA1.lz4" 2 0 1 0
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LMA2.lz4" 2 0 2 0
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_1" 4 0 0 batchpointlight_0_0_1.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_1_0_1" 4 0 1 batchpointlight_1_0_1.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_2_0_1" 4 0 2 batchpointlight_2_0_1.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA2" 4 0 2 comp_2.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM00.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA10.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA2_diffuse" 4 16 2 "gi_RoomTest_LMA20.bin" "RoomTest_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM01.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA11.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA2_diffuse" 4 16 2 "gi_RoomTest_LMA21.bin" "RoomTest_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM02.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA12.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA2_diffuse" 4 16 2 "gi_RoomTest_LMA22.bin" "RoomTest_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM03.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA13.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA2_diffuse" 4 16 2 "gi_RoomTest_LMA23.bin" "RoomTest_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_final" 4 16 0 "gi_RoomTest_LM04.bin" "RoomTest_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_final" 4 16 1 "gi_RoomTest_LMA14.bin" "RoomTest_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA2_final" 4 16 2 "gi_RoomTest_LMA24.bin" "RoomTest_LMA2_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" 256 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "RoomTest_LM0_final_HDR.lz4"
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" 256 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "1" "RoomTest_LMA1_final_HDR.lz4"
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA2_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA2_final_HDR.lz4" 256 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "2" "RoomTest_LMA2_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LM0_final.hdr" 1024
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LMA1_final.hdr" 1024
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA2_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LMA2_final.hdr" 1024
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 2048x2048: 1
+Done
+Rendering UV GBuffer for RoomTest_LM0 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for RoomTest_LMA1 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for RoomTest_LMA2 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LM0.lz4" 2 0 0 0
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LMA2.lz4" 2 0 2 0
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LMA1.lz4" 2 0 1 0
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_2" 4 0 0 batchpointlight_0_0_2.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_2_0_2" 4 0 2 batchpointlight_2_0_2.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA2" 4 0 2 comp_2.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_1_0_2" 4 0 1 batchpointlight_1_0_2.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM00.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA2_diffuse" 4 16 2 "gi_RoomTest_LMA20.bin" "RoomTest_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA10.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM01.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA2_diffuse" 4 16 2 "gi_RoomTest_LMA21.bin" "RoomTest_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA11.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM02.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA2_diffuse" 4 16 2 "gi_RoomTest_LMA22.bin" "RoomTest_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA12.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM03.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA2_diffuse" 4 16 2 "gi_RoomTest_LMA23.bin" "RoomTest_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA13.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_final" 4 16 0 "gi_RoomTest_LM04.bin" "RoomTest_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA2_final" 4 16 2 "gi_RoomTest_LMA24.bin" "RoomTest_LMA2_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_final" 4 16 1 "gi_RoomTest_LMA14.bin" "RoomTest_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" 512 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "RoomTest_LM0_final_HDR.lz4"
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA2_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA2_final_HDR.lz4" 512 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "2" "RoomTest_LMA2_final_HDR.lz4"
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" 512 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "1" "RoomTest_LMA1_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LM0_final.hdr" 1024
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA2_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LMA2_final.hdr" 1024
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LMA1_final.hdr" 1024
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 2048x2048: 1
+Done
+Rendering UV GBuffer for RoomTest_LM0 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for RoomTest_LMA1 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for RoomTest_LMA2 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LM0.lz4" 2 0 0 0
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LMA2.lz4" 2 0 2 0
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LMA1.lz4" 2 0 1 0
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_2" 4 0 0 batchpointlight_0_0_2.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_2_0_2" 4 0 2 batchpointlight_2_0_2.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA2" 4 0 2 comp_2.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_1_0_2" 4 0 1 batchpointlight_1_0_2.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM00.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA2_diffuse" 4 16 2 "gi_RoomTest_LMA20.bin" "RoomTest_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA10.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM01.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA2_diffuse" 4 16 2 "gi_RoomTest_LMA21.bin" "RoomTest_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA11.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM02.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA2_diffuse" 4 16 2 "gi_RoomTest_LMA22.bin" "RoomTest_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA12.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM03.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA2_diffuse" 4 16 2 "gi_RoomTest_LMA23.bin" "RoomTest_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA13.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_final" 4 16 0 "gi_RoomTest_LM04.bin" "RoomTest_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA2_final" 4 16 2 "gi_RoomTest_LMA24.bin" "RoomTest_LMA2_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_final" 4 16 1 "gi_RoomTest_LMA14.bin" "RoomTest_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" 512 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "RoomTest_LM0_final_HDR.lz4"
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA2_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA2_final_HDR.lz4" 512 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "2" "RoomTest_LMA2_final_HDR.lz4"
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" 512 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "1" "RoomTest_LMA1_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LM0_final.hdr" 1024
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA2_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LMA2_final.hdr" 1024
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LMA1_final.hdr" 1024
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 2048x2048: 1
+Done
+Rendering UV GBuffer for RoomTest_LM0 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for RoomTest_LMA1 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for RoomTest_LMA2 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LM0.lz4" 2 0 0 0
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LMA1.lz4" 2 0 1 0
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LMA2.lz4" 2 0 2 0
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_2" 4 0 0 batchpointlight_0_0_2.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_1_0_2" 4 0 1 batchpointlight_1_0_2.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_2_0_2" 4 0 2 batchpointlight_2_0_2.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA2" 4 0 2 comp_2.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM00.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA10.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA2_diffuse" 4 16 2 "gi_RoomTest_LMA20.bin" "RoomTest_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM01.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA11.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA2_diffuse" 4 16 2 "gi_RoomTest_LMA21.bin" "RoomTest_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM02.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA12.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA2_diffuse" 4 16 2 "gi_RoomTest_LMA22.bin" "RoomTest_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM03.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA13.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA2_diffuse" 4 16 2 "gi_RoomTest_LMA23.bin" "RoomTest_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_final" 4 16 0 "gi_RoomTest_LM04.bin" "RoomTest_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_final" 4 16 1 "gi_RoomTest_LMA14.bin" "RoomTest_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA2_final" 4 16 2 "gi_RoomTest_LMA24.bin" "RoomTest_LMA2_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" 512 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "RoomTest_LM0_final_HDR.lz4"
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" 512 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "1" "RoomTest_LMA1_final_HDR.lz4"
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA2_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA2_final_HDR.lz4" 512 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "2" "RoomTest_LMA2_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LM0_final.hdr" 1024
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LMA1_final.hdr" 1024
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA2_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LMA2_final.hdr" 1024
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 2048x2048: 1
+Done
+Rendering UV GBuffer for RoomTest_LM0 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for RoomTest_LMA1 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for RoomTest_LMA2 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LM0.lz4" 2 0 0 0
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LMA1.lz4" 2 0 1 0
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LMA2.lz4" 2 0 2 0
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_2" 4 0 0 batchpointlight_0_0_2.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_1_0_2" 4 0 1 batchpointlight_1_0_2.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_2_0_2" 4 0 2 batchpointlight_2_0_2.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA2" 4 0 2 comp_2.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM00.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA10.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA2_diffuse" 4 16 2 "gi_RoomTest_LMA20.bin" "RoomTest_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM01.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA11.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA2_diffuse" 4 16 2 "gi_RoomTest_LMA21.bin" "RoomTest_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM02.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA12.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA2_diffuse" 4 16 2 "gi_RoomTest_LMA22.bin" "RoomTest_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM03.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA13.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA2_diffuse" 4 16 2 "gi_RoomTest_LMA23.bin" "RoomTest_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_final" 4 16 0 "gi_RoomTest_LM04.bin" "RoomTest_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_final" 4 16 1 "gi_RoomTest_LMA14.bin" "RoomTest_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA2_final" 4 16 2 "gi_RoomTest_LMA24.bin" "RoomTest_LMA2_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" 512 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "RoomTest_LM0_final_HDR.lz4"
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" 512 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "1" "RoomTest_LMA1_final_HDR.lz4"
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA2_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA2_final_HDR.lz4" 512 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "2" "RoomTest_LMA2_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LM0_final.hdr" 1024
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LMA1_final.hdr" 1024
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA2_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LMA2_final.hdr" 1024
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 2048x2048: 1
+Done
+Rendering UV GBuffer for RoomTest_LM0 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LM0.lz4" 2 0 0 0
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_4" 4 0 0 batchpointlight_0_0_4.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_5_7" 4 0 0 batchpointlight_0_5_7.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM00.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM01.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM02.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM03.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_final" 4 16 0 "gi_RoomTest_LM04.bin" "RoomTest_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" 1024 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "RoomTest_LM0_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LM0_final.hdr" 1024
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 2048x2048: 1
+Done
+Rendering UV GBuffer for RoomTest_LM0 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LM0.lz4" 2 0 0 0
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_4" 4 0 0 batchpointlight_0_0_4.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_5_7" 4 0 0 batchpointlight_0_5_7.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM00.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM01.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM02.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM03.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_final" 4 16 0 "gi_RoomTest_LM04.bin" "RoomTest_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" 1024 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "RoomTest_LM0_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LM0_final.hdr" 1024
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 2048x2048: 1
+Done
+Rendering UV GBuffer for RoomTest_LM0 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LM0.lz4" 2 0 0 0
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_4" 4 0 0 batchpointlight_0_0_4.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_5_7" 4 0 0 batchpointlight_0_5_7.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM00.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM01.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM02.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM03.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_final" 4 16 0 "gi_RoomTest_LM04.bin" "RoomTest_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" 1024 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "RoomTest_LM0_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LM0_final.hdr" 1024
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 2048x2048: 1
+Done
+Rendering UV GBuffer for RoomTest_LM0 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for RoomTest_LMA1 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for RoomTest_LMA2 50
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LM0.lz4" 2 0 0 0
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LMA2.lz4" 2 0 2 0
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_RoomTest_LMA1.lz4" 2 0 1 0
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_2" 4 0 0 batchpointlight_0_0_2.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_2_0_2" 4 0 2 batchpointlight_2_0_2.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA2" 4 0 2 comp_2.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_1_0_2" 4 0 1 batchpointlight_1_0_2.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM00.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA2_diffuse" 4 16 2 "gi_RoomTest_LMA20.bin" "RoomTest_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA10.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM01.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA2_diffuse" 4 16 2 "gi_RoomTest_LMA21.bin" "RoomTest_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA11.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM02.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA2_diffuse" 4 16 2 "gi_RoomTest_LMA22.bin" "RoomTest_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA12.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_diffuse" 4 16 0 "gi_RoomTest_LM03.bin" "RoomTest_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA2_diffuse" 4 16 2 "gi_RoomTest_LMA23.bin" "RoomTest_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_diffuse" 4 16 1 "gi_RoomTest_LMA13.bin" "RoomTest_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LM0_final" 4 16 0 "gi_RoomTest_LM04.bin" "RoomTest_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA2_final" 4 16 2 "gi_RoomTest_LMA24.bin" "RoomTest_LMA2_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "RoomTest_LMA1_final" 4 16 1 "gi_RoomTest_LMA14.bin" "RoomTest_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" 512 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "RoomTest_LM0_final_HDR.lz4"
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA2_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA2_final_HDR.lz4" 512 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "2" "RoomTest_LMA2_final_HDR.lz4"
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" 512 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "1" "RoomTest_LMA1_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LM0_final.hdr" 1024
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA2_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LMA2_final.hdr" 1024
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LMA1_final.hdr" 1024
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll

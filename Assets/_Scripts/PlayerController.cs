@@ -218,10 +218,14 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        prevRoom.GetComponent<RoomController>().ChangeRoomState(false); //이전 방의 상태를 변경
-        prevRoom = GameManager.Instance.GetComponent<RoomCreation>().roomMap[roomIndex]
-            .RoomObject;                                               //플레이어가 위치한 방의 오브젝트를 저장
-        prevRoom.GetComponent<RoomController>().ChangeRoomState(true); //플레이어가 위치한 방의 상태를 변경
+        //이전 방의 상태를 변경
+        prevRoom.GetComponent<RoomController>().ChangeRoomState(false);
+        prevRoom.TryGetComponent(out BGMPlayer prevBGM);
+        
+        //플레이어가 위치한 방의 오브젝트를 저장
+        prevRoom = GameManager.Instance.GetComponent<RoomCreation>().roomMap[roomIndex].RoomObject;
+        //플레이어가 위치한 방의 상태를 변경
+        prevRoom.GetComponent<RoomController>().ChangeRoomState(true);
 
         //위랑 똑같지만 미니맵 전용
         prevRoomMinimap.GetComponent<Image>().color = Color.gray;
@@ -235,8 +239,17 @@ public class PlayerController : MonoBehaviour
             b_nowBattle      = true; //문 열리고난뒤 조작 풀어주는것을 막는다.
             Cursor.lockState = CursorLockMode.Confined;
             GameManager.Instance.GO_BattleCanvas.SetActive(true); //전투씬 켜고
-            BattleMain.instance.StartBattleScene(ref prevRoom.GetComponent<RoomController>()
-                .CR_creature); //현재 방에 있는 크리쳐 정보를 넘겨준다.
+            BattleMain.instance.StartBattleScene(ref prevRoom.GetComponent<RoomController>().CR_creature); //현재 방에 있는 크리쳐 정보를 넘겨준다.
+        }
+        else
+        {
+            if (!prevRoom.TryGetComponent(out BGMPlayer bgm))
+                return;
+            
+            if (!prevBGM.IsUnityNull())
+                bgm.StartMusic(prevBGM.bgm.name);
+            else
+                bgm.StartMusic(null);
         }
     }
 

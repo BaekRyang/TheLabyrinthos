@@ -696,6 +696,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5198793495870318963}
   - component: {fileID: 8330877169939976443}
+  - component: {fileID: -7295181109749623704}
   m_Layer: 0
   m_Name: CraftingRoom_Type1
   m_TagString: Untagged
@@ -755,7 +756,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enableBaking: 1
   ignoreWarnings: 0
-  errorMessage: 
+  errorMessage: this GameObject is not a prefab
+--- !u!114 &-7295181109749623704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5198793495870318960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d7044eedf8fcee42be0650a55a26377, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bgm: {fileID: 8300000, guid: 8202232743f3d7b4cbd40cb9dec0f143, type: 3}
+  middleTime: 0
 --- !u!1 &8487976456259687781
 GameObject:
   m_ObjectHideFlags: 0

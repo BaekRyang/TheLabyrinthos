@@ -251,6 +251,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8763491569536039945}
   - component: {fileID: 5334952220784757960}
+  - component: {fileID: 1557512100781471328}
   m_Layer: 0
   m_Name: StartRoom
   m_TagString: Untagged
@@ -292,7 +293,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enableBaking: 1
   ignoreWarnings: 0
-  errorMessage: prefab contains unapplied component (Text (TMP) (UnityEngine.MeshFilter))
+  errorMessage: prefab contains unapplied component (Room_Type0 (BGMPlayer))
+--- !u!114 &1557512100781471328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8763491569536039942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d7044eedf8fcee42be0650a55a26377, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bgm: {fileID: 8300000, guid: 8202232743f3d7b4cbd40cb9dec0f143, type: 3}
 --- !u!1 &8763491570386796889
 GameObject:
   m_ObjectHideFlags: 0

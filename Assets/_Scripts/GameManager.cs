@@ -121,6 +121,8 @@ public class GameManager : MonoBehaviour
 
         Minimap.instance.CreateMinimap(GetComponent<RoomCreation>().roomMap);
         CR_levelDefault = creatures.C_default[level - 1]; //현재레벨 기본 크리쳐 스텟 설정
+        
+        GetComponent<RoomCreation>().roomMap[45].RoomObject.GetComponent<BGMPlayer>().StartMusic(null);
 
     }
 

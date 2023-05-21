@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace TypeDefs
@@ -99,17 +100,19 @@ namespace TypeDefs
     public class PlayerStats
     {
         //기본 스텟
-        public float health = 100.0f;
-        public float maxHealth = 100.0f;
-        public float exp = 1.0f;
-        public float speed = 1.0f;
-        public int defense = 5;
-        public int prepareSpeed = 0;
-        public int damage = 10;
+        public float  health       = 100.0f;
+        public float  maxHealth    = 100.0f;
+        public float  exp          = 0.0f;
+        public float  speed        = 1.0f;
+        public int    defense      = 5;
+        public int    prepareSpeed = 0;
+        public float    accuracyMult = 1;
+        public int    damage       = 10;
         public Sprite attackSprite;
         public Sprite hitedSprite;
         public Sprite avoidSprite;
     }
+    
     #endregion
 
     #region Creature
@@ -192,5 +195,25 @@ namespace TypeDefs
         Food,
         Other
     }
+    #endregion
+
+    #region Effect
+
+    public enum effectStats
+    {
+        MaxHealth,
+        Speed,
+        Defense,
+        Accuracy,
+        PrepareSpeed,
+        Damage
+    }
+    public enum EffectList
+    {
+        poision
+    }
+
+    
+
     #endregion
 }

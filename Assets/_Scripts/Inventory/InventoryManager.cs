@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TypeDefs;
@@ -8,24 +9,28 @@ public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance;
 
-    [SerializeField] private int i_inventoryCount; //인스펙터 확인용
-    [SerializeField] public int i_itemCount; //인스펙터 확인용
+    [SerializeField]
+    private int i_inventoryCount; //인스펙터 확인용
+
+    [SerializeField]
+    public int i_itemCount; //인스펙터 확인용
 
     //인벤토리 key, value 형식으로 사용
-    public Dictionary<int, int> dict_inventory;
+    public Dictionary<int, int>          dict_inventory;
     public Dictionary<int, List<Weapon>> dict_weaponInventory;
-    public Dictionary<int, Sprite> dict_imgList = new Dictionary<int, Sprite>();
-    public Sprite emptyItem;
-    public Sprite spriteNotFounded;
-    public Sprite weaponSpriteNotFounded;
-    public Dictionary<int, Item> dict_items;
+    public Dictionary<int, Sprite>       dict_imgList = new Dictionary<int, Sprite>();
+    public Sprite                        emptyItem;
+    public Sprite                        spriteNotFounded;
+    public Sprite                        weaponSpriteNotFounded;
+    public Dictionary<int, Item>         dict_items;
 
-    public bool b_UIOpen;
+    public bool      b_UIOpen;
     public Inventory openedInventory;
 
     [Header("Set In Inspector")]
     //UI요소
     public GameObject GO_inventory;
+
     public GameObject GO_crafting;
 
     public Crafting crafting;
@@ -41,41 +46,38 @@ public class InventoryManager : MonoBehaviour
         Instance = this;
 
         crafting = GO_crafting.GetComponent<Crafting>();
-        
-        dict_items = new Dictionary<int, Item>();
-        dict_inventory = new Dictionary<int, int>();
+
+        dict_items           = new Dictionary<int, Item>();
+        dict_inventory       = new Dictionary<int, int>();
         dict_weaponInventory = new Dictionary<int, List<Weapon>>();
         var tmpArray = Resources.LoadAll<Sprite>("Sprites/Items");
-        
+
         for (int i = 0; i < tmpArray.Length; i++)
         {
             dict_imgList.Add(int.Parse(tmpArray[i].name), tmpArray[i]);
         }
 
-        emptyItem = dict_imgList[-1];
-        spriteNotFounded = dict_imgList[-2];
+        emptyItem              = dict_imgList[-1];
+        spriteNotFounded       = dict_imgList[-2];
         weaponSpriteNotFounded = dict_imgList[-3];
-        
     }
+
     void Start()
     {
         GO_inventory.transform.Find("Inventory").GetComponent<Inventory>().LoadSetting();
         GO_inventory.SetActive(false);
         
+        CreateSyringes();
         foreach (KeyValuePair<int, Item> kvp in dict_items)
-            AddItem(kvp.Value);
-
+            AddItem(kvp.Value, 2);
         GetComponent<Player>().WP_weapon = dict_weaponInventory[0][0];
-
+        
         GO_crafting.transform.Find("Inventory").GetComponent<Inventory>().LoadSetting();
         //GO_crafting.SetActive(false); //Crafting에서 로딩 다 끝나면 알아서 비활성화 한다.
-        
+
         equipedItem.UpdateUI();
         stats.UpdateUI();
-    }
-
-    void Update()
-    {
+        
         
     }
 
@@ -95,7 +97,6 @@ public class InventoryManager : MonoBehaviour
             openedInventory.UpdateInventory();
             StartCoroutine(LerpCanvas(GO_targetUI.GetComponent<CanvasGroup>(), 0, 1, 0.3f));
         }
-        
     }
 
     public void CloseUI()
@@ -113,9 +114,9 @@ public class InventoryManager : MonoBehaviour
                     GO_inventory.transform.Find("Inventory").GetComponent<Inventory>().DestroyElements();
                     GO_inventory.SetActive(false);
                 }
-                ));
+            ));
         }
-        
+
         if (GO_crafting.activeSelf)
         {
             StartCoroutine(Lerp.LerpValueAfter(value => GO_crafting.GetComponent<CanvasGroup>().alpha = value,
@@ -143,11 +144,10 @@ public class InventoryManager : MonoBehaviour
                 null,
                 () =>
                     GameManager.Instance.settings.SetActive(false)
-                ));
+            ));
         }
-        
-        b_UIOpen = false;
 
+        b_UIOpen = false;
     }
 
     private IEnumerator LerpCanvas(CanvasGroup target, float from, float to, float duration)
@@ -156,8 +156,8 @@ public class InventoryManager : MonoBehaviour
 
         while (elapsedTime < duration)
         {
-            target.alpha = Mathf.Lerp(from, to, (elapsedTime / duration));
-            elapsedTime += Time.deltaTime;
+            target.alpha =  Mathf.Lerp(from, to, (elapsedTime / duration));
+            elapsedTime  += Time.deltaTime;
             yield return null;
         }
 
@@ -176,10 +176,10 @@ public class InventoryManager : MonoBehaviour
             return;
         }
 
-        if (dict_inventory.ContainsKey(item.i_id))   //해당 아이템을 이미 갖고있으면
-            dict_inventory[item.i_id] += amount;     //개수만큼 더해주고
-        else                                         //없으면
-            dict_inventory.Add(item.i_id, amount);   //새로 만들어준다.
+        if (dict_inventory.ContainsKey(item.i_id)) //해당 아이템을 이미 갖고있으면
+            dict_inventory[item.i_id] += amount;   //개수만큼 더해주고
+        else                                       //없으면
+            dict_inventory.Add(item.i_id, amount); //새로 만들어준다.
     }
 
     public bool RemoveItem(Item item, int amount = 1)
@@ -200,11 +200,11 @@ public class InventoryManager : MonoBehaviour
             return false;
         }
 
-        if (dict_inventory.ContainsKey(item.i_id))   //해당 아이템을 가지고 있다면
+        if (dict_inventory.ContainsKey(item.i_id)) //해당 아이템을 가지고 있다면
         {
-            dict_inventory[item.i_id] -= amount;     //개수를 감소시키고
-            if (dict_inventory[item.i_id] <= 0)      //아이템 개수가 0 이하면
-                dict_inventory.Remove(item.i_id);    //딕셔너리에서 아이템을 제거
+            dict_inventory[item.i_id] -= amount;  //개수를 감소시키고
+            if (dict_inventory[item.i_id] <= 0)   //아이템 개수가 0 이하면
+                dict_inventory.Remove(item.i_id); //딕셔너리에서 아이템을 제거
             return true;
         }
 
@@ -223,7 +223,7 @@ public class InventoryManager : MonoBehaviour
 
         if (dict_inventory.ContainsKey(item.i_id))      //해당 아이템을 가지고 있다면     
             return dict_inventory[item.i_id] >= amount; //아이템 개수가 amount 이상이면 true, 그렇지 않으면 false 반환
-        return false;                              //해당 아이템을 가지고 있지 않다면 false 반환
+        return false;                                   //해당 아이템을 가지고 있지 않다면 false 반환
     }
 
 
@@ -235,13 +235,13 @@ public class InventoryManager : MonoBehaviour
             return;
         }
 
-        if (dict_inventory.ContainsKey(item))   //해당 아이템을 이미 갖고있으면
+        if (dict_inventory.ContainsKey(item)) //해당 아이템을 이미 갖고있으면
         {
-            dict_inventory[item] += amount;     //개수만큼 더해주고
+            dict_inventory[item] += amount; //개수만큼 더해주고
         }
-        else                                    //없으면
+        else //없으면
         {
-            dict_inventory.Add(item, amount);   //새로 만들어준다.
+            dict_inventory.Add(item, amount); //새로 만들어준다.
         }
     }
 
@@ -253,22 +253,21 @@ public class InventoryManager : MonoBehaviour
             if (dict_weaponInventory.ContainsKey(item) && dict_weaponInventory[item].Count > 0)
             {
                 if (dict_weaponInventory[item].Count > 0)
-                    dict_weaponInventory[item].RemoveAt(0);  // 무기 아이템 리스트에서 첫번째 아이템 제거
+                    dict_weaponInventory[item].RemoveAt(0); // 무기 아이템 리스트에서 첫번째 아이템 제거
 
                 if (dict_weaponInventory[item].Count == 0)
-                    dict_weaponInventory.Remove(item);  // 해당 무기 아이템 리스트가 비어있으면 딕셔너리에서 제거
+                    dict_weaponInventory.Remove(item); // 해당 무기 아이템 리스트가 비어있으면 딕셔너리에서 제거
                 return true;
             }
 
             return false;
-
         }
 
-        if (dict_inventory.ContainsKey(item))   //해당 아이템을 가지고 있다면
+        if (dict_inventory.ContainsKey(item)) //해당 아이템을 가지고 있다면
         {
-            dict_inventory[item] -= amount;     //개수를 감소시키고
-            if (dict_inventory[item] <= 0)      //아이템 개수가 0 이하면
-                dict_inventory.Remove(item);    //딕셔너리에서 아이템을 제거
+            dict_inventory[item] -= amount;  //개수를 감소시키고
+            if (dict_inventory[item] <= 0)   //아이템 개수가 0 이하면
+                dict_inventory.Remove(item); //딕셔너리에서 아이템을 제거
             return true;
         }
 
@@ -286,7 +285,7 @@ public class InventoryManager : MonoBehaviour
 
         if (dict_inventory.ContainsKey(item))      //해당 아이템을 가지고 있다면     
             return dict_inventory[item] >= amount; //아이템 개수가 amount 이상이면 true, 그렇지 않으면 false 반환
-        return false;                         //해당 아이템을 가지고 있지 않다면 false 반환
+        return false;                              //해당 아이템을 가지고 있지 않다면 false 반환
     }
 
     public Sprite GetImage(int id)
@@ -309,8 +308,27 @@ public class InventoryManager : MonoBehaviour
     {
         Player player = GetComponent<Player>();
         player.WP_weapon = item as Weapon;
-        
+
         equipedItem.UpdateUI();
         stats.UpdateUI();
+    }
+
+    public void CreateSyringes()
+    {
+        
+        
+        var effectCount = 
+            Enum.GetValues(typeof(EffectList)).Length + 
+            Enum.GetValues(typeof(effectStats)).Length;
+
+        for (int i = 0; i < effectCount; i++)
+        {
+            Disposable tmpDisposable = new Disposable(dict_items[104] as Disposable);
+            tmpDisposable.CreateEffect(i);
+            tmpDisposable.i_id = 500 + i;
+            Debug.Log(tmpDisposable.i_id + "주사기 추가 - " + GameManager.Instance.effectsManager.GetEffectDesc(tmpDisposable.disposableID));
+            dict_items.Add(tmpDisposable.i_id, tmpDisposable);
+        }
+        
     }
 }

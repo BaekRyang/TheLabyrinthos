@@ -24,12 +24,13 @@ public class Stats : MonoBehaviour
 
     private void Start()
     {
-        player = InventoryManager.Instance.GetComponent<Player>();
+        player = GameManager.Instance.p_Player;
     }
 
     public void UpdateUI()
     {
         hp.value      = player.PS_playerStats.health;
+        hp.maxValue   = player.PS_playerStats.maxHealth;
         exp.value     = player.PS_playerStats.exp;
         speed.value   = (player.PS_playerStats.speed * player.WP_weapon.f_speedMult*100).ToInt();
         defence.value = player.PS_playerStats.defense;

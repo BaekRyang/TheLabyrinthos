@@ -119,11 +119,6 @@ public class Inventory : MonoBehaviour
 
     void CalcCellSize()
     {
-        int maxChildCount = 6;
-        int cellSize      = 160;
-        int spacing       = 30;
-        int offset        = 80;
-
         UpdateLayout(TF_Weapons);
         UpdateLayout(TF_Disposables);
         UpdateLayout(TF_Foods);

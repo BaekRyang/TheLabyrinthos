@@ -32,7 +32,7 @@ public class BattleActions : MonoBehaviour
 
     void Start()
     {
-        P_player = GameManager.Instance.GetComponent<Player>();
+        P_player = GameManager.Instance.p_Player;
         PS_playerStats = P_player.GetPlayerStats();
 
         BM_BattleMain = GetComponent<BattleMain>();
@@ -132,14 +132,17 @@ public class BattleActions : MonoBehaviour
                         break;
                 }
                 
-                P_player.ConsumeTurn();             //턴 하나 소모
+                //내구도 하나 빼주기
+                P_player.WP_weapon.i_durability--;
             } 
             else
             {
                 //빗나가면 다른 소리로
                 clip = BM_BattleMain.AC_playerMissed[rand.Next(BM_BattleMain.AC_playerMissed.Length)];
             }
-
+            
+            P_player.ConsumeTurn(); //턴 하나 소모
+            
             Debug.Log("Player : " + randInt + " > " + accInt);
             BM_BattleMain.EndTurn(true);
             BM_BattleMain.GO_attackList.SetActive(false);

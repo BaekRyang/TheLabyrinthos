@@ -57,7 +57,7 @@ public class BGMPlayer : MonoBehaviour
                 {
                     playingSource.Stop();
                     toPlaySource.clip   = bgm;
-                    toPlaySource.time   = middleTime;
+                    toPlaySource.time   = playingSource.isPlaying ? middleTime : 0;
                     toPlaySource.volume = 1;
                     toPlaySource.Play();
                     StartCoroutine(

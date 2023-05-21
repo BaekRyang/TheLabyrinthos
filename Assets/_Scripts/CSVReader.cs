@@ -43,7 +43,6 @@ public class CSVReader : MonoBehaviour
             Weapon item = baseItem as Weapon;
             for (int i = startIndex; i < dataValue.Length; i++)
             {
-                Debug.Log(i);
                 switch (i - 5)
                 {
                     case 0:
@@ -102,7 +101,7 @@ public class CSVReader : MonoBehaviour
             string data = sReader.ReadLine();                       //데이터를 한줄 읽는다.
             if (data == null) break;                                //비어있으면 break
 
-            var data_value = data.Split(',');                       //CSV파일은 ","로 구분하므로 ,로 분할하고 분할된 각 값을 배열에 저장
+            var data_value = data.Split(',');        //CSV파일은 ","로 구분하므로 ,로 분할하고 분할된 각 값을 배열에 저장
             if (data_value[0] == "Type") continue;                  //첫줄은 항목 유형 설명탭이므로 첫줄이면 건너뛴다. (이 CSV 파일에서는 1,1 에 Type이 있음)
 
             Item tmpItem = ParseItem(data_value);                   //ParseItem을 호출하여 위에서 만든 배열을 넘겨준다.

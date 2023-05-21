@@ -16,9 +16,11 @@ public class ItemObject : MonoBehaviour, IScrollHandler, IPointerEnterHandler, I
     //조합대에서도 이거 쓰니까 있는 설정
     public bool b_canClick;
 
-    [Header("Item value : id를 기준으로 사용됨")] public Item I_item;
+    [Header("Item value : id를 기준으로 사용됨")] 
+    public Item I_item;
 
-    [Header("For Crafting Actions")] public bool hasItem;
+    [Header("For Crafting Actions")] 
+    public bool hasItem;
 
     private void Awake()
     {
@@ -36,10 +38,19 @@ public class ItemObject : MonoBehaviour, IScrollHandler, IPointerEnterHandler, I
             return;
         }
 
-        bool isSpriteExist = InventoryManager.Instance.dict_imgList.TryGetValue(I_item.i_id, out Sprite foundedSprite);
+        if (I_item.i_id >= 500)
+        {
+            transform.GetChild(0).GetComponent<Image>().sprite = InventoryManager.Instance.dict_imgList[104];
+        }
+        else
+        {
+            bool isSpriteExist = InventoryManager.Instance.dict_imgList.TryGetValue(I_item.i_id, out Sprite foundedSprite);
 
-        transform.GetChild(0).GetComponent<Image>().sprite =
-            isSpriteExist ? foundedSprite : InventoryManager.Instance.spriteNotFounded;
+            transform.GetChild(0).GetComponent<Image>().sprite =
+                isSpriteExist ? foundedSprite : InventoryManager.Instance.spriteNotFounded;
+        }
+
+        
 
         if (amount > 1)
         {
@@ -99,6 +110,17 @@ public class ItemObject : MonoBehaviour, IScrollHandler, IPointerEnterHandler, I
         // infoBox.position       = transform.position;
         textComponents[0].text = I_item.s_name;
         textComponents[1].text = I_item.s_description.Replace("\\n", "\n");
+
+        if (I_item.IT_type != ItemType.Disposable)
+            return;
+
+        Disposable disposableItem = I_item as Disposable;
+        if (!GameManager.Instance.effectsManager.IsKnown(disposableItem.disposableID))
+            textComponents[1].text += "\n\n<b><color=#999999>알 수 없는 효과</color></b>";
+        else
+            textComponents[1].text += "\n\n<b><color=#CCCC00>" + 
+                                      GameManager.Instance.effectsManager.GetEffectDesc(disposableItem.disposableID) +
+                                      "</color></b>";
     }
 
     public void OnPointerExit(PointerEventData eventData)

@@ -4,11 +4,9 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("Player Textures")] [SerializeField]
+    [Header("Player Textures")]
+    [SerializeField]
     GameObject spriteBox;
-
-    [SerializeField] Material  playerMat;
-    [SerializeField] Texture[] playerTexture;
 
     GameObject GO_PrevInteracted;
 
@@ -22,15 +20,11 @@ public class PlayerController : MonoBehaviour
     public bool b_nowBattle;
 
     //카메라 회전 및 움직임
-    float rotationSpeed      = 2f;
-    float distanceFromPlayer = 1f;
+    float rotationSpeed = 2f;
 
     float pitch;
 
     public float yaw;
-
-    float minZoomDistance = 1f;
-    float maxZoomDistance = 1f;
 
     private Vector3    previousPosition;
     private Quaternion previousRotation;
@@ -41,7 +35,7 @@ public class PlayerController : MonoBehaviour
     //플레이어 마우스 액션
     RaycastHit hit;
     bool       isHit;
-    float      detectionDistance = 0.2f;
+    int        detectionDistance = 2;
     LayerMask  LM_InteractLayerMask; //검출하고자 하는 레이어를 지정.
     GameObject GO_LastHitGO;
 
@@ -64,12 +58,11 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        playerTexture   = Resources.LoadAll<Texture>("Sprites/Player");
         GO_minimapArrow = Minimap.instance.GO_arrow.GetComponent<RectTransform>();
         GO_minimapArrow.transform.rotation = Quaternion.Euler(0,
             0,
             Camera.main.transform.rotation.eulerAngles.y + (90 - Camera.main.transform.rotation.eulerAngles.y) * 2);
-        
+
         ResetSetting();
     }
 
@@ -89,7 +82,7 @@ public class PlayerController : MonoBehaviour
                 direction   = Camera.main.transform.forward * vertical + Camera.main.transform.right * horizontal;
                 direction.y = 0; //수직 방향으로 이동하지 않도록 y축 값을 0으로 설정
                 direction.Normalize();
-                    
+
                 Debug.DrawRay(transform.position, direction, Color.yellow);
             }
 
@@ -156,7 +149,7 @@ public class PlayerController : MonoBehaviour
 
         //이 시점에서는 오브젝트가 상호작용 가능하다는 것이 확실함
         //거리가 너무 멀다면
-        if ((rcastHit.transform.position - transform.position).sqrMagnitude >= 4)
+        if ((rcastHit.transform.position - transform.position).sqrMagnitude >= Mathf.Pow(detectionDistance, 2))
         {
             if (isNotFirstInteract)
             {
@@ -190,7 +183,7 @@ public class PlayerController : MonoBehaviour
             .RoomObject;                                               //플레이어가 위치한 방의 루트 오브젝트를 저장 (플레이어는 45번에 생성)
         prevRoom.GetComponent<RoomController>().ChangeRoomState(true); //플레이어가 위치한 방의 상태를 변경
 
-        prevRoomMinimap = Minimap.instance.GetRoom(45);
+        prevRoomMinimap                             = Minimap.instance.GetRoom(45);
         prevRoomMinimap.GetComponent<Image>().color = Color.white;
     }
 
@@ -221,7 +214,7 @@ public class PlayerController : MonoBehaviour
         //이전 방의 상태를 변경
         prevRoom.GetComponent<RoomController>().ChangeRoomState(false);
         prevRoom.TryGetComponent(out BGMPlayer prevBGM);
-        
+
         //플레이어가 위치한 방의 오브젝트를 저장
         prevRoom = GameManager.Instance.GetComponent<RoomCreation>().roomMap[roomIndex].RoomObject;
         //플레이어가 위치한 방의 상태를 변경
@@ -238,14 +231,14 @@ public class PlayerController : MonoBehaviour
             //플레이어 조작은 문 열때 막히니 따로 막을 필요 없고
             b_nowBattle      = true; //문 열리고난뒤 조작 풀어주는것을 막는다.
             Cursor.lockState = CursorLockMode.Confined;
-            GameManager.Instance.GO_BattleCanvas.SetActive(true); //전투씬 켜고
+            GameManager.Instance.GO_BattleCanvas.SetActive(true);                                          //전투씬 켜고
             BattleMain.instance.StartBattleScene(ref prevRoom.GetComponent<RoomController>().CR_creature); //현재 방에 있는 크리쳐 정보를 넘겨준다.
         }
         else
         {
             if (!prevRoom.TryGetComponent(out BGMPlayer bgm))
                 return;
-            
+
             if (!prevBGM.IsUnityNull())
                 bgm.StartMusic(prevBGM.bgm.name);
             else

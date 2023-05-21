@@ -36,7 +36,7 @@ public class EquipedItem : MonoBehaviour
 
     private void Start()
     {
-        player = GameManager.Instance.GetComponent<Player>();
+        player = GameManager.Instance.p_Player;
     }
 
     public void UpdateUI()
@@ -56,7 +56,7 @@ public class EquipedItem : MonoBehaviour
             isSpriteExist ? foundedSprite : InventoryManager.Instance.weaponSpriteNotFounded;
     }
 
-    private void UpdateStatsCell()
+    public void UpdateStatsCell()
     {
         Weapon weapon = player.WP_weapon;
         statsDamage.GetChild(0).GetComponent<TMP_Text>().text =

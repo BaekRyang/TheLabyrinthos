@@ -19,6 +19,7 @@ public class Item
     public ParseAttributes parsing;
 }
 
+[Serializable]
 public class Weapon : Item
 {
     public string s_inspectText;
@@ -56,6 +57,17 @@ public class Weapon : Item
         f_accuracyMult  = other.f_accuracyMult;
         i_maxDurability = other.i_maxDurability;
         i_durability    = other.i_durability;
+    }
+    
+    public void ConsumeDurability(int amount = 1)
+    {
+        i_durability -= amount;
+        if (i_durability <= 0)
+        {
+            var IM = InventoryManager.Instance;
+            IM.RemoveItem(this);
+            GameManager.Instance.p_Player.WP_weapon = IM.GetWeaponInstance(0);
+        }
     }
 }
 

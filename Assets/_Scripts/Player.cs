@@ -24,16 +24,16 @@ public class Player : MonoBehaviour
 
     public void AddEffect(object effectType, int duration, float strength)
     {
-        Effect effect = null;
-        if (effectType is EffectList)
+        Effect effect;
+        if (effectType is EffectList list) //effectType이 EffectList라면 EffectList인 list에 저장
         {
-            effect = new Effect(duration, (EffectList)effectType, strength);
-            GameManager.Instance.effectsManager.NowKnown((int)effectType);
+            effect = new Effect(duration, list, strength); //해당 effectType을 가진 effect를 생성
+            GameManager.Instance.effectsManager.NowKnown((int)list); //아이템을 사용했으므로 Known상태로 만들어준다.
         }
-        else if (effectType is effectStats)
+        else if (effectType is effectStats type) //마찬가지로 effectType이 effectStats라면 effectStats인 type에 저장
         {
-            effect = new Effect(duration, (effectStats)effectType, strength);
-            GameManager.Instance.effectsManager.NowKnown((int)effectType + Enum.GetValues(typeof(EffectList)).Length);
+            effect = new Effect(duration, type, strength);
+            GameManager.Instance.effectsManager.NowKnown((int)type + Enum.GetValues(typeof(EffectList)).Length);
         }
         else
             throw new ArgumentException("Invalid Effect Type");
@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
         effectList.Add(effect);
         
         effect.ApplyEffect();
-        Debug.Log("Effct Applyed : " + effectType + "-" + duration + "turn");
+        Debug.Log("Effect Applied : " + effectType + "-" + duration + "turn");
         
         InventoryManager.Instance.stats.UpdateUI();
     }

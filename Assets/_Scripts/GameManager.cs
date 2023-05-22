@@ -14,9 +14,10 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    [Header("Seed")] [SerializeField] bool   b_useSeed;
-    [SerializeField]                  string s_seed = "-";
-    [SerializeField]                  int    i_roomSize;
+    [Header("Seed")] 
+    [SerializeField] private bool   b_useSeed;
+    [SerializeField] private string s_seed = "-";
+    [SerializeField] private int    i_roomSize;
 
     [Header("System Objects")]
     [SerializeField] public GameObject GO_curtain;
@@ -73,6 +74,8 @@ public class GameManager : MonoBehaviour
         GO_craftingPrefabs = Resources.LoadAll<GameObject>("RoomStructures/SpecialRoom/Crafting");
         GO_bossRoomPrefabs = Resources.LoadAll<GameObject>("RoomStructures/SpecialRoom/BossRoom");
         GO_shopPrefabs     = Resources.LoadAll<GameObject>("RoomStructures/SpecialRoom/Shop");
+        
+        p_Player = GetComponent<Player>();
 
         creatures = new Creatures();
     }
@@ -103,12 +106,11 @@ public class GameManager : MonoBehaviour
         dict_randomObjects.Add("Creature", new Random(Convert.ToInt32(s_seed, 16) + 2)); //크리쳐용 랜덤 시드
         dict_randomObjects.Add("Room", new Random(Convert.ToInt32(s_seed, 16) + 3));     //방배치용 랜덤 시드
         dict_randomObjects.Add("Effect", new Random(Convert.ToInt32(s_seed, 16) + 4));   //아이템용 랜덤 시드
+        dict_randomObjects.Add("Syringe", new Random(Convert.ToInt32(s_seed, 16) + 5));  //주사기용 랜덤 시드
 
         ResetLevel(i_level);
         go_player      = Instantiate(go_playerPrefab);
         go_player.name = "Player";
-
-        p_Player = GetComponent<Player>();
 
         ChangeStatsSlider(StatsType.Hp, GetComponent<Player>().GetPlayerStats().health);
         ChangeStatsSlider(StatsType.Exp, GetComponent<Player>().GetPlayerStats().exp);

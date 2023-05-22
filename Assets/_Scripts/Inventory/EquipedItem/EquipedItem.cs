@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Tayx.Graphy.Utils.NumString;
 using TMPro;
 using UnityEngine;
@@ -50,7 +47,7 @@ public class EquipedItem : MonoBehaviour
         UpdateStatsCell();
 
         bool isSpriteExist =
-            InventoryManager.Instance.dict_imgList.TryGetValue(player.WP_weapon.i_id + 1000, out Sprite foundedSprite);
+            InventoryManager.Instance.loadedImages.TryGetValue(player.WP_weapon.i_id + 1000, out Sprite foundedSprite);
 
         weaponImage.sprite =
             isSpriteExist ? foundedSprite : InventoryManager.Instance.weaponSpriteNotFounded;

@@ -66,10 +66,7 @@ public class ItemActionHandler : MonoBehaviour, IPointerExitHandler
         transform.position = position;
         gameObject.SetActive(true);
 
-        if (focusedItem.b_useable)
-            useObject.SetActive(true);
-        else
-            useObject.SetActive(false);
+        useObject.SetActive(focusedItem.b_useable);
 
         if (focusedItem.IT_type == ItemType.Weapon)
         {

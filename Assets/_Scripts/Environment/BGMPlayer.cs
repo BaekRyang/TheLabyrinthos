@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class BGMPlayer : MonoBehaviour
@@ -29,9 +25,9 @@ public class BGMPlayer : MonoBehaviour
 
         if (prevClip == bgm.name)
             return;
-        
-        AudioSource playingSource = null;
-        AudioSource toPlaySource  = null;
+
+        AudioSource playingSource;
+        AudioSource toPlaySource;
         
         
         if (audioSource1.isPlaying)
@@ -44,8 +40,7 @@ public class BGMPlayer : MonoBehaviour
             playingSource = audioSource2;
             toPlaySource  = audioSource1;
         }
-
-
+        
         StartCoroutine(
             Lerp.LerpValueAfter(value => playingSource.volume = value,
                 1,
@@ -65,8 +60,7 @@ public class BGMPlayer : MonoBehaviour
                             0,
                             1f,
                             0.5f,
-                            Mathf.Lerp,
-                            null
+                            Mathf.Lerp
                         ));
                 }));
     }

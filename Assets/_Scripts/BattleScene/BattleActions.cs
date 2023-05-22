@@ -47,10 +47,6 @@ public class BattleActions : MonoBehaviour
         
         gameObject.SetActive(false); //전부 로딩 되면 오브젝트 끄기
     }
-    void Update()
-    {
-        
-    }
 
     public void ButtonClick(string _ButtonType)
     {
@@ -133,7 +129,7 @@ public class BattleActions : MonoBehaviour
                 }
                 
                 //내구도 하나 빼주기
-                P_player.WP_weapon.i_durability--;
+                P_player.WP_weapon.ConsumeDurability();
             } 
             else
             {
@@ -269,7 +265,7 @@ public class BattleActions : MonoBehaviour
         Destroy(tmpGO);
     }
 
-    public void SetDmgNAcc() //공격 상세창 값 초기화용
+    private void SetDmgNAcc() //공격 상세창 값 초기화용
     {
         var typeDict = BM_BattleMain.dict_dmgAccList;
         typeDict[Parts.Weakpoint].percentage.text = Mathf.Clamp((weakpointACC * P_player.WP_weapon.f_accuracyMult), 0, 100) + "%";

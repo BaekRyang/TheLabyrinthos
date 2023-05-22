@@ -61,9 +61,4 @@ public class ObjectController : MonoBehaviour
                 Destroy(gameObject);
         }
     }
-
-    void Update()
-    {
-
-    }
 }

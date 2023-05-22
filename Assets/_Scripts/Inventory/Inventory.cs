@@ -30,9 +30,9 @@ public class Inventory : MonoBehaviour
 
     public void LoadSetting()
     {
-        dict_Inventory = InventoryManager.Instance.dict_inventory;
-        dict_items     = InventoryManager.Instance.dict_items;
-        dict_imgList   = InventoryManager.Instance.dict_imgList;
+        dict_Inventory = InventoryManager.Instance.inventory;
+        dict_items     = InventoryManager.Instance.definedItems;
+        dict_imgList   = InventoryManager.Instance.loadedImages;
     }
 
     void Start()
@@ -46,7 +46,7 @@ public class Inventory : MonoBehaviour
 
         if ((target & (1 << 3)) != 0)
         {
-            foreach (var weaponList in InventoryManager.Instance.dict_weaponInventory)
+            foreach (var weaponList in InventoryManager.Instance.weaponInventory)
             {
                 foreach (var weapon in weaponList.Value)
                 {

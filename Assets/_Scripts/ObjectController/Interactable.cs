@@ -14,11 +14,12 @@ public class Interactable : MonoBehaviour
     Coroutine crt_coroutine;
     [Header("This Object Type")]
     [SerializeField] ObjectType type;
-    [SerializeField] Outline.Mode mode = Outline.Mode.OutlineVisible;
-    [SerializeField] Color enabledOutlineColor = Color.white;
-    [SerializeField] Color disabledOutlineColor = Color.white;
-    [SerializeField] float enabledOutlineWidth = 1f;
-    [SerializeField] float disabledOutlineWidth = 1f;
+    [SerializeField]        Outline.Mode mode                 = Outline.Mode.OutlineVisible;
+    [SerializeField]        Color        enabledOutlineColor  = Color.white;
+    [SerializeField]        Color        disabledOutlineColor = Color.white;
+    [SerializeField]        float        enabledOutlineWidth  = 1f;
+    [SerializeField]        float        disabledOutlineWidth = 1f;
+    private static readonly int          EmissionColor        = Shader.PropertyToID("_EmissionColor");
 
 
     private void Awake()
@@ -64,7 +65,7 @@ public class Interactable : MonoBehaviour
         switch (type)
         {
             case ObjectType.MoveDoor:
-                StartCoroutine(OpenDoor(CHANGE_ROOM_DELAY, true));
+                StartCoroutine(OpenDoor(CHANGE_ROOM_DELAY));
                 enabled = false;
                 GetComponent<Outline>().enabled = false;
                 gameObject.layer = LayerMask.NameToLayer("Default");
@@ -122,7 +123,7 @@ public class Interactable : MonoBehaviour
         }
     }
 
-    private IEnumerator OpenDoor(float delay = 1.5f, bool reuseable = false)
+    private IEnumerator OpenDoor(float delay = 1.5f)
     {
         Quaternion startRotation = transform.rotation;
         Vector3 targetRotationEulerAngles = transform.rotation.eulerAngles;
@@ -157,25 +158,25 @@ public class Interactable : MonoBehaviour
 
         f_fadePercent = duration;
         b_fading = true;
-        Color originalColor = mat.GetColor("_EmissionColor");
+        Color originalColor = mat.GetColor(EmissionColor);
 
         while (f_fadePercent >= 0)
         {
             f_fadePercent -= Time.deltaTime;
 
-            mat.SetColor("_EmissionColor", Color.Lerp(targetColor, originalColor, (duration - f_fadePercent) / duration));
+            mat.SetColor(EmissionColor, Color.Lerp(targetColor, originalColor, (duration - f_fadePercent) / duration));
             yield return null;
         }
         b_fading = false;
 
-        mat.SetColor("_Emission Color", originalColor);
+        mat.SetColor(EmissionColor, originalColor);
     }
 
-    public void ChangeState(bool enabled)
+    public void ChangeState(bool setEnabled)
     {
         Outline outline = GetComponent<Outline>();
 
-        outline.OutlineColor = enabled ? enabledOutlineColor : disabledOutlineColor;
-        outline.OutlineWidth = enabled ? enabledOutlineWidth : disabledOutlineWidth;
+        outline.OutlineColor = setEnabled ? enabledOutlineColor : disabledOutlineColor;
+        outline.OutlineWidth = setEnabled ? enabledOutlineWidth : disabledOutlineWidth;
     }
 }

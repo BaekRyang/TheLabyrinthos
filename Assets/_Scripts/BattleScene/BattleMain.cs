@@ -261,7 +261,7 @@ public class BattleMain : MonoBehaviour
         ChangeSliderValue(false, StatsType.Tp, 0);
         
         //인벤토리 내부 값 업데이트
-        InventoryManager.Instance.equipedItem.UpdateUI();
+        InventoryManager.Instance.equippedItem.UpdateUI();
         InventoryManager.Instance.stats.UpdateUI();
 
         //전투씬 끄기

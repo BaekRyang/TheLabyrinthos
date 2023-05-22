@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Tayx.Graphy.Utils.NumString;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,7 +8,6 @@ public class Stats : MonoBehaviour
     private Slider exp;
     private Slider speed;
     private Slider defence;
-
     private Player player;
     
     private void Awake()
@@ -29,6 +25,8 @@ public class Stats : MonoBehaviour
 
     public void UpdateUI()
     {
+        player ??= GameManager.Instance.p_Player;
+        
         hp.value      = player.PS_playerStats.health;
         hp.maxValue   = player.PS_playerStats.maxHealth;
         exp.value     = player.PS_playerStats.exp;

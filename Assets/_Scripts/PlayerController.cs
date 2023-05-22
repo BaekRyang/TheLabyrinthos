@@ -120,7 +120,7 @@ public class PlayerController : MonoBehaviour
         Camera.main.transform.rotation = rotation;
     }
 
-    protected void Move()
+    private void Move()
     {
         float   currentMoveSpeed = moveSpeed;
         Vector3 velocity         = new Vector3(direction.x, 0, direction.z);
@@ -187,7 +187,7 @@ public class PlayerController : MonoBehaviour
         prevRoomMinimap.GetComponent<Image>().color = Color.white;
     }
 
-    public void CalcPlayerRoomIndex()
+    private void CalcPlayerRoomIndex()
     {
         int size = 10;
 
@@ -203,9 +203,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void UpdateRoomEnter(int roomIndex)
+    private void UpdateRoomEnter(int enteredRoomIndex)
     {
-        if (!GameManager.Instance.GetComponent<RoomCreation>().roomMap.ContainsKey(roomIndex))
+        if (!GameManager.Instance.GetComponent<RoomCreation>().roomMap.ContainsKey(enteredRoomIndex))
         {
             Debug.Log("존재하지 않는 방");
             return;
@@ -216,15 +216,15 @@ public class PlayerController : MonoBehaviour
         prevRoom.TryGetComponent(out BGMPlayer prevBGM);
 
         //플레이어가 위치한 방의 오브젝트를 저장
-        prevRoom = GameManager.Instance.GetComponent<RoomCreation>().roomMap[roomIndex].RoomObject;
+        prevRoom = GameManager.Instance.GetComponent<RoomCreation>().roomMap[enteredRoomIndex].RoomObject;
         //플레이어가 위치한 방의 상태를 변경
         prevRoom.GetComponent<RoomController>().ChangeRoomState(true);
 
         //위랑 똑같지만 미니맵 전용
         prevRoomMinimap.GetComponent<Image>().color = Color.gray;
-        prevRoomMinimap                             = Minimap.instance.GetRoom(roomIndex);
+        prevRoomMinimap                             = Minimap.instance.GetRoom(enteredRoomIndex);
         prevRoomMinimap.GetComponent<Image>().color = Color.white;
-        Minimap.instance.SetAnchor(roomIndex);
+        Minimap.instance.SetAnchor(enteredRoomIndex);
 
         if (prevRoom.GetComponent<RoomController>().b_hasCreature) //들어간 방에 크리쳐가 있으면
         {
@@ -239,10 +239,7 @@ public class PlayerController : MonoBehaviour
             if (!prevRoom.TryGetComponent(out BGMPlayer bgm))
                 return;
 
-            if (!prevBGM.IsUnityNull())
-                bgm.StartMusic(prevBGM.bgm.name);
-            else
-                bgm.StartMusic(null);
+            bgm.StartMusic(!prevBGM.IsUnityNull() ? prevBGM.bgm.name : null);
         }
     }
 

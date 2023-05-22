@@ -16,7 +16,10 @@ public class EffectsManager : MonoBehaviour
 
     public void NowKnown(int ID)
     {
-        knownEffects.Add(ID);
+        //ID가 knownEffects에 없다면 추가
+        if (!knownEffects.Contains(ID))
+            knownEffects.Add(ID);
+
     }
 
     public string GetEffectDesc(int ID)

@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3076c2e333e57b741aae8ecf5b602237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shouldTransperScrollEventToRoot: 1
+  transferScrollEvent: 1
   b_canClick: 1
   I_item:
     i_id: 0
@@ -175,6 +175,7 @@ MonoBehaviour:
     s_description: 
     IT_type: 0
     b_useable: 0
+    effectID: 0
   hasItem: 0
 --- !u!1 &6960526845897391244
 GameObject:

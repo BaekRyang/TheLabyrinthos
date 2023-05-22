@@ -9,9 +9,9 @@ using UnityEngine.UI;
 public class ItemObject : MonoBehaviour, IScrollHandler, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
 {
     ScrollRect SR_parent;
-
-    [FormerlySerializedAs("b_isInventoryUIElement")] [Header("For Inventory Actions")]
-    public bool shouldTransperScrollEventToRoot; //인벤토리 UI인지 표시
+    
+    [Header("For Inventory Actions")]
+    public bool transferScrollEvent; //인벤토리 UI인지 표시
 
     //조합대에서도 이거 쓰니까 있는 설정
     public bool b_canClick;
@@ -24,7 +24,7 @@ public class ItemObject : MonoBehaviour, IScrollHandler, IPointerEnterHandler, I
 
     private void Awake()
     {
-        if (shouldTransperScrollEventToRoot)
+        if (transferScrollEvent)
             SR_parent = transform.parent.parent.parent.GetComponent<ScrollRect>();
     }
 
@@ -40,11 +40,15 @@ public class ItemObject : MonoBehaviour, IScrollHandler, IPointerEnterHandler, I
 
         if (I_item.i_id >= 500)
         {
-            transform.GetChild(0).GetComponent<Image>().sprite = InventoryManager.Instance.dict_imgList[104];
+            var tmpImage = transform.GetChild(0).GetComponent<Image>();
+            tmpImage.sprite = InventoryManager.Instance.loadedImages[104];
+
+            if (I_item is Disposable tmpDisposable)
+                tmpImage.color = tmpDisposable.color;
         }
         else
         {
-            bool isSpriteExist = InventoryManager.Instance.dict_imgList.TryGetValue(I_item.i_id, out Sprite foundedSprite);
+            bool isSpriteExist = InventoryManager.Instance.loadedImages.TryGetValue(I_item.i_id, out Sprite foundedSprite);
 
             transform.GetChild(0).GetComponent<Image>().sprite =
                 isSpriteExist ? foundedSprite : InventoryManager.Instance.spriteNotFounded;
@@ -63,12 +67,11 @@ public class ItemObject : MonoBehaviour, IScrollHandler, IPointerEnterHandler, I
         }
     }
 
-    public void TansparentItem(bool transparent)
+    public void TransparentItem(bool transparent)
     {
-        if (transparent)
-            transform.GetChild(0).GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f, 0.5f);
-        else
-            transform.GetChild(0).GetComponent<Image>().color = new Color(1, 1, 1, 1);
+        transform.GetChild(0).GetComponent<Image>().color = transparent ?
+            new Color(0.5f, 0.5f, 0.5f, 0.5f) :
+            new Color(1, 1, 1, 1);
     }
 
     public void OnScroll(PointerEventData eventData) //스크롤 요소때문에 이벤트를 넘겨준다.
@@ -96,7 +99,6 @@ public class ItemObject : MonoBehaviour, IScrollHandler, IPointerEnterHandler, I
         else infoBox.GetChild(1).transform.localScale = Vector3.zero;
 
         infoBox.localScale = Vector3.one;
-        CanvasGroup tmpCG = infoBox.GetComponent<CanvasGroup>();
 
         StopAllCoroutines();
         StartCoroutine(Lerp.LerpValue(
@@ -145,4 +147,5 @@ public class ItemObject : MonoBehaviour, IScrollHandler, IPointerEnterHandler, I
 
         InventoryManager.Instance.itemActionHandler.LoadItem(ref I_item, transform.position);
     }
+
 }

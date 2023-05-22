@@ -54,13 +54,12 @@ public class Crafting : MonoBehaviour
         Debug.Log("LOAD START");
         var recipeKeys = dict_craftingTable.Keys.ToList();
 
-        for (int i = 0; i < recipeKeys.Count; i++) //레시피 안에 있는 아이템을 전부 순환한다.
+        foreach (var t in recipeKeys)
         {
-            Debug.Log(recipeKeys[i]);
-            int i_type = recipeKeys[i] / 100;
-            GameObject tmpGO = Instantiate(GO_recipeTab, RTR_contents[i_type]);
-            tmpGO.GetComponent<Recipe>().I_destItem = IM_manager.dict_items[recipeKeys[i]];
-            tmpGO.GetComponent<Recipe>().dict_recipe = dict_craftingTable[recipeKeys[i]];
+            int        i_type = t / 100;
+            GameObject tmpGO  = Instantiate(GO_recipeTab, RTR_contents[i_type]);
+            tmpGO.GetComponent<Recipe>().I_destItem  = IM_manager.definedItems[t];
+            tmpGO.GetComponent<Recipe>().dict_recipe = dict_craftingTable[t];
             tmpGO.GetComponent<Recipe>().RunSetting(IM_manager);
         }
         
@@ -73,7 +72,7 @@ public class Crafting : MonoBehaviour
         ResetCells(true);
 
         //완성품 칸 업데이트
-        GO_destItemCell.GetComponent<ItemObject>().I_item = IM_manager.dict_items[destItemID];
+        GO_destItemCell.GetComponent<ItemObject>().I_item = IM_manager.definedItems[destItemID];
         GO_destItemCell.GetComponent<ItemObject>().UpdateItem();
 
         dict_targetRecipe = recipe; //혹시 다른데서 쓸 지도 모르니깐 저장하고
@@ -94,7 +93,7 @@ public class Crafting : MonoBehaviour
             else
             {
                 //무기인데 소유중이 아니거나, 무기가 아닌경우는 원본을 올린다.
-                GO_resourceCells[count].GetComponent<ItemObject>().I_item = IM_manager.dict_items[kvp.Key];
+                GO_resourceCells[count].GetComponent<ItemObject>().I_item = IM_manager.definedItems[kvp.Key];
                 GO_resourceCells[count].GetComponent<ItemObject>().hasItem = IM_manager.RemoveItem(kvp.Key, kvp.Value);
             }
                 
@@ -114,8 +113,7 @@ public class Crafting : MonoBehaviour
     {
         if (GO_resourceCells[0].GetComponent<ItemObject>().I_item == null)
             return;
-
-
+        
         GO_destItemCell.GetComponent<ItemObject>().I_item = null;
         GO_destItemCell.GetComponent<ItemObject>().UpdateItem();
         GO_destItemCell.GetComponent<ItemObject>().b_canClick = false;
@@ -143,17 +141,18 @@ public class Crafting : MonoBehaviour
             GO_resourceCells[i].SetActive(false);
     }
 
-    public void CalcCanCraft() //레시피 칸에 있는 아이템들을 소유하고 있는지 확인하는 메서드
+    private void CalcCanCraft() //레시피 칸에 있는 아이템들을 소유하고 있는지 확인하는 메서드
     {
         int count = 0;
         int unprepared = 0;
-        foreach (var kvp in dict_targetRecipe)
+        foreach (var unused in dict_targetRecipe)
         {
+            //아이템을 소유중?
             if (GO_resourceCells[count].GetComponent<ItemObject>().hasItem)
-                GO_resourceCells[count].GetComponent<ItemObject>().TansparentItem(false);
+                GO_resourceCells[count].GetComponent<ItemObject>().TransparentItem(false);
             else
             {
-                GO_resourceCells[count].GetComponent<ItemObject>().TansparentItem(true);
+                GO_resourceCells[count].GetComponent<ItemObject>().TransparentItem(true);
                 unprepared++; //없으면 반투명시키고, 카운트 증가
             }
             count++;
@@ -162,12 +161,12 @@ public class Crafting : MonoBehaviour
         if (unprepared != 0) //카운트가 올라있으면 재료가 다 있지 않은것임
         {
             GO_indicator.GetComponentInChildren<TMP_Text>().text = "<color=#FF0000>재료가 부족합니다.</color>";
-            GO_destItemCell.GetComponent<ItemObject>().TansparentItem(true);
+            GO_destItemCell.GetComponent<ItemObject>().TransparentItem(true);
         }
         else
         { //재료가 다 있다면 반투명을 없애고 클릭 가능한 상태로 만든다.
             GO_indicator.GetComponentInChildren<TMP_Text>().text = GO_destItemCell.GetComponent<ItemObject>().I_item.s_name;
-            GO_destItemCell.GetComponent<ItemObject>().TansparentItem(false);
+            GO_destItemCell.GetComponent<ItemObject>().TransparentItem(false);
             GO_destItemCell.GetComponent<ItemObject>().b_canClick = true;
         }
             
@@ -175,12 +174,6 @@ public class Crafting : MonoBehaviour
 
     public void CraftItem() //아이템 제작 메서드
     {
-        //재료 아이템 인벤에서 없애주고
-        //foreach (var kvp in dict_targetRecipe)
-        //    IM_manager.RemoveItem(kvp.Key, kvp.Value);
-
-        /* 재료 아이템은 조합대에 올릴때 인벤에서 사라짐 */
-
         //완성품 넣어준다.
         IM_manager.AddItem(GO_destItemCell.GetComponent<ItemObject>().I_item);
 
@@ -190,11 +183,6 @@ public class Crafting : MonoBehaviour
         //제작대는 비워준다.
         ResetCells(false);
 
-    }
-
-    void Update()
-    {
-        
     }
 
 }

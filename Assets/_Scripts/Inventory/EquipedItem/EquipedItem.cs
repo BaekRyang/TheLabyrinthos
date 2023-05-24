@@ -1,5 +1,6 @@
 using Tayx.Graphy.Utils.NumString;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,8 +13,6 @@ public class EquipedItem : MonoBehaviour
     private Transform statsAccuracy;
     private Transform statsPrepareSpeed;
     private Image     weaponImage;
-
-    private Player player;
 
     private void Awake()
     {
@@ -30,15 +29,11 @@ public class EquipedItem : MonoBehaviour
         statsAccuracy     = elementsAnchor.Find("Accuracy");
         statsPrepareSpeed = elementsAnchor.Find("PrepareSpeed");
     }
-
-    private void Start()
-    {
-        player = GameManager.Instance.p_Player;
-    }
+    
 
     public void UpdateUI()
     {
-        Weapon weapon = player.WP_weapon;
+        Weapon weapon = Player.Instance.WP_weapon;
         durability.maxValue = weapon.i_maxDurability;
         durability.value    = weapon.i_durability;
 
@@ -47,7 +42,7 @@ public class EquipedItem : MonoBehaviour
         UpdateStatsCell();
 
         bool isSpriteExist =
-            InventoryManager.Instance.loadedImages.TryGetValue(player.WP_weapon.i_id + 1000, out Sprite foundedSprite);
+            InventoryManager.loadedImages.TryGetValue(Player.Instance.WP_weapon.i_id + 1000, out Sprite foundedSprite);
 
         weaponImage.sprite =
             isSpriteExist ? foundedSprite : InventoryManager.Instance.weaponSpriteNotFounded;
@@ -55,7 +50,7 @@ public class EquipedItem : MonoBehaviour
 
     public void UpdateStatsCell()
     {
-        Weapon weapon = player.WP_weapon;
+        Weapon weapon = Player.Instance.WP_weapon;
         statsDamage.GetChild(0).GetComponent<TMP_Text>().text =
             $"{weapon.i_damage - weapon.i_damageRange} ~ {weapon.i_damage + weapon.i_damageRange}";
 

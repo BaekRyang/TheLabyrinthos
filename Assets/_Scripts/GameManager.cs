@@ -62,6 +62,9 @@ public class GameManager : MonoBehaviour
 
     [Header("EffectManagement")]
     [SerializeField] public EffectsManager effectsManager;
+    
+    [Header("Battle Controll")]
+    public bool b_nowBattle;
 
 
     void Awake()
@@ -111,9 +114,9 @@ public class GameManager : MonoBehaviour
         ResetLevel(i_level);
         go_player      = Instantiate(go_playerPrefab);
         go_player.name = "Player";
-
-        ChangeStatsSlider(StatsType.Hp, GetComponent<Player>().GetPlayerStats().health);
-        ChangeStatsSlider(StatsType.Exp, GetComponent<Player>().GetPlayerStats().exp);
+        
+        UpdateStatsSlider(StatsType.Hp);
+        UpdateStatsSlider(StatsType.Exp);
     }
 
     void Update()
@@ -249,15 +252,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void ChangeStatsSlider(StatsType statsType, float f_val)
+    public void UpdateStatsSlider(StatsType statsType)
     {
+        var stats = p_Player.GetPlayerStats();
         switch (statsType)
         {
             case StatsType.Hp:
-                SL_hpBar.value = f_val;
+                SL_hpBar.maxValue = stats.maxHealth;
+                SL_hpBar.value    = stats.health;
                 break;
             case StatsType.Exp:
-                SL_expBar.value = f_val;
+                SL_expBar.value = stats.exp;
                 break;
         }
     }

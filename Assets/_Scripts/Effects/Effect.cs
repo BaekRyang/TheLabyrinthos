@@ -1,15 +1,16 @@
 using System;
 using TypeDefs;
 
+[Serializable]
 public class Effect
 {
     public  EffectTypes effectType;
     public  bool        isPositive;
-    private int         expirationRemain;
-    private float       effectStrength;
+    public  int         expirationRemain;
+    public  int         effectStrength;
     private Dele        endturnEffect;
 
-    public Effect(int exp, EffectTypes paramEffectType, float strength, bool isPositive)
+    public Effect(int exp, EffectTypes paramEffectType, int strength, bool isPositive)
     {
         expirationRemain = exp;
         effectStrength   = strength;
@@ -21,7 +22,8 @@ public class Effect
             endturnEffect = () =>
             {
                 var playerStats = Player.Instance.GetPlayerStats();
-                playerStats.health -= (int)effectStrength;
+                playerStats.health -= effectStrength;
+                GameManager.Instance.UpdateStatsSlider(StatsType.Hp);
             };
         }
     }
@@ -47,22 +49,22 @@ public class Effect
         switch (effectType)
         {
             case EffectTypes.MaxHealth:
-                playerStats.maxHealth += isPositive ? (int)effectStrength : -(int)effectStrength;
+                playerStats.maxHealth += isPositive ? effectStrength : -effectStrength;
                 break;
             case EffectTypes.Speed:
-                playerStats.speed += isPositive ? (int)effectStrength : -(int)effectStrength;
+                playerStats.speed += isPositive ? effectStrength * 0.01f : -effectStrength * 0.01f;
                 break;
             case EffectTypes.Defense:
-                playerStats.defense += isPositive ? (int)effectStrength : -(int)effectStrength;
+                playerStats.defense += isPositive ? effectStrength : -effectStrength;
                 break;
             case EffectTypes.Accuracy:
-                playerStats.accuracyMult += isPositive ? effectStrength : -effectStrength;
+                playerStats.accuracyMult += isPositive ? effectStrength * 0.01f : -effectStrength * 0.01f;
                 break;
             case EffectTypes.PrepareSpeed:
-                playerStats.prepareSpeed += isPositive ? (int)effectStrength : -(int)effectStrength;
+                playerStats.prepareSpeed += isPositive ? effectStrength : -effectStrength;
                 break;
             case EffectTypes.Damage:
-                playerStats.damage += isPositive ? (int)effectStrength : -(int)effectStrength;
+                playerStats.damage += isPositive ? effectStrength : -effectStrength;
                 break;
             case EffectTypes.Poison:
                 break;
@@ -77,7 +79,7 @@ public class Effect
 
     public int ConsumeTurn()
     {
-        endturnEffect();
+        endturnEffect?.Invoke();
         expirationRemain--;
         if (expirationRemain == 0)
             RemoveEffect();

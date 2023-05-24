@@ -17,7 +17,6 @@ public class PlayerController : MonoBehaviour
 
     //카메라 조종
     public bool b_camControll;
-    public bool b_nowBattle;
 
     //카메라 회전 및 움직임
     float rotationSpeed = 2f;
@@ -228,11 +227,10 @@ public class PlayerController : MonoBehaviour
 
         if (prevRoom.GetComponent<RoomController>().b_hasCreature) //들어간 방에 크리쳐가 있으면
         {
-            //플레이어 조작은 문 열때 막히니 따로 막을 필요 없고
-            b_nowBattle      = true; //문 열리고난뒤 조작 풀어주는것을 막는다.
-            Cursor.lockState = CursorLockMode.Confined;
-            GameManager.Instance.GO_BattleCanvas.SetActive(true);                                          //전투씬 켜고
-            BattleMain.instance.StartBattleScene(ref prevRoom.GetComponent<RoomController>().CR_creature); //현재 방에 있는 크리쳐 정보를 넘겨준다.
+            GameManager.Instance.b_nowBattle = true;
+            Cursor.lockState                 = CursorLockMode.Confined;
+            GameManager.Instance.GO_BattleCanvas.SetActive(true);                                      //전투씬 켜고
+            BattleMain.instance.StartBattleScene(prevRoom.GetComponent<RoomController>().CR_creature); //현재 방에 있는 크리쳐 정보를 넘겨준다.
         }
         else
         {
@@ -245,8 +243,8 @@ public class PlayerController : MonoBehaviour
 
     public void ExitBattle()
     {
-        b_nowBattle      = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        GameManager.Instance.b_nowBattle = false;
+        Cursor.lockState                 = CursorLockMode.Locked;
         prevRoom.GetComponent<RoomController>().DestroyCreature();
     }
 }

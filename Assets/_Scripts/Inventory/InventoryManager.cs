@@ -11,10 +11,10 @@ public class InventoryManager : MonoBehaviour
 
     //인벤토리 key, value 형식으로 사용
     [Header("Dictionaries")]
-    public readonly Dictionary<int, int>          inventory       = new Dictionary<int, int>();
-    public readonly Dictionary<int, List<Weapon>> weaponInventory = new Dictionary<int, List<Weapon>>();
-    public readonly Dictionary<int, Item>         definedItems    = new Dictionary<int, Item>();
-    public readonly Dictionary<int, Sprite>       loadedImages    = new Dictionary<int, Sprite>();
+    public static readonly Dictionary<int, int>          inventory       = new Dictionary<int, int>();
+    public static readonly Dictionary<int, List<Weapon>> weaponInventory = new Dictionary<int, List<Weapon>>();
+    public static readonly Dictionary<int, Item>         definedItems    = new Dictionary<int, Item>();
+    public static readonly Dictionary<int, Sprite>       loadedImages    = new Dictionary<int, Sprite>();
     
     [Header("Default Sprite Setting")]
     public Sprite emptyItem;
@@ -37,6 +37,7 @@ public class InventoryManager : MonoBehaviour
     public ItemActionHandler itemActionHandler;
     public EquipedItem       equippedItem;
     public Stats             stats;
+    public EffectIndicator   effectIndicator;
 
     private void Awake()
     {
@@ -58,15 +59,11 @@ public class InventoryManager : MonoBehaviour
 
     void Start()
     {
-        GO_inventory.transform.Find("Inventory").GetComponent<Inventory>().LoadSetting();
         GO_inventory.SetActive(false);
-        
         CreateSyringes();
         foreach (var (_, value) in definedItems)
             AddItem(value, 2);
         GetComponent<Player>().WP_weapon = weaponInventory[0][0];
-        
-        GO_crafting.transform.Find("Inventory").GetComponent<Inventory>().LoadSetting();
         //GO_crafting.SetActive(false); //Crafting에서 로딩 다 끝나면 알아서 비활성화 한다.
 
         equippedItem.UpdateUI();
@@ -82,6 +79,7 @@ public class InventoryManager : MonoBehaviour
         if (target == "Inventory")
         {
             stats.UpdateUI();
+            effectIndicator.UpdateUI();
             GO_targetUI = GO_inventory;
         }
         if (target == "Crafting")
@@ -312,14 +310,20 @@ public class InventoryManager : MonoBehaviour
 
     private void CreateSyringes()
     {
-        var effectCount = Enum.GetValues(typeof(effectStats)).Length;
-
+        var effectCount = Enum.GetValues(typeof(EffectTypes)).Length;
+        
+        //이펙트의 개수 출력
+        Debug.Log(effectCount);
+        
+        Disposable tmpDisposable;
         for (int i = 0; i < effectCount; i++)
         {
-            for (int j = 0; i < 2; i++)
+            for (int j = 0; j < 2; j++)
             {
-                Disposable tmpDisposable = new Disposable(definedItems[104] as Disposable);
+                tmpDisposable = new Disposable(definedItems[104] as Disposable);
+                
                 tmpDisposable.CreateEffect((EffectTypes)i, j == 1);
+                
                 tmpDisposable.i_id = 500 + i * 2 + j;
                 //tmpDisposable.color를 i 따라서 무작위 색상으로 설정 (단 너무 비슷한 색상끼리 겹치지 않게)
                 tmpDisposable.color = new Color(
@@ -327,10 +331,14 @@ public class InventoryManager : MonoBehaviour
                     Random.Range(0.0f, 0.5f) + (i % 3) * 0.5f,
                     Random.Range(0.0f, 0.5f) + (i % 5) * 0.5f);
 
-                Debug.Log(tmpDisposable.i_id + "주사기 추가 - " + GameManager.Instance.effectsManager.GetEffectDesc(tmpDisposable.effect));
+                Debug.Log(tmpDisposable.i_id + " 주사기 추가 - " + GameManager.Instance.effectsManager.GetEffectDesc(tmpDisposable.effect));
                 definedItems.Add(tmpDisposable.i_id, tmpDisposable);
+
+                if ((EffectTypes)i is EffectTypes.Poison)
+                    break;
+                //독은 두개 만들것이 없음
             }
         }
-        
+
     }
 }

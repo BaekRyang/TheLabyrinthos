@@ -60,11 +60,12 @@ public class BattleActions : MonoBehaviour
                 break;
 
             case "Tab_Item":
-
+                BM_BattleMain.inventory.SetActive(true);
+                BM_BattleMain.inventory.transform.GetChild(0).GetComponent<Inventory>().
+                    UpdateInventory();
                 break;
 
             case "Tab_Escape":
-
                 break;
 
             //Attack 행동 4가지
@@ -81,7 +82,20 @@ public class BattleActions : MonoBehaviour
                 BM_BattleMain.GO_attackList.SetActive(false);
                 BM_BattleMain.GO_actionList.SetActive(true);
                 break;
+            case "Inventory_Back":
+                BM_BattleMain.inventory.SetActive(false);
+                break;
         }
+    }
+
+    public void ItemUsed()
+    {
+        BM_BattleMain.ChangeSliderValue(true, StatsType.Hp, PS_playerStats.health);
+        P_player.ConsumeTurn();
+        BM_BattleMain.EndTurn(true);
+        BM_BattleMain.GO_attackList.SetActive(false);
+        BM_BattleMain.GO_actionList.SetActive(false);
+        BM_BattleMain.inventory.SetActive(false);
     }
 
     public void Attack(bool b_IsPlayer, Parts part = Parts.Thorax)

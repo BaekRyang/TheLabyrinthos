@@ -197,21 +197,6 @@ namespace TypeDefs
     #endregion
 
     #region Effect
-
-    public enum effectStats
-    {
-        MaxHealth,
-        Speed,
-        Defense,
-        Accuracy,
-        PrepareSpeed,
-        Damage
-    }
-    public enum EffectList
-    {
-        Poison
-    }
-
     public enum EffectTypes
     {
         MaxHealth,

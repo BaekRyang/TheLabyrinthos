@@ -92,7 +92,6 @@ public class CSVReader : MonoBehaviour
 
     private void LoadItems() //CSV를 읽는 기본 로직 처리
     {
-        InventoryManager iManager = GetComponent<InventoryManager>();
         TextAsset textAsset = Resources.Load<TextAsset>("Items");
         StringReader sReader = new StringReader(textAsset.text);
 
@@ -107,7 +106,7 @@ public class CSVReader : MonoBehaviour
             Item tmpItem = ParseItem(data_value);                   //ParseItem을 호출하여 위에서 만든 배열을 넘겨준다.
             if (tmpItem.IT_type == ItemType.Undefined) continue;    //만들어진 아이템의 종류가 Undefined 이면 정상적으로 만들어진 아이템이 아니므로 지나간다.
 
-            iManager.definedItems.Add(tmpItem.i_id, tmpItem);         //만들어진 아이템을 InventoryManager에 있는 아이템 목록을 저장하는 Dictionary에 저장한다.
+            InventoryManager.definedItems.Add(tmpItem.i_id, tmpItem);         //만들어진 아이템을 InventoryManager에 있는 아이템 목록을 저장하는 Dictionary에 저장한다.
             Debug.Log(tmpItem.s_name + " 등록됨");
         }
     }

@@ -94,8 +94,10 @@ public class Disposable : Item
 
     public void CreateEffect(EffectTypes type, bool isPositive)
     {
-        effect          = new Effect(-1, type, -1, isPositive);
+        effect          = new Effect(5, type, 5, isPositive);
         dele_itemEffect = () => Player.Instance.AddEffect(ref effect);
+        dele_itemEffect += () => InventoryManager.Instance.effectIndicator.UpdateUI();
+        dele_itemEffect += () => GameManager.Instance.UpdateStatsSlider(StatsType.Hp);
     }
 }
 

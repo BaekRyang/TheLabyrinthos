@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    Dictionary<int, int> dict_Inventory;
-    Dictionary<int, Item> dict_items;
-    Dictionary<int, Sprite> dict_imgList;
-
     public Transform TF_Weapons;
     public Transform TF_Disposables;
     public Transform TF_Foods;
@@ -28,13 +24,6 @@ public class Inventory : MonoBehaviour
         TF_Others      = transform.Find("Elements").GetChild(3).Find("Scroll View").GetChild(0).GetChild(0).GetComponent<Transform>();
     }
 
-    public void LoadSetting()
-    {
-        dict_Inventory = InventoryManager.Instance.inventory;
-        dict_items     = InventoryManager.Instance.definedItems;
-        dict_imgList   = InventoryManager.Instance.loadedImages;
-    }
-
     void Start()
     {
     }
@@ -46,7 +35,7 @@ public class Inventory : MonoBehaviour
 
         if ((target & (1 << 3)) != 0)
         {
-            foreach (var weaponList in InventoryManager.Instance.weaponInventory)
+            foreach (var weaponList in InventoryManager.weaponInventory)
             {
                 foreach (var weapon in weaponList.Value)
                 {
@@ -59,9 +48,9 @@ public class Inventory : MonoBehaviour
         }
 
 
-        foreach (KeyValuePair<int, int> kvp in dict_Inventory)
+        foreach (KeyValuePair<int, int> kvp in InventoryManager.inventory)
         {
-            Item targetItem = dict_items[kvp.Key];
+            Item targetItem = InventoryManager.definedItems[kvp.Key];
             switch (targetItem.IT_type)
             {
                 case ItemType.Weapon:

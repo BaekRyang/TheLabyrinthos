@@ -10,7 +10,6 @@ public class ItemActionHandler : MonoBehaviour, IPointerExitHandler
     private GameObject wearObject;
     private GameObject discardObject;
     private GameObject discardAllObject;
-    private IPointerExitHandler _pointerExitHandlerImplementation;
 
     private void Start()
     {
@@ -28,8 +27,9 @@ public class ItemActionHandler : MonoBehaviour, IPointerExitHandler
         if (action == "Wear")
         {
             InventoryManager.Instance.Wear(ref focusedItem);
-            
             OnPointerExit(null);
+            if (GameManager.Instance.b_nowBattle)
+                BattleMain.instance.BA_battleActions.ItemUsed();
             return;
         }
         
@@ -37,10 +37,11 @@ public class ItemActionHandler : MonoBehaviour, IPointerExitHandler
         {
             if (focusedItem is Disposable disposable)
                 disposable.dele_itemEffect?.Invoke();
-
             InventoryManager.Instance.RemoveItem(focusedItem);
             InventoryManager.Instance.openedInventory.UpdateInventory();
             OnPointerExit(null);
+            if (GameManager.Instance.b_nowBattle)
+                BattleMain.instance.BA_battleActions.ItemUsed();
             return;
         }
         

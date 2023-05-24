@@ -41,14 +41,14 @@ public class ItemObject : MonoBehaviour, IScrollHandler, IPointerEnterHandler, I
         if (I_item.i_id >= 500)
         {
             var tmpImage = transform.GetChild(0).GetComponent<Image>();
-            tmpImage.sprite = InventoryManager.Instance.loadedImages[104];
+            tmpImage.sprite = InventoryManager.loadedImages[104];
 
             if (I_item is Disposable tmpDisposable)
                 tmpImage.color = tmpDisposable.color;
         }
         else
         {
-            bool isSpriteExist = InventoryManager.Instance.loadedImages.TryGetValue(I_item.i_id, out Sprite foundedSprite);
+            bool isSpriteExist = InventoryManager.loadedImages.TryGetValue(I_item.i_id, out Sprite foundedSprite);
 
             transform.GetChild(0).GetComponent<Image>().sprite =
                 isSpriteExist ? foundedSprite : InventoryManager.Instance.spriteNotFounded;
@@ -84,7 +84,9 @@ public class ItemObject : MonoBehaviour, IScrollHandler, IPointerEnterHandler, I
     {
         if (I_item == null || I_item.IT_type == ItemType.Undefined) return;
 
-        var infoBox = InventoryManager.Instance.RT_infoBox;
+        var infoBox = GameManager.Instance.b_nowBattle ?
+            BattleMain.instance.infoBox :
+            InventoryManager.Instance.RT_infoBox;
         infoBox.gameObject.SetActive(true);
 
         var textComponents = infoBox.GetComponentsInChildren<TMP_Text>();
@@ -99,35 +101,43 @@ public class ItemObject : MonoBehaviour, IScrollHandler, IPointerEnterHandler, I
         else infoBox.GetChild(1).transform.localScale = Vector3.zero;
 
         infoBox.localScale = Vector3.one;
-
-        StopAllCoroutines();
-        StartCoroutine(Lerp.LerpValue(
-            value => infoBox.position = value,
-            infoBox.position,
-            transform.position,
-            0.2f,
-            Vector3.Lerp,
-            Lerp.EaseInOut));
-
-        // infoBox.position       = transform.position;
+        
+        infoBox.position   = transform.position;
+        
+        // StopAllCoroutines();
+        // StartCoroutine(Lerp.LerpValue(
+        //     value => infoBox.position = value,
+        //     infoBox.position,
+        //     transform.position,
+        //     0.2f,
+        //     Vector3.Lerp,
+        //     Lerp.EaseInOut));
+        
         textComponents[0].text = I_item.s_name;
         textComponents[1].text = I_item.s_description.Replace("\\n", "\n");
 
-        if (I_item.IT_type != ItemType.Disposable)
-            return;
+        if (I_item is Disposable disposableItem)
+        {
+            if (disposableItem.effect == null)
+                return;
+            
+            if (!GameManager.Instance.effectsManager.IsKnown(disposableItem.effect.effectType))
+                textComponents[1].text += "\n\n<b><color=#999999>알 수 없는 효과</color></b>";
+            else
+                textComponents[1].text += "\n\n<b><color=#CCCC00>" + 
+                                          GameManager.Instance.effectsManager.GetEffectDesc(disposableItem.effect) +
+                                          "</color></b>";
+        }
+            
 
-        Disposable disposableItem = I_item as Disposable;
-        if (!GameManager.Instance.effectsManager.IsKnown(disposableItem.effect.effectType))
-            textComponents[1].text += "\n\n<b><color=#999999>알 수 없는 효과</color></b>";
-        else
-            textComponents[1].text += "\n\n<b><color=#CCCC00>" + 
-                                      GameManager.Instance.effectsManager.GetEffectDesc(disposableItem.effect) +
-                                      "</color></b>";
+        
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        var infoBox = InventoryManager.Instance.RT_infoBox;
+        var infoBox = GameManager.Instance.b_nowBattle ?
+            BattleMain.instance.infoBox :
+            InventoryManager.Instance.RT_infoBox;
         infoBox.GetChild(1).transform.localScale = Vector3.one;
         infoBox.localScale                       = Vector3.zero;
     }
@@ -145,7 +155,11 @@ public class ItemObject : MonoBehaviour, IScrollHandler, IPointerEnterHandler, I
             return;
         }
 
-        InventoryManager.Instance.itemActionHandler.LoadItem(ref I_item, transform.position);
+        var itemHandler = GameManager.Instance.b_nowBattle ?
+            BattleMain.instance.infoBox.transform.parent.GetChild(1).GetComponent<ItemActionHandler>() :
+            InventoryManager.Instance.itemActionHandler;
+        
+        itemHandler.LoadItem(ref I_item, transform.position);
     }
 
 }

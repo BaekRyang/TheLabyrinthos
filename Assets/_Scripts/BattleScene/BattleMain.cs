@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using TypeDefs;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 //같은 이름의 클래스가 두개라서 고정
 
@@ -11,7 +13,7 @@ public class BattleMain : MonoBehaviour
 {
     public static BattleMain instance;
 
-    BattleActions BA_battleActions;
+    public BattleActions BA_battleActions;
 
     [SerializeField] float f_turnDelay = 1f;
 
@@ -28,7 +30,8 @@ public class BattleMain : MonoBehaviour
     [SerializeField] Image[] IMG_enemyFullBodys = new Image[5]; //순서대로 얼굴, 측면, (풀바디) WeakPoint, Thorax, Outer
     [SerializeField] Image IMG_enemySideBody;
 
-    
+    [SerializeField]                                      public GameObject inventory;
+    [FormerlySerializedAs("descAnchor")] [SerializeField] public Transform  infoBox;
 
     public Sprite SPR_playerAttack;
     public Sprite SPR_enemyAttack;
@@ -137,7 +140,7 @@ public class BattleMain : MonoBehaviour
                             new DmgAccText(GO_attackList.transform.GetChild(2).Find("Percentage").GetComponent<TMP_Text>(),
                                             GO_attackList.transform.GetChild(2).Find("Damage").GetComponent<TMP_Text>()));
 
-        
+        inventory.SetActive(false);
     }
 
     void Update()
@@ -174,7 +177,7 @@ public class BattleMain : MonoBehaviour
 
     }
 
-    public void StartBattleScene(ref Creature CR_Opponent)
+    public void StartBattleScene(Creature CR_Opponent)
     {
         //BattleMain과 BattleAction에서도 Enemy의 스텟을 참조해야 하므로 참조로 넘겨준다.
         BA_battleActions.CR_Enemy = CR_Enemy = CR_Opponent;
@@ -197,8 +200,10 @@ public class BattleMain : MonoBehaviour
         SL_enemyTP.value = CR_Enemy.prepareSpeed;                       //Enemy의 TP 반영
         f_enemySpeed = CR_Enemy.speed;                                  //Enemy의 속도 반영
 
-        UpdateDamageIndicator();                                        //공격력 표시창 업데이트
+        // UpdateDamageIndicator();                                        //공격력 표시창 업데이트
         b_paused = false;
+
+        InventoryManager.Instance.openedInventory = inventory.transform.GetComponentInChildren<Inventory>(); 
     }
 
     public void ChangeSliderValue(bool b_IsPlayer, StatsType statsType, float f_val)
@@ -226,6 +231,7 @@ public class BattleMain : MonoBehaviour
     {
         TMP_playerDamage.text = "DMG\n" + (PS_playerStats.damage + P_player.WP_weapon.i_damage);
         TMP_EnemyDamage.text = "DMG\n" + CR_Enemy.damage;
+        
     }
 
     public void EndTurn(bool b_isPlayer) {
@@ -269,7 +275,7 @@ public class BattleMain : MonoBehaviour
         PC_player.ExitBattle();
 
         //외부 상시 스텟바 업데이트
-        GameManager.Instance.ChangeStatsSlider(StatsType.Hp, PS_playerStats.health);
+        GameManager.Instance.UpdateStatsSlider(StatsType.Hp);
 
         yield return new WaitForSeconds(0.5f);
         GameManager.Instance.StartCoroutine(GameManager.Instance.CurtainModify(true, 1)); //BattleMain은 사라질거니까 GM에서 실행해준다.

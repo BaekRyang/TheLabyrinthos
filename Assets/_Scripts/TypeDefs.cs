@@ -209,9 +209,25 @@ namespace TypeDefs
     }
     public enum EffectList
     {
-        poision
+        Poison
     }
 
+    public enum EffectTypes
+    {
+        MaxHealthUp,
+        MaxHealthDown,
+        SpeedUp,
+        SpeedDown,
+        DefenseUp,
+        DefenseDown,
+        AccuracyUp,
+        AccuracyDown,
+        PrepareSpeedUp,
+        PrepareSpeedDown,
+        DamageUp,
+        DamageDown,
+        Poison
+    }
     
 
     #endregion

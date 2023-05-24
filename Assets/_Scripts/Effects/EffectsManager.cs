@@ -46,11 +46,16 @@ public class EffectsManager : MonoBehaviour
         {
             switch ((EffectList)ID)
             {
-                case EffectList.poision:
+                case EffectList.Poison:
                     return "중독";
             }
         }
 
         return "";
+    }
+
+    public Sprite GetEffectIcon(EffectTypes effType)
+    {
+        return null;
     }
 }

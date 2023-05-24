@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public static Player Instance;
+    
     public PlayerStats  PS_playerStats;
     public Weapon       WP_weapon;
     public List<Effect> effectList = new List<Effect>();
@@ -15,6 +17,8 @@ public class Player : MonoBehaviour
     void Awake()
     {
         PS_playerStats = new PlayerStats();
+
+        Instance ??= this;
     }
 
     public ref PlayerStats GetPlayerStats()
@@ -27,7 +31,7 @@ public class Player : MonoBehaviour
         Effect effect;
         if (effectType is EffectList list) //effectType이 EffectList라면 EffectList인 list에 저장
         {
-            effect = new Effect(duration, list, strength); //해당 effectType을 가진 effect를 생성
+            effect = new Effect(duration, list, strength);           //해당 effectType을 가진 effect를 생성
             GameManager.Instance.effectsManager.NowKnown((int)list); //아이템을 사용했으므로 Known상태로 만들어준다.
         }
         else if (effectType is effectStats type) //마찬가지로 effectType이 effectStats라면 effectStats인 type에 저장
@@ -59,6 +63,8 @@ public class Player : MonoBehaviour
 
         foreach (var effect in effectList)
         {
+            //매턴이 끝날때 리스트에 있는 이펙트들의 턴종료 효과를 발동하고, 만료된 이펙트를 지워준다.
+            //리스트에 담겨있지 않으면 이펙트는 무효과임
             var remain = effect.ConsumeTurn();
             if (remain == 0)
                 effectList.Remove(effect);

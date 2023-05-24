@@ -312,23 +312,24 @@ public class InventoryManager : MonoBehaviour
 
     private void CreateSyringes()
     {
-        var effectCount = 
-            Enum.GetValues(typeof(EffectList)).Length + 
-            Enum.GetValues(typeof(effectStats)).Length;
+        var effectCount = Enum.GetValues(typeof(effectStats)).Length;
 
         for (int i = 0; i < effectCount; i++)
         {
-            Disposable tmpDisposable = new Disposable(definedItems[104] as Disposable);
-            tmpDisposable.CreateEffect(i);
-            tmpDisposable.i_id = 500 + i;
-            //tmpDisposable.color를 i 따라서 무작위 색상으로 설정 (단 너무 비슷한 색상끼리 겹치지 않게)
-            tmpDisposable.color = new Color(
-                Random.Range(0.0f, 0.5f) + (i % 2) * 0.5f,
-                Random.Range(0.0f, 0.5f) + (i % 3) * 0.5f,
-                Random.Range(0.0f, 0.5f) + (i % 5) * 0.5f);
+            for (int j = 0; i < 2; i++)
+            {
+                Disposable tmpDisposable = new Disposable(definedItems[104] as Disposable);
+                tmpDisposable.CreateEffect((EffectTypes)i, j == 1);
+                tmpDisposable.i_id = 500 + i * 2 + j;
+                //tmpDisposable.color를 i 따라서 무작위 색상으로 설정 (단 너무 비슷한 색상끼리 겹치지 않게)
+                tmpDisposable.color = new Color(
+                    Random.Range(0.0f, 0.5f) + (i % 2) * 0.5f,
+                    Random.Range(0.0f, 0.5f) + (i % 3) * 0.5f,
+                    Random.Range(0.0f, 0.5f) + (i % 5) * 0.5f);
 
-            Debug.Log(tmpDisposable.i_id + "주사기 추가 - " + GameManager.Instance.effectsManager.GetEffectDesc(tmpDisposable.disposableID));
-            definedItems.Add(tmpDisposable.i_id, tmpDisposable);
+                Debug.Log(tmpDisposable.i_id + "주사기 추가 - " + GameManager.Instance.effectsManager.GetEffectDesc(tmpDisposable.effect));
+                definedItems.Add(tmpDisposable.i_id, tmpDisposable);
+            }
         }
         
     }

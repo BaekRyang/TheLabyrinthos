@@ -214,18 +214,12 @@ namespace TypeDefs
 
     public enum EffectTypes
     {
-        MaxHealthUp,
-        MaxHealthDown,
-        SpeedUp,
-        SpeedDown,
-        DefenseUp,
-        DefenseDown,
-        AccuracyUp,
-        AccuracyDown,
-        PrepareSpeedUp,
-        PrepareSpeedDown,
-        DamageUp,
-        DamageDown,
+        MaxHealth,
+        Speed,
+        Defense,
+        Accuracy,
+        PrepareSpeed,
+        Damage,
         Poison
     }
     

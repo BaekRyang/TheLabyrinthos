@@ -36,9 +36,7 @@ public class ItemActionHandler : MonoBehaviour, IPointerExitHandler
         if (action == "Use")
         {
             if (focusedItem is Disposable disposable)
-            {
                 disposable.dele_itemEffect?.Invoke();
-            }
 
             InventoryManager.Instance.RemoveItem(focusedItem);
             InventoryManager.Instance.openedInventory.UpdateInventory();

@@ -117,11 +117,11 @@ public class ItemObject : MonoBehaviour, IScrollHandler, IPointerEnterHandler, I
             return;
 
         Disposable disposableItem = I_item as Disposable;
-        if (!GameManager.Instance.effectsManager.IsKnown(disposableItem.disposableID))
+        if (!GameManager.Instance.effectsManager.IsKnown(disposableItem.effect.effectType))
             textComponents[1].text += "\n\n<b><color=#999999>알 수 없는 효과</color></b>";
         else
             textComponents[1].text += "\n\n<b><color=#CCCC00>" + 
-                                      GameManager.Instance.effectsManager.GetEffectDesc(disposableItem.disposableID) +
+                                      GameManager.Instance.effectsManager.GetEffectDesc(disposableItem.effect) +
                                       "</color></b>";
     }
 

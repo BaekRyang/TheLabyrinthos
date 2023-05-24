@@ -1,103 +1,78 @@
+using System;
 using TypeDefs;
 
 public class Effect
 {
     public  EffectTypes effectType;
+    public  bool        isPositive;
     private int         expirationRemain;
-    private effectStats statsEffect;
     private float       effectStrength;
     private Dele        endturnEffect;
 
-    public Effect(int exp, effectStats effectType, float strength)
+    public Effect(int exp, EffectTypes paramEffectType, float strength, bool isPositive)
     {
         expirationRemain = exp;
-        statsEffect = effectType;
-        effectStrength = strength;
-    }
+        effectStrength   = strength;
+        effectType       = paramEffectType;
+        this.isPositive  = isPositive;
 
-    public Effect(int exp, EffectList effectType, float strength)
-    {
-        var playerStats = Player.Instance.GetPlayerStats();
-        expirationRemain = exp;
-        effectStrength = strength;
-
-        switch (effectType)
+        if (effectType == EffectTypes.Poison)
         {
-            case EffectList.Poison:
-                endturnEffect = () =>
-                {
-                    playerStats.health -= effectStrength;
-                };
-                break;
+            endturnEffect = () =>
+            {
+                var playerStats = Player.Instance.GetPlayerStats();
+                playerStats.health -= (int)effectStrength;
+            };
         }
     }
 
-    public void ApplyEffect()
+    public Effect(Effect other)
+    {
+        expirationRemain = other.expirationRemain;
+        effectStrength   = other.effectStrength;
+        effectType       = other.effectType;
+        isPositive       = other.isPositive;
+        endturnEffect    = other.endturnEffect;
+    }
+
+    public void ApplyEffect(bool revert = false)
     {
         var playerStats = Player.Instance.GetPlayerStats();
-        switch (statsEffect)
+
+        //revert가 true면 효과를 반대로 적용한다.
+        //revert가 true로 들어왔다는것이 효과를 제거한다는 뜻이므로, isPositive를 반대로 바꿔도 됨
+        if (revert)
+            isPositive = !isPositive;
+
+        switch (effectType)
         {
-            case effectStats.Damage:
-                effectType = EffectTypes.DamageUp;
-                playerStats.damage += (int)effectStrength;
+            case EffectTypes.MaxHealth:
+                playerStats.maxHealth += isPositive ? (int)effectStrength : -(int)effectStrength;
                 break;
-
-            case effectStats.Defense:
-                effectType = EffectTypes.DefenseUp;
-                playerStats.defense += (int)effectStrength;
+            case EffectTypes.Speed:
+                playerStats.speed += isPositive ? (int)effectStrength : -(int)effectStrength;
                 break;
-
-            case effectStats.Speed:
-                effectType = EffectTypes.SpeedUp;
-                playerStats.speed += effectStrength;
+            case EffectTypes.Defense:
+                playerStats.defense += isPositive ? (int)effectStrength : -(int)effectStrength;
                 break;
-
-            case effectStats.Accuracy:
-                effectType = EffectTypes.AccuracyUp;
-                playerStats.accuracyMult += effectStrength;
+            case EffectTypes.Accuracy:
+                playerStats.accuracyMult += isPositive ? effectStrength : -effectStrength;
                 break;
-
-            case effectStats.MaxHealth:
-                effectType = EffectTypes.MaxHealthUp;
-                playerStats.maxHealth += (int)effectStrength;
+            case EffectTypes.PrepareSpeed:
+                playerStats.prepareSpeed += isPositive ? (int)effectStrength : -(int)effectStrength;
                 break;
-
-            case effectStats.PrepareSpeed:
-                effectType = EffectTypes.PrepareSpeedUp;
-                playerStats.prepareSpeed += (int)effectStrength;
+            case EffectTypes.Damage:
+                playerStats.damage += isPositive ? (int)effectStrength : -(int)effectStrength;
+                break;
+            case EffectTypes.Poison:
                 break;
         }
     }
 
     public void RemoveEffect()
     {
-        var playerStats = GameManager.Instance.GetComponent<Player>().GetPlayerStats();
-        switch (statsEffect)
-        {
-            case effectStats.Damage:
-                playerStats.damage -= (int)effectStrength;
-                break;
-
-            case effectStats.Defense:
-                playerStats.defense -= (int)effectStrength;
-                break;
-
-            case effectStats.Speed:
-                playerStats.speed -= effectStrength;
-                break;
-
-            case effectStats.Accuracy:
-                playerStats.accuracyMult -= effectStrength;
-                break;
-
-            case effectStats.MaxHealth:
-                playerStats.maxHealth -= (int)effectStrength;
-                break;
-
-            case effectStats.PrepareSpeed:
-                playerStats.prepareSpeed -= (int)effectStrength;
-                break;
-        }
+        //효과를 제거할때는 그냥 간단하게 ApplyEffect(true)를 호출하면 됨
+        ApplyEffect(true);
     }
 
     public int ConsumeTurn()

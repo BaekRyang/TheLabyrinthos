@@ -69,10 +69,10 @@ public class Weapon : Item
 
 public class Disposable : Item
 {
-    public int   disposableID;
-    public Color color;
-    public short effectID;
-    public Dele  dele_itemEffect; //아이템 효과(함수로)
+    public Effect effect;
+    public Color  color;
+    public short  effectID;
+    public Dele   dele_itemEffect; //아이템 효과(함수로)
     public Disposable(Item item)
     {
         IT_type = item.IT_type;
@@ -92,15 +92,10 @@ public class Disposable : Item
         dele_itemEffect = other.dele_itemEffect;
     }
 
-    public void CreateEffect(int ID)
+    public void CreateEffect(EffectTypes type, bool isPositive)
     {
-        disposableID = ID;
-
-        if (disposableID < Enum.GetValues(typeof(EffectList)).Length)
-            dele_itemEffect = () => GameManager.Instance.p_Player.AddEffect((EffectList)disposableID);
-        else
-            dele_itemEffect = () => GameManager.Instance.p_Player.AddEffect((effectStats)disposableID - Enum.GetValues(typeof(EffectList)).Length);
-
+        effect          = new Effect(-1, type, -1, isPositive);
+        dele_itemEffect = () => Player.Instance.AddEffect(ref effect);
     }
 }
 

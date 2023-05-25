@@ -62,7 +62,10 @@ public class InventoryManager : MonoBehaviour
         GO_inventory.SetActive(false);
         CreateSyringes();
         foreach (var (_, value) in definedItems)
+        {
+            if (value.i_id == 306) continue;
             AddItem(value, 2);
+        }
         GetComponent<Player>().WP_weapon = weaponInventory[0][0];
         //GO_crafting.SetActive(false); //Crafting에서 로딩 다 끝나면 알아서 비활성화 한다.
 

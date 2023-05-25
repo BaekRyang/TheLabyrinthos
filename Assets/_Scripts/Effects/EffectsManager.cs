@@ -5,21 +5,20 @@ using UnityEngine;
 
 public class EffectsManager : MonoBehaviour
 {
-    public List<EffectTypes> knownEffects;
+    public List<int> knownEffects;
 
-    public bool IsKnown(EffectTypes ID)
+    public bool IsKnown(EffectTypes ID, bool isPositive)
     {
-        if (knownEffects.Contains(ID))
+        if (knownEffects.Contains((int)ID * 10 + (isPositive ? 1 : 0)))
             return true;
         return false;
     }
 
-    public void NowKnown(EffectTypes ID)
+    public void NowKnown(EffectTypes ID, bool isPositive)
     {
         //ID가 knownEffects에 없다면 추가
-        if (!knownEffects.Contains(ID))
-            knownEffects.Add(ID);
-
+        if (!knownEffects.Contains((int)ID * 10 + (isPositive ? 1 : 0)))
+            knownEffects.Add((int)ID * 10 + (isPositive ? 1 : 0));
     }
 
     public string GetEffectDesc(Effect effect, bool showLevel = false)
@@ -52,10 +51,10 @@ public class EffectsManager : MonoBehaviour
                 desc = "중독";
                 return desc; //중독은 언제나 부정이므로 isPositive를 체크하지 않는다.
         }
-        
+
         desc += effect.isPositive ? "증가" : "감소";
         desc += showLevel ? " " + effect.effectStrength : "";
-        
+
         return desc;
     }
 
@@ -89,7 +88,7 @@ public class EffectsManager : MonoBehaviour
 
         desc += effect.isPositive ? "+ " : "- ";
         desc += effect.effectStrength;
-        
+
         if (effect.effectType == EffectTypes.Accuracy || effect.effectType == EffectTypes.Speed)
             desc += "%";
 

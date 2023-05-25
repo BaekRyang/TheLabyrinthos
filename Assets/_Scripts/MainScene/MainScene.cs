@@ -38,10 +38,7 @@ public class MainScene : MonoBehaviour
         LIT_lights = new Light[GO_lights.Length];
 
         for (int i = 0; i < GO_lights.Length; i++)
-        {
-            GO_lights[i] = GO_lights[i].transform.GetChild(0).gameObject;
             LIT_lights[i] = GO_lights[i].GetComponent<Light>();
-        }
 
         MAT_logos = GO_whiteBoard.transform.GetChild(0).GetChild(0).GetComponent<Renderer>().material;
     }

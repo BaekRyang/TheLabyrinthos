@@ -28,13 +28,14 @@ public class BattleMain : MonoBehaviour
     [SerializeField] TMP_Text TMP_EnemyDamage;
 
     [SerializeField] Image[] IMG_enemyFullBodys = new Image[5]; //순서대로 얼굴, 측면, (풀바디) WeakPoint, Thorax, Outer
-    [SerializeField] Image IMG_enemySideBody;
+    [SerializeField] Image IMG_enemyDefault;
 
     [SerializeField]                                      public GameObject inventory;
     [FormerlySerializedAs("descAnchor")] [SerializeField] public Transform  infoBox;
 
-    public Sprite SPR_playerAttack;
-    public Sprite SPR_enemyAttack;
+    public Sprite     SPR_playerAttack;
+    public Sprite     SPR_enemyAttack;
+    public GameObject keyCard;
 
     [Header("Set Automatically")]
     public Slider SL_playerHP;
@@ -187,6 +188,10 @@ public class BattleMain : MonoBehaviour
         IMG_enemyFullBodys[1].sprite = CR_Opponent.spritePack.fullBody_Thrax;
         IMG_enemyFullBodys[2].sprite = CR_Opponent.spritePack.fullBody_Outer;
 
+        IMG_enemyDefault.transform.GetChild(0).GetComponent<Image>().sprite =
+            IMG_enemyDefault.GetComponent<Image>().sprite =
+                CR_Opponent.spritePack.fullBody;
+
         //플레이어 스텟을 가져와서 저장한다. (플레이어는 일회용이 아니므로 ref 으로 넘어옴)
         P_player = GameManager.Instance.GetComponent<Player>();
         PS_playerStats = P_player.GetPlayerStats();
@@ -254,6 +259,11 @@ public class BattleMain : MonoBehaviour
         PlayerController PC_player = GameObject.Find("Player").GetComponent<PlayerController>();
         b_paused = true; //행동 멈추고
         yield return new WaitForSeconds(1f);
+
+        if (PC_player.prevRoom.GetComponent<RoomController>().RT_roomType == RoomType.KeyRoom)
+        {
+            Instantiate(keyCard, PC_player.prevRoom.transform.position + Vector3.up, Quaternion.identity);
+        }
 
         //화면 암전
         StartCoroutine(GameManager.Instance.CurtainModify(false, 1));

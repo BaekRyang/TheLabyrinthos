@@ -121,7 +121,7 @@ public class ItemObject : MonoBehaviour, IScrollHandler, IPointerEnterHandler, I
             if (disposableItem.effect == null)
                 return;
             
-            if (!GameManager.Instance.effectsManager.IsKnown(disposableItem.effect.effectType))
+            if (!GameManager.Instance.effectsManager.IsKnown(disposableItem.effect.effectType, disposableItem.effect.isPositive))
                 textComponents[1].text += "\n\n<b><color=#999999>알 수 없는 효과</color></b>";
             else
                 textComponents[1].text += "\n\n<b><color=#CCCC00>" + 

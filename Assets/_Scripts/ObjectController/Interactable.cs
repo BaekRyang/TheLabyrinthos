@@ -2,6 +2,7 @@ using System.Collections;
 using TypeDefs;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Interactable : MonoBehaviour
 {
@@ -69,6 +70,7 @@ public class Interactable : MonoBehaviour
                 enabled = false;
                 GetComponent<Outline>().enabled = false;
                 gameObject.layer = LayerMask.NameToLayer("Default");
+                GetComponent<AudioSource>()?.Play();
                 break;
 
             case ObjectType.Door:
@@ -76,12 +78,13 @@ public class Interactable : MonoBehaviour
                 enabled = false;
                 GetComponent<Outline>().enabled = false;
                 gameObject.layer = LayerMask.NameToLayer("Default");
-                //문은 한번 열었으면 일반 오브젝트로 바꿔준다.
+                GetComponent<AudioSource>()?.Play();
                 break;
 
             case ObjectType.Keypad:
-                if (GameManager.Instance.b_hasKey)
+                if (InventoryManager.Instance.HasItem(306) || GameManager.Instance.b_hasKey)
                 {
+                    InventoryManager.Instance.RemoveItem(306);
                     //키패트 라이팅 정보 초기화
                     b_fading = false;
                     f_fadePercent = 0;

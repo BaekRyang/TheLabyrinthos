@@ -1,3 +1,4 @@
+using Tayx.Graphy.Utils.NumString;
 using TypeDefs;
 using UnityEngine;
 
@@ -8,7 +9,14 @@ public class ObjectController : MonoBehaviour
     [SerializeField] int i_percent = 100;
     [SerializeField] CreatureSpritePack CSP_spritePack;
     [SerializeField] bool b_customCreature;
-    [SerializeField] Creature CR_customCreature;
+
+    [Header("CustomCreature")]
+    [SerializeField] private float damage;
+    [SerializeField] private float defense;
+    [SerializeField] private float health;
+    [SerializeField] private float speed;
+    [SerializeField] private float prepareSpeed;
+    [SerializeField] private CreatureSpritePack sprites;
 
     [Header("Set Automatically")]
     [SerializeField] int i_randNum;
@@ -31,28 +39,27 @@ public class ObjectController : MonoBehaviour
                 return;
             }
 
-            Creature tmpCR = GameManager.Instance.CR_levelDefault;
+            Creature tmpCR = new Creature(GameManager.Instance.CR_levelDefault, CSP_spritePack);
+            
             if (b_customCreature)
             {
-                CR_creature = new Creature(
-                    tmpCR.damage * CR_customCreature.damage,
-                    tmpCR.defense * CR_customCreature.defense,
-                    tmpCR.health * CR_customCreature.health,
-                    tmpCR.speed * CR_customCreature.speed,
-                    tmpCR.prepareSpeed + CR_customCreature.prepareSpeed,
-                    tmpCR.spritePack = CSP_spritePack
+                tmpCR = new Creature((tmpCR.damage * damage).ToInt(),
+                    (tmpCR.defense * defense).ToInt(),
+                    tmpCR.health * health,
+                    tmpCR.speed * speed,
+                    Mathf.Clamp((tmpCR.prepareSpeed * prepareSpeed).ToInt(), 0, 100),
+                    sprites
                 );
             }
-            else
-                CR_creature = new Creature(tmpCR, CSP_spritePack);
-
+            
             RoomController RC_room = transform.parent.parent.GetComponent<RoomController>();
-            if (RC_room != null)
-            {
-                RC_room.b_hasCreature = true;
-                RC_room.CR_creature = CR_creature;
-                RC_room.GO_creature = gameObject;
-            }
+            
+            
+            if (RC_room == null) return;
+            
+            RC_room.b_hasCreature = true;
+            RC_room.CR_creature   = tmpCR;
+            RC_room.GO_creature   = gameObject;
         }
         else
         {

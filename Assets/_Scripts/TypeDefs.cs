@@ -150,6 +150,7 @@ namespace TypeDefs
     [Serializable]
     public struct CreatureSpritePack
     {
+        public Sprite fullBody;
         public Sprite fullBody_WeakPoint;
         public Sprite fullBody_Thrax;
         public Sprite fullBody_Outer;

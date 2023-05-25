@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
         Effect effect = new Effect(originEffect); 
         
         //아이템을 사용했으므로 Known상태로 만들어준다.
-        GameManager.Instance.effectsManager.NowKnown(effect.effectType);  
+        GameManager.Instance.effectsManager.NowKnown(effect.effectType, effect.isPositive);  
 
         effectList.Add(effect);
         

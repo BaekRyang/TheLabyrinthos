@@ -19,6 +19,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 131f550eee535fb44b8a4f994a930696, type: 2}
     - target: {fileID: 4287388051369199029, guid: 8428acf3993616043b0902d2110b8448,
         type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4287388051369199029, guid: 8428acf3993616043b0902d2110b8448,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -34,6 +39,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4287388051369199029, guid: 8428acf3993616043b0902d2110b8448,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4287388051369199029, guid: 8428acf3993616043b0902d2110b8448,
+        type: 3}
       propertyPath: m_LocalRotation.x
       value: -0.7071068
       objectReference: {fileID: 0}
@@ -45,16 +55,6 @@ PrefabInstance:
     - target: {fileID: 4287388051369199029, guid: 8428acf3993616043b0902d2110b8448,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4287388051369199029, guid: 8428acf3993616043b0902d2110b8448,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 4287388051369199029, guid: 8428acf3993616043b0902d2110b8448,
-        type: 3}
-      propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4287388051369199029, guid: 8428acf3993616043b0902d2110b8448,
@@ -74,3 +74,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8428acf3993616043b0902d2110b8448, type: 3}
+--- !u!1 &2485390023812841128 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 947028535448139686, guid: 8428acf3993616043b0902d2110b8448,
+    type: 3}
+  m_PrefabInstance: {fileID: 3411868562869094670}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &-6188858887049120427
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2485390023812841128}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

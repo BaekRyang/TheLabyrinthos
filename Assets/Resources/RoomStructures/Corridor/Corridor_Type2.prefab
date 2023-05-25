@@ -45,16 +45,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   renderSettingsBounces: 5
-  renderSettingsGISamples: 16
+  renderSettingsGISamples: 32
   renderSettingsGIBackFaceWeight: 0
   renderSettingsTileSize: 512
-  renderSettingsPriority: 2
-  renderSettingsTexelsPerUnit: 20
+  renderSettingsPriority: 2.2846155
+  renderSettingsTexelsPerUnit: 40
   renderSettingsForceRefresh: 1
   renderSettingsForceRebuildGeometry: 1
   renderSettingsPerformRendering: 1
   renderSettingsUserRenderMode: 0
-  renderSettingsDistanceShadowmask: 0
+  renderSettingsDistanceShadowmask: 1
   renderSettingsSettingsMode: 0
   renderSettingsFixSeams: 1
   renderSettingsDenoise: 1
@@ -65,7 +65,7 @@ MonoBehaviour:
   renderSettingsAutoAtlas: 1
   renderSettingsUnwrapUVs: 1
   renderSettingsForceDisableUnwrapUVs: 0
-  renderSettingsMaxAutoResolution: 4096
+  renderSettingsMaxAutoResolution: 2048
   renderSettingsMinAutoResolution: 16
   renderSettingsUnloadScenes: 1
   renderSettingsAdjustSamples: 1
@@ -76,7 +76,7 @@ MonoBehaviour:
   renderSettingsHackEmissiveBoost: 1
   renderSettingsHackIndirectBoost: 1
   renderSettingsTempPath: 
-  renderSettingsOutPath: 
+  renderSettingsOutPath: BakeryLightmaps
   renderSettingsUseScenePath: 0
   renderSettingsHackAOIntensity: 0
   renderSettingsHackAOSamples: 16
@@ -103,8 +103,8 @@ MonoBehaviour:
   renderSettingsPostPacking: 1
   renderSettingsHoleFilling: 0
   renderSettingsBeepOnFinish: 0
-  renderSettingsExportTerrainAsHeightmap: 1
-  renderSettingsRTXMode: 0
+  renderSettingsExportTerrainAsHeightmap: 0
+  renderSettingsRTXMode: 1
   renderSettingsLightProbeMode: 1
   renderSettingsClientMode: 0
   renderSettingsServerAddress: 127.0.0.1
@@ -316,7 +316,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enableBaking: 1
   ignoreWarnings: 0
-  errorMessage: this GameObject is not a prefab
+  errorMessage: prefab contains unapplied data (Floor (UnityEngine.MeshFilter).m_Mesh)
 --- !u!114 &-1457692493652003052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -448,10 +448,10 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5}
   - {x: 0.5, y: 0.5}
   - {x: 0.5, y: 0.5}
-  - {x: -2.5, y: 0.9960937}
-  - {x: -1.5, y: 0.9960937}
-  - {x: -2.5, y: -0.0039063096}
-  - {x: -1.5, y: -0.0039063096}
+  - {x: -2.5, y: -1.0039062}
+  - {x: -1.5, y: -1.0039062}
+  - {x: -2.5, y: -2.0039062}
+  - {x: -1.5, y: -2.0039062}
   m_Textures2: []
   m_Textures3: []
   m_Tangents:
@@ -476,7 +476,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2646
+  m_VersionIndex: 2754
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -759,19 +759,18 @@ MonoBehaviour:
     cut_Hited: {fileID: 0}
     cut_Avoid: {fileID: 0}
   b_customCreature: 0
-  CR_customCreature:
-    damage: 0
-    defense: 0
-    health: 0
-    speed: 0
-    prepareSpeed: 0
-    spritePack:
-      fullBody_WeakPoint: {fileID: 0}
-      fullBody_Thrax: {fileID: 0}
-      fullBody_Outer: {fileID: 0}
-      cut_Attack: {fileID: 0}
-      cut_Hited: {fileID: 0}
-      cut_Avoid: {fileID: 0}
+  damage: 0
+  defense: 0
+  health: 0
+  speed: 0
+  prepareSpeed: 0
+  sprites:
+    fullBody_WeakPoint: {fileID: 0}
+    fullBody_Thrax: {fileID: 0}
+    fullBody_Outer: {fileID: 0}
+    cut_Attack: {fileID: 0}
+    cut_Hited: {fileID: 0}
+    cut_Avoid: {fileID: 0}
   i_randNum: 0
   b_isCreature: 0
   CR_creature:
@@ -883,19 +882,18 @@ MonoBehaviour:
     cut_Hited: {fileID: 0}
     cut_Avoid: {fileID: 0}
   b_customCreature: 0
-  CR_customCreature:
-    damage: 0
-    defense: 0
-    health: 0
-    speed: 0
-    prepareSpeed: 0
-    spritePack:
-      fullBody_WeakPoint: {fileID: 0}
-      fullBody_Thrax: {fileID: 0}
-      fullBody_Outer: {fileID: 0}
-      cut_Attack: {fileID: 0}
-      cut_Hited: {fileID: 0}
-      cut_Avoid: {fileID: 0}
+  damage: 0
+  defense: 0
+  health: 0
+  speed: 0
+  prepareSpeed: 0
+  sprites:
+    fullBody_WeakPoint: {fileID: 0}
+    fullBody_Thrax: {fileID: 0}
+    fullBody_Outer: {fileID: 0}
+    cut_Attack: {fileID: 0}
+    cut_Hited: {fileID: 0}
+    cut_Avoid: {fileID: 0}
   i_randNum: 0
   b_isCreature: 0
   CR_creature:
@@ -1019,19 +1017,18 @@ MonoBehaviour:
     cut_Hited: {fileID: 0}
     cut_Avoid: {fileID: 0}
   b_customCreature: 0
-  CR_customCreature:
-    damage: 0
-    defense: 0
-    health: 0
-    speed: 0
-    prepareSpeed: 0
-    spritePack:
-      fullBody_WeakPoint: {fileID: 0}
-      fullBody_Thrax: {fileID: 0}
-      fullBody_Outer: {fileID: 0}
-      cut_Attack: {fileID: 0}
-      cut_Hited: {fileID: 0}
-      cut_Avoid: {fileID: 0}
+  damage: 0
+  defense: 0
+  health: 0
+  speed: 0
+  prepareSpeed: 0
+  sprites:
+    fullBody_WeakPoint: {fileID: 0}
+    fullBody_Thrax: {fileID: 0}
+    fullBody_Outer: {fileID: 0}
+    cut_Attack: {fileID: 0}
+    cut_Hited: {fileID: 0}
+    cut_Avoid: {fileID: 0}
   i_randNum: 0
   b_isCreature: 0
   CR_creature:
@@ -1619,19 +1616,18 @@ MonoBehaviour:
     cut_Hited: {fileID: 0}
     cut_Avoid: {fileID: 0}
   b_customCreature: 0
-  CR_customCreature:
-    damage: 0
-    defense: 0
-    health: 0
-    speed: 0
-    prepareSpeed: 0
-    spritePack:
-      fullBody_WeakPoint: {fileID: 0}
-      fullBody_Thrax: {fileID: 0}
-      fullBody_Outer: {fileID: 0}
-      cut_Attack: {fileID: 0}
-      cut_Hited: {fileID: 0}
-      cut_Avoid: {fileID: 0}
+  damage: 0
+  defense: 0
+  health: 0
+  speed: 0
+  prepareSpeed: 0
+  sprites:
+    fullBody_WeakPoint: {fileID: 0}
+    fullBody_Thrax: {fileID: 0}
+    fullBody_Outer: {fileID: 0}
+    cut_Attack: {fileID: 0}
+    cut_Hited: {fileID: 0}
+    cut_Avoid: {fileID: 0}
   i_randNum: 0
   b_isCreature: 0
   CR_creature:
@@ -1743,19 +1739,18 @@ MonoBehaviour:
     cut_Hited: {fileID: 0}
     cut_Avoid: {fileID: 0}
   b_customCreature: 0
-  CR_customCreature:
-    damage: 0
-    defense: 0
-    health: 0
-    speed: 0
-    prepareSpeed: 0
-    spritePack:
-      fullBody_WeakPoint: {fileID: 0}
-      fullBody_Thrax: {fileID: 0}
-      fullBody_Outer: {fileID: 0}
-      cut_Attack: {fileID: 0}
-      cut_Hited: {fileID: 0}
-      cut_Avoid: {fileID: 0}
+  damage: 0
+  defense: 0
+  health: 0
+  speed: 0
+  prepareSpeed: 0
+  sprites:
+    fullBody_WeakPoint: {fileID: 0}
+    fullBody_Thrax: {fileID: 0}
+    fullBody_Outer: {fileID: 0}
+    cut_Attack: {fileID: 0}
+    cut_Hited: {fileID: 0}
+    cut_Avoid: {fileID: 0}
   i_randNum: 0
   b_isCreature: 0
   CR_creature:
@@ -1873,19 +1868,18 @@ MonoBehaviour:
     cut_Hited: {fileID: 0}
     cut_Avoid: {fileID: 0}
   b_customCreature: 0
-  CR_customCreature:
-    damage: 0
-    defense: 0
-    health: 0
-    speed: 0
-    prepareSpeed: 0
-    spritePack:
-      fullBody_WeakPoint: {fileID: 0}
-      fullBody_Thrax: {fileID: 0}
-      fullBody_Outer: {fileID: 0}
-      cut_Attack: {fileID: 0}
-      cut_Hited: {fileID: 0}
-      cut_Avoid: {fileID: 0}
+  damage: 0
+  defense: 0
+  health: 0
+  speed: 0
+  prepareSpeed: 0
+  sprites:
+    fullBody_WeakPoint: {fileID: 0}
+    fullBody_Thrax: {fileID: 0}
+    fullBody_Outer: {fileID: 0}
+    cut_Attack: {fileID: 0}
+    cut_Hited: {fileID: 0}
+    cut_Avoid: {fileID: 0}
   i_randNum: 0
   b_isCreature: 0
   CR_creature:
@@ -2184,19 +2178,18 @@ MonoBehaviour:
     cut_Hited: {fileID: 0}
     cut_Avoid: {fileID: 0}
   b_customCreature: 0
-  CR_customCreature:
-    damage: 0
-    defense: 0
-    health: 0
-    speed: 0
-    prepareSpeed: 0
-    spritePack:
-      fullBody_WeakPoint: {fileID: 0}
-      fullBody_Thrax: {fileID: 0}
-      fullBody_Outer: {fileID: 0}
-      cut_Attack: {fileID: 0}
-      cut_Hited: {fileID: 0}
-      cut_Avoid: {fileID: 0}
+  damage: 0
+  defense: 0
+  health: 0
+  speed: 0
+  prepareSpeed: 0
+  sprites:
+    fullBody_WeakPoint: {fileID: 0}
+    fullBody_Thrax: {fileID: 0}
+    fullBody_Outer: {fileID: 0}
+    cut_Attack: {fileID: 0}
+    cut_Hited: {fileID: 0}
+    cut_Avoid: {fileID: 0}
   i_randNum: 0
   b_isCreature: 0
   CR_creature:
@@ -2308,19 +2301,18 @@ MonoBehaviour:
     cut_Hited: {fileID: 0}
     cut_Avoid: {fileID: 0}
   b_customCreature: 0
-  CR_customCreature:
-    damage: 0
-    defense: 0
-    health: 0
-    speed: 0
-    prepareSpeed: 0
-    spritePack:
-      fullBody_WeakPoint: {fileID: 0}
-      fullBody_Thrax: {fileID: 0}
-      fullBody_Outer: {fileID: 0}
-      cut_Attack: {fileID: 0}
-      cut_Hited: {fileID: 0}
-      cut_Avoid: {fileID: 0}
+  damage: 0
+  defense: 0
+  health: 0
+  speed: 0
+  prepareSpeed: 0
+  sprites:
+    fullBody_WeakPoint: {fileID: 0}
+    fullBody_Thrax: {fileID: 0}
+    fullBody_Outer: {fileID: 0}
+    cut_Attack: {fileID: 0}
+    cut_Hited: {fileID: 0}
+    cut_Avoid: {fileID: 0}
   i_randNum: 0
   b_isCreature: 0
   CR_creature:
@@ -2444,19 +2436,18 @@ MonoBehaviour:
     cut_Hited: {fileID: 0}
     cut_Avoid: {fileID: 0}
   b_customCreature: 0
-  CR_customCreature:
-    damage: 0
-    defense: 0
-    health: 0
-    speed: 0
-    prepareSpeed: 0
-    spritePack:
-      fullBody_WeakPoint: {fileID: 0}
-      fullBody_Thrax: {fileID: 0}
-      fullBody_Outer: {fileID: 0}
-      cut_Attack: {fileID: 0}
-      cut_Hited: {fileID: 0}
-      cut_Avoid: {fileID: 0}
+  damage: 0
+  defense: 0
+  health: 0
+  speed: 0
+  prepareSpeed: 0
+  sprites:
+    fullBody_WeakPoint: {fileID: 0}
+    fullBody_Thrax: {fileID: 0}
+    fullBody_Outer: {fileID: 0}
+    cut_Attack: {fileID: 0}
+    cut_Hited: {fileID: 0}
+    cut_Avoid: {fileID: 0}
   i_randNum: 0
   b_isCreature: 0
   CR_creature:
@@ -2568,19 +2559,18 @@ MonoBehaviour:
     cut_Hited: {fileID: 0}
     cut_Avoid: {fileID: 0}
   b_customCreature: 0
-  CR_customCreature:
-    damage: 0
-    defense: 0
-    health: 0
-    speed: 0
-    prepareSpeed: 0
-    spritePack:
-      fullBody_WeakPoint: {fileID: 0}
-      fullBody_Thrax: {fileID: 0}
-      fullBody_Outer: {fileID: 0}
-      cut_Attack: {fileID: 0}
-      cut_Hited: {fileID: 0}
-      cut_Avoid: {fileID: 0}
+  damage: 0
+  defense: 0
+  health: 0
+  speed: 0
+  prepareSpeed: 0
+  sprites:
+    fullBody_WeakPoint: {fileID: 0}
+    fullBody_Thrax: {fileID: 0}
+    fullBody_Outer: {fileID: 0}
+    cut_Attack: {fileID: 0}
+    cut_Hited: {fileID: 0}
+    cut_Avoid: {fileID: 0}
   i_randNum: 0
   b_isCreature: 0
   CR_creature:
@@ -2783,19 +2773,18 @@ MonoBehaviour:
     cut_Hited: {fileID: 0}
     cut_Avoid: {fileID: 0}
   b_customCreature: 0
-  CR_customCreature:
-    damage: 0
-    defense: 0
-    health: 0
-    speed: 0
-    prepareSpeed: 0
-    spritePack:
-      fullBody_WeakPoint: {fileID: 0}
-      fullBody_Thrax: {fileID: 0}
-      fullBody_Outer: {fileID: 0}
-      cut_Attack: {fileID: 0}
-      cut_Hited: {fileID: 0}
-      cut_Avoid: {fileID: 0}
+  damage: 0
+  defense: 0
+  health: 0
+  speed: 0
+  prepareSpeed: 0
+  sprites:
+    fullBody_WeakPoint: {fileID: 0}
+    fullBody_Thrax: {fileID: 0}
+    fullBody_Outer: {fileID: 0}
+    cut_Attack: {fileID: 0}
+    cut_Hited: {fileID: 0}
+    cut_Avoid: {fileID: 0}
   i_randNum: 0
   b_isCreature: 0
   CR_creature:
@@ -3070,19 +3059,18 @@ MonoBehaviour:
     cut_Hited: {fileID: 0}
     cut_Avoid: {fileID: 0}
   b_customCreature: 0
-  CR_customCreature:
-    damage: 0
-    defense: 0
-    health: 0
-    speed: 0
-    prepareSpeed: 0
-    spritePack:
-      fullBody_WeakPoint: {fileID: 0}
-      fullBody_Thrax: {fileID: 0}
-      fullBody_Outer: {fileID: 0}
-      cut_Attack: {fileID: 0}
-      cut_Hited: {fileID: 0}
-      cut_Avoid: {fileID: 0}
+  damage: 0
+  defense: 0
+  health: 0
+  speed: 0
+  prepareSpeed: 0
+  sprites:
+    fullBody_WeakPoint: {fileID: 0}
+    fullBody_Thrax: {fileID: 0}
+    fullBody_Outer: {fileID: 0}
+    cut_Attack: {fileID: 0}
+    cut_Hited: {fileID: 0}
+    cut_Avoid: {fileID: 0}
   i_randNum: 0
   b_isCreature: 0
   CR_creature:
@@ -3206,19 +3194,18 @@ MonoBehaviour:
     cut_Hited: {fileID: 0}
     cut_Avoid: {fileID: 0}
   b_customCreature: 0
-  CR_customCreature:
-    damage: 0
-    defense: 0
-    health: 0
-    speed: 0
-    prepareSpeed: 0
-    spritePack:
-      fullBody_WeakPoint: {fileID: 0}
-      fullBody_Thrax: {fileID: 0}
-      fullBody_Outer: {fileID: 0}
-      cut_Attack: {fileID: 0}
-      cut_Hited: {fileID: 0}
-      cut_Avoid: {fileID: 0}
+  damage: 0
+  defense: 0
+  health: 0
+  speed: 0
+  prepareSpeed: 0
+  sprites:
+    fullBody_WeakPoint: {fileID: 0}
+    fullBody_Thrax: {fileID: 0}
+    fullBody_Outer: {fileID: 0}
+    cut_Attack: {fileID: 0}
+    cut_Hited: {fileID: 0}
+    cut_Avoid: {fileID: 0}
   i_randNum: 0
   b_isCreature: 0
   CR_creature:

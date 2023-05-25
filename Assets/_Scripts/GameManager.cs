@@ -5,6 +5,7 @@ using TMPro;
 using TypeDefs;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Random = System.Random;
 
@@ -40,7 +41,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject[] GO_roomPrefabs;
     [SerializeField] private GameObject[] GO_corridorPrefabs;
     [SerializeField] private GameObject[] GO_craftingPrefabs;
-    [SerializeField] private GameObject[] GO_bossRoomPrefabs;
+    [SerializeField] private GameObject[] GO_keyRoomPrefabs;
 
     [Header("Test Keys")] 
     public bool b_hasKey;
@@ -75,7 +76,7 @@ public class GameManager : MonoBehaviour
         GO_roomPrefabs     = Resources.LoadAll<GameObject>("RoomStructures/Default");
         GO_corridorPrefabs = Resources.LoadAll<GameObject>("RoomStructures/Corridor");
         GO_craftingPrefabs = Resources.LoadAll<GameObject>("RoomStructures/SpecialRoom/Crafting");
-        GO_bossRoomPrefabs = Resources.LoadAll<GameObject>("RoomStructures/SpecialRoom/BossRoom");
+        GO_keyRoomPrefabs = Resources.LoadAll<GameObject>("RoomStructures/SpecialRoom/KeyRoom");
         GO_shopPrefabs     = Resources.LoadAll<GameObject>("RoomStructures/SpecialRoom/Shop");
         
         p_Player = GetComponent<Player>();
@@ -239,8 +240,8 @@ public class GameManager : MonoBehaviour
                 return GO_craftingPrefabs[dict_randomObjects["Room"].Next(GO_craftingPrefabs.Length)];
 
             case RoomType.KeyRoom:
-                if (typeId != -1) return GO_bossRoomPrefabs[typeId];
-                return GO_bossRoomPrefabs[dict_randomObjects["Room"].Next(GO_bossRoomPrefabs.Length)];
+                if (typeId != -1) return GO_keyRoomPrefabs[typeId];
+                return GO_keyRoomPrefabs[dict_randomObjects["Room"].Next(GO_keyRoomPrefabs.Length)];
 
             case RoomType.Shop:
                 if (typeId != -1) return GO_shopPrefabs[typeId];

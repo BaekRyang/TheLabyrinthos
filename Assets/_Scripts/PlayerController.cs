@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
     public float vertical;
 
     //이전 방의 이름과 게임 오브젝트
-    [SerializeField] GameObject prevRoom;
+    [SerializeField] public GameObject prevRoom;
     [SerializeField] GameObject prevRoomMinimap;
 
     //미니맵 방향표시용

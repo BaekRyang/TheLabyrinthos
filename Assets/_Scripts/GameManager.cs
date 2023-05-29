@@ -34,7 +34,6 @@ public class GameManager : MonoBehaviour
     private GameObject go_playerPrefab;
 
     [NonSerialized] public GameObject go_player;
-    [NonSerialized] public Player     p_Player;
 
     [Header("Room Struct Prefabs")]
     [SerializeField] private GameObject GO_startRoomPrefab;
@@ -78,14 +77,13 @@ public class GameManager : MonoBehaviour
         GO_craftingPrefabs = Resources.LoadAll<GameObject>("RoomStructures/SpecialRoom/Crafting");
         GO_keyRoomPrefabs = Resources.LoadAll<GameObject>("RoomStructures/SpecialRoom/KeyRoom");
         GO_shopPrefabs     = Resources.LoadAll<GameObject>("RoomStructures/SpecialRoom/Shop");
-        
-        p_Player = GetComponent<Player>();
 
         creatures = new Creatures();
     }
 
     void Start()
     {
+        StartCoroutine(LoadSettings());
         Cursor.lockState = CursorLockMode.Locked;
         GameObject data = GameObject.Find("DataPacker");
 
@@ -113,11 +111,40 @@ public class GameManager : MonoBehaviour
         dict_randomObjects.Add("Syringe", new Random(Convert.ToInt32(s_seed, 16) + 5));  //주사기용 랜덤 시드
 
         ResetLevel(i_level);
-        go_player      = Instantiate(go_playerPrefab);
-        go_player.name = "Player";
-        
+        go_player                 = Instantiate(go_playerPrefab);
+        go_player.name            = "Player";
+
         UpdateStatsSlider(StatsType.Hp);
         UpdateStatsSlider(StatsType.Exp);
+    }
+
+    IEnumerator LoadSettings()
+    {
+        yield return StartCoroutine(GetComponent<CSVReader>().LoadSetting());
+        yield return new WaitForSeconds(0.1f);
+        Debug.Log("Item Table Load Complete");
+
+        yield return StartCoroutine(GetComponent<InventoryManager>().LoadSetting());
+        Player.Instance.WP_weapon = InventoryManager.weaponInventory[0][0];
+        yield return new WaitForSeconds(0.1f);
+        Debug.Log("ItemManager Load Complete");
+
+        yield return StartCoroutine(Crafting.Instance.LoadSetting());
+        yield return new WaitForSeconds(0.1f);
+        Debug.Log("Crafting Recipe Load Complete");
+
+        yield return StartCoroutine(BattleMain.instance.LoadSetting());
+        yield return new WaitForSeconds(0.1f);
+        Debug.Log("Battle Main Load Complete");
+        
+        yield return StartCoroutine(BattleMain.instance.BA_battleActions.LoadSetting());
+        yield return new WaitForSeconds(0.1f);
+        Debug.Log("Battle Action Load Complete");
+        
+        yield return new WaitForSeconds(2f);
+        
+        yield return StartCoroutine(CurtainModify(true, 2));
+        yield return null;
     }
 
     void Update()
@@ -178,8 +205,7 @@ public class GameManager : MonoBehaviour
         IMG_blackPanel.color = endColor; //완전히 불투명한 상태로 설정
     }
 
-    public IEnumerator OpenElevator(GameObject[] obj, float duration, float CHANGE_LEVEL_DELAY,
-        PlayerController                         pc_controller) //obj는 엘레베이터 양쪽 문 오브젝트 저장되어있음
+    public IEnumerator OpenElevator(GameObject[] obj, float duration, float CHANGE_LEVEL_DELAY, PlayerController pc_controller) //obj는 엘레베이터 양쪽 문 오브젝트 저장되어있음
     {
         pc_controller.b_camControll = true;
         StartCoroutine(Instance.CurtainModify(false, CHANGE_LEVEL_DELAY)); //화면 암전
@@ -255,7 +281,7 @@ public class GameManager : MonoBehaviour
 
     public void UpdateStatsSlider(StatsType statsType)
     {
-        var stats = p_Player.GetPlayerStats();
+        var stats = Player.Instance.GetPlayerStats();
         switch (statsType)
         {
             case StatsType.Hp:

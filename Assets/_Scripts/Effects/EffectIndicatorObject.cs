@@ -10,13 +10,9 @@ public class EffectIndicatorObject : MonoBehaviour, IPointerExitHandler, IPointe
     public  Effect        effect;
     private RectTransform infoBox;
 
-    private void Start()
-    {
-        infoBox = InventoryManager.Instance.RT_descBox;
-    }
-
     public void OnPointerEnter(PointerEventData eventData)
     {
+        infoBox ??= InventoryManager.Instance.RT_descBox;
         infoBox.gameObject.SetActive(true);
         infoBox.localScale = Vector3.one;
 

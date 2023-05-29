@@ -22,13 +22,13 @@ public class CSVReader : MonoBehaviour
     Food Food = new Food();
     Other Other = new Other();
 
-    void Start()
+    public IEnumerator LoadSetting()
     {
         WriteDelegate();
 
         LoadItems();
 
-        //LoadCraftingTable(); //Crafting이 호출함
+        yield return null;
     }
 
     private void WriteDelegate() //각 아이템을 Parsing 하는 코드 작성 : 사실 클래스 안에다가 만들면 더 간단한데

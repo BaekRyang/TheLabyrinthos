@@ -8634,6 +8634,16 @@ PrefabInstance:
       propertyPath: m_Navigation.m_SelectOnDown
       value: 
       objectReference: {fileID: 1006568169}
+    - target: {fileID: 6599377334292501767, guid: a6fccee8f10f74743ab5e2de370a2149,
+        type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 1518870082}
+    - target: {fileID: 6599377334292501767, guid: a6fccee8f10f74743ab5e2de370a2149,
+        type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: GetBoolSeedData
+      objectReference: {fileID: 0}
     - target: {fileID: 8018112217700852552, guid: a6fccee8f10f74743ab5e2de370a2149,
         type: 3}
       propertyPath: m_text

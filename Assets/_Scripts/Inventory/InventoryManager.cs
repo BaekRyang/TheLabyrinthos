@@ -39,10 +39,9 @@ public class InventoryManager : MonoBehaviour
     public Stats             stats;
     public EffectIndicator   effectIndicator;
 
-    private void Awake()
+    public IEnumerator LoadSetting()
     {
         Instance = this;
-
         crafting = GO_crafting.GetComponent<Crafting>();
 
         var tmpArray = Resources.LoadAll<Sprite>("Sprites/Items");
@@ -51,28 +50,22 @@ public class InventoryManager : MonoBehaviour
         {
             loadedImages.Add(int.Parse(sprite.name), sprite);
         }
-
         emptyItem              = loadedImages[-1];
         spriteNotFounded       = loadedImages[-2];
         weaponSpriteNotFounded = loadedImages[-3];
-    }
-
-    void Start()
-    {
-        GO_inventory.SetActive(false);
+        
         CreateSyringes();
         foreach (var (_, value) in definedItems)
         {
             if (value.i_id == 306) continue;
             AddItem(value, 2);
         }
-        GetComponent<Player>().WP_weapon = weaponInventory[0][0];
-        //GO_crafting.SetActive(false); //Crafting에서 로딩 다 끝나면 알아서 비활성화 한다.
 
         equippedItem.UpdateUI();
         stats.UpdateUI();
         
-        
+        GO_inventory.SetActive(false);
+        yield return null;
     }
 
     public void OpenInventory(string target)
@@ -83,6 +76,7 @@ public class InventoryManager : MonoBehaviour
         {
             stats.UpdateUI();
             effectIndicator.UpdateUI();
+            equippedItem.UpdateUI();
             GO_targetUI = GO_inventory;
         }
         if (target == "Crafting")
@@ -304,8 +298,7 @@ public class InventoryManager : MonoBehaviour
 
     public void Wear(ref Item item)
     {
-        Player player = GetComponent<Player>();
-        player.WP_weapon = item as Weapon;
+        Player.Instance.WP_weapon = item as Weapon;
 
         equippedItem.UpdateUI();
         stats.UpdateUI();

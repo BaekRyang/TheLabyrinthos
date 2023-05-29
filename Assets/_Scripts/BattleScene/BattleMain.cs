@@ -90,8 +90,8 @@ public class BattleMain : MonoBehaviour
         AC_playerMissed = Resources.LoadAll<AudioClip>("SFX/PlayerAttack/Miss");
         AC_enemyAttack = Resources.LoadAll<AudioClip>("SFX/EnemyAttack");
     }
-
-    void Start()
+    
+    public IEnumerator LoadSetting()
     {
         BA_battleActions = GetComponent<BattleActions>();
 
@@ -142,6 +142,7 @@ public class BattleMain : MonoBehaviour
                                             GO_attackList.transform.GetChild(2).Find("Damage").GetComponent<TMP_Text>()));
 
         inventory.SetActive(false);
+        yield return null;
     }
 
     void Update()
@@ -193,7 +194,7 @@ public class BattleMain : MonoBehaviour
                 CR_Opponent.spritePack.fullBody;
 
         //플레이어 스텟을 가져와서 저장한다. (플레이어는 일회용이 아니므로 ref 으로 넘어옴)
-        P_player = GameManager.Instance.GetComponent<Player>();
+        P_player       = Player.Instance;
         PS_playerStats = P_player.GetPlayerStats();
 
         //행동 포인트관련 초기화 : 전투 중간에 변경될 일이 있을까? => 있으면 f_Speed같은 경우는 ref로 넘겨줘야함

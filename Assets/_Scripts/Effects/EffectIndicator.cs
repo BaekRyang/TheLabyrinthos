@@ -23,11 +23,17 @@ public class EffectIndicator : MonoBehaviour
         {
             var obj = Instantiate(UIObject, transform);
             Image effectIcon = obj.transform.GetChild(0).GetComponent<Image>();
+            Image effectPositive = obj.transform.GetChild(0).GetChild(0).GetComponent<Image>();
             
             obj.GetComponent<EffectIndicatorObject>().effect        = effect;
             obj.transform.GetChild(1).GetComponent<TMP_Text>().text = effect.expirationRemain.ToString();
-            // effectIcon.sprite = GameManager.Instance.effectsManager.GetEffectIcon(effect.effectType);
+            effectIcon.sprite = GameManager.Instance.effectsManager.GetEffectIcon(effect.effectType);
 
+            effectPositive.sprite = effect.isPositive ?
+                GameManager.Instance.effectsManager.effectIconsPositive :
+                GameManager.Instance.effectsManager.effectIconsNegative;
+
+            effectPositive.color = effect.isPositive ? new Color(1, .2f, .2f) : new Color(.2f, .2f, 1);
         }
     }
 }

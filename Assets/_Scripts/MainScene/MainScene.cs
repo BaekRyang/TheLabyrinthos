@@ -85,7 +85,7 @@ public class MainScene : MonoBehaviour
         else if (button == "BacktoMenu_ST")
             StartCoroutine(MoveMenu(3));
         else if (button == "LoadLevel")
-            StartCoroutine(CurtainModify(false, 2, true));
+            StartGame();
         else if (button == "Exit")
             StartCoroutine(CurtainModify(false, 1, false, true));
             
@@ -94,7 +94,7 @@ public class MainScene : MonoBehaviour
     public void StartGame()
     {
         StartCoroutine(Lerp.LerpValue(volume => AS_mainLoop.volume = volume, 1, 0f, 2, Mathf.Lerp));
-        StartCoroutine(CurtainModify(false, 3));
+        StartCoroutine(CurtainModify(false, 2, true));
     }
 
     private IEnumerator MoveMenu(int type)

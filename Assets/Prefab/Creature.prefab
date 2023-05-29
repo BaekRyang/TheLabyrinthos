@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2271119611936407084}
   - component: {fileID: 2271119611936407087}
   - component: {fileID: 995910114333958288}
+  - component: {fileID: 320603859195088729}
   m_Layer: 7
   m_Name: Creature
   m_TagString: Untagged
@@ -64,6 +65,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   i_percent: 100
   CSP_spritePack:
+    fullBody: {fileID: 0}
     fullBody_WeakPoint: {fileID: 0}
     fullBody_Thrax: {fileID: 0}
     fullBody_Outer: {fileID: 0}
@@ -71,19 +73,19 @@ MonoBehaviour:
     cut_Hited: {fileID: 0}
     cut_Avoid: {fileID: 0}
   b_customCreature: 0
-  CR_customCreature:
-    damage: 0
-    defense: 0
-    health: 0
-    speed: 0
-    prepareSpeed: 0
-    spritePack:
-      fullBody_WeakPoint: {fileID: 0}
-      fullBody_Thrax: {fileID: 0}
-      fullBody_Outer: {fileID: 0}
-      cut_Attack: {fileID: 0}
-      cut_Hited: {fileID: 0}
-      cut_Avoid: {fileID: 0}
+  damage: 0
+  defense: 0
+  health: 0
+  speed: 0
+  prepareSpeed: 0
+  sprites:
+    fullBody: {fileID: 0}
+    fullBody_WeakPoint: {fileID: 0}
+    fullBody_Thrax: {fileID: 0}
+    fullBody_Outer: {fileID: 0}
+    cut_Attack: {fileID: 0}
+    cut_Hited: {fileID: 0}
+    cut_Avoid: {fileID: 0}
   i_randNum: 0
   b_isCreature: 1
   CR_creature:
@@ -93,12 +95,25 @@ MonoBehaviour:
     speed: 0
     prepareSpeed: 0
     spritePack:
+      fullBody: {fileID: 0}
       fullBody_WeakPoint: {fileID: 0}
       fullBody_Thrax: {fileID: 0}
       fullBody_Outer: {fileID: 0}
       cut_Attack: {fileID: 0}
       cut_Hited: {fileID: 0}
       cut_Avoid: {fileID: 0}
+--- !u!114 &320603859195088729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2271119611936407058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57df9de8b82d82341b962b4daee404e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2271119612486156601
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,7 +5,21 @@ using UnityEngine;
 
 public class EffectsManager : MonoBehaviour
 {
-    public List<int> knownEffects;
+    public  List<int>                  knownEffects;
+    public  Sprite[]                   effectIconsArray;
+    private Dictionary<string, Sprite> effectIcons = new Dictionary<string, Sprite>();
+    public  Sprite                     effectIconsNegative;
+    public  Sprite                     effectIconsPositive;
+
+
+    private void Start()
+    {
+        //KeyValue로 쓰기위해 변환해준다.
+        foreach (var sprite in effectIconsArray)
+            effectIcons.Add(sprite.name, sprite);
+        
+    }
+    
 
     public bool IsKnown(EffectTypes ID, bool isPositive)
     {
@@ -97,6 +111,6 @@ public class EffectsManager : MonoBehaviour
 
     public Sprite GetEffectIcon(EffectTypes effType)
     {
-        return null;
+        return effectIcons[effType.ToString()];
     }
 }

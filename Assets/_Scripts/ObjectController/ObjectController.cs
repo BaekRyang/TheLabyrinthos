@@ -57,7 +57,7 @@ public class ObjectController : MonoBehaviour
             
             if (RC_room == null) return;
             
-            RC_room.b_hasCreature = true;
+            RC_room.hasCreature = true;
             RC_room.CR_creature   = tmpCR;
             RC_room.GO_creature   = gameObject;
         }

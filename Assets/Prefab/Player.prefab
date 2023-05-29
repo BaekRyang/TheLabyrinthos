@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2271119611936407087}
   - component: {fileID: 565301745987779607}
   - component: {fileID: 2271119611936407081}
+  - component: {fileID: 6667447569877311444}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -79,23 +80,55 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteBox: {fileID: 2271119612486156601}
-  playerMat: {fileID: 2100000, guid: 5c3c33e99cb709940af86604a3eb8e83, type: 2}
-  playerTexture:
-  - {fileID: 2800000, guid: bddf6f4de30e08f4988779e5343ac484, type: 3}
-  - {fileID: 2800000, guid: 63e2176ec8e7c8e40a67199788ba0a90, type: 3}
-  - {fileID: 2800000, guid: ef4a3244bbbd6c34fbf4f8f64cdb82bd, type: 3}
-  - {fileID: 2800000, guid: 97711b5d71cf42541a80cb5178f2bf4d, type: 3}
   direction: {x: 0, y: 0, z: 0}
   b_camControll: 0
-  b_nowBattle: 0
   yaw: 0
-  wallLayer:
-    serializedVersion: 2
-    m_Bits: 0
+  roomIndex: 45
   horizontal: 0
   vertical: 0
   prevRoom: {fileID: 0}
   prevRoomMinimap: {fileID: 0}
+--- !u!114 &6667447569877311444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2271119611936407058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b754bc57bbc4ac43a85291dc32145bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PS_playerStats:
+    health: 100
+    maxHealth: 100
+    exp: 1
+    speed: 1
+    defense: 5
+    prepareSpeed: 0
+    accuracyMult: 1
+    damage: 10
+    attackSprite: {fileID: 0}
+    hitedSprite: {fileID: 0}
+    avoidSprite: {fileID: 0}
+  WP_weapon:
+    i_id: 0
+    s_name: 
+    s_description: 
+    IT_type: 1
+    b_useable: 0
+    s_inspectText: 
+    i_damage: 0
+    i_damageRange: 0
+    i_preparedSpeed: 0
+    f_speedMult: 0
+    f_accuracyMult: 0
+    i_maxDurability: 0
+    i_durability: 0
+  effectList: []
+  defaultExp: 0
+  defaultStr: 1
 --- !u!1 &2271119612486156601
 GameObject:
   m_ObjectHideFlags: 0

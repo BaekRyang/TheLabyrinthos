@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class Crafting : MonoBehaviour
 {
+    public static Crafting Instance;
+    
     [Header("Set in inspector")]
     [SerializeField] GameObject GO_recipeTab;
 
@@ -23,8 +25,18 @@ public class Crafting : MonoBehaviour
 
     Inventory InventoryUI;
 
+    public IEnumerator LoadSetting()
+    {
+        IM_manager  = InventoryManager.Instance;
+        InventoryUI = IM_manager.GO_crafting.transform.Find("Inventory").GetComponent<Inventory>();
+        StartCoroutine(LoadRecipe());
+        yield return null;
+    }
+    
     void Awake()
     {
+        Instance = this;
+        
         for (int i = 0; i < 4; i++)
             RTR_contents[i] = transform.Find("Crafting").GetChild(1).GetChild(1).GetChild(1).GetChild(i).GetChild(0).GetChild(0).GetComponent<RectTransform>();
 
@@ -40,27 +52,23 @@ public class Crafting : MonoBehaviour
 
         GO_resourceCells[0].SetActive(true);
     }
-    void Start()
-    {
-        IM_manager = InventoryManager.Instance;
-        InventoryUI = IM_manager.GO_crafting.transform.Find("Inventory").GetComponent<Inventory>();
-        StartCoroutine(LoadRecipe());
-    }
+
 
     private IEnumerator LoadRecipe()
     {
-        Debug.Log("LOAD");
+        Debug.Log("LOAD Crafting Table");
         yield return StartCoroutine(GameManager.Instance.GetComponent<CSVReader>().LoadCraftingTable()); //DB 작성이 완료될때까지 기다린다.
-        Debug.Log("LOAD START");
+        Debug.Log("LOAD Crafting Table Complete");
         var recipeKeys = dict_craftingTable.Keys.ToList();
 
+        //레시피 칸에 버튼 만들어주기
         foreach (var t in recipeKeys)
         {
             int        i_type = t / 100;
             GameObject tmpGO  = Instantiate(GO_recipeTab, RTR_contents[i_type]);
             tmpGO.GetComponent<Recipe>().I_destItem  = InventoryManager.definedItems[t];
             tmpGO.GetComponent<Recipe>().dict_recipe = dict_craftingTable[t];
-            tmpGO.GetComponent<Recipe>().RunSetting(IM_manager);
+            tmpGO.GetComponent<Recipe>().RunSetting();
         }
         
         gameObject.SetActive(false); //다 끝났으면 비활성화 시킨다.

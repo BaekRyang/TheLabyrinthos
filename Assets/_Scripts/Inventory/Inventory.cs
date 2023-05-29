@@ -24,10 +24,6 @@ public class Inventory : MonoBehaviour
         TF_Others      = transform.Find("Elements").GetChild(3).Find("Scroll View").GetChild(0).GetChild(0).GetComponent<Transform>();
     }
 
-    void Start()
-    {
-    }
-
     public void UpdateInventory(byte target = 15, bool destroyElements = true)
     {
         if (destroyElements)

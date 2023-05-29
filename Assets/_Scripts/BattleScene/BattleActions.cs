@@ -30,22 +30,24 @@ public class BattleActions : MonoBehaviour
     BattleMain BM_BattleMain;
     Random rand = new Random();
 
-    void Start()
+    public IEnumerator LoadSetting()
     {
-        P_player = GameManager.Instance.p_Player;
+        P_player       = Player.Instance;
         PS_playerStats = P_player.GetPlayerStats();
 
         BM_BattleMain = GetComponent<BattleMain>();
 
         dict_attackTable.Add(Parts.Weakpoint, new AttackPair(WEAKPOINT_DMG, WEAKPOINT_ACC));
-        dict_attackTable.Add(Parts.Thorax, new AttackPair(THORAX_DMG, THORAX_ACC));
-        dict_attackTable.Add(Parts.Outer, new AttackPair(OUTER_DMG, OUTER_ACC));
+        dict_attackTable.Add(Parts.Thorax,    new AttackPair(THORAX_DMG,    THORAX_ACC));
+        dict_attackTable.Add(Parts.Outer,     new AttackPair(OUTER_DMG,     OUTER_ACC));
 
         weakpointACC = BASE_ACCURACY * dict_attackTable[Parts.Weakpoint].accuracy;
         thoraxACC    = BASE_ACCURACY * dict_attackTable[Parts.Thorax].accuracy;
         outerACC     = BASE_ACCURACY * dict_attackTable[Parts.Outer].accuracy;
-        
+
         gameObject.SetActive(false); //전부 로딩 되면 오브젝트 끄기
+        
+        yield return null;
     }
 
     public void ButtonClick(string _ButtonType)

@@ -8,8 +8,7 @@ public class Stats : MonoBehaviour
     private Slider exp;
     private Slider speed;
     private Slider defence;
-    private Player player;
-    
+
     private void Awake()
     {
         hp = transform.Find("HP").GetChild(0).GetComponent<Slider>();
@@ -17,15 +16,11 @@ public class Stats : MonoBehaviour
         speed = transform.Find("Speed").GetChild(0).GetComponent<Slider>();
         defence = transform.Find("Defence").GetChild(0).GetComponent<Slider>();
     }
-
-    private void Start()
-    {
-        player = GameManager.Instance.p_Player;
-    }
+    
 
     public void UpdateUI()
     {
-        player ??= GameManager.Instance.p_Player;
+        var player = Player.Instance;
         
         hp.value      = player.PS_playerStats.health;
         hp.maxValue   = player.PS_playerStats.maxHealth;

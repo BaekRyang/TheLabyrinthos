@@ -9,7 +9,7 @@ public class Settings : MonoBehaviour
     public void SetVolume(Slider slider)
     {
         string target = slider.transform.parent.parent.name;
-        audioMixer.SetFloat(target, Mathf.Log10(slider.value / 100) * 20 + 10);
+        audioMixer.SetFloat(target, Mathf.Log10(slider.value / 100) * 20);
     }
 
     public void SetResolution(string resolution)

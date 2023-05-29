@@ -1,6 +1,7 @@
 using TypeDefs;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class RoomController : MonoBehaviour
 {
@@ -10,17 +11,13 @@ public class RoomController : MonoBehaviour
     [SerializeField] GameObject ceilings;
     [SerializeField] public GameObject go_specialObject;
     [SerializeField] public RoomType RT_roomType;
-    [SerializeField] public bool b_hasCreature;
+    
+    [Header("Battle Encounter System")]
+    [SerializeField] public bool hasCreature;
+    [SerializeField] public bool forcedBattle;
     [SerializeField] public Creature CR_creature;
     [SerializeField] public GameObject GO_creature;
-
-    GameManager GM;
-
-    private void Awake()
-    {
-        GM = GameManager.Instance;
-    }
-
+    
     public void ChangeRoomState(bool _state)
     {
         ceilings.SetActive(!_state);
@@ -56,7 +53,7 @@ public class RoomController : MonoBehaviour
             }
         }
 
-        GameObject randomPickedRoom = GM.GetRoomObject(RT_roomType);
+        GameObject randomPickedRoom = GameManager.Instance.GetRoomObject(RT_roomType);
         GameObject GO_Struct        = Instantiate(randomPickedRoom, transform.position, Quaternion.identity);
         if (RT_roomType == RoomType.HorizontalCorridor)
             GO_Struct.transform.Rotate(new Vector3(0, 90, 0)); //세로방은 90도 회전
@@ -78,7 +75,7 @@ public class RoomController : MonoBehaviour
     public void DestroyCreature()
     {
         Destroy(GO_creature);
-        b_hasCreature = false;
+        hasCreature = false;
         GO_creature = null;
     }
 }

@@ -225,8 +225,11 @@ public class PlayerController : MonoBehaviour
         prevRoomMinimap.GetComponent<Image>().color = Color.white;
         Minimap.instance.SetAnchor(enteredRoomIndex);
 
-        if (prevRoom.GetComponent<RoomController>().b_hasCreature) //들어간 방에 크리쳐가 있으면
+        if (prevRoom.GetComponent<RoomController>().hasCreature) //들어간 방에 크리쳐가 있으면
         {
+            vertical = horizontal = 0; //이동 데이터를 초기화 시켜준다.
+
+            b_camControll                    = true;
             GameManager.Instance.b_nowBattle = true;
             Cursor.lockState                 = CursorLockMode.Confined;
             GameManager.Instance.GO_BattleCanvas.SetActive(true);                                      //전투씬 켜고

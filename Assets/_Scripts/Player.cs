@@ -7,7 +7,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public static Player Instance;
-    
+
     public PlayerStats  PS_playerStats;
     public Weapon       WP_weapon;
     public List<Effect> effectList = new List<Effect>();

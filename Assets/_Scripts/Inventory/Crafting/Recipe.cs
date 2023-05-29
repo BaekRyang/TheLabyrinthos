@@ -14,9 +14,9 @@ public class Recipe : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
     int[] resourceID;
     int[] resourceCount;
 
-    public void RunSetting(InventoryManager IM_manager)
+    public void RunSetting()
     {
-        transform.GetChild(0).GetComponent<Image>().sprite  = IM_manager.GetImage(I_destItem.i_id);
+        transform.GetChild(0).GetComponent<Image>().sprite  = InventoryManager.Instance.GetImage(I_destItem.i_id);
         transform.GetChild(1).GetComponent<TMP_Text>().text = I_destItem.s_name;
 
         resourceID = dict_recipe.Keys.ToArray();

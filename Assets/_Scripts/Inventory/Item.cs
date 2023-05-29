@@ -62,7 +62,7 @@ public class Weapon : Item
         {
             var IM = InventoryManager.Instance;
             IM.RemoveItem(this);
-            GameManager.Instance.p_Player.WP_weapon = IM.GetWeaponInstance(0);
+            Player.Instance.WP_weapon = IM.GetWeaponInstance(0);
         }
     }
 }

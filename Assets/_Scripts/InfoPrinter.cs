@@ -9,13 +9,10 @@ public class InfoPrinter : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     bool b_hover;
     RectTransform infoBox;
 
-    void Start()
-    {
-        infoBox = InventoryManager.Instance.RT_descBox;
-    }
-
     public void OnPointerEnter(PointerEventData eventData)
     {
+        infoBox ??= InventoryManager.Instance.RT_descBox;
+        
         b_hover = true;
         if (name == "ItemCell(Clone)") return;
 

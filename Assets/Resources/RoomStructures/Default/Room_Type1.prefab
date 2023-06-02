@@ -1097,6 +1097,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   i_percent: 50
   CSP_spritePack:
+    fullBody: {fileID: 0}
     fullBody_WeakPoint: {fileID: 0}
     fullBody_Thrax: {fileID: 0}
     fullBody_Outer: {fileID: 0}
@@ -1110,6 +1111,7 @@ MonoBehaviour:
   speed: 0
   prepareSpeed: 0
   sprites:
+    fullBody: {fileID: 0}
     fullBody_WeakPoint: {fileID: 0}
     fullBody_Thrax: {fileID: 0}
     fullBody_Outer: {fileID: 0}
@@ -1125,6 +1127,7 @@ MonoBehaviour:
     speed: 0
     prepareSpeed: 0
     spritePack:
+      fullBody: {fileID: 0}
       fullBody_WeakPoint: {fileID: 0}
       fullBody_Thrax: {fileID: 0}
       fullBody_Outer: {fileID: 0}
@@ -3210,6 +3213,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   i_percent: 50
   CSP_spritePack:
+    fullBody: {fileID: 0}
     fullBody_WeakPoint: {fileID: 0}
     fullBody_Thrax: {fileID: 0}
     fullBody_Outer: {fileID: 0}
@@ -3223,6 +3227,7 @@ MonoBehaviour:
   speed: 0
   prepareSpeed: 0
   sprites:
+    fullBody: {fileID: 0}
     fullBody_WeakPoint: {fileID: 0}
     fullBody_Thrax: {fileID: 0}
     fullBody_Outer: {fileID: 0}
@@ -3238,6 +3243,7 @@ MonoBehaviour:
     speed: 0
     prepareSpeed: 0
     spritePack:
+      fullBody: {fileID: 0}
       fullBody_WeakPoint: {fileID: 0}
       fullBody_Thrax: {fileID: 0}
       fullBody_Outer: {fileID: 0}
@@ -7527,6 +7533,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   i_percent: 50
   CSP_spritePack:
+    fullBody: {fileID: 0}
     fullBody_WeakPoint: {fileID: 0}
     fullBody_Thrax: {fileID: 0}
     fullBody_Outer: {fileID: 0}
@@ -7540,6 +7547,7 @@ MonoBehaviour:
   speed: 0
   prepareSpeed: 0
   sprites:
+    fullBody: {fileID: 0}
     fullBody_WeakPoint: {fileID: 0}
     fullBody_Thrax: {fileID: 0}
     fullBody_Outer: {fileID: 0}
@@ -7555,6 +7563,7 @@ MonoBehaviour:
     speed: 0
     prepareSpeed: 0
     spritePack:
+      fullBody: {fileID: 0}
       fullBody_WeakPoint: {fileID: 0}
       fullBody_Thrax: {fileID: 0}
       fullBody_Outer: {fileID: 0}
@@ -15302,7 +15311,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enableBaking: 1
   ignoreWarnings: 0
-  errorMessage: prefab contains unapplied data (Floor (UnityEngine.ProBuilder.ProBuilderMesh).m_Mesh)
+  errorMessage: this GameObject is not a prefab
 --- !u!114 &6237787413483981375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17299,6 +17308,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   i_percent: 50
   CSP_spritePack:
+    fullBody: {fileID: 0}
     fullBody_WeakPoint: {fileID: 0}
     fullBody_Thrax: {fileID: 0}
     fullBody_Outer: {fileID: 0}
@@ -17312,6 +17322,7 @@ MonoBehaviour:
   speed: 0
   prepareSpeed: 0
   sprites:
+    fullBody: {fileID: 0}
     fullBody_WeakPoint: {fileID: 0}
     fullBody_Thrax: {fileID: 0}
     fullBody_Outer: {fileID: 0}
@@ -17327,6 +17338,7 @@ MonoBehaviour:
     speed: 0
     prepareSpeed: 0
     spritePack:
+      fullBody: {fileID: 0}
       fullBody_WeakPoint: {fileID: 0}
       fullBody_Thrax: {fileID: 0}
       fullBody_Outer: {fileID: 0}
@@ -17462,6 +17474,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   i_percent: 50
   CSP_spritePack:
+    fullBody: {fileID: 0}
     fullBody_WeakPoint: {fileID: 0}
     fullBody_Thrax: {fileID: 0}
     fullBody_Outer: {fileID: 0}
@@ -17475,6 +17488,7 @@ MonoBehaviour:
   speed: 0
   prepareSpeed: 0
   sprites:
+    fullBody: {fileID: 0}
     fullBody_WeakPoint: {fileID: 0}
     fullBody_Thrax: {fileID: 0}
     fullBody_Outer: {fileID: 0}
@@ -17490,6 +17504,7 @@ MonoBehaviour:
     speed: 0
     prepareSpeed: 0
     spritePack:
+      fullBody: {fileID: 0}
       fullBody_WeakPoint: {fileID: 0}
       fullBody_Thrax: {fileID: 0}
       fullBody_Outer: {fileID: 0}
@@ -23382,7 +23397,7 @@ PrefabInstance:
         type: 3}
       propertyPath: CSP_spritePack.fullBody
       value: 
-      objectReference: {fileID: 21300000, guid: 4dba79caa67d14742b42e1fc56c833d3,
+      objectReference: {fileID: 21300000, guid: 9efdcf5f6bf8bde4baea8c26b85248e1,
         type: 3}
     - target: {fileID: 995910114333958288, guid: f2135fdedb6556c48908dc585cfba15c,
         type: 3}
@@ -23397,27 +23412,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 995910114333958288, guid: f2135fdedb6556c48908dc585cfba15c,
         type: 3}
+      propertyPath: CSP_spritePack.cut_Hited
+      value: 
+      objectReference: {fileID: 21300000, guid: bd1a795a1332f114f8a4100184bccc8e,
+        type: 3}
+    - target: {fileID: 995910114333958288, guid: f2135fdedb6556c48908dc585cfba15c,
+        type: 3}
       propertyPath: CSP_spritePack.cut_Attack
       value: 
-      objectReference: {fileID: 21300000, guid: 63e72edab6b1bfc4e9a58f31db587585,
+      objectReference: {fileID: 21300000, guid: fa1550b2d9c753540942b648d1afa5ce,
         type: 3}
     - target: {fileID: 995910114333958288, guid: f2135fdedb6556c48908dc585cfba15c,
         type: 3}
       propertyPath: CSP_spritePack.fullBody_Outer
       value: 
-      objectReference: {fileID: 21300000, guid: 322f11da6c82dc94b9a5500d6b224e91,
+      objectReference: {fileID: 21300000, guid: 66d9651b898bb1444a9e6f5e23f002c6,
         type: 3}
     - target: {fileID: 995910114333958288, guid: f2135fdedb6556c48908dc585cfba15c,
         type: 3}
       propertyPath: CSP_spritePack.fullBody_Thrax
       value: 
-      objectReference: {fileID: 21300000, guid: b249f5e940fcdd54ead6c8a2c82f2ae1,
+      objectReference: {fileID: 21300000, guid: b86a7ee2a5524c149923b056317ac249,
         type: 3}
     - target: {fileID: 995910114333958288, guid: f2135fdedb6556c48908dc585cfba15c,
         type: 3}
       propertyPath: CSP_spritePack.fullBody_WeakPoint
       value: 
-      objectReference: {fileID: 21300000, guid: 46dd741d762b0e4429ebbba29020efa6,
+      objectReference: {fileID: 21300000, guid: ba14eb66ad70abc4f9caabf4bab84c2e,
         type: 3}
     - target: {fileID: 995910114333958288, guid: f2135fdedb6556c48908dc585cfba15c,
         type: 3}
@@ -23465,12 +23486,12 @@ PrefabInstance:
     - target: {fileID: 2271119611936407084, guid: f2135fdedb6556c48908dc585cfba15c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.4414401
+      value: 0.999
       objectReference: {fileID: 0}
     - target: {fileID: 2271119611936407084, guid: f2135fdedb6556c48908dc585cfba15c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.049999714
+      value: 0.26
       objectReference: {fileID: 0}
     - target: {fileID: 2271119611936407084, guid: f2135fdedb6556c48908dc585cfba15c,
         type: 3}
@@ -23517,6 +23538,21 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 126
       objectReference: {fileID: 0}
+    - target: {fileID: 2271119612486156600, guid: f2135fdedb6556c48908dc585cfba15c,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.7955
+      objectReference: {fileID: 0}
+    - target: {fileID: 2271119612486156600, guid: f2135fdedb6556c48908dc585cfba15c,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.322
+      objectReference: {fileID: 0}
+    - target: {fileID: 2271119612486156602, guid: f2135fdedb6556c48908dc585cfba15c,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0c3c41e00d7c6f44bbe36806631b5760, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2135fdedb6556c48908dc585cfba15c, type: 3}
 --- !u!4 &8483347485243709958 stripped

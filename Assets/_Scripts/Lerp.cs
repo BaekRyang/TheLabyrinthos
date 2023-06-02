@@ -29,7 +29,7 @@ public static class Lerp
         valueSetter(to);
     }
 
-    public static IEnumerator LerpValueAfter<T>(
+    public static IEnumerator LerpValueAfter<T> (
         Action<T> valueSetter,                      //람다 함수
         T from,                                     //from
         T to,                                       //to

@@ -28,7 +28,7 @@ public class Recipe : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
         infoBox.gameObject.SetActive(true);
 
         if (I_destItem.IT_type == ItemType.Weapon)
-        {
+        { 
             infoBox.GetChild(1).transform.localScale = Vector3.one;
             Weapon tmpWeapon = I_destItem as Weapon;
             infoBox.GetChild(1).GetComponentInChildren<TMP_Text>().text = tmpWeapon.s_inspectText.Replace("\\n", "\n");

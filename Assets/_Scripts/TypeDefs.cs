@@ -53,16 +53,14 @@ namespace TypeDefs
 
     public class UIModElements
     {
-        public UIModElements(Image hp, Image tp, Transform hit)
+        public UIModElements(Image hp, Image tp)
         {
             hpSlider = hp;
             tpSlider = tp;
-            hitImage = hit;
         }
 
         public Image hpSlider;
         public Image tpSlider;
-        public Transform hitImage;
     }
 
     public enum ActionTypes

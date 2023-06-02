@@ -349,4 +349,9 @@ public class GameManager : MonoBehaviour
         if (buttonType == "Exit")
             Application.Quit();
     }
+
+    public void GameOver()
+    {
+        Debug.Log("Game Over");
+    }
 }

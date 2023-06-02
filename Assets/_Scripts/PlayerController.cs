@@ -233,7 +233,7 @@ public class PlayerController : MonoBehaviour
             GameManager.Instance.b_nowBattle = true;
             Cursor.lockState                 = CursorLockMode.Confined;
             GameManager.Instance.GO_BattleCanvas.SetActive(true);                                      //전투씬 켜고
-            BattleMain.instance.StartBattleScene(prevRoom.GetComponent<RoomController>().CR_creature); //현재 방에 있는 크리쳐 정보를 넘겨준다.
+            StartCoroutine(BattleMain.instance.StartBattleScene(prevRoom.GetComponent<RoomController>().CR_creature)); //현재 방에 있는 크리쳐 정보를 넘겨준다.
         }
         else
         {

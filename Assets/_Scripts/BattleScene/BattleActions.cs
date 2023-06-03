@@ -1,3 +1,4 @@
+using MoreMountains.Feedbacks;
 using System.Collections;
 using System.Collections.Generic;
 using TypeDefs;
@@ -29,6 +30,10 @@ public class BattleActions : MonoBehaviour
 
     BattleMain BM_BattleMain;
     Random     rand = new Random();
+
+    [Header("Set In Inspector")]
+    [SerializeField]
+    MMF_Player[] MMF_player;
 
     public IEnumerator LoadSetting()
     {
@@ -104,6 +109,8 @@ public class BattleActions : MonoBehaviour
         AudioClip clip;
         int       randInt = rand.Next(101);
 
+        BM_BattleMain.b_paused = true;
+        
         if (b_IsPlayer)
         {
             int accInt = (int)(BASE_ACCURACY * dict_attackTable[part].accuracy * P_player.WP_weapon.f_accuracyMult);
@@ -155,16 +162,15 @@ public class BattleActions : MonoBehaviour
             P_player.ConsumeTurn(); //턴 하나 소모
 
             Debug.Log("Player : " + randInt + " > " + accInt);
-            BM_BattleMain.EndTurn(true);
             BM_BattleMain.GO_attackList.SetActive(false);
             BM_BattleMain.GO_actionList.SetActive(false);
 
-            StartCoroutine(
-                BM_BattleMain.PlayAttackScratch(BM_BattleMain.creatureAttackAnchor,
-                                  0.1f,
-                                  BM_BattleMain.SPR_playerAttack,
-                                  clip)
-            );
+            // StartCoroutine(
+            //     BM_BattleMain.PlayAttackScratch(BM_BattleMain.creatureAttackAnchor,
+            //                                     0.1f,
+            //                                     BM_BattleMain.SPR_playerAttack,
+            //                                     clip)
+            // );
 
             if (CR_Enemy.health <= 0)
             {
@@ -194,22 +200,22 @@ public class BattleActions : MonoBehaviour
                 clip = BM_BattleMain.AC_playerMissed[rand.Next(BM_BattleMain.AC_playerMissed.Length)];
             }
 
-            BM_BattleMain.EndTurn(false);
+            
             Debug.Log("Creature : " + randInt + " > " + BASE_ACCURACY);
-            StartCoroutine(
-                BM_BattleMain.PlayAttackScratch(BM_BattleMain.playerAttackAnchor,
-                                                0.1f,
-                                                BM_BattleMain.SPR_enemyAttack,
-                                                clip)
-            );
-
-            StartCoroutine(BM_BattleMain.AnimateAction(ActionTypes.Attack, false));
+            // StartCoroutine(
+            //     BM_BattleMain.PlayAttackScratch(BM_BattleMain.playerAttackAnchor,
+            //                                     0.1f,
+            //                                     BM_BattleMain.SPR_enemyAttack,
+            //                                     clip)
+            // );
 
             if (PS_playerStats.health <= 0)
             {
                 GameManager.Instance.GameOver();
             }
         }
+
+        StartCoroutine(AnimateAction(ActionTypes.Attack, b_IsPlayer));
     }
 
     IEnumerator LerpColor(UIModElements targetElements, SliderColor to, float duration, bool isEndColor = false)
@@ -279,5 +285,16 @@ public class BattleActions : MonoBehaviour
         typeDict[Parts.Weakpoint].damage.text = ((baseDamage - P_player.WP_weapon.i_damageRange) * dict_attackTable[Parts.Weakpoint].damage * (creatureDef)).ToString("0.##") + " ~ " + ((baseDamage + P_player.WP_weapon.i_damageRange) * dict_attackTable[Parts.Weakpoint].damage * (creatureDef)).ToString("0.##") + " DMG";
         typeDict[Parts.Thorax].damage.text    = ((baseDamage - P_player.WP_weapon.i_damageRange) * dict_attackTable[Parts.Thorax].damage    * (creatureDef)).ToString("0.##") + " ~ " + ((baseDamage + P_player.WP_weapon.i_damageRange) * dict_attackTable[Parts.Thorax].damage    * (creatureDef)).ToString("0.##") + " DMG";
         typeDict[Parts.Outer].damage.text     = ((baseDamage - P_player.WP_weapon.i_damageRange) * dict_attackTable[Parts.Outer].damage     * (creatureDef)).ToString("0.##") + " ~ " + ((baseDamage + P_player.WP_weapon.i_damageRange) * dict_attackTable[Parts.Outer].damage     * (creatureDef)).ToString("0.##") + " DMG";
+    }
+
+    public IEnumerator AnimateAction(ActionTypes acType, bool isPlayer)
+    {
+        var targetMMF = isPlayer ? MMF_player[0] : MMF_player[1];
+        
+        
+        yield return targetMMF.PlayFeedbacksCoroutine(transform.position);
+
+        BM_BattleMain.EndTurn(isPlayer);
+        yield return null;
     }
 }

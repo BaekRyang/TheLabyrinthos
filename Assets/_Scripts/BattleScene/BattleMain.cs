@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using TypeDefs;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -104,6 +105,9 @@ public class BattleMain : MonoBehaviour
     public IEnumerator LoadSetting()
     {
         BA_battleActions = GetComponent<BattleActions>();
+        
+        elementGroup.gameObject.SetActive(true);
+        elementGroup.transform.Find("Inventory").gameObject.SetActive(true);
 
         SL_playerHP       = transform.GetChild(1).Find("Character").Find("StatsArea").Find("HP").GetComponent<Slider>();
         SL_playerTP       = transform.GetChild(1).Find("Character").Find("StatsArea").Find("TP").GetComponent<Slider>();
@@ -150,7 +154,10 @@ public class BattleMain : MonoBehaviour
 
     void Update()
     {
-        if (!b_paused && !b_playerReady && !b_enemyReady) //둘다 준비상태가 아닐 때
+        if (b_paused)
+            return;
+        
+        if (!b_playerReady && !b_enemyReady) //둘다 준비상태가 아닐 때
         {
             //speed를 기반으로 증가량을 계산.
             //0~100까지 증가량은 속도 1.0 기준으로 3초가 걸린다.
@@ -176,9 +183,11 @@ public class BattleMain : MonoBehaviour
                 Debug.Log("크리쳐 준비");
             }
         }
-
+        
         if (b_playerReady) GO_actionList.SetActive(true);
         else if (b_enemyReady) BA_battleActions.Attack(false);
+        //Pause를 영향을 받지 않아서 크리쳐가 무한으로 공격하는 버그가 있었음
+        //위에서 Pause에 따라서 early return하도록 수정했음
     }
 
     public IEnumerator StartBattleScene(Creature CR_Opponent)
@@ -262,6 +271,8 @@ public class BattleMain : MonoBehaviour
             IMG_enemyTP.color = colors[(int)SliderColor.Tp_default];
             b_enemyReady      = false;
         }
+        
+        b_paused = false;
     }
 
     public IEnumerator EndFight(bool playerWin)
@@ -338,66 +349,6 @@ public class BattleMain : MonoBehaviour
             );
         
         yield return new WaitForSeconds(0.5f);
-        Destroy(tmpGO);
-    }
-
-    public IEnumerator AnimateAction(ActionTypes acType, bool isPlayer)
-    {
-        GameObject    tmpGO   = Instantiate(GO_action);
-        Image         tmpIMG  = tmpGO.GetComponent<Image>();
-        RectTransform tmpRect = tmpGO.GetComponent<RectTransform>();
-        BattleAnimate tmpANI  = tmpGO.GetComponent<BattleAnimate>();
-
-        if (isPlayer)
-        {
-            tmpGO.transform.SetParent(playerAttackAnchor);
-            tmpANI.b_isPlayer = true;
-            switch (acType)
-            {
-                case ActionTypes.Attack:
-                    tmpIMG.sprite = null;
-                    break;
-                case ActionTypes.Hited:
-                    tmpIMG.sprite = null;
-                    break;
-                case ActionTypes.Avoid:
-                    tmpIMG.sprite = null;
-                    break;
-            }
-
-            tmpRect.localPosition = new Vector2(1536, 0);
-        }
-        else
-        {
-            tmpGO.transform.SetParent(creatureAttackAnchor);
-            switch (acType)
-            {
-                case ActionTypes.Attack:
-                    tmpIMG.sprite = CR_Enemy.spritePack.cut_Attack;
-                    break;
-                case ActionTypes.Hited:
-                case ActionTypes.Avoid:
-                    tmpIMG.sprite = CR_Enemy.spritePack.cut_Hited;
-                    break;
-            }
-
-            tmpRect.localPosition = new Vector2(1536, 0);
-        }
-
-        yield return StartCoroutine(tmpANI.Run(false, 0.2f));
-        //공격 모션 출력
-        
-        yield return StartCoroutine(
-            Lerp.LerpValue(
-                value => tmpIMG.color = value,
-                colors[(int)SliderColor.Tp_default],
-                colors[(int)SliderColor.transparent],
-                .5f,
-                Color.Lerp
-            )
-        );
-        //공격 모션 투명해지게
-
         Destroy(tmpGO);
     }
 }

@@ -113,13 +113,13 @@ public class GameManager : MonoBehaviour
         ResetLevel(i_level);
         go_player                 = Instantiate(go_playerPrefab);
         go_player.name            = "Player";
-
-        UpdateStatsSlider(StatsType.Hp);
-        UpdateStatsSlider(StatsType.Exp);
     }
 
     IEnumerator LoadSettings()
     {
+        yield return new WaitForSeconds(1f);
+        //Awake나 Start 대기용
+        
         yield return StartCoroutine(GetComponent<CSVReader>().LoadSetting());
         yield return new WaitForSeconds(0.1f);
         Debug.Log("Item Table Load Complete");
@@ -141,6 +141,9 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         Debug.Log("Battle Action Load Complete");
         
+        UpdateStatsSlider(StatsType.Hp);
+        UpdateStatsSlider(StatsType.Exp);
+
         yield return new WaitForSeconds(2f);
         
         yield return StartCoroutine(CurtainModify(true, 2));

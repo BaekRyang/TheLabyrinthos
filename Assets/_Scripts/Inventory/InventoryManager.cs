@@ -39,10 +39,16 @@ public class InventoryManager : MonoBehaviour
     public Stats             stats;
     public EffectIndicator   effectIndicator;
 
+    public GameObject ui;
+
     public IEnumerator LoadSetting()
     {
         Instance = this;
         crafting = GO_crafting.GetComponent<Crafting>();
+        
+        ui.SetActive(true);
+        GO_inventory.SetActive(true);
+        GO_crafting.SetActive(true);
 
         var tmpArray = Resources.LoadAll<Sprite>("Sprites/Items");
 

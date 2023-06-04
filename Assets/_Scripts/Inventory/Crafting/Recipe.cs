@@ -3,6 +3,7 @@ using System.Linq;
 using System.Text;
 using TMPro;
 using TypeDefs;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -24,39 +25,39 @@ public class Recipe : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
-        var infoBox = InventoryManager.Instance.RT_infoBox;
-        infoBox.gameObject.SetActive(true);
+        var infoBoxPack = PopUpManager.Instance.infoBoxP;
+        
+        infoBoxPack.box.gameObject.SetActive(true);
+        infoBoxPack.box.position = transform.position;
 
         if (I_destItem.IT_type == ItemType.Weapon)
-        { 
-            infoBox.GetChild(1).transform.localScale = Vector3.one;
+        {
+            infoBoxPack.inspectObject.SetActive(true);
             Weapon tmpWeapon = I_destItem as Weapon;
-            infoBox.GetChild(1).GetComponentInChildren<TMP_Text>().text = tmpWeapon.s_inspectText.Replace("\\n", "\n");
-            infoBox.GetChild(1).GetComponentInChildren<TMP_Text>().text += "\nDUR : " + tmpWeapon.i_durability + "/" + tmpWeapon.i_maxDurability;
+            infoBoxPack.inspect.text =  tmpWeapon.s_inspectText.Replace("\\n", "\n");
+            infoBoxPack.inspect.text += "\nDUR : " + tmpWeapon.i_durability + "/" + tmpWeapon.i_maxDurability;
         }
-        else infoBox.GetChild(1).transform.localScale = Vector3.zero;
-
-        infoBox.localScale = Vector3.one;
-        infoBox.position = transform.position;
-        infoBox.GetChild(0).GetChild(0).GetComponentInChildren<TMP_Text>().text = I_destItem.s_name;
+        
+        infoBoxPack.title.text = I_destItem.s_name;
 
         StringBuilder sb = new StringBuilder();
+        sb.Append(I_destItem.s_description + "\n\n" + "<color=orange>필요한 재료</color>\n");
         for (int i = 0; i < resourceCount.Length; i++)
         {
-            sb.Append(InventoryManager.definedItems[resourceID[i]].s_name + " " + resourceCount[i] + "개");
+            sb.Append(InventoryManager.definedItems[resourceID[i]].s_name + " <color=green>" + resourceCount[i] + "개</color>");
             if (i != resourceCount.Length - 1)
             {
                 sb.Append("\n");
             }
         }
-        infoBox.GetChild(0).GetChild(1).GetComponentInChildren<TMP_Text>().text = sb.ToString();
+        infoBoxPack.desc.text = sb.ToString();
+        
+        StartCoroutine(PopUpManager.UpdateUI(infoBoxPack));
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        var infoBox = InventoryManager.Instance.RT_infoBox;
-        infoBox.GetChild(1).transform.localScale = Vector3.one;
-        infoBox.localScale = Vector3.zero;
+        PopUpManager.Instance.infoBox.gameObject.SetActive(false);
     }
 
     public void OnPointerClick(PointerEventData eventData)

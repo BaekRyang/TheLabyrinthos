@@ -5,6 +5,7 @@ using TMPro;
 using TypeDefs;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Random = System.Random;
@@ -15,17 +16,19 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    [Header("Seed")] 
-    [SerializeField] private bool   b_useSeed;
-    [SerializeField] private string s_seed = "-";
-    [SerializeField] private int    i_roomSize;
+    [Header("Seed")] [SerializeField] private bool   b_useSeed;
+    [SerializeField]                  private string s_seed = "-";
+    [SerializeField]                  private int    i_roomSize;
 
     [Header("System Objects")]
-    [SerializeField] public GameObject GO_curtain;
+    [SerializeField]
+    public GameObject GO_curtain;
+
     [SerializeField] public GameObject GO_BattleCanvas;
 
     [Header("Set Automatically")]
-    [SerializeField] Creatures creatures;
+    [SerializeField]
+    Creatures creatures;
 
     [SerializeField] public Creature CR_levelDefault;
 
@@ -36,35 +39,37 @@ public class GameManager : MonoBehaviour
     [NonSerialized] public GameObject go_player;
 
     [Header("Room Struct Prefabs")]
-    [SerializeField] private GameObject GO_startRoomPrefab;
+    [SerializeField]
+    private GameObject GO_startRoomPrefab;
+
     [SerializeField] private GameObject[] GO_roomPrefabs;
     [SerializeField] private GameObject[] GO_corridorPrefabs;
     [SerializeField] private GameObject[] GO_craftingPrefabs;
     [SerializeField] private GameObject[] GO_keyRoomPrefabs;
 
-    [Header("Test Keys")] 
-    public bool b_hasKey;
+    [Header("Test Keys")] public bool b_hasKey;
 
-    [SerializeField] 
-    private GameObject[] GO_shopPrefabs;
+    [SerializeField] private GameObject[] GO_shopPrefabs;
 
-    [Header("Level Controll")] 
-    public int i_level = 1;
+    [Header("Level Controll")] public int i_level = 1;
 
     [HideInInspector] public Dictionary<string, Random> dict_randomObjects = new Dictionary<string, Random>();
 
     [Header("InventoryUIs")]
-    [SerializeField] private Slider SL_hpBar;
+    [SerializeField]
+    private Slider SL_hpBar;
+
     [SerializeField] private Slider SL_expBar;
 
     [Header("Setting UI")]
-    [SerializeField] public GameObject settings;
+    [SerializeField]
+    public GameObject settings;
 
     [Header("EffectManagement")]
-    [SerializeField] public EffectsManager effectsManager;
-    
-    [Header("Battle Controll")]
-    public bool b_nowBattle;
+    [SerializeField]
+    public EffectsManager effectsManager;
+
+    [Header("Battle Controll")] public bool b_nowBattle;
 
 
     void Awake()
@@ -75,7 +80,7 @@ public class GameManager : MonoBehaviour
         GO_roomPrefabs     = Resources.LoadAll<GameObject>("RoomStructures/Default");
         GO_corridorPrefabs = Resources.LoadAll<GameObject>("RoomStructures/Corridor");
         GO_craftingPrefabs = Resources.LoadAll<GameObject>("RoomStructures/SpecialRoom/Crafting");
-        GO_keyRoomPrefabs = Resources.LoadAll<GameObject>("RoomStructures/SpecialRoom/KeyRoom");
+        GO_keyRoomPrefabs  = Resources.LoadAll<GameObject>("RoomStructures/SpecialRoom/KeyRoom");
         GO_shopPrefabs     = Resources.LoadAll<GameObject>("RoomStructures/SpecialRoom/Shop");
 
         creatures = new Creatures();
@@ -83,7 +88,6 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(LoadSettings());
         Cursor.lockState = CursorLockMode.Locked;
         GameObject data = GameObject.Find("DataPacker");
 
@@ -104,22 +108,24 @@ public class GameManager : MonoBehaviour
                 GetComponent<RoomCreation>().CreateSeed(out s_seed);
         }
 
-        dict_randomObjects.Add("Object", new Random(Convert.ToInt32(s_seed, 16) + 1));   //오브젝트용 랜덤 시드
+        dict_randomObjects.Add("Object",   new Random(Convert.ToInt32(s_seed, 16) + 1)); //오브젝트용 랜덤 시드
         dict_randomObjects.Add("Creature", new Random(Convert.ToInt32(s_seed, 16) + 2)); //크리쳐용 랜덤 시드
-        dict_randomObjects.Add("Room", new Random(Convert.ToInt32(s_seed, 16) + 3));     //방배치용 랜덤 시드
-        dict_randomObjects.Add("Effect", new Random(Convert.ToInt32(s_seed, 16) + 4));   //아이템용 랜덤 시드
-        dict_randomObjects.Add("Syringe", new Random(Convert.ToInt32(s_seed, 16) + 5));  //주사기용 랜덤 시드
+        dict_randomObjects.Add("Room",     new Random(Convert.ToInt32(s_seed, 16) + 3)); //방배치용 랜덤 시드
+        dict_randomObjects.Add("Effect",   new Random(Convert.ToInt32(s_seed, 16) + 4)); //아이템용 랜덤 시드
+        dict_randomObjects.Add("Syringe",  new Random(Convert.ToInt32(s_seed, 16) + 5)); //주사기용 랜덤 시드
 
         ResetLevel(i_level);
-        go_player                 = Instantiate(go_playerPrefab);
-        go_player.name            = "Player";
+        go_player      = Instantiate(go_playerPrefab);
+        go_player.name = "Player";
+        
+        StartCoroutine(LoadSettings()); 
     }
 
     IEnumerator LoadSettings()
     {
         yield return new WaitForSeconds(1f);
         //Awake나 Start 대기용
-        
+
         yield return StartCoroutine(GetComponent<CSVReader>().LoadSetting());
         yield return new WaitForSeconds(0.1f);
         Debug.Log("Item Table Load Complete");
@@ -133,19 +139,19 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         Debug.Log("Crafting Recipe Load Complete");
 
-        yield return StartCoroutine(BattleMain.instance.LoadSetting());
+        yield return StartCoroutine(BattleMain.Instance.LoadSetting());
         yield return new WaitForSeconds(0.1f);
         Debug.Log("Battle Main Load Complete");
-        
-        yield return StartCoroutine(BattleMain.instance.BA_battleActions.LoadSetting());
+
+        yield return StartCoroutine(BattleMain.Instance.BA_battleActions.LoadSetting());
         yield return new WaitForSeconds(0.1f);
         Debug.Log("Battle Action Load Complete");
-        
+
         UpdateStatsSlider(StatsType.Hp);
         UpdateStatsSlider(StatsType.Exp);
 
         yield return new WaitForSeconds(2f);
-        
+
         yield return StartCoroutine(CurtainModify(true, 2));
         yield return null;
     }
@@ -163,12 +169,12 @@ public class GameManager : MonoBehaviour
         i_roomSize = 5 + Mathf.RoundToInt(level * 3.3f);
         Debug.Log("구조 생성 시작 - Size : " + i_roomSize);
         GetComponent<RoomCreation>()
-            .InitStruct(Convert.ToInt32(s_seed, 16) + level, i_roomSize); //시드는 16진수이지만, 알고리즘은 10진수 => 바꿔서 넘겨줌
+           .InitStruct(Convert.ToInt32(s_seed, 16) + level, i_roomSize); //시드는 16진수이지만, 알고리즘은 10진수 => 바꿔서 넘겨줌
         Debug.Log("구조 생성 완료 - 배치 시작");
         GetComponent<RoomCreation>().PlaceRoom();
         Debug.Log("방 배치 완료");
         GetComponent<RoomCreation>().roomMap[45].RoomObject.GetComponent<RoomController>().go_specialObject
-            .GetComponent<TMP_Text>().text = "Level " + i_level;
+                                    .GetComponent<TMP_Text>().text = "Level " + i_level;
         if (!go_player.IsUnityNull()) go_player.GetComponent<Rigidbody>().useGravity = true;
 
         Minimap.instance.CreateMinimap(GetComponent<RoomCreation>().roomMap);
@@ -216,11 +222,11 @@ public class GameManager : MonoBehaviour
 
         Vector3 obj1StartPosition = obj[0].transform.localPosition;
         Vector3 obj1EndPosition = new Vector3(obj1StartPosition.x, obj1StartPosition.y,
-            obj1StartPosition.z + obj[0].transform.localScale.z);
+                                              obj1StartPosition.z + obj[0].transform.localScale.z);
 
         Vector3 obj2StartPosition = obj[1].transform.localPosition;
         Vector3 obj2EndPosition = new Vector3(obj2StartPosition.x, obj2StartPosition.y,
-            obj2StartPosition.z - obj[1].transform.localScale.z);
+                                              obj2StartPosition.z - obj[1].transform.localScale.z);
 
         while (elapsedTime < duration)
         {
@@ -305,12 +311,9 @@ public class GameManager : MonoBehaviour
         if (b_setClose) //인벤끄기
         {
             PC_tmp.b_camControll = false;
-
-            var infoBox  = InventoryManager.Instance.RT_infoBox;
-            var infoBox2 = InventoryManager.Instance.RT_descBox;
-            infoBox.localScale = Vector3.zero;
-            infoBox.gameObject.SetActive(false);
-            infoBox2.gameObject.SetActive(false);
+            
+            PopUpManager.Instance.infoBox.gameObject.SetActive(false);
+            PopUpManager.Instance.descBox.gameObject.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
             InventoryManager.Instance.CloseUI();
         }
@@ -338,7 +341,7 @@ public class GameManager : MonoBehaviour
                 settings.SetActive(true);
                 CanvasGroup canvasAlpha = settings.GetComponent<CanvasGroup>();
                 StartCoroutine(Lerp.LerpValue<float>(value => canvasAlpha.alpha = value, 0, 1, 0.3f, Mathf.Lerp,
-                    Lerp.EaseOut));
+                                                     Lerp.EaseOut));
             }
         }
 
@@ -346,11 +349,51 @@ public class GameManager : MonoBehaviour
         {
             CanvasGroup canvasAlpha = settings.GetComponent<CanvasGroup>();
             StartCoroutine(Lerp.LerpValueAfter<float>(value => canvasAlpha.alpha = value, 1, 0, 0.3f, Mathf.Lerp,
-                Lerp.EaseOut, () => settings.gameObject.SetActive(false)));
+                                                      Lerp.EaseOut, () => settings.gameObject.SetActive(false)));
         }
 
         if (buttonType == "Exit")
             Application.Quit();
+
+        if (buttonType == "Retry") //현재 씬을 다시 로드한다.
+        {
+            Instance                  = null;
+            Crafting.Instance         = null;
+            Player.Instance           = null;
+            InventoryManager.Instance = null;
+            BattleMain.Instance       = null;
+            
+            StartCoroutine(Lerp.LerpValueAfter(
+                               value => GO_curtain.GetComponent<Image>().color = new Color(0, 0, 0, value),
+                               0,
+                               1f,
+                               1f,
+                               Mathf.Lerp,
+                               null,
+                               () => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex))
+            );
+        }
+
+        if (buttonType == "BackToLobby")
+        {
+            Instance = null;
+            Crafting.Instance = null;
+            Player.Instance = null;
+            InventoryManager.Instance = null;
+            BattleMain.Instance = null;
+            
+            
+            StartCoroutine(Lerp.LerpValueAfter(
+                               value => GO_curtain.GetComponent<Image>().color = new Color(0, 0, 0, value),
+                               0,
+                               1f,
+                               1f,
+                               Mathf.Lerp,
+                               null,
+                               () => SceneManager.LoadScene("Lobby"))
+            );
+            
+        }
     }
 
     public void GameOver()

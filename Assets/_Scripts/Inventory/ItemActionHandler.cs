@@ -27,9 +27,12 @@ public class ItemActionHandler : MonoBehaviour, IPointerExitHandler
         if (action == "Wear")
         {
             InventoryManager.Instance.Wear(ref focusedItem);
+
+            InventoryManager.Instance.openedInventory.UpdateInventory();
+            
             OnPointerExit(null);
             if (GameManager.Instance.b_nowBattle)
-                BattleMain.instance.BA_battleActions.ItemUsed();
+                BattleMain.Instance.BA_battleActions.ItemUsed();
             return;
         }
         
@@ -41,7 +44,7 @@ public class ItemActionHandler : MonoBehaviour, IPointerExitHandler
             InventoryManager.Instance.openedInventory.UpdateInventory();
             OnPointerExit(null);
             if (GameManager.Instance.b_nowBattle)
-                BattleMain.instance.BA_battleActions.ItemUsed();
+                BattleMain.Instance.BA_battleActions.ItemUsed();
             return;
         }
         

@@ -7,26 +7,22 @@ using UnityEngine.EventSystems;
 
 public class EffectIndicatorObject : MonoBehaviour, IPointerExitHandler, IPointerEnterHandler
 {
-    public  Effect        effect;
-    private RectTransform infoBox;
+    public  Effect                 effect;
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        infoBox ??= InventoryManager.Instance.RT_descBox;
-        infoBox.gameObject.SetActive(true);
-        infoBox.localScale = Vector3.one;
+        var infoBox = PopUpManager.Instance.descBoxP;
+        
+        infoBox.box.gameObject.SetActive(true);
 
-        infoBox.position = this.transform.position;
-        
-        infoBox.GetChild(0).GetChild(0).GetComponentInChildren<TMP_Text>().text =
-            GameManager.Instance.effectsManager.GetEffectDesc(effect, true);
-        
-        infoBox.GetChild(0).GetChild(1).GetComponentInChildren<TMP_Text>().text = 
-            GameManager.Instance.effectsManager.GetEffectDetails(effect);
+        infoBox.box.position = transform.position;
+
+        infoBox.title.text = GameManager.Instance.effectsManager.GetEffectDesc(effect, true);
+        infoBox.desc.text  = GameManager.Instance.effectsManager.GetEffectDetails(effect);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        infoBox.localScale = Vector3.zero;
+        PopUpManager.Instance.descBox.gameObject.SetActive(false);
     }
 }

@@ -35,6 +35,9 @@ public class Inventory : MonoBehaviour
             {
                 foreach (var weapon in weaponList.Value)
                 {
+                    if (weapon == Player.Instance.WP_weapon)
+                        continue; //들고 있는 무기는 표시하지 않는다.
+                    
                     GameObject tmpGO = Instantiate(copyGO, TF_Weapons);
                     tmpGO.GetComponent<ItemObject>().I_item = weapon;
                     tmpGO.name                              = weapon.s_name;
@@ -116,7 +119,7 @@ public class Inventory : MonoBehaviour
             Instantiate(copyGO, transform);
 
         RectTransform rectTransform = transform.GetComponent<RectTransform>();
-        rectTransform.sizeDelta        = new Vector2(cellSize * transform.childCount - spacing,           0);
+        rectTransform.sizeDelta        = new Vector2(cellSize     * transform.childCount - spacing - 10,  0);
         rectTransform.anchoredPosition = new Vector2(cellSize / 2 * transform.childCount - (spacing / 2), 0);
     }
 

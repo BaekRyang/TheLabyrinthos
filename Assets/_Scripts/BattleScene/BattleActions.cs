@@ -172,10 +172,7 @@ public class BattleActions : MonoBehaviour
             //                                     clip)
             // );
 
-            if (CR_Enemy.health <= 0)
-            {
-                StartCoroutine(BM_BattleMain.EndFight(true));
-            }
+
         }
         else
         {
@@ -208,11 +205,6 @@ public class BattleActions : MonoBehaviour
             //                                     BM_BattleMain.SPR_enemyAttack,
             //                                     clip)
             // );
-
-            if (PS_playerStats.health <= 0)
-            {
-                GameManager.Instance.GameOver();
-            }
         }
 
         StartCoroutine(AnimateAction(ActionTypes.Attack, b_IsPlayer));
@@ -290,9 +282,28 @@ public class BattleActions : MonoBehaviour
     public IEnumerator AnimateAction(ActionTypes acType, bool isPlayer)
     {
         var targetMMF = isPlayer ? MMF_player[0] : MMF_player[1];
+
+        targetMMF.PlayFeedbacks();
+        yield return new WaitForSeconds(targetMMF.TotalDuration / 2f);
+
+        //애니메이션 출력중 전투 종료 조건을 검사하여 전투씬 종료 시키기
+        if (PS_playerStats.health <= 0) //플레이어 체력 먼저 검사
+        {
+            GameManager.Instance.GameOver();
+            yield break;
+        }
         
+        if (CR_Enemy.health <= 0) //그다음 크리쳐 체력 검사
+        {
+            StartCoroutine(BM_BattleMain.EndFight(true));
+            yield break;
+        }
         
-        yield return targetMMF.PlayFeedbacksCoroutine(transform.position);
+        //종료 조건이 안되면 애니메이션 끝날때까지 대기
+        yield return new WaitForSeconds(targetMMF.TotalDuration / 2f);
+        
+        //Reverse Feedback Play
+        MMF_player[2].PlayFeedbacks();
 
         BM_BattleMain.EndTurn(isPlayer);
         yield return null;

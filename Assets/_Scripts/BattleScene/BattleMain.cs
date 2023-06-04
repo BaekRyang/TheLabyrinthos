@@ -14,7 +14,7 @@ using Random = System.Random;
 
 public class BattleMain : MonoBehaviour
 {
-    public static BattleMain instance;
+    public static BattleMain Instance;
 
     public BattleActions BA_battleActions;
 
@@ -41,11 +41,7 @@ public class BattleMain : MonoBehaviour
     [SerializeField] public GameObject inventory;
 
     [SerializeField] private RectTransform animationAnchor;
-
-    [FormerlySerializedAs("descAnchor")]
-    [SerializeField]
-    public Transform infoBox;
-
+    
     public Sprite     SPR_playerAttack;
     public Sprite     SPR_enemyAttack;
     public GameObject keyCard;
@@ -94,7 +90,7 @@ public class BattleMain : MonoBehaviour
 
     void Awake()
     {
-        instance                 = this;
+        Instance                 = this;
         AC_playerAttackWeakPoint = Resources.LoadAll<AudioClip>("SFX/PlayerAttack/Weakpoint");
         AC_playerAttackThorax    = Resources.LoadAll<AudioClip>("SFX/PlayerAttack/Thorax");
         AC_playerAttackOuter     = Resources.LoadAll<AudioClip>("SFX/PlayerAttack/Outer");
@@ -192,13 +188,6 @@ public class BattleMain : MonoBehaviour
 
     public IEnumerator StartBattleScene(Creature CR_Opponent)
     {
-        yield return StartCoroutine(Lerp.LerpValue(color => background.color = color,
-                                                   new Color(.5f, .5f, .5f, 0),
-                                                   new Color(.5f, .5f, .5f, 1),
-                                                   1,
-                                                   Color.Lerp,
-                                                   Lerp.EaseIn));
-
         //BattleMain과 BattleAction에서도 Enemy의 스텟을 참조해야 하므로 참조로 넘겨준다.
         BA_battleActions.CR_Enemy = CR_Enemy = CR_Opponent;
 
@@ -228,6 +217,12 @@ public class BattleMain : MonoBehaviour
         b_paused = false;
 
         InventoryManager.Instance.openedInventory = inventory.transform.GetComponentInChildren<Inventory>();
+        yield return StartCoroutine(Lerp.LerpValue(color => background.color = color,
+                                                   new Color(.5f, .5f, .5f, 0),
+                                                   new Color(.5f, .5f, .5f, 1),
+                                                   1,
+                                                   Color.Lerp,
+                                                   Lerp.EaseIn));
     }
 
     public void ChangeSliderValue(bool b_IsPlayer, StatsType statsType, float f_val)
@@ -279,7 +274,6 @@ public class BattleMain : MonoBehaviour
     {
         PlayerController PC_player = GameObject.Find("Player").GetComponent<PlayerController>();
         b_paused = true; //행동 멈추고
-        yield return new WaitForSeconds(1f);
 
         if (PC_player.prevRoom.GetComponent<RoomController>().RT_roomType == RoomType.KeyRoom)
         {
@@ -287,8 +281,7 @@ public class BattleMain : MonoBehaviour
         }
 
         //화면 암전
-        StartCoroutine(GameManager.Instance.CurtainModify(false, 1));
-        yield return new WaitForSeconds(0.5f);
+        yield return StartCoroutine(GameManager.Instance.CurtainModify(false, 1));
 
         Debug.Log("값 초기화");
         //각종 값들 초기화 해주고

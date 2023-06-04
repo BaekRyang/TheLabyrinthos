@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using TypeDefs;
 using Unity.VisualScripting;
@@ -9,18 +10,15 @@ using UnityEngine.UI;
 public class ItemObject : MonoBehaviour, IScrollHandler, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
 {
     ScrollRect SR_parent;
-    
-    [Header("For Inventory Actions")]
-    public bool transferScrollEvent; //인벤토리 UI인지 표시
+
+    [Header("For Inventory Actions")] public bool transferScrollEvent; //인벤토리 UI인지 표시
 
     //조합대에서도 이거 쓰니까 있는 설정
     public bool b_canClick;
 
-    [Header("Item value : id를 기준으로 사용됨")] 
-    public Item I_item;
+    [Header("Item value : id를 기준으로 사용됨")] public Item I_item;
 
-    [Header("For Crafting Actions")] 
-    public bool hasItem;
+    [Header("For Crafting Actions")] public bool hasItem;
 
     private void Awake()
     {
@@ -54,7 +52,6 @@ public class ItemObject : MonoBehaviour, IScrollHandler, IPointerEnterHandler, I
                 isSpriteExist ? foundedSprite : InventoryManager.Instance.spriteNotFounded;
         }
 
-        
 
         if (amount > 1)
         {
@@ -69,9 +66,7 @@ public class ItemObject : MonoBehaviour, IScrollHandler, IPointerEnterHandler, I
 
     public void TransparentItem(bool transparent)
     {
-        transform.GetChild(0).GetComponent<Image>().color = transparent ?
-            new Color(0.5f, 0.5f, 0.5f, 0.5f) :
-            new Color(1, 1, 1, 1);
+        transform.GetChild(0).GetComponent<Image>().color = transparent ? new Color(0.5f, 0.5f, 0.5f, 0.5f) : new Color(1, 1, 1, 1);
     }
 
     public void OnScroll(PointerEventData eventData) //스크롤 요소때문에 이벤트를 넘겨준다.
@@ -84,62 +79,49 @@ public class ItemObject : MonoBehaviour, IScrollHandler, IPointerEnterHandler, I
     {
         if (I_item == null || I_item.IT_type == ItemType.Undefined) return;
 
-        var infoBox = GameManager.Instance.b_nowBattle ?
-            BattleMain.instance.infoBox :
-            InventoryManager.Instance.RT_infoBox;
-        infoBox.gameObject.SetActive(true);
+        var infoBoxPack = GameManager.Instance.b_nowBattle ? PopUpManager.Instance.infoBoxBattleP : PopUpManager.Instance.infoBoxP;
 
-        var textComponents = infoBox.GetComponentsInChildren<TMP_Text>();
-
+        infoBoxPack.box.gameObject.SetActive(true);
+        infoBoxPack.box.position = transform.position;
+        
+        infoBoxPack.title.text = I_item.s_name;
+        infoBoxPack.desc.text  = I_item.s_description.Replace("\\n", "\n");
+        
         if (I_item.IT_type == ItemType.Weapon)
         {
-            infoBox.GetChild(1).transform.localScale = Vector3.one;
+            infoBoxPack.inspectObject.SetActive(true);
             Weapon tmpWeapon = I_item as Weapon;
-            textComponents[2].text =  tmpWeapon.s_inspectText.Replace("\\n", "\n");
-            textComponents[2].text += "\nDUR : " + tmpWeapon.i_durability + "/" + tmpWeapon.i_maxDurability;
+            infoBoxPack.inspect.text =  tmpWeapon.s_inspectText.Replace("\\n", "\n");
+            infoBoxPack.inspect.text += "\nDUR : " + tmpWeapon.i_durability + "/" + tmpWeapon.i_maxDurability;
         }
-        else infoBox.GetChild(1).transform.localScale = Vector3.zero;
-
-        infoBox.localScale = Vector3.one;
-        
-        infoBox.position   = transform.position;
-        
-        // StopAllCoroutines();
-        // StartCoroutine(Lerp.LerpValue(
-        //     value => infoBox.position = value,
-        //     infoBox.position,
-        //     transform.position,
-        //     0.2f,
-        //     Vector3.Lerp,
-        //     Lerp.EaseInOut));
-        
-        textComponents[0].text = I_item.s_name;
-        textComponents[1].text = I_item.s_description.Replace("\\n", "\n");
 
         if (I_item is Disposable disposableItem)
         {
-            if (disposableItem.effect == null)
-                return;
-            
-            if (!GameManager.Instance.effectsManager.IsKnown(disposableItem.effect.effectType, disposableItem.effect.isPositive))
-                textComponents[1].text += "\n\n<b><color=#999999>알 수 없는 효과</color></b>";
-            else
-                textComponents[1].text += "\n\n<b><color=#CCCC00>" + 
-                                          GameManager.Instance.effectsManager.GetEffectDesc(disposableItem.effect) +
-                                          "</color></b>";
+            if (disposableItem.effect != null)
+            {
+                if (!GameManager.Instance.effectsManager.IsKnown(disposableItem.effect.effectType, disposableItem.effect.isPositive))
+                    infoBoxPack.desc.text += "\n\n<b><color=#999999>알 수 없는 효과</color></b>";
+                else
+                    infoBoxPack.desc.text += "\n\n<b><color=#CCCC00>"                                                 +
+                                             GameManager.Instance.effectsManager.GetEffectDesc(disposableItem.effect) +
+                                             "</color></b>";
+            }
         }
-            
 
-        
+        StartCoroutine(PopUpManager.UpdateUI(infoBoxPack)); 
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        var infoBox = GameManager.Instance.b_nowBattle ?
-            BattleMain.instance.infoBox :
-            InventoryManager.Instance.RT_infoBox;
-        infoBox.GetChild(1).transform.localScale = Vector3.one;
-        infoBox.localScale                       = Vector3.zero;
+        var infoBox = GameManager.Instance.b_nowBattle ? PopUpManager.Instance.infoBoxBattleP : PopUpManager.Instance.infoBoxP;
+
+        if (infoBox.box.gameObject.activeSelf)
+        {
+            infoBox.box.gameObject.SetActive(false);
+        }
+
+        if (infoBox.inspectObject.activeSelf)
+            infoBox.inspectObject.SetActive(false);
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -155,11 +137,11 @@ public class ItemObject : MonoBehaviour, IScrollHandler, IPointerEnterHandler, I
             return;
         }
 
-        var itemHandler = GameManager.Instance.b_nowBattle ?
-            BattleMain.instance.infoBox.transform.parent.GetChild(1).GetComponent<ItemActionHandler>() :
-            InventoryManager.Instance.itemActionHandler;
-        
+        if (I_item.IT_type == ItemType.Undefined)
+            return;
+
+        var itemHandler = GameManager.Instance.b_nowBattle ? PopUpManager.Instance.itemActionHandlerBattle : PopUpManager.Instance.itemActionHandler;
+
         itemHandler.LoadItem(ref I_item, transform.position);
     }
-
 }

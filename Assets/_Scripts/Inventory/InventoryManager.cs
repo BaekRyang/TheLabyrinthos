@@ -32,8 +32,6 @@ public class InventoryManager : MonoBehaviour
 
     public Crafting crafting;
 
-    public RectTransform     RT_infoBox;
-    public RectTransform     RT_descBox;
     public ItemActionHandler itemActionHandler;
     public EquipedItem       equippedItem;
     public Stats             stats;
@@ -50,22 +48,29 @@ public class InventoryManager : MonoBehaviour
         GO_inventory.SetActive(true);
         GO_crafting.SetActive(true);
 
-        var tmpArray = Resources.LoadAll<Sprite>("Sprites/Items");
+        if (loadedImages.Count == 0) //이미지가 하나도 없을 때만 로드
+        {
+            var tmpArray = Resources.LoadAll<Sprite>("Sprites/Items");
 
-        foreach (var sprite in tmpArray)
-        {
-            loadedImages.Add(int.Parse(sprite.name), sprite);
+            foreach (var sprite in tmpArray)
+            {
+                loadedImages.Add(int.Parse(sprite.name), sprite);
+            }
+
+            emptyItem              = loadedImages[-1];
+            spriteNotFounded       = loadedImages[-2];
+            weaponSpriteNotFounded = loadedImages[-3];
+
+            CreateSyringes();
+            
+            foreach (var (_, value) in definedItems)
+            {
+                if (value.i_id == 306) continue;
+                AddItem(value, 2);
+            }
         }
-        emptyItem              = loadedImages[-1];
-        spriteNotFounded       = loadedImages[-2];
-        weaponSpriteNotFounded = loadedImages[-3];
         
-        CreateSyringes();
-        foreach (var (_, value) in definedItems)
-        {
-            if (value.i_id == 306) continue;
-            AddItem(value, 2);
-        }
+        // AddItem(definedItems[0]); //기본칼 추가
 
         equippedItem.UpdateUI();
         stats.UpdateUI();

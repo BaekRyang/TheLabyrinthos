@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using TypeDefs;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CSVReader : MonoBehaviour
@@ -92,6 +93,16 @@ public class CSVReader : MonoBehaviour
 
     private void LoadItems() //CSV를 읽는 기본 로직 처리
     {
+        //이미 아이템이 등록되어있으면 더이상 읽지 않는다. (중복 등록 방지)
+        if (InventoryManager.definedItems.Count > 0)
+        {
+            //인벤토리를 초기화 한다.
+            InventoryManager.inventory.Clear();
+            InventoryManager.weaponInventory.Clear();
+            return; 
+        }
+        
+        
         TextAsset textAsset = Resources.Load<TextAsset>("Items");
         StringReader sReader = new StringReader(textAsset.text);
 

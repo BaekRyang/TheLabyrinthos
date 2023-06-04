@@ -1,41 +1,47 @@
+using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class InfoPrinter : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerMoveHandler
 {
-    [SerializeField] string s_name;
-    [SerializeField] string s_desc;
-    bool b_hover;
-    RectTransform infoBox;
+    [SerializeField] string        s_name;
+    [SerializeField] string        s_desc;
+    bool                           b_hover;
+    private PopUpManager.PopUpInfo descBoxPack;
+
+    public void Start()
+    {
+        descBoxPack = PopUpManager.Instance.descBoxP;
+    }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        infoBox ??= InventoryManager.Instance.RT_descBox;
-        
         b_hover = true;
         if (name == "ItemCell(Clone)") return;
 
-        infoBox.gameObject.SetActive(true);
+        descBoxPack.box.gameObject.SetActive(true);
 
-        infoBox.position = Input.mousePosition;
+        descBoxPack.box.position = Input.mousePosition;
+        
+        descBoxPack.title.text = s_name;
+        descBoxPack.desc.text  = s_desc.Replace("\\n", "\n");
 
-        infoBox.localScale = Vector3.one;
-        infoBox.GetChild(0).GetChild(0).GetComponentInChildren<TMP_Text>().text = s_name;
-        infoBox.GetChild(0).GetChild(1).GetComponentInChildren<TMP_Text>().text = s_desc.Replace("\\n", "\n");
+        StartCoroutine(PopUpManager.UpdateUI(descBoxPack));
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        b_hover = false;
-        infoBox.localScale = Vector3.zero;
+        b_hover            = false;
+        descBoxPack.box.gameObject.SetActive(false);
     }
 
     public void OnPointerMove(PointerEventData eventData)
     {
         if (b_hover)
         {
-            infoBox.position = Input.mousePosition + new Vector3(10, -20, 0);
+            descBoxPack.box.position = Input.mousePosition + new Vector3(10, -20, 0);
         }
     }
 }

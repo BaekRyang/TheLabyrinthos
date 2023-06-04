@@ -74,4 +74,22 @@ public class EquipedItem : MonoBehaviour
             $"{(weapon.i_preparedSpeed > 1 ? "<color=#00FF00>+" : "")}" +
             $"{weapon.i_preparedSpeed}";
     }
+
+    public void DurabilityUI(bool enter)
+    {
+        var descBoxPack = PopUpManager.Instance.descBoxP;
+        if (enter)
+        {
+            descBoxPack.box.gameObject.SetActive(true);
+            descBoxPack.title.text = "내구도";
+            descBoxPack.desc.text  = $"{Player.Instance.WP_weapon.i_durability} / {Player.Instance.WP_weapon.i_maxDurability}";
+            descBoxPack.box.position   = Input.mousePosition + new Vector3(10, -20, 0);
+
+            StartCoroutine(PopUpManager.UpdateUI(descBoxPack));
+        }
+        else
+        {
+            descBoxPack.box.gameObject.SetActive(false);
+        }
+    }
 }

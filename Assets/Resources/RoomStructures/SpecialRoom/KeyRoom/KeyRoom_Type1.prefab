@@ -1384,7 +1384,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enableBaking: 1
   ignoreWarnings: 0
-  errorMessage: prefab contains unapplied object (Creature)
+  errorMessage: this GameObject is not a prefab
 --- !u!114 &7568697433355516859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3062,32 +3062,27 @@ PrefabInstance:
         type: 3}
       propertyPath: sprites.fullBody
       value: 
-      objectReference: {fileID: 21300000, guid: 25b0eeaa956e40a4abc5935d5e60cac1,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 995910114333958288, guid: f2135fdedb6556c48908dc585cfba15c,
         type: 3}
       propertyPath: sprites.cut_Attack
       value: 
-      objectReference: {fileID: 21300000, guid: ddee7abb6c40835418afbec4da860189,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 995910114333958288, guid: f2135fdedb6556c48908dc585cfba15c,
         type: 3}
       propertyPath: sprites.fullBody_Outer
       value: 
-      objectReference: {fileID: 21300000, guid: da3583c0c5d85114c98e060d6f35d3af,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 995910114333958288, guid: f2135fdedb6556c48908dc585cfba15c,
         type: 3}
       propertyPath: sprites.fullBody_Thrax
       value: 
-      objectReference: {fileID: 21300000, guid: 610cd9924acdbcf46abb41575d67f0f8,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 995910114333958288, guid: f2135fdedb6556c48908dc585cfba15c,
         type: 3}
       propertyPath: sprites.fullBody_WeakPoint
       value: 
-      objectReference: {fileID: 21300000, guid: 486d9b9930260c440943ff213074dc82,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 2271119611936407058, guid: f2135fdedb6556c48908dc585cfba15c,
         type: 3}
       propertyPath: m_Name

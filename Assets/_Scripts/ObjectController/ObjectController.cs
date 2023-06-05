@@ -7,7 +7,6 @@ public class ObjectController : MonoBehaviour
     [Header("Set in Inspector")]
     [Range(0, 100)]
     [SerializeField] int i_percent = 100;
-    [SerializeField] CreatureSpritePack CSP_spritePack;
     [SerializeField] bool b_customCreature;
 
     [Header("CustomCreature")]
@@ -39,17 +38,17 @@ public class ObjectController : MonoBehaviour
                 return;
             }
 
-            Creature tmpCR = new Creature(GameManager.Instance.CR_levelDefault, CSP_spritePack);
+            Creature tmpCR = CreatureManager.Instance.GetRandomCreatureByLevel(GameManager.Instance.i_level);
             
-            if (b_customCreature)
+            if (b_customCreature) //특수 크리쳐설정
             {
-                tmpCR = new Creature((tmpCR.damage * damage).ToInt(),
-                    (tmpCR.defense * defense).ToInt(),
-                    tmpCR.health * health,
-                    tmpCR.speed * speed,
-                    Mathf.Clamp((tmpCR.prepareSpeed * prepareSpeed).ToInt(), 0, 100),
-                    sprites
-                );
+                tmpCR.damage       =  (tmpCR.damage  * damage).ToInt();
+                tmpCR.defense      =  (tmpCR.defense * defense).ToInt();
+                tmpCR.health       *= health;
+                tmpCR.speed        *= speed;
+                tmpCR.prepareSpeed =  Mathf.Clamp((tmpCR.prepareSpeed * prepareSpeed).ToInt(), 0, 100);
+                
+                tmpCR.spritePack = sprites.fullBody != null ? sprites : tmpCR.spritePack;
             }
             
             RoomController RC_room = transform.parent.parent.GetComponent<RoomController>();

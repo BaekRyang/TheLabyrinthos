@@ -1801,7 +1801,7 @@ MonoBehaviour:
   m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 400, y: 900}
+  m_CellSize: {x: 500, y: 900}
   m_Spacing: {x: 50, y: 0}
   m_Constraint: 1
   m_ConstraintCount: 3
@@ -8968,7 +8968,7 @@ PrefabInstance:
     - target: {fileID: 2527137857286832730, guid: 752130b65c51ae145a4ac48f6fd1edfc,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 400
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 2527137857286832730, guid: 752130b65c51ae145a4ac48f6fd1edfc,
         type: 3}
@@ -9018,7 +9018,7 @@ PrefabInstance:
     - target: {fileID: 2527137857286832730, guid: 752130b65c51ae145a4ac48f6fd1edfc,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -590
+      value: -589.95996
       objectReference: {fileID: 0}
     - target: {fileID: 2527137857286832730, guid: 752130b65c51ae145a4ac48f6fd1edfc,
         type: 3}
@@ -9885,7 +9885,7 @@ PrefabInstance:
     - target: {fileID: 1955357067151700498, guid: 69dc6c374b73a8a448ec2f8f9fb31f68,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.9795789
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1955357067151700498, guid: 69dc6c374b73a8a448ec2f8f9fb31f68,
         type: 3}
@@ -9900,7 +9900,7 @@ PrefabInstance:
     - target: {fileID: 1955357067994948808, guid: 69dc6c374b73a8a448ec2f8f9fb31f68,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.9795789
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1955357067994948808, guid: 69dc6c374b73a8a448ec2f8f9fb31f68,
         type: 3}
@@ -9915,7 +9915,7 @@ PrefabInstance:
     - target: {fileID: 1955357068629169871, guid: 69dc6c374b73a8a448ec2f8f9fb31f68,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.9795789
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1955357068629169871, guid: 69dc6c374b73a8a448ec2f8f9fb31f68,
         type: 3}
@@ -9930,7 +9930,7 @@ PrefabInstance:
     - target: {fileID: 2346854905554295973, guid: 69dc6c374b73a8a448ec2f8f9fb31f68,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.9795789
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2346854905554295973, guid: 69dc6c374b73a8a448ec2f8f9fb31f68,
         type: 3}
@@ -12256,6 +12256,7 @@ MonoBehaviour:
     speed: 0
     prepareSpeed: 0
     spritePack:
+      creatureName: 
       fullBody: {fileID: 0}
       fullBody_WeakPoint: {fileID: 0}
       fullBody_Thrax: {fileID: 0}
@@ -12290,6 +12291,7 @@ MonoBehaviour:
     speed: 0
     prepareSpeed: 0
     spritePack:
+      creatureName: 
       fullBody: {fileID: 0}
       fullBody_WeakPoint: {fileID: 0}
       fullBody_Thrax: {fileID: 0}
@@ -12784,6 +12786,7 @@ GameObject:
   - component: {fileID: 1052851487}
   - component: {fileID: 1052851490}
   - component: {fileID: 1052851491}
+  - component: {fileID: 1052851492}
   - component: {fileID: 1052851489}
   - component: {fileID: 1052851488}
   m_Layer: 0
@@ -12846,22 +12849,6 @@ MonoBehaviour:
   GO_curtain: {fileID: 1947326161}
   gameOver: {fileID: 1750497540}
   GO_BattleCanvas: {fileID: 997984183}
-  creatures:
-    C_default: []
-  CR_levelDefault:
-    damage: 0
-    defense: 0
-    health: 0
-    speed: 0
-    prepareSpeed: 0
-    spritePack:
-      fullBody: {fileID: 0}
-      fullBody_WeakPoint: {fileID: 0}
-      fullBody_Thrax: {fileID: 0}
-      fullBody_Outer: {fileID: 0}
-      cut_Attack: {fileID: 0}
-      cut_Hited: {fileID: 0}
-      cut_Avoid: {fileID: 0}
   go_playerPrefab: {fileID: 2271119611936407058, guid: 1e3e41c9142fc534fbacf4228fa5cfbc,
     type: 3}
   GO_startRoomPrefab: {fileID: 0}
@@ -13158,6 +13145,74 @@ MonoBehaviour:
   descBoxDesc: {fileID: 496764303}
   itemActionHandler: {fileID: 8642517517801135800}
   itemActionHandlerBattle: {fileID: 1892110973}
+--- !u!114 &1052851492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1052851480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a83e4cfbb6e5ec4478965cf8891e527c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites:
+  - creatureName: L1_Creature1
+    fullBody: {fileID: 21300000, guid: 6b4229d7172b0194cb89509bc0cad721, type: 3}
+    fullBody_WeakPoint: {fileID: 21300000, guid: b84ddcbc7fd34974b86ad1ce5378fa73,
+      type: 3}
+    fullBody_Thrax: {fileID: 21300000, guid: fc87e721e001cc74594c046738b4419b, type: 3}
+    fullBody_Outer: {fileID: 21300000, guid: ac1c3f977817b5649a29e2eedc0f8e24, type: 3}
+    cut_Attack: {fileID: 21300000, guid: f09b6dbaf5c886a499ea3e455ee1d7b0, type: 3}
+    cut_Hited: {fileID: 0}
+    cut_Avoid: {fileID: 0}
+  - creatureName: L1_Creature2
+    fullBody: {fileID: 21300000, guid: 7952eca176ce51a4eb03e0f70ffcdbe1, type: 3}
+    fullBody_WeakPoint: {fileID: 21300000, guid: 3cd01c2a301263345b8c086b2d992c0b,
+      type: 3}
+    fullBody_Thrax: {fileID: 21300000, guid: 8969a2d52dd3c22428b7c96ceaff3477, type: 3}
+    fullBody_Outer: {fileID: 21300000, guid: 22e025fe1b642964ab47e965f4a5e526, type: 3}
+    cut_Attack: {fileID: 21300000, guid: c2018997d70bb2a4cac714cfed78b654, type: 3}
+    cut_Hited: {fileID: 0}
+    cut_Avoid: {fileID: 0}
+  - creatureName: L1_Creature3
+    fullBody: {fileID: 21300000, guid: 759e0a3998d2b7f4280804814aa1df8f, type: 3}
+    fullBody_WeakPoint: {fileID: 21300000, guid: 848cdc62b74611549a02c563ffb8dcd4,
+      type: 3}
+    fullBody_Thrax: {fileID: 21300000, guid: cd75fe52d2217184598bbc8cfde8aadf, type: 3}
+    fullBody_Outer: {fileID: 21300000, guid: d7c9423dfac7a7c4bb3897e0ceae5956, type: 3}
+    cut_Attack: {fileID: 21300000, guid: a986c6b107ddf1d4e98f932b44f1bd99, type: 3}
+    cut_Hited: {fileID: 0}
+    cut_Avoid: {fileID: 0}
+  - creatureName: L2_Creature1
+    fullBody: {fileID: 21300000, guid: 55a64c341c780be408cd39843fd10547, type: 3}
+    fullBody_WeakPoint: {fileID: 21300000, guid: d1d3c11cabb95fa4fba427d96de9fd2b,
+      type: 3}
+    fullBody_Thrax: {fileID: 21300000, guid: ae078ca390d151c40b9c6e032c875257, type: 3}
+    fullBody_Outer: {fileID: 21300000, guid: 9b515665ce16b264196db9c844aa3c11, type: 3}
+    cut_Attack: {fileID: 21300000, guid: 199757ac1d02f9c4fb6d22ff6638f9c0, type: 3}
+    cut_Hited: {fileID: 0}
+    cut_Avoid: {fileID: 21300000, guid: de76443901509ef43b2d2473cfef5b20, type: 3}
+  - creatureName: L2_Creature2
+    fullBody: {fileID: 21300000, guid: 9efdcf5f6bf8bde4baea8c26b85248e1, type: 3}
+    fullBody_WeakPoint: {fileID: 21300000, guid: 571b27cecdbe5f54a9f9920d4a98103a,
+      type: 3}
+    fullBody_Thrax: {fileID: 21300000, guid: 29526d9065749ba4da576e8ed721b9f7, type: 3}
+    fullBody_Outer: {fileID: 21300000, guid: f9e10dff51746694bbf8edf79b84b3a8, type: 3}
+    cut_Attack: {fileID: 21300000, guid: fa1550b2d9c753540942b648d1afa5ce, type: 3}
+    cut_Hited: {fileID: 0}
+    cut_Avoid: {fileID: 21300000, guid: bd1a795a1332f114f8a4100184bccc8e, type: 3}
+  - creatureName: L2_Creature3
+    fullBody: {fileID: 21300000, guid: 06ae9dd907f77174eb48e34365f69505, type: 3}
+    fullBody_WeakPoint: {fileID: 21300000, guid: 5959417c7aad8084f9eb44cdf47d761e,
+      type: 3}
+    fullBody_Thrax: {fileID: 21300000, guid: a3acfa505ee3c944f9b5da23f95c2285, type: 3}
+    fullBody_Outer: {fileID: 21300000, guid: 247419ed98ccc894dbf4002bc9b3cea0, type: 3}
+    cut_Attack: {fileID: 21300000, guid: ac78b28dc635725478f4aadcf6908031, type: 3}
+    cut_Hited: {fileID: 0}
+    cut_Avoid: {fileID: 21300000, guid: 49c55dfa69f3f4644a77a58507afd4e4, type: 3}
+  creatures: []
 --- !u!1 &1056635254
 GameObject:
   m_ObjectHideFlags: 0
@@ -18175,7 +18230,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1471779781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23358,7 +23413,7 @@ PrefabInstance:
     - target: {fileID: 2527137857286832730, guid: 752130b65c51ae145a4ac48f6fd1edfc,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 400
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 2527137857286832730, guid: 752130b65c51ae145a4ac48f6fd1edfc,
         type: 3}
@@ -23403,12 +23458,12 @@ PrefabInstance:
     - target: {fileID: 2527137857286832730, guid: 752130b65c51ae145a4ac48f6fd1edfc,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1410
+      value: 1510
       objectReference: {fileID: 0}
     - target: {fileID: 2527137857286832730, guid: 752130b65c51ae145a4ac48f6fd1edfc,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -590
+      value: -589.95996
       objectReference: {fileID: 0}
     - target: {fileID: 2527137857286832730, guid: 752130b65c51ae145a4ac48f6fd1edfc,
         type: 3}
@@ -26986,7 +27041,7 @@ PrefabInstance:
     - target: {fileID: 2527137857286832730, guid: 752130b65c51ae145a4ac48f6fd1edfc,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 400
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 2527137857286832730, guid: 752130b65c51ae145a4ac48f6fd1edfc,
         type: 3}
@@ -27031,12 +27086,12 @@ PrefabInstance:
     - target: {fileID: 2527137857286832730, guid: 752130b65c51ae145a4ac48f6fd1edfc,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 510
+      value: 410
       objectReference: {fileID: 0}
     - target: {fileID: 2527137857286832730, guid: 752130b65c51ae145a4ac48f6fd1edfc,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -590
+      value: -589.95996
       objectReference: {fileID: 0}
     - target: {fileID: 2527137857286832730, guid: 752130b65c51ae145a4ac48f6fd1edfc,
         type: 3}

@@ -116,6 +116,16 @@ namespace TypeDefs
     [Serializable]
     public class Creature
     {
+        public Creature(Creature other)
+        {
+            health = other.health;
+            speed = other.speed;
+            defense = other.defense;
+            prepareSpeed = other.prepareSpeed;
+            damage = other.damage;
+            spritePack = other.spritePack;
+        }
+        
         public Creature(int atk, int def, float hp, float spd, int pspd, CreatureSpritePack csp)
         {
             damage = atk;
@@ -148,6 +158,7 @@ namespace TypeDefs
     [Serializable]
     public struct CreatureSpritePack
     {
+        public string creatureName;
         public Sprite fullBody;
         public Sprite fullBody_WeakPoint;
         public Sprite fullBody_Thrax;

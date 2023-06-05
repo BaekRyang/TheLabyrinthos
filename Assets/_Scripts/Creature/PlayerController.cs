@@ -62,7 +62,6 @@ public class PlayerController : MonoBehaviour
             0,
             Camera.main.transform.rotation.eulerAngles.y + (90 - Camera.main.transform.rotation.eulerAngles.y) * 2);
 
-        ResetSetting();
     }
 
     private void Update()

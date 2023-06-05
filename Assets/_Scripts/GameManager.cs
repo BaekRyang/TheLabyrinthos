@@ -28,13 +28,7 @@ public class GameManager : MonoBehaviour
     public GameObject gameOver;
 
     [SerializeField] public GameObject GO_BattleCanvas;
-
-    [Header("Set Automatically")]
-    [SerializeField]
-    Creatures creatures;
-
-    [SerializeField] public Creature CR_levelDefault;
-
+    
     [Header("Player Prefab")]
     [SerializeField]
     private GameObject go_playerPrefab;
@@ -85,8 +79,6 @@ public class GameManager : MonoBehaviour
         GO_craftingPrefabs = Resources.LoadAll<GameObject>("RoomStructures/SpecialRoom/Crafting");
         GO_keyRoomPrefabs  = Resources.LoadAll<GameObject>("RoomStructures/SpecialRoom/KeyRoom");
         GO_shopPrefabs     = Resources.LoadAll<GameObject>("RoomStructures/SpecialRoom/Shop");
-
-        creatures = new Creatures();
     }
 
     void Start()
@@ -116,10 +108,6 @@ public class GameManager : MonoBehaviour
         dict_randomObjects.Add("Room",     new Random(Convert.ToInt32(s_seed, 16) + 3)); //방배치용 랜덤 시드
         dict_randomObjects.Add("Effect",   new Random(Convert.ToInt32(s_seed, 16) + 4)); //아이템용 랜덤 시드
         dict_randomObjects.Add("Syringe",  new Random(Convert.ToInt32(s_seed, 16) + 5)); //주사기용 랜덤 시드
-
-        ResetLevel(i_level);
-        go_player      = Instantiate(go_playerPrefab);
-        go_player.name = "Player";
         
         StartCoroutine(LoadSettings()); 
     }
@@ -127,6 +115,11 @@ public class GameManager : MonoBehaviour
     IEnumerator LoadSettings()
     {
         gameOver.SetActive(false);
+     
+        go_player      = Instantiate(go_playerPrefab);
+        go_player.name = "Player"; //플레이어는 로딩중에 참조하니까 미리 만든다.
+        var playerRigid = go_player.GetComponent<Rigidbody>();
+        playerRigid.useGravity = false; //맵 생기기전에 떨어지지 말라고 중력을 꺼준다.
         
         yield return new WaitForSeconds(1f);
         //Awake나 Start 대기용
@@ -144,6 +137,10 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         Debug.Log("Crafting Recipe Load Complete");
 
+        yield return StartCoroutine(CreatureManager.Instance.LoadSettings());
+        yield return new WaitForSeconds(0.1f);
+        Debug.Log("Creatures Load Complete");
+
         yield return StartCoroutine(BattleMain.Instance.LoadSetting());
         yield return new WaitForSeconds(0.1f);
         Debug.Log("Battle Main Load Complete");
@@ -155,8 +152,13 @@ public class GameManager : MonoBehaviour
         UpdateStatsSlider(StatsType.Hp);
         UpdateStatsSlider(StatsType.Exp);
 
-        yield return new WaitForSeconds(2f);
+        ResetLevel(i_level);
+        
+        Player.Instance.GetComponent<PlayerController>().ResetSetting();
 
+        yield return new WaitForSeconds(2f);
+        playerRigid.useGravity = true;
+        go_player.transform.position = Vector3.zero;
         yield return StartCoroutine(CurtainModify(true, 2));
         yield return null;
     }
@@ -183,7 +185,6 @@ public class GameManager : MonoBehaviour
         if (!go_player.IsUnityNull()) go_player.GetComponent<Rigidbody>().useGravity = true;
 
         Minimap.instance.CreateMinimap(GetComponent<RoomCreation>().roomMap);
-        CR_levelDefault = creatures.C_default[level - 1]; //현재레벨 기본 크리쳐 스텟 설정
 
         GetComponent<RoomCreation>().roomMap[45].RoomObject.GetComponent<BGMPlayer>().StartMusic(null);
     }

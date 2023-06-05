@@ -1,3 +1,4 @@
+using MoreMountains.Feedbacks;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -23,6 +24,8 @@ public class GameManager : MonoBehaviour
     [Header("System Objects")]
     [SerializeField]
     public GameObject GO_curtain;
+
+    public GameObject gameOver;
 
     [SerializeField] public GameObject GO_BattleCanvas;
 
@@ -123,6 +126,8 @@ public class GameManager : MonoBehaviour
 
     IEnumerator LoadSettings()
     {
+        gameOver.SetActive(false);
+        
         yield return new WaitForSeconds(1f);
         //Awake나 Start 대기용
 
@@ -364,7 +369,7 @@ public class GameManager : MonoBehaviour
             BattleMain.Instance       = null;
             
             StartCoroutine(Lerp.LerpValueAfter(
-                               value => GO_curtain.GetComponent<Image>().color = new Color(0, 0, 0, value),
+                               value => gameOver.transform.GetChild(2).GetComponent<Image>().color = new Color(0, 0, 0, value),
                                0,
                                1f,
                                1f,
@@ -384,7 +389,7 @@ public class GameManager : MonoBehaviour
             
             
             StartCoroutine(Lerp.LerpValueAfter(
-                               value => GO_curtain.GetComponent<Image>().color = new Color(0, 0, 0, value),
+                               value => gameOver.transform.GetChild(2).GetComponent<Image>().color = new Color(0, 0, 0, value),
                                0,
                                1f,
                                1f,
@@ -398,6 +403,17 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        Debug.Log("Game Over");
+        gameOver.transform.GetChild(0).GetComponent<CanvasGroup>().alpha = 0;
+        gameOver.transform.GetChild(2).gameObject.SetActive(true);
+        StartCoroutine(GameOverProcess());
+    }
+
+    public IEnumerator GameOverProcess()
+    {
+        yield return CurtainModify(false, 0.5f);
+        yield return new WaitForSeconds(1);
+        gameOver.SetActive(true);
+        gameOver.GetComponent<MMF_Player>().PlayFeedbacks();
+        
     }
 }

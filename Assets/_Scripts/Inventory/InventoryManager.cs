@@ -70,7 +70,7 @@ public class InventoryManager : MonoBehaviour
             }
         }
         
-        // AddItem(definedItems[0]); //기본칼 추가
+        AddItem(definedItems[0]); //기본칼 추가
 
         equippedItem.UpdateUI();
         stats.UpdateUI();

@@ -72,6 +72,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   i_percent: 40
   CSP_spritePack:
+    fullBody: {fileID: 0}
     fullBody_WeakPoint: {fileID: 0}
     fullBody_Thrax: {fileID: 0}
     fullBody_Outer: {fileID: 0}
@@ -85,6 +86,7 @@ MonoBehaviour:
   speed: 0
   prepareSpeed: 0
   sprites:
+    fullBody: {fileID: 0}
     fullBody_WeakPoint: {fileID: 0}
     fullBody_Thrax: {fileID: 0}
     fullBody_Outer: {fileID: 0}
@@ -100,6 +102,7 @@ MonoBehaviour:
     speed: 0
     prepareSpeed: 0
     spritePack:
+      fullBody: {fileID: 0}
       fullBody_WeakPoint: {fileID: 0}
       fullBody_Thrax: {fileID: 0}
       fullBody_Outer: {fileID: 0}
@@ -253,7 +256,7 @@ GameObject:
   - component: {fileID: 2617720603694773785}
   - component: {fileID: 642999336956252241}
   - component: {fileID: 275476239466448588}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: First_Aid_Kit_Cap
   m_TagString: Untagged
   m_Icon: {fileID: 0}

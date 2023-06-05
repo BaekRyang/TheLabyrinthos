@@ -103,7 +103,7 @@ namespace TypeDefs
         public float  speed        = 1.0f;
         public int    defense      = 5;
         public int    prepareSpeed = 0;
-        public float    accuracyMult = 1;
+        public float  accuracyMult = 1;
         public int    damage       = 10;
         public Sprite attackSprite;
         public Sprite hitedSprite;

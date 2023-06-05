@@ -33,7 +33,7 @@ public class BattleActions : MonoBehaviour
 
     [Header("Set In Inspector")]
     [SerializeField]
-    MMF_Player[] MMF_player;
+    public MMF_Player[] MMF_player;
 
     public IEnumerator LoadSetting()
     {
@@ -41,7 +41,7 @@ public class BattleActions : MonoBehaviour
         PS_playerStats = P_player.GetPlayerStats();
 
         BM_BattleMain = GetComponent<BattleMain>();
-
+        
         dict_attackTable.Add(Parts.Weakpoint, new AttackPair(WEAKPOINT_DMG, WEAKPOINT_ACC));
         dict_attackTable.Add(Parts.Thorax,    new AttackPair(THORAX_DMG,    THORAX_ACC));
         dict_attackTable.Add(Parts.Outer,     new AttackPair(OUTER_DMG,     OUTER_ACC));
@@ -51,7 +51,6 @@ public class BattleActions : MonoBehaviour
         outerACC     = BASE_ACCURACY * dict_attackTable[Parts.Outer].accuracy;
 
         gameObject.SetActive(false); //전부 로딩 되면 오브젝트 끄기
-
         yield return null;
     }
 

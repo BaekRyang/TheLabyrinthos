@@ -294,6 +294,9 @@ public class BattleMain : MonoBehaviour
         InventoryManager.Instance.equippedItem.UpdateUI();
         InventoryManager.Instance.stats.UpdateUI();
 
+        //애니메이션 되감기
+        yield return BA_battleActions.MMF_player[2].PlayFeedbacksCoroutine(transform.position);
+        
         //전투씬 끄기
         PC_player.b_camControll = false;
         PC_player.ExitBattle();

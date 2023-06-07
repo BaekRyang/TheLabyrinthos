@@ -1,4 +1,5 @@
 using MoreMountains.Feedbacks;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TypeDefs;
@@ -32,8 +33,7 @@ public class BattleActions : MonoBehaviour
     Random     rand = new Random();
 
     [Header("Set In Inspector")]
-    [SerializeField]
-    public MMF_Player[] MMF_player;
+    [SerializeField] public MMF_Player[] MMF_player;
 
     public IEnumerator LoadSetting()
     {
@@ -107,7 +107,7 @@ public class BattleActions : MonoBehaviour
     {
         AudioClip clip;
         int       randInt = rand.Next(101);
-
+        bool      isHit  = false;
         BM_BattleMain.b_paused = true;
         
         if (b_IsPlayer)
@@ -117,6 +117,8 @@ public class BattleActions : MonoBehaviour
             if (randInt < //랜덤 (0~100)
                 accInt)   //기본 정확도 x 부위 정확도 계수
             {
+                isHit = true;
+                
                 float damage = ((PS_playerStats.damage + P_player.WP_weapon.i_damage) *          //플레이어 공격력
                                 (dict_attackTable[part].damage)                       *          //부위 데미지 계수
                                 (1 - CR_Enemy.defense / (float)(CR_Enemy.defense + CONST_DEF))); //방어력 계산
@@ -148,7 +150,7 @@ public class BattleActions : MonoBehaviour
                         clip = BM_BattleMain.AC_playerAttackThorax[rand.Next(BM_BattleMain.AC_playerAttackThorax.Length)];
                         break;
                 }
-
+                
                 //내구도 하나 빼주기
                 P_player.WP_weapon.ConsumeDurability();
             }
@@ -178,6 +180,8 @@ public class BattleActions : MonoBehaviour
             if (randInt <      //랜덤 (0~100)
                 BASE_ACCURACY) //**크리쳐별 정확도를 가져와서 써야함
             {
+                isHit = true;
+                
                 float damage = (CR_Enemy.damage * (1 - PS_playerStats.defense / (float)(PS_playerStats.defense + CONST_DEF)));
                 damage                =  Mathf.Round(damage * 10f) / 10f;
                 PS_playerStats.health -= damage;
@@ -206,7 +210,7 @@ public class BattleActions : MonoBehaviour
             // );
         }
 
-        StartCoroutine(AnimateAction(ActionTypes.Attack, b_IsPlayer));
+        StartCoroutine(AnimateAction(isHit ? ActionTypes.Attack : ActionTypes.Missed, b_IsPlayer));
     }
 
     IEnumerator LerpColor(UIModElements targetElements, SliderColor to, float duration, bool isEndColor = false)
@@ -278,10 +282,25 @@ public class BattleActions : MonoBehaviour
         typeDict[Parts.Outer].damage.text     = ((baseDamage - P_player.WP_weapon.i_damageRange) * dict_attackTable[Parts.Outer].damage     * (creatureDef)).ToString("0.##") + " ~ " + ((baseDamage + P_player.WP_weapon.i_damageRange) * dict_attackTable[Parts.Outer].damage     * (creatureDef)).ToString("0.##") + " DMG";
     }
 
-    public IEnumerator AnimateAction(ActionTypes acType, bool isPlayer)
+    private IEnumerator AnimateAction(ActionTypes acType, bool isPlayer)
     {
         var targetMMF = isPlayer ? MMF_player[0] : MMF_player[1];
 
+        switch (acType)
+        {
+            case ActionTypes.Attack:
+                BM_BattleMain.creatureAttackSprite.sprite = isPlayer ? CR_Enemy.spritePack.cut_Hited : CR_Enemy.spritePack.cut_Attack;
+                // BM_BattleMain.playerAttackSprite.sprite   = isPlayer ? P_player.cut_Attack : P_player.cut_Hited;
+                break;
+            case ActionTypes.Missed:
+                BM_BattleMain.creatureAttackSprite.sprite = isPlayer ? CR_Enemy.spritePack.cut_Avoid : CR_Enemy.spritePack.cut_Attack;
+                // BM_BattleMain.playerAttackSprite.sprite   = isPlayer ? P_player.cut_Attack : P_player.cut_Avoid;
+                break;
+        }
+        
+        BM_BattleMain.playerAttackScratch.gameObject.SetActive(isPlayer);
+        BM_BattleMain.creatureAttackScratch.gameObject.SetActive(!isPlayer);
+        
         targetMMF.PlayFeedbacks();
         yield return new WaitForSeconds(targetMMF.TotalDuration / 2f);
 

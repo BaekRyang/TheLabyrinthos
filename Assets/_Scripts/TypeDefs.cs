@@ -66,8 +66,7 @@ namespace TypeDefs
     public enum ActionTypes
     {
         Attack,
-        Hited,
-        Avoid
+        Missed
     }
     #endregion
 
@@ -105,9 +104,6 @@ namespace TypeDefs
         public int    prepareSpeed = 0;
         public float  accuracyMult = 1;
         public int    damage       = 10;
-        public Sprite attackSprite;
-        public Sprite hitedSprite;
-        public Sprite avoidSprite;
     }
     
     #endregion
@@ -166,6 +162,7 @@ namespace TypeDefs
         public Sprite cut_Attack;
         public Sprite cut_Hited;
         public Sprite cut_Avoid;
+        public Sprite attackScratch;
     }
     #endregion
 

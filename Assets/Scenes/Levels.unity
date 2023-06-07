@@ -12238,11 +12238,14 @@ MonoBehaviour:
   IMG_playerTP: {fileID: 0}
   IMG_enemyHP: {fileID: 0}
   IMG_enemyTP: {fileID: 0}
-  attactAnimate: {fileID: 0}
-  creatureAttackAnchor: {fileID: 0}
-  playerAttackAnchor: {fileID: 0}
-  screenEffects: []
-  damageIndicate: {fileID: 0}
+  creatureAttackAnchor: {fileID: 615281950}
+  playerAttackAnchor: {fileID: 386954384}
+  creatureAttackSprite: {fileID: 0}
+  playerAttackSprite: {fileID: 0}
+  creatureAttackScratch: {fileID: 0}
+  playerAttackScratch: {fileID: 0}
+  screenEffects: {fileID: 2097932362}
+  damageIndicate: {fileID: 553981046}
   colors:
   - {r: 0.5019608, g: 0, b: 0, a: 1}
   - {r: 1, g: 0, b: 0, a: 1}
@@ -12264,6 +12267,7 @@ MonoBehaviour:
       cut_Attack: {fileID: 0}
       cut_Hited: {fileID: 0}
       cut_Avoid: {fileID: 0}
+      attackScratch: {fileID: 0}
 --- !u!222 &997984189
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12299,6 +12303,7 @@ MonoBehaviour:
       cut_Attack: {fileID: 0}
       cut_Hited: {fileID: 0}
       cut_Avoid: {fileID: 0}
+      attackScratch: {fileID: 0}
   MMF_player:
   - {fileID: 386954388}
   - {fileID: 615281954}
@@ -13159,32 +13164,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprites:
   - creatureName: L1_Creature1
-    fullBody: {fileID: 21300000, guid: 6b4229d7172b0194cb89509bc0cad721, type: 3}
+    fullBody: {fileID: 21300000, guid: dae67d0f9661c694cbbcd6edc5595d83, type: 3}
     fullBody_WeakPoint: {fileID: 21300000, guid: b84ddcbc7fd34974b86ad1ce5378fa73,
       type: 3}
     fullBody_Thrax: {fileID: 21300000, guid: fc87e721e001cc74594c046738b4419b, type: 3}
     fullBody_Outer: {fileID: 21300000, guid: ac1c3f977817b5649a29e2eedc0f8e24, type: 3}
-    cut_Attack: {fileID: 21300000, guid: f09b6dbaf5c886a499ea3e455ee1d7b0, type: 3}
-    cut_Hited: {fileID: 0}
-    cut_Avoid: {fileID: 0}
+    cut_Attack: {fileID: 21300000, guid: f0cbf49703488d747b284400e159fc14, type: 3}
+    cut_Hited: {fileID: 21300000, guid: 2c7c422b8be05ec498783070dd1bba57, type: 3}
+    cut_Avoid: {fileID: 21300000, guid: 08ec8a19b8da3bf49a8b5eca8171f4dc, type: 3}
+    attackScratch: {fileID: 21300000, guid: 8f0e8a796aa015c43823ba0bc9766afd, type: 3}
   - creatureName: L1_Creature2
-    fullBody: {fileID: 21300000, guid: 7952eca176ce51a4eb03e0f70ffcdbe1, type: 3}
+    fullBody: {fileID: 21300000, guid: e003c0c2ac342334bb0a44a6ffd7383f, type: 3}
     fullBody_WeakPoint: {fileID: 21300000, guid: 3cd01c2a301263345b8c086b2d992c0b,
       type: 3}
     fullBody_Thrax: {fileID: 21300000, guid: 8969a2d52dd3c22428b7c96ceaff3477, type: 3}
     fullBody_Outer: {fileID: 21300000, guid: 22e025fe1b642964ab47e965f4a5e526, type: 3}
-    cut_Attack: {fileID: 21300000, guid: c2018997d70bb2a4cac714cfed78b654, type: 3}
-    cut_Hited: {fileID: 0}
-    cut_Avoid: {fileID: 0}
+    cut_Attack: {fileID: 21300000, guid: 49ae659807dfd8c46b3357b0164ce746, type: 3}
+    cut_Hited: {fileID: 21300000, guid: 74eaca94c46c0434a9d080497596a82a, type: 3}
+    cut_Avoid: {fileID: 21300000, guid: 0f21f67b54722a440beea78ca35769f3, type: 3}
+    attackScratch: {fileID: 21300000, guid: 8f0e8a796aa015c43823ba0bc9766afd, type: 3}
   - creatureName: L1_Creature3
-    fullBody: {fileID: 21300000, guid: 759e0a3998d2b7f4280804814aa1df8f, type: 3}
+    fullBody: {fileID: 21300000, guid: 6f86d1ab462b8c949aa277c8157761d8, type: 3}
     fullBody_WeakPoint: {fileID: 21300000, guid: 848cdc62b74611549a02c563ffb8dcd4,
       type: 3}
     fullBody_Thrax: {fileID: 21300000, guid: cd75fe52d2217184598bbc8cfde8aadf, type: 3}
     fullBody_Outer: {fileID: 21300000, guid: d7c9423dfac7a7c4bb3897e0ceae5956, type: 3}
-    cut_Attack: {fileID: 21300000, guid: a986c6b107ddf1d4e98f932b44f1bd99, type: 3}
-    cut_Hited: {fileID: 0}
-    cut_Avoid: {fileID: 0}
+    cut_Attack: {fileID: 21300000, guid: 828285a80c5e06446bf5cccf89df13e0, type: 3}
+    cut_Hited: {fileID: 21300000, guid: 6292a088a2393324abeb8a260a2eb192, type: 3}
+    cut_Avoid: {fileID: 21300000, guid: 30b5951f05adca643b666878ec20f628, type: 3}
+    attackScratch: {fileID: 21300000, guid: 8f0e8a796aa015c43823ba0bc9766afd, type: 3}
   - creatureName: L2_Creature1
     fullBody: {fileID: 21300000, guid: 55a64c341c780be408cd39843fd10547, type: 3}
     fullBody_WeakPoint: {fileID: 21300000, guid: d1d3c11cabb95fa4fba427d96de9fd2b,
@@ -13194,6 +13202,7 @@ MonoBehaviour:
     cut_Attack: {fileID: 21300000, guid: 199757ac1d02f9c4fb6d22ff6638f9c0, type: 3}
     cut_Hited: {fileID: 0}
     cut_Avoid: {fileID: 21300000, guid: de76443901509ef43b2d2473cfef5b20, type: 3}
+    attackScratch: {fileID: 21300000, guid: 8f0e8a796aa015c43823ba0bc9766afd, type: 3}
   - creatureName: L2_Creature2
     fullBody: {fileID: 21300000, guid: 9efdcf5f6bf8bde4baea8c26b85248e1, type: 3}
     fullBody_WeakPoint: {fileID: 21300000, guid: 571b27cecdbe5f54a9f9920d4a98103a,
@@ -13203,6 +13212,7 @@ MonoBehaviour:
     cut_Attack: {fileID: 21300000, guid: fa1550b2d9c753540942b648d1afa5ce, type: 3}
     cut_Hited: {fileID: 0}
     cut_Avoid: {fileID: 21300000, guid: bd1a795a1332f114f8a4100184bccc8e, type: 3}
+    attackScratch: {fileID: 21300000, guid: 8f0e8a796aa015c43823ba0bc9766afd, type: 3}
   - creatureName: L2_Creature3
     fullBody: {fileID: 21300000, guid: 06ae9dd907f77174eb48e34365f69505, type: 3}
     fullBody_WeakPoint: {fileID: 21300000, guid: 5959417c7aad8084f9eb44cdf47d761e,
@@ -13212,6 +13222,7 @@ MonoBehaviour:
     cut_Attack: {fileID: 21300000, guid: ac78b28dc635725478f4aadcf6908031, type: 3}
     cut_Hited: {fileID: 0}
     cut_Avoid: {fileID: 21300000, guid: 49c55dfa69f3f4644a77a58507afd4e4, type: 3}
+    attackScratch: {fileID: 21300000, guid: 8f0e8a796aa015c43823ba0bc9766afd, type: 3}
   creatures: []
 --- !u!1 &1056635254
 GameObject:
@@ -13843,7 +13854,7 @@ PrefabInstance:
     - target: {fileID: 3873678764447158577, guid: dc6252250fdde4240bb4c9dedc338ee6,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3873678764447158577, guid: dc6252250fdde4240bb4c9dedc338ee6,
         type: 3}
@@ -17283,7 +17294,7 @@ MonoBehaviour:
     FieldOfView: 60
     OrthographicSize: 5
     NearClipPlane: 0.1
-    FarClipPlane: 15
+    FarClipPlane: 30
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
@@ -17723,7 +17734,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 15
+  far clip plane: 30
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -17956,7 +17967,7 @@ PrefabInstance:
     - target: {fileID: 3980250042945978598, guid: 1b86992ea5a8918439ed31a5d966a05f,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3980250042945978598, guid: 1b86992ea5a8918439ed31a5d966a05f,
         type: 3}
@@ -18106,7 +18117,7 @@ PrefabInstance:
     - target: {fileID: 8898020769999906390, guid: 1b86992ea5a8918439ed31a5d966a05f,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8898020769999906390, guid: 1b86992ea5a8918439ed31a5d966a05f,
         type: 3}
@@ -18230,7 +18241,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1471779781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26694,7 +26705,7 @@ PrefabInstance:
     - target: {fileID: 3980250042945978598, guid: 1b86992ea5a8918439ed31a5d966a05f,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3980250042945978598, guid: 1b86992ea5a8918439ed31a5d966a05f,
         type: 3}
@@ -26844,7 +26855,7 @@ PrefabInstance:
     - target: {fileID: 8898020769999906390, guid: 1b86992ea5a8918439ed31a5d966a05f,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8898020769999906390, guid: 1b86992ea5a8918439ed31a5d966a05f,
         type: 3}

@@ -8,6 +8,11 @@ public class Player : MonoBehaviour
 {
     public static Player Instance;
 
+    public Sprite cut_Attack;
+    public Sprite cut_Avoid;
+    public Sprite cut_Hited;
+    public Sprite attackScratch;
+
     public PlayerStats  PS_playerStats;
     public Weapon       WP_weapon;
     public List<Effect> effectList = new List<Effect>();

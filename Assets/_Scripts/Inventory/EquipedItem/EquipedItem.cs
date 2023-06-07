@@ -48,7 +48,7 @@ public class EquipedItem : MonoBehaviour
             isSpriteExist ? foundedSprite : InventoryManager.Instance.weaponSpriteNotFounded;
     }
 
-    public void UpdateStatsCell()
+    private void UpdateStatsCell()
     {
         Weapon weapon = Player.Instance.WP_weapon;
         statsDamage.GetChild(0).GetComponent<TMP_Text>().text =

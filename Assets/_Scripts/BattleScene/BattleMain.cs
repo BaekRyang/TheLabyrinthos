@@ -41,16 +41,15 @@ public class BattleMain : MonoBehaviour
     [SerializeField] public GameObject inventory;
 
     [SerializeField] private RectTransform animationAnchor;
-    
+
     public Sprite     SPR_playerAttack;
     public Sprite     SPR_enemyAttack;
     public GameObject keyCard;
 
-    [Header("Set Automatically")] 
-    public Slider SL_playerHP;
-    public Slider SL_playerTP;
-    public Slider SL_enemyHP;
-    public Slider SL_enemyTP;
+    [Header("Set Automatically")] public Slider SL_playerHP;
+    public                               Slider SL_playerTP;
+    public                               Slider SL_enemyHP;
+    public                               Slider SL_enemyTP;
 
     public GameObject  GO_actionList;
     public GameObject  GO_attackList;
@@ -69,17 +68,20 @@ public class BattleMain : MonoBehaviour
     [HideInInspector] public UIModElements playerElements;
     [HideInInspector] public UIModElements enemyElements;
 
-    public RectTransform   attactAnimate;
-    public RectTransform   creatureAttackAnchor;
-    public RectTransform   playerAttackAnchor;
-    public RectTransform[] screenEffects;
-    public RectTransform   damageIndicate;
-    
+    [SerializeField]                                                                                           public  RectTransform creatureAttackAnchor;
+    [SerializeField]                                                                                           public  RectTransform playerAttackAnchor;
+    [DoNotSerialize]                                                                                           public  Image         creatureAttackSprite;
+    [DoNotSerialize]                                                                                           public  Image         playerAttackSprite;
+    [FormerlySerializedAs("ppAttackScratch")] [FormerlySerializedAs("creatureAttackScratch")] [DoNotSerialize] public  Image         playerAttackScratch;
+    [FormerlySerializedAs("playerAttackScratch")] [DoNotSerialize]                                             public  Image         creatureAttackScratch;
+    [SerializeField]                                                                                           public  RectTransform screenEffects;
+    [SerializeField]                                                                                           private RectTransform damageIndicate;
+
     [Header("Set in Inspector : Colors")]
     [SerializeField]
     public Color[] colors = new Color[5];
 
-    public Dictionary<Parts, DmgAccText> dict_dmgAccList = new Dictionary<Parts, DmgAccText>();
+    public readonly Dictionary<Parts, DmgAccText> dict_dmgAccList = new Dictionary<Parts, DmgAccText>();
 
     protected float f_enemySpeed;
 
@@ -96,12 +98,17 @@ public class BattleMain : MonoBehaviour
         AC_playerAttackOuter     = Resources.LoadAll<AudioClip>("SFX/PlayerAttack/Outer");
         AC_playerMissed          = Resources.LoadAll<AudioClip>("SFX/PlayerAttack/Miss");
         AC_enemyAttack           = Resources.LoadAll<AudioClip>("SFX/EnemyAttack");
+
+        creatureAttackSprite  = creatureAttackAnchor.GetChild(0).GetComponent<Image>();
+        playerAttackSprite    = playerAttackAnchor.GetChild(0).GetComponent<Image>();
+        playerAttackScratch = creatureAttackAnchor.GetChild(1).GetComponent<Image>();
+        creatureAttackScratch   = playerAttackAnchor.GetChild(1).GetComponent<Image>();
     }
 
     public IEnumerator LoadSetting()
     {
         BA_battleActions = GetComponent<BattleActions>();
-        
+
         elementGroup.gameObject.SetActive(true);
         elementGroup.transform.Find("Inventory").gameObject.SetActive(true);
 
@@ -152,7 +159,7 @@ public class BattleMain : MonoBehaviour
     {
         if (b_paused)
             return;
-        
+
         if (!b_playerReady && !b_enemyReady) //둘다 준비상태가 아닐 때
         {
             //speed를 기반으로 증가량을 계산.
@@ -179,7 +186,7 @@ public class BattleMain : MonoBehaviour
                 Debug.Log("크리쳐 준비");
             }
         }
-        
+
         if (b_playerReady) GO_actionList.SetActive(true);
         else if (b_enemyReady) BA_battleActions.Attack(false);
         //Pause를 영향을 받지 않아서 크리쳐가 무한으로 공격하는 버그가 있었음
@@ -199,6 +206,9 @@ public class BattleMain : MonoBehaviour
         IMG_enemyDefault.transform.GetChild(0).GetComponent<Image>().sprite =
             IMG_enemyDefault.GetComponent<Image>().sprite =
                 CR_Opponent.spritePack.fullBody;
+        
+        creatureAttackScratch.sprite   = CR_Opponent.spritePack.attackScratch;
+        // creatureAttackScratch.sprite = P_player.attackScratch; //지금은 무기별 이펙트가 없으니
 
         //플레이어 스텟을 가져와서 저장한다. (플레이어는 일회용이 아니므로 ref 으로 넘어옴)
         P_player       = Player.Instance;
@@ -209,7 +219,7 @@ public class BattleMain : MonoBehaviour
         SL_playerTP.value = PS_playerStats.prepareSpeed               //플레이어 TP를 스텟으로 맞춰줌(선제공격용)
                           + P_player.WP_weapon.i_preparedSpeed;       //무기 스텟을 더해준다.
 
-        SL_enemyHP.value = SL_enemyHP.maxValue = CR_Enemy.health; //Enemt의 체력 초기값 설정 (MAX/NOW)
+        SL_enemyHP.value = SL_enemyHP.maxValue = CR_Enemy.health; //Enemy의 체력 초기값 설정 (MAX/NOW)
         SL_enemyTP.value = CR_Enemy.prepareSpeed;                 //Enemy의 TP 반영
         f_enemySpeed     = CR_Enemy.speed;                        //Enemy의 속도 반영
 
@@ -266,7 +276,7 @@ public class BattleMain : MonoBehaviour
             IMG_enemyTP.color = colors[(int)SliderColor.Tp_default];
             b_enemyReady      = false;
         }
-        
+
         b_paused = false;
     }
 
@@ -296,7 +306,7 @@ public class BattleMain : MonoBehaviour
 
         //애니메이션 되감기
         yield return BA_battleActions.MMF_player[2].PlayFeedbacksCoroutine(transform.position);
-        
+
         //전투씬 끄기
         PC_player.b_camControll = false;
         PC_player.ExitBattle();
@@ -308,7 +318,7 @@ public class BattleMain : MonoBehaviour
         GameManager.Instance.StartCoroutine(GameManager.Instance.CurtainModify(true, 1)); //BattleMain은 사라질거니까 GM에서 실행해준다.
         gameObject.SetActive(false);
     }
-    
+
     public IEnumerator PlayAttackScratch(RectTransform targetAnchor, float duration, Sprite hitSprite, AudioClip clip) //0에서 100까지 채우기
     {
         Random     tmpRand  = new Random();
@@ -333,7 +343,7 @@ public class BattleMain : MonoBehaviour
         }
 
         hitImage.fillAmount = 1;
-        
+
         StartCoroutine(
             Lerp.LerpValue(
                 value => hitImage.color = value,
@@ -341,9 +351,9 @@ public class BattleMain : MonoBehaviour
                 colors[(int)SliderColor.Tp_default],
                 .5f,
                 Color.Lerp
-                )
-            );
-        
+            )
+        );
+
         yield return new WaitForSeconds(0.5f);
         Destroy(tmpGO);
     }

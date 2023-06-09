@@ -217,4 +217,68 @@ namespace TypeDefs
     
 
     #endregion
+
+#region Setting
+
+    [Serializable]
+    public class OptionData
+    {
+        public Volume         volume;
+        public Resolution     resolution;
+        public int screenMode;
+        public int            refreshRate;
+        public int           vsync;
+        
+        public OptionData()
+        {
+            volume      = new Volume(100f, 100f, 100f);
+            resolution  = new Resolution(1920, 1080);
+            screenMode  = (int)FullScreenMode.FullScreenWindow;
+            refreshRate = 60;
+            vsync       = 0;
+        }
+
+        public void ApplySetting()
+        {
+            Screen.SetResolution(resolution.width, resolution.height, (FullScreenMode)screenMode, refreshRate);
+            QualitySettings.vSyncCount = vsync;
+            
+            SystemObject.Instance.audioMixer.SetFloat("Master", Mathf.Log10(volume.master / 100) * 20);
+            SystemObject.Instance.audioMixer.SetFloat("Music",  Mathf.Log10(volume.music  / 100) * 20);
+            SystemObject.Instance.audioMixer.SetFloat("SFX",    Mathf.Log10(volume.sfx    / 100) * 20);
+            
+            Debug.Log("Setting Applied");
+        }
+    }
+
+    [Serializable]
+    public struct Resolution
+    {
+        public int width;
+        public int height;
+
+        public Resolution(int w, int h)
+        {
+            width  = w;
+            height = h;
+        }
+    }
+
+    [Serializable]
+    public struct Volume
+    {
+        public float master;
+        public float music;
+        public float sfx;
+        
+        public Volume(float master, float music, float sfx)
+        {
+            this.master = master;
+            this.music = music;
+            this.sfx = sfx;
+        }
+    }
+    
+
+#endregion
 }

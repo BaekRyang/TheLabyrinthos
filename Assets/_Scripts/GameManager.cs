@@ -348,6 +348,19 @@ public class GameManager : MonoBehaviour
                 CanvasGroup canvasAlpha = settings.GetComponent<CanvasGroup>();
                 StartCoroutine(Lerp.LerpValue<float>(value => canvasAlpha.alpha = value, 0, 1, 0.3f, Mathf.Lerp,
                                                      Lerp.EaseOut));
+                {
+                    var anchor = settings.transform.Find("SoundSettingElements");
+        
+                    Dictionary<string, Slider> soundSliders = new Dictionary<string, Slider>();
+                    //각 자식의 이름으로 슬라이더를 등록해준다.
+                    foreach (Transform child in anchor)
+                        soundSliders.Add(child.name, child.GetComponentInChildren<Slider>());
+                
+                    //Settings.Instance.optionData.volume의 값을 슬라이더에 적용시킨다.
+                    soundSliders["Master"].value = SystemObject.Instance.optionData.volume.master;
+                    soundSliders["Music"].value  = SystemObject.Instance.optionData.volume.music;
+                    soundSliders["SFX"].value    = SystemObject.Instance.optionData.volume.sfx;
+                }
             }
         }
 
@@ -356,6 +369,7 @@ public class GameManager : MonoBehaviour
             CanvasGroup canvasAlpha = settings.GetComponent<CanvasGroup>();
             StartCoroutine(Lerp.LerpValueAfter<float>(value => canvasAlpha.alpha = value, 1, 0, 0.3f, Mathf.Lerp,
                                                       Lerp.EaseOut, () => settings.gameObject.SetActive(false)));
+            SystemObject.Instance.SaveSetting();
         }
 
         if (buttonType == "Exit")

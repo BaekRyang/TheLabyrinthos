@@ -1,15 +1,30 @@
+using System;
+using TypeDefs;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
 public class Settings : MonoBehaviour
 {
-    public AudioMixer audioMixer;
+    public static Settings Instance;
+
+    private void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+        else
+            Debug.Log("Settings Instance already exist");
+    }
+
+    private void OnDisable()
+    {
+        SystemObject.Instance.SaveSetting();
+    }
 
     public void SetVolume(Slider slider)
     {
         string target = slider.transform.parent.parent.name;
-        audioMixer.SetFloat(target, Mathf.Log10(slider.value / 100) * 20);
+        SystemObject.Instance.audioMixer.SetFloat(target, Mathf.Log10(slider.value / 100) * 20);
     }
 
     public void SetResolution(string resolution)

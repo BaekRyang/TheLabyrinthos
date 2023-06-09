@@ -1,11 +1,15 @@
 using System.Collections;
 using TMPro;
+using TypeDefs;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Video;
+using Resolution = TypeDefs.Resolution;
+using Volume = UnityEngine.Rendering.Volume;
 
 public class MainScene : MonoBehaviour
 {
@@ -29,13 +33,12 @@ public class MainScene : MonoBehaviour
     [SerializeField] GameObject[] GO_cameras;
 
     [SerializeField] VideoPlayer videoPlayer;
-
-    bool b_loaded;
+    bool                         b_loaded;
 
     void Start()
     {
-        Screen.SetResolution(1920, 1080, Screen.fullScreenMode);
-        //Screen.SetResolution(2560, 1440, true);
+        SystemObject.Instance.LoadSetting(); 
+
         StartCoroutine(Open());
         dataCarrier = GameObject.Find("DataPacker").GetComponent<DataCarrier>();
         DontDestroyOnLoad(dataCarrier);
@@ -58,10 +61,6 @@ public class MainScene : MonoBehaviour
         {
             GameObject.Find("DataPacker").GetComponent<DataCarrier>().seed = sender.GetComponent<TMP_InputField>().text;
         }
-    }
-
-    void Update()
-    {
     }
 
     public void ButtonAction(string button)
@@ -150,10 +149,26 @@ public class MainScene : MonoBehaviour
             StartCoroutine(Lerp.LerpValue(value => dof.focalLength.value   = value, 300, 100f, 1, Mathf.Lerp));
 
             GO_mainUI.transform.Find("Settings").gameObject.SetActive(true);
+
             var tmpCG  = GO_mainUI.transform.Find("Settings").GetComponent<CanvasGroup>();
             var tmpCG2 = GO_mainUI.transform.Find("MainTabs").GetComponent<CanvasGroup>();
             StartCoroutine(Lerp.LerpValue(value => tmpCG.alpha  = value, 0, 1f, 1f, Mathf.Lerp, Lerp.EaseOut));
             StartCoroutine(Lerp.LerpValue(value => tmpCG2.alpha = value, 1, 0f, 1f, Mathf.Lerp, Lerp.EaseOut));
+            
+            {
+                var anchor = GO_mainUI.transform.Find("Settings").Find("SoundSettingElements");
+        
+                Dictionary<string, Slider> soundSliders = new Dictionary<string, Slider>();
+                //각 자식의 이름으로 슬라이더를 등록해준다.
+                foreach (Transform child in anchor)
+                    soundSliders.Add(child.name, child.GetComponentInChildren<Slider>());
+                
+                //Settings.Instance.optionData.volume의 값을 슬라이더에 적용시킨다.
+                soundSliders["Master"].value = SystemObject.Instance.optionData.volume.master;
+                soundSliders["Music"].value  = SystemObject.Instance.optionData.volume.music;
+                soundSliders["SFX"].value    = SystemObject.Instance.optionData.volume.sfx;
+            }
+            
             yield return null;
         }
         else if (type == 3)
@@ -171,6 +186,7 @@ public class MainScene : MonoBehaviour
 
             StartCoroutine(Lerp.LerpValue(value => dof.focusDistance.value = value, 1.5f, 6,    1, Mathf.Lerp));
             StartCoroutine(Lerp.LerpValue(value => dof.focalLength.value   = value, 100,  300f, 1, Mathf.Lerp));
+            
             yield return null;
         }
     }

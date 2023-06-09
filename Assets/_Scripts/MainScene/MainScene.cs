@@ -5,18 +5,20 @@ using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class MainScene : MonoBehaviour
 {
     [SerializeField] DataCarrier dataCarrier;
 
-    [SerializeField] Image I_curtain;
+    [SerializeField] Image       I_curtain;
+    [SerializeField] Image       I_curtainOverVideo;
     [SerializeField] AudioSource AS_mainLoop;
-    [SerializeField] GameObject GO_mainUI;
+    [SerializeField] GameObject  GO_mainUI;
 
     [SerializeField] GameObject[] GO_lights;
-    [SerializeField] Light[] LIT_lights;
-    [SerializeField] Volume VOL_volume;
+    [SerializeField] Light[]      LIT_lights;
+    [SerializeField] Volume       VOL_volume;
 
     [SerializeField] GameObject GO_targetPosition;
     [SerializeField] GameObject GO_defaultPosition;
@@ -26,8 +28,10 @@ public class MainScene : MonoBehaviour
 
     [SerializeField] GameObject[] GO_cameras;
 
+    [SerializeField] VideoPlayer videoPlayer;
+
     bool b_loaded;
-     
+
     void Start()
     {
         Screen.SetResolution(1920, 1080, Screen.fullScreenMode);
@@ -47,7 +51,7 @@ public class MainScene : MonoBehaviour
     {
         if (sender.GetComponent<TMP_InputField>().text.Length != 6)
         {
-            sender.GetComponent<TMP_InputField>().text = "";
+            sender.GetComponent<TMP_InputField>().text                                     = "";
             sender.transform.GetChild(0).Find("Placeholder").GetComponent<TMP_Text>().text = "시드는 <color=white>6자리 HEX</color>이여야 합니다.";
         }
         else
@@ -58,7 +62,6 @@ public class MainScene : MonoBehaviour
 
     void Update()
     {
-
     }
 
     public void ButtonAction(string button)
@@ -88,7 +91,6 @@ public class MainScene : MonoBehaviour
             StartGame();
         else if (button == "Exit")
             StartCoroutine(CurtainModify(false, 1, false, true));
-            
     }
 
     public void StartGame()
@@ -112,12 +114,13 @@ public class MainScene : MonoBehaviour
             yield return StartCoroutine(Lerp.LerpValue(value => MAT_logos.color = value, Color.white, new Color(1, 1, 1, 0), 0.5f, Color.Lerp));
 
             GO_mainUI.transform.Find("NewGameSetting").gameObject.SetActive(true);
-            var tmpCG = GO_mainUI.transform.Find("NewGameSetting").GetComponent<CanvasGroup>();
+            var tmpCG  = GO_mainUI.transform.Find("NewGameSetting").GetComponent<CanvasGroup>();
             var tmpCG2 = GO_mainUI.transform.Find("MainTabs").GetComponent<CanvasGroup>();
-            StartCoroutine(Lerp.LerpValue(value => tmpCG.alpha = value, 0, 1f, 1f, Mathf.Lerp, Lerp.EaseOut));
+            StartCoroutine(Lerp.LerpValue(value => tmpCG.alpha  = value, 0, 1f, 1f, Mathf.Lerp, Lerp.EaseOut));
             StartCoroutine(Lerp.LerpValue(value => tmpCG2.alpha = value, 1, 0f, 1f, Mathf.Lerp, Lerp.EaseOut));
             yield return null;
-        } else if (type == 1)
+        }
+        else if (type == 1)
         {
             GO_cameras[0].SetActive(true);
             GO_cameras[1].SetActive(false);
@@ -130,11 +133,12 @@ public class MainScene : MonoBehaviour
             DepthOfField dof;
             VOL_volume.profile.TryGet(out dof);
 
-            StartCoroutine(Lerp.LerpValue(value => dof.focusDistance.value = value, 2.5f, 6, 1, Mathf.Lerp));
+            StartCoroutine(Lerp.LerpValue(value => dof.focusDistance.value = value, 1.5f, 6, 1, Mathf.Lerp));
 
             StartCoroutine(Lerp.LerpValue(value => MAT_logos.color = value, new Color(1, 1, 1, 0), Color.white, 0.5f, Color.Lerp));
             yield return null;
-        } else if (type == 2)
+        }
+        else if (type == 2)
         {
             GO_cameras[0].SetActive(false);
             GO_cameras[2].SetActive(true);
@@ -142,13 +146,13 @@ public class MainScene : MonoBehaviour
             DepthOfField dof;
             VOL_volume.profile.TryGet(out dof);
 
-            StartCoroutine(Lerp.LerpValue(value => dof.focusDistance.value = value, 6, 2.5f, 1, Mathf.Lerp));
-            StartCoroutine(Lerp.LerpValue(value => dof.focalLength.value = value, 300, 100f, 1, Mathf.Lerp));
+            StartCoroutine(Lerp.LerpValue(value => dof.focusDistance.value = value, 6,   1.5f, 1, Mathf.Lerp));
+            StartCoroutine(Lerp.LerpValue(value => dof.focalLength.value   = value, 300, 100f, 1, Mathf.Lerp));
 
             GO_mainUI.transform.Find("Settings").gameObject.SetActive(true);
-            var tmpCG = GO_mainUI.transform.Find("Settings").GetComponent<CanvasGroup>();
+            var tmpCG  = GO_mainUI.transform.Find("Settings").GetComponent<CanvasGroup>();
             var tmpCG2 = GO_mainUI.transform.Find("MainTabs").GetComponent<CanvasGroup>();
-            StartCoroutine(Lerp.LerpValue(value => tmpCG.alpha = value, 0, 1f, 1f, Mathf.Lerp, Lerp.EaseOut));
+            StartCoroutine(Lerp.LerpValue(value => tmpCG.alpha  = value, 0, 1f, 1f, Mathf.Lerp, Lerp.EaseOut));
             StartCoroutine(Lerp.LerpValue(value => tmpCG2.alpha = value, 1, 0f, 1f, Mathf.Lerp, Lerp.EaseOut));
             yield return null;
         }
@@ -165,13 +169,33 @@ public class MainScene : MonoBehaviour
             DepthOfField dof;
             VOL_volume.profile.TryGet(out dof);
 
-            StartCoroutine(Lerp.LerpValue(value => dof.focusDistance.value = value, 2.5f, 6, 1, Mathf.Lerp));
-            StartCoroutine(Lerp.LerpValue(value => dof.focalLength.value = value, 100, 300f, 1, Mathf.Lerp));
+            StartCoroutine(Lerp.LerpValue(value => dof.focusDistance.value = value, 1.5f, 6,    1, Mathf.Lerp));
+            StartCoroutine(Lerp.LerpValue(value => dof.focalLength.value   = value, 100,  300f, 1, Mathf.Lerp));
             yield return null;
         }
     }
+
     private IEnumerator Open()
     {
+        yield return new WaitForSeconds(1f);
+        yield return StartCoroutine(Lerp.LerpValue(value => I_curtainOverVideo.color = value, new Color(0, 0, 0, 1), new Color(0, 0, 0, 0), 1, Color.Lerp));
+
+        while (true)
+        {
+            //videoPlayer가 실행된지 1초 이상이면서 비디오가 재생중이 아니라면
+            if (videoPlayer.time > 1 && !videoPlayer.isPlaying || Input.GetMouseButtonDown(0))
+            {
+                videoPlayer.Stop();
+                break;
+            }
+            yield return null;
+        }
+
+        yield return StartCoroutine(Lerp.LerpValue(value => I_curtainOverVideo.color = value, new Color(0, 0, 0, 0), new Color(0, 0, 0, 1), 1, Color.Lerp));
+        
+        DestroyImmediate(videoPlayer.gameObject);
+        DestroyImmediate(I_curtainOverVideo.gameObject);
+
         yield return new WaitForSeconds(1);
         StartCoroutine(Lerp.LerpValue<float>(volume => AS_mainLoop.volume = volume, 0, 1, 4, Mathf.Lerp));
         yield return new WaitForSeconds(1);
@@ -186,16 +210,16 @@ public class MainScene : MonoBehaviour
         float elapsedTime = 0f;
 
         Color startColor = I_curtain.color;
-        Color endColor = I_curtain.color;
+        Color endColor   = I_curtain.color;
         if (open)
         {
             startColor.a = 1f;
-            endColor.a = 0f;
+            endColor.a   = 0f;
         }
         else
         {
             startColor.a = 0f;
-            endColor.a = 1f;
+            endColor.a   = 1f;
         }
 
 
@@ -214,14 +238,11 @@ public class MainScene : MonoBehaviour
             yield return StartCoroutine(Lerp.LerpValue<float>(volume => AS_mainLoop.volume = volume, 1, 0, 1, Mathf.Lerp));
             SceneManager.LoadScene("Levels");
         }
-            
+
         if (quit)
         {
             yield return StartCoroutine(Lerp.LerpValue<float>(volume => AS_mainLoop.volume = volume, 1, 0, 1, Mathf.Lerp));
             Application.Quit();
         }
-            
-        
     }
-
 }

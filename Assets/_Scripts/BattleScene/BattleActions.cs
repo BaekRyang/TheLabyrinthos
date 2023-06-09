@@ -2,7 +2,9 @@ using MoreMountains.Feedbacks;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using TypeDefs;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = System.Random;
@@ -33,7 +35,14 @@ public class BattleActions : MonoBehaviour
     Random     rand = new Random();
 
     [Header("Set In Inspector")]
-    [SerializeField] public MMF_Player[] MMF_player;
+    [SerializeField]
+    public MMF_Player[] MMF_player;
+
+    [SerializeField] public  GameObject  damageObject;
+    [SerializeField] public  Material    critMaterial;
+    [SerializeField] public  Color       critColor;
+    [SerializeField] public  Color       missedColor;
+    [DoNotSerialize] private AudioSource audioSource;
 
     public IEnumerator LoadSetting()
     {
@@ -41,7 +50,7 @@ public class BattleActions : MonoBehaviour
         PS_playerStats = P_player.GetPlayerStats();
 
         BM_BattleMain = GetComponent<BattleMain>();
-        
+
         dict_attackTable.Add(Parts.Weakpoint, new AttackPair(WEAKPOINT_DMG, WEAKPOINT_ACC));
         dict_attackTable.Add(Parts.Thorax,    new AttackPair(THORAX_DMG,    THORAX_ACC));
         dict_attackTable.Add(Parts.Outer,     new AttackPair(OUTER_DMG,     OUTER_ACC));
@@ -50,6 +59,8 @@ public class BattleActions : MonoBehaviour
         thoraxACC    = BASE_ACCURACY * dict_attackTable[Parts.Thorax].accuracy;
         outerACC     = BASE_ACCURACY * dict_attackTable[Parts.Outer].accuracy;
 
+        
+        audioSource = GetComponent<AudioSource>();
         gameObject.SetActive(false); //전부 로딩 되면 오브젝트 끄기
         yield return null;
     }
@@ -105,11 +116,11 @@ public class BattleActions : MonoBehaviour
 
     public void Attack(bool b_IsPlayer, Parts part = Parts.Thorax)
     {
-        AudioClip clip;
         int       randInt = rand.Next(101);
-        bool      isHit  = false;
+        bool      isHit   = false;
         BM_BattleMain.b_paused = true;
-        
+        float damage = 0;
+
         if (b_IsPlayer)
         {
             int accInt = (int)(BASE_ACCURACY * dict_attackTable[part].accuracy * P_player.WP_weapon.f_accuracyMult);
@@ -118,10 +129,10 @@ public class BattleActions : MonoBehaviour
                 accInt)   //기본 정확도 x 부위 정확도 계수
             {
                 isHit = true;
-                
-                float damage = ((PS_playerStats.damage + P_player.WP_weapon.i_damage) *          //플레이어 공격력
-                                (dict_attackTable[part].damage)                       *          //부위 데미지 계수
-                                (1 - CR_Enemy.defense / (float)(CR_Enemy.defense + CONST_DEF))); //방어력 계산
+
+                damage = ((PS_playerStats.damage + P_player.WP_weapon.i_damage) *          //플레이어 공격력
+                          (dict_attackTable[part].damage)                       *          //부위 데미지 계수
+                          (1 - CR_Enemy.defense / (float)(CR_Enemy.defense + CONST_DEF))); //방어력 계산
 
                 double d_damageRange = P_player.WP_weapon.i_damageRange;
                 damage += (float)(rand.NextDouble() * (d_damageRange * 2) - d_damageRange);
@@ -138,26 +149,26 @@ public class BattleActions : MonoBehaviour
                 switch (part)
                 {
                     case Parts.Weakpoint:
-                        clip = BM_BattleMain.AC_playerAttackWeakPoint[rand.Next(BM_BattleMain.AC_playerAttackWeakPoint.Length)];
+                        audioSource.clip = BM_BattleMain.AC_playerAttackWeakPoint[rand.Next(BM_BattleMain.AC_playerAttackWeakPoint.Length)];
                         break;
                     case Parts.Thorax:
-                        clip = BM_BattleMain.AC_playerAttackThorax[rand.Next(BM_BattleMain.AC_playerAttackThorax.Length)];
+                        audioSource.clip = BM_BattleMain.AC_playerAttackThorax[rand.Next(BM_BattleMain.AC_playerAttackThorax.Length)];
                         break;
                     case Parts.Outer:
-                        clip = BM_BattleMain.AC_playerAttackOuter[rand.Next(BM_BattleMain.AC_playerAttackOuter.Length)];
+                        audioSource.clip = BM_BattleMain.AC_playerAttackOuter[rand.Next(BM_BattleMain.AC_playerAttackOuter.Length)];
                         break;
                     default:
-                        clip = BM_BattleMain.AC_playerAttackThorax[rand.Next(BM_BattleMain.AC_playerAttackThorax.Length)];
+                        audioSource.clip = BM_BattleMain.AC_playerAttackThorax[rand.Next(BM_BattleMain.AC_playerAttackThorax.Length)];
                         break;
                 }
-                
+
                 //내구도 하나 빼주기
                 P_player.WP_weapon.ConsumeDurability();
             }
             else
             {
                 //빗나가면 다른 소리로
-                clip = BM_BattleMain.AC_playerMissed[rand.Next(BM_BattleMain.AC_playerMissed.Length)];
+                audioSource.clip = BM_BattleMain.AC_playerMissed[rand.Next(BM_BattleMain.AC_playerMissed.Length)];
             }
 
             P_player.ConsumeTurn(); //턴 하나 소모
@@ -172,8 +183,6 @@ public class BattleActions : MonoBehaviour
             //                                     BM_BattleMain.SPR_playerAttack,
             //                                     clip)
             // );
-
-
         }
         else
         {
@@ -181,9 +190,9 @@ public class BattleActions : MonoBehaviour
                 BASE_ACCURACY) //**크리쳐별 정확도를 가져와서 써야함
             {
                 isHit = true;
-                
-                float damage = (CR_Enemy.damage * (1 - PS_playerStats.defense / (float)(PS_playerStats.defense + CONST_DEF)));
-                damage                =  Mathf.Round(damage * 10f) / 10f;
+
+                damage                =  (CR_Enemy.damage * (1 - PS_playerStats.defense / (float)(PS_playerStats.defense + CONST_DEF)));
+                damage                =  Mathf.Round(damage                             * 10f) / 10f;
                 PS_playerStats.health -= damage;
                 PS_playerStats.health =  Mathf.Round(PS_playerStats.health * 10f) / 10f;
                 BM_BattleMain.ChangeSliderValue(true, StatsType.Hp, PS_playerStats.health);
@@ -193,14 +202,14 @@ public class BattleActions : MonoBehaviour
                                          1f));
 
 
-                clip = BM_BattleMain.AC_enemyAttack[rand.Next(BM_BattleMain.AC_enemyAttack.Length)];
+                audioSource.clip = BM_BattleMain.AC_enemyAttack[rand.Next(BM_BattleMain.AC_enemyAttack.Length)];
             }
             else
             {
-                clip = BM_BattleMain.AC_playerMissed[rand.Next(BM_BattleMain.AC_playerMissed.Length)];
+                audioSource.clip = BM_BattleMain.AC_playerMissed[rand.Next(BM_BattleMain.AC_playerMissed.Length)];
             }
 
-            
+
             Debug.Log("Creature : " + randInt + " > " + BASE_ACCURACY);
             // StartCoroutine(
             //     BM_BattleMain.PlayAttackScratch(BM_BattleMain.playerAttackAnchor,
@@ -210,7 +219,7 @@ public class BattleActions : MonoBehaviour
             // );
         }
 
-        StartCoroutine(AnimateAction(isHit ? ActionTypes.Attack : ActionTypes.Missed, b_IsPlayer));
+        StartCoroutine(AnimateAction(isHit ? ActionTypes.Attack : ActionTypes.Missed, b_IsPlayer, damage, false));
     }
 
     IEnumerator LerpColor(UIModElements targetElements, SliderColor to, float duration, bool isEndColor = false)
@@ -282,27 +291,49 @@ public class BattleActions : MonoBehaviour
         typeDict[Parts.Outer].damage.text     = ((baseDamage - P_player.WP_weapon.i_damageRange) * dict_attackTable[Parts.Outer].damage     * (creatureDef)).ToString("0.##") + " ~ " + ((baseDamage + P_player.WP_weapon.i_damageRange) * dict_attackTable[Parts.Outer].damage     * (creatureDef)).ToString("0.##") + " DMG";
     }
 
-    private IEnumerator AnimateAction(ActionTypes acType, bool isPlayer)
+    private IEnumerator AnimateAction(ActionTypes acType, bool isPlayer, float damage, bool crit = false)
     {
         var targetMMF = isPlayer ? MMF_player[0] : MMF_player[1];
+        var dmgObject = Instantiate(damageObject,
+                                    transform.position + (isPlayer ? Vector3.left * 120: Vector3.right * 550),
+                                    Quaternion.identity,
+                                    BM_BattleMain.damageIndicate
+                                    );
+        var dmgText   = dmgObject.GetComponentInChildren<TMP_Text>();
+        var dmgMMF    = dmgObject.GetComponent<MMF_Player>();
+        dmgMMF.Initialization();
 
         switch (acType)
         {
             case ActionTypes.Attack:
                 BM_BattleMain.creatureAttackSprite.sprite = isPlayer ? CR_Enemy.spritePack.cut_Hited : CR_Enemy.spritePack.cut_Attack;
+                dmgText.text                              = damage.ToString("0.#");
+                if (crit)
+                {
+                    dmgObject.transform.GetChild(1).gameObject.SetActive(true);
+                    dmgText.fontMaterial = critMaterial;
+                    dmgText.color        = critColor;
+                }
                 // BM_BattleMain.playerAttackSprite.sprite   = isPlayer ? P_player.cut_Attack : P_player.cut_Hited;
                 break;
             case ActionTypes.Missed:
                 BM_BattleMain.creatureAttackSprite.sprite = isPlayer ? CR_Enemy.spritePack.cut_Avoid : CR_Enemy.spritePack.cut_Attack;
+                dmgText.text                              = "빗나감!";
+                dmgText.color                             = missedColor;
+                
                 // BM_BattleMain.playerAttackSprite.sprite   = isPlayer ? P_player.cut_Attack : P_player.cut_Avoid;
                 break;
         }
-        
+
         BM_BattleMain.playerAttackScratch.gameObject.SetActive(isPlayer);
         BM_BattleMain.creatureAttackScratch.gameObject.SetActive(!isPlayer);
-        
+
+        dmgMMF.PlayFeedbacks();
         targetMMF.PlayFeedbacks();
+        audioSource.Play();
+        Debug.Log("WaitStart");
         yield return new WaitForSeconds(targetMMF.TotalDuration / 2f);
+        Debug.Log("WaitEnd");
 
         //애니메이션 출력중 전투 종료 조건을 검사하여 전투씬 종료 시키기
         if (PS_playerStats.health <= 0) //플레이어 체력 먼저 검사
@@ -310,19 +341,19 @@ public class BattleActions : MonoBehaviour
             GameManager.Instance.GameOver();
             yield break;
         }
-        
+
         if (CR_Enemy.health <= 0) //그다음 크리쳐 체력 검사
         {
             StartCoroutine(BM_BattleMain.EndFight(true));
             yield break;
         }
-        
+
         //종료 조건이 안되면 애니메이션 끝날때까지 대기
         yield return new WaitForSeconds(targetMMF.TotalDuration / 2f);
-        
+
         //Reverse Feedback Play
         MMF_player[2].PlayFeedbacks();
-
+        DestroyImmediate(dmgObject);
         BM_BattleMain.EndTurn(isPlayer);
         yield return null;
     }

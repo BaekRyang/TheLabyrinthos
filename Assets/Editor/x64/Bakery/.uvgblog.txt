@@ -6228,3 +6228,301 @@ Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA1_f
 Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/RoomTest_LMA2_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/RoomTest_LMA2_final.hdr" 1024
 Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
 Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+2023-6-8
+Rendering UV GBuffer for Lobby_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_Lobby_LM0.lz4" 2 0 0 0
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_12" 4 0 0 batchpointlight_0_0_12.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Lobby_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Lobby_LM0_diffuse" 4 16 0 "gi_Lobby_LM00.bin" "Lobby_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Lobby_LM0_diffuse" 4 16 0 "gi_Lobby_LM01.bin" "Lobby_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Lobby_LM0_diffuse" 4 16 0 "gi_Lobby_LM02.bin" "Lobby_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Lobby_LM0_diffuse" 4 16 0 "gi_Lobby_LM03.bin" "Lobby_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Lobby_LM0_final" 4 16 0 "gi_Lobby_LM04.bin" "Lobby_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/Lobby_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/Lobby_LM0_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "Lobby_LM0_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/Lobby_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/Lobby_LM0_final.hdr" 1024
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 512x512: 1
+Num alphas of 512x1024: 1
+Num alphas of 1024x512: 1
+Num alphas of 1024x1024: 1
+Num alphas of 2048x866: 1
+Done
+Rendering UV GBuffer for Lobby_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_Lobby_LM0.lz4" 2 0 0 0
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_12" 4 0 0 batchpointlight_0_0_12.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Lobby_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Lobby_LM0_diffuse" 4 16 0 "gi_Lobby_LM00.bin" "Lobby_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Lobby_LM0_diffuse" 4 16 0 "gi_Lobby_LM01.bin" "Lobby_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Lobby_LM0_diffuse" 4 16 0 "gi_Lobby_LM02.bin" "Lobby_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Lobby_LM0_diffuse" 4 16 0 "gi_Lobby_LM03.bin" "Lobby_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Lobby_LM0_final" 4 16 0 "gi_Lobby_LM04.bin" "Lobby_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/Lobby_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/Lobby_LM0_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "Lobby_LM0_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/Lobby_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/Lobby_LM0_final.hdr" 1024
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 512x512: 1
+Num alphas of 512x1024: 1
+Num alphas of 1024x512: 1
+Num alphas of 1024x1024: 1
+Num alphas of 2048x866: 1
+Done
+Rendering UV GBuffer for Lobby_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_Lobby_LM0.lz4" 2 0 0 0
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_12" 4 0 0 batchpointlight_0_0_12.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Lobby_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Lobby_LM0_diffuse" 4 16 0 "gi_Lobby_LM00.bin" "Lobby_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Lobby_LM0_diffuse" 4 16 0 "gi_Lobby_LM01.bin" "Lobby_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Lobby_LM0_diffuse" 4 16 0 "gi_Lobby_LM02.bin" "Lobby_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Lobby_LM0_diffuse" 4 16 0 "gi_Lobby_LM03.bin" "Lobby_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Lobby_LM0_final" 4 16 0 "gi_Lobby_LM04.bin" "Lobby_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/Lobby_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/Lobby_LM0_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "Lobby_LM0_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/Lobby_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/Lobby_LM0_final.hdr" 1024
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 512x512: 1
+Num alphas of 512x1024: 1
+Num alphas of 1024x512: 1
+Num alphas of 1024x1024: 1
+Num alphas of 2048x866: 1
+Done
+Rendering UV GBuffer for Lobby_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_Lobby_LM0.lz4" 2 0 0 0
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_12" 4 0 0 batchpointlight_0_0_12.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Lobby_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Lobby_LM0_diffuse" 4 16 0 "gi_Lobby_LM00.bin" "Lobby_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Lobby_LM0_diffuse" 4 16 0 "gi_Lobby_LM01.bin" "Lobby_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Lobby_LM0_diffuse" 4 16 0 "gi_Lobby_LM02.bin" "Lobby_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Lobby_LM0_diffuse" 4 16 0 "gi_Lobby_LM03.bin" "Lobby_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Lobby_LM0_final" 4 16 0 "gi_Lobby_LM04.bin" "Lobby_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/Lobby_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/Lobby_LM0_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "Lobby_LM0_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/Lobby_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/Lobby_LM0_final.hdr" 1024
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 512x512: 1
+Num alphas of 512x1024: 1
+Num alphas of 1024x512: 1
+Num alphas of 1024x1024: 1
+Num alphas of 2048x866: 1
+Done
+Rendering UV GBuffer for Lobby_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_Lobby_LM0.lz4" 2 0 0 0
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_12" 4 0 0 batchpointlight_0_0_12.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Lobby_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Lobby_LM0_diffuse" 4 16 0 "gi_Lobby_LM00.bin" "Lobby_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Lobby_LM0_diffuse" 4 16 0 "gi_Lobby_LM01.bin" "Lobby_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Lobby_LM0_diffuse" 4 16 0 "gi_Lobby_LM02.bin" "Lobby_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Lobby_LM0_diffuse" 4 16 0 "gi_Lobby_LM03.bin" "Lobby_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Lobby_LM0_final" 4 16 0 "gi_Lobby_LM04.bin" "Lobby_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/Lobby_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/Lobby_LM0_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "Lobby_LM0_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/Lobby_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/Lobby_LM0_final.hdr" 1024
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll

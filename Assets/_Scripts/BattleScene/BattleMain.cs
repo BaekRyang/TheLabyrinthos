@@ -68,14 +68,14 @@ public class BattleMain : MonoBehaviour
     [HideInInspector] public UIModElements playerElements;
     [HideInInspector] public UIModElements enemyElements;
 
-    [SerializeField]                                                                                           public  RectTransform creatureAttackAnchor;
-    [SerializeField]                                                                                           public  RectTransform playerAttackAnchor;
-    [DoNotSerialize]                                                                                           public  Image         creatureAttackSprite;
-    [DoNotSerialize]                                                                                           public  Image         playerAttackSprite;
-    [FormerlySerializedAs("ppAttackScratch")] [FormerlySerializedAs("creatureAttackScratch")] [DoNotSerialize] public  Image         playerAttackScratch;
-    [FormerlySerializedAs("playerAttackScratch")] [DoNotSerialize]                                             public  Image         creatureAttackScratch;
-    [SerializeField]                                                                                           public  RectTransform screenEffects;
-    [SerializeField]                                                                                           private RectTransform damageIndicate;
+    [SerializeField] public RectTransform creatureAttackAnchor;
+    [SerializeField] public RectTransform playerAttackAnchor;
+    [DoNotSerialize] public Image         creatureAttackSprite;
+    [DoNotSerialize] public Image         playerAttackSprite;
+    [DoNotSerialize] public Image         playerAttackScratch;
+    [DoNotSerialize] public Image         creatureAttackScratch;
+    [SerializeField] public RectTransform screenEffects;
+    [SerializeField] public RectTransform damageIndicate;
 
     [Header("Set in Inspector : Colors")]
     [SerializeField]
@@ -101,8 +101,8 @@ public class BattleMain : MonoBehaviour
 
         creatureAttackSprite  = creatureAttackAnchor.GetChild(0).GetComponent<Image>();
         playerAttackSprite    = playerAttackAnchor.GetChild(0).GetComponent<Image>();
-        playerAttackScratch = creatureAttackAnchor.GetChild(1).GetComponent<Image>();
-        creatureAttackScratch   = playerAttackAnchor.GetChild(1).GetComponent<Image>();
+        playerAttackScratch   = creatureAttackAnchor.GetChild(1).GetComponent<Image>();
+        creatureAttackScratch = playerAttackAnchor.GetChild(1).GetComponent<Image>();
     }
 
     public IEnumerator LoadSetting()
@@ -206,8 +206,8 @@ public class BattleMain : MonoBehaviour
         IMG_enemyDefault.transform.GetChild(0).GetComponent<Image>().sprite =
             IMG_enemyDefault.GetComponent<Image>().sprite =
                 CR_Opponent.spritePack.fullBody;
-        
-        creatureAttackScratch.sprite   = CR_Opponent.spritePack.attackScratch;
+
+        creatureAttackScratch.sprite = CR_Opponent.spritePack.attackScratch;
         // creatureAttackScratch.sprite = P_player.attackScratch; //지금은 무기별 이펙트가 없으니
 
         //플레이어 스텟을 가져와서 저장한다. (플레이어는 일회용이 아니므로 ref 으로 넘어옴)
@@ -226,6 +226,10 @@ public class BattleMain : MonoBehaviour
         // UpdateDamageIndicator();                                        //공격력 표시창 업데이트
         b_paused = false;
 
+        //damage indicator 안에 있는 자식 오브젝트들이 있으면 전부 삭제
+        foreach (Transform child in damageIndicate)
+            DestroyImmediate(child.gameObject);
+        
         InventoryManager.Instance.openedInventory = inventory.transform.GetComponentInChildren<Inventory>();
         yield return StartCoroutine(Lerp.LerpValue(color => background.color = color,
                                                    new Color(.5f, .5f, .5f, 0),

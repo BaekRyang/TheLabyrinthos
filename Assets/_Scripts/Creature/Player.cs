@@ -17,8 +17,6 @@ public class Player : MonoBehaviour
     public Weapon       WP_weapon;
     public List<Effect> effectList = new List<Effect>();
     
-    public int   defaultExp = 5;
-    public float defaultStr = 1.1f;
     void Awake()
     {
         PS_playerStats = new PlayerStats();
@@ -58,6 +56,14 @@ public class Player : MonoBehaviour
             if (remain == 0)
                 effectList.Remove(effect);
         }
+    }
+
+    public bool AddExp(int value)
+    {
+        PS_playerStats.Exp += value;
+        
+
+        return false;
     }
 }
 

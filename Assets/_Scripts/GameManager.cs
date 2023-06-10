@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject[] GO_shopPrefabs;
 
-    [Header("Level Controll")] public int i_level = 1;
+    [Header("Level Control")] public int i_level = 1;
 
     [HideInInspector] public Dictionary<string, Random> dict_randomObjects = new Dictionary<string, Random>();
 
@@ -67,6 +67,8 @@ public class GameManager : MonoBehaviour
     public EffectsManager effectsManager;
 
     [Header("Battle Controll")] public bool b_nowBattle;
+
+    [Header("EXP Control")] public int levelEXP = 15;
 
 
     void Awake()

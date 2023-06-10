@@ -244,7 +244,11 @@ public class BattleMain : MonoBehaviour
         switch (statsType)
         {
             case StatsType.Hp:
-                if (b_IsPlayer) SL_playerHP.value = f_val;
+                if (b_IsPlayer)
+                {
+                    SL_playerHP.maxValue = PS_playerStats.MaxHealth;
+                    SL_playerHP.value = f_val;
+                }
                 else SL_enemyHP.value             = f_val;
                 break;
             case StatsType.Tp:
@@ -315,8 +319,11 @@ public class BattleMain : MonoBehaviour
         PC_player.b_camControll = false;
         PC_player.ExitBattle();
 
-        //외부 상시 스텟바 업데이트
-        GameManager.Instance.UpdateStatsSlider(StatsType.Hp);
+        P_player.PS_playerStats.Exp += GameManager.Instance.levelEXP;
+        
+        // //외부 상시 스텟바 업데이트
+        // GameManager.Instance.UpdateStatsSlider(StatsType.Hp);
+        // GameManager.Instance.UpdateStatsSlider(StatsType.Exp);
 
         yield return new WaitForSeconds(0.5f);
         GameManager.Instance.StartCoroutine(GameManager.Instance.CurtainModify(true, 1)); //BattleMain은 사라질거니까 GM에서 실행해준다.

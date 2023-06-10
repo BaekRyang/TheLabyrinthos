@@ -119,7 +119,7 @@ public class CSVReader : MonoBehaviour
                         item.dele_itemEffect += () =>
                         {
                             var hp = Player.Instance.PS_playerStats;
-                            hp.Health += (hp.MaxHealth - hp.Health) * item.restoreHpLossPercent;
+                            hp.Health += hp.MissingHealth * item.restoreHpLossPercent;
                             if (hp.Health > hp.MaxHealth)
                                 hp.Health = hp.MaxHealth;
                         };
@@ -171,7 +171,7 @@ public class CSVReader : MonoBehaviour
                         item.dele_itemEffect += () =>
                         {
                             var hp = Player.Instance.PS_playerStats;
-                            hp.Health += (hp.MaxHealth - hp.Health) * item.restoreHpLossPercent;
+                            hp.Health += hp.MissingHealth * item.restoreHpLossPercent;
                             if (hp.Health > hp.MaxHealth)
                                 hp.Health = hp.MaxHealth;
                         };

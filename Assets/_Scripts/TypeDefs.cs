@@ -99,12 +99,13 @@ namespace TypeDefs
         //기본 스텟
         private float health       = 1.0f;
         private float maxHealth    = 1000.0f;
-        private float exp          = 0.0f;
+        private int   exp          = 0;
         private float speed        = 1.0f;
         private int   defense      = 5;
         private int   prepareSpeed = 0;
         private float accuracyMult = 1;
         private int   damage       = 10;
+        private int   level        = 1;
         
         public float Health
         {
@@ -129,13 +130,26 @@ namespace TypeDefs
                     InventoryManager.Instance.stats.UpdateUI();
             }
         }
+        
+        public float MissingHealth => MaxHealth - Health;
 
-        public float Exp
+        public int Exp
         {
             get => exp;
             set
             {
-                exp = value;
+                exp += value;
+                if (Exp >= 100)
+                {
+                    exp -= 100;
+                    Level++;
+                    MaxHealth += 5;
+                    Health    += MissingHealth / 2;
+                    Damage    += 2;
+                    Defense   += 2;
+                }
+                
+                GameManager.Instance.UpdateStatsSlider(StatsType.Exp);
                 if (InventoryManager.Instance.b_UIOpen)
                     InventoryManager.Instance.stats.UpdateUI();
             }
@@ -187,6 +201,17 @@ namespace TypeDefs
             set
             {
                 damage = value;
+            }
+        }
+
+        public int Level
+        {
+            get => level;
+            set
+            {
+                level = value;
+                if (InventoryManager.Instance.b_UIOpen)
+                    InventoryManager.Instance.stats.UpdateUI();
             }
         }
     }

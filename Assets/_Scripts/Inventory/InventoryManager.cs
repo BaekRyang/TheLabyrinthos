@@ -69,11 +69,11 @@ public class InventoryManager : MonoBehaviour
 
             CreateSyringes();
             
-            foreach (var (_, value) in definedItems)
-            {
-                if (value.i_id == 306) continue;
-                AddItem(value, 2);
-            }
+            // foreach (var (_, value) in definedItems)
+            // {
+            //     if (value.i_id == 306) continue;
+            //     AddItem(value, 2);
+            // }
         }
         
         AddItem(definedItems[0]); //기본칼 추가  
@@ -93,7 +93,7 @@ public class InventoryManager : MonoBehaviour
         GameObject GO_targetUI = null;
         if (target == "Inventory")
         {
-            // stats.UpdateUI();
+            stats.UpdateUI();
             effectIndicator.UpdateUI();
             equippedItem.UpdateUI();
             GO_targetUI = GO_inventory;

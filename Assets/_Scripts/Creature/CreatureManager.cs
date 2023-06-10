@@ -34,6 +34,9 @@ public class CreatureManager : MonoBehaviour
 
     public IEnumerator LoadSettings()
     {
+        if (spritesDictionary.Count > 0)
+            spritesDictionary.Clear();
+        
         foreach (var sprite in sprites)
         {
             spritesDictionary.Add(sprite.creatureName, sprite);

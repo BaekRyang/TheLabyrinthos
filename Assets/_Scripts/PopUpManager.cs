@@ -44,8 +44,6 @@ public class PopUpManager : MonoBehaviour
 
     private void Awake()
     {
-        Instance ??= this;
-
         infoBoxP =
             new PopUpInfo()
             {
@@ -87,6 +85,12 @@ public class PopUpManager : MonoBehaviour
         infoBoxBattleInspect.transform.parent.parent.gameObject.SetActive(false);
         
         descBox.gameObject.SetActive(false);
+    }
+    
+    public IEnumerator LoadSetting()
+    {
+        Instance = this;
+        yield return null;
     }
 
     public static IEnumerator UpdateUI(PopUpInfo pack)

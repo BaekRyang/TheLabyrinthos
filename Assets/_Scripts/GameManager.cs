@@ -68,9 +68,16 @@ public class GameManager : MonoBehaviour
 
     [Header("Battle Controll")] public bool b_nowBattle;
 
-    [Header("EXP Control")] public int levelEXP = 15;
+    [Header("EXP Control")]     public int        levelEXP    = 15;
+    [Header("UI Control")]
+    public float pressedTime = 0;
+    public Image tabFill;
+    
+    [Header("Minimap Control")] public MMF_Player minimapMMF;
 
+    public PlayerController playerController;
 
+    private bool loaded = false;
     void Awake()
     {
         Instance ??= this;
@@ -126,6 +133,10 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         //Awake나 Start 대기용
 
+        yield return GetComponent<PopUpManager>().LoadSetting();
+        yield return new WaitForSeconds(0.1f);
+        Debug.Log("PopUpManager Load Complete");
+
         yield return StartCoroutine(GetComponent<CSVReader>().LoadSetting());
         yield return new WaitForSeconds(0.1f);
         Debug.Log("Item Table Load Complete");
@@ -154,21 +165,62 @@ public class GameManager : MonoBehaviour
         UpdateStatsSlider(StatsType.Exp);
 
         ResetLevel(i_level);
-        
-        Player.Instance.GetComponent<PlayerController>().ResetSetting();
+
+        playerController = Player.Instance.GetComponent<PlayerController>();
+        playerController.ResetSetting();
 
         yield return new WaitForSeconds(2f);
         playerRigid.useGravity = true;
         go_player.transform.position = Vector3.zero;
         yield return StartCoroutine(CurtainModify(true, 2));
+        loaded = true;
         yield return null;
     }
 
     void Update()
     {
-        //UI 켜거나 끄기
-        if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.Escape))
-            Inventory("Inventory");
+        if (!b_nowBattle) //전투중에서는 전부 작동하지 않도록
+        {
+            //UI 켜거나 끄기
+            if (Input.GetKeyDown(KeyCode.Escape) && pressedTime != -1) //Esc는 기다리지 않고 바로 열어준다.
+                Inventory("Inventory");                                //그런데 탭을 누르고 있으면 무시한다.
+            
+            if (Input.GetKey(KeyCode.Tab) && !playerController.b_camControll) //탭을 누르고 있으면 게이지를 채워준다.
+            {                                                                 //특정 상황안에 있으면 작동하지 않음
+                tabFill.fillAmount = pressedTime / 0.5f;
+                pressedTime += Time.deltaTime;
+                if (pressedTime > 0.5f)                                       //일정시간 계속 누르고 있었으면 GoodTrip을 열어준다.
+                {
+                    playerController.vertical = playerController.horizontal = 0;
+                    minimapMMF.Direction      = MMFeedbacks.Directions.TopToBottom;
+                    minimapMMF.PlayFeedbacks();
+                    Cursor.lockState               = CursorLockMode.Confined;
+                    playerController.b_camControll = true;
+                    pressedTime                    = -1;
+                    tabFill.fillAmount             = 1;
+                }
+            }
+            
+            //탭을 뗐을때 누르고 있었던 시간이 0.5초 이하면 인벤토리를 열어준다.
+            if (Input.GetKeyUp(KeyCode.Tab))                 //탭을 뗐을때
+            {
+                if (pressedTime <= 0.5f && pressedTime >= 0)//누르고 있었던 시간이 0.5초 이하면
+                    Inventory("Inventory");                 //인벤토리를 열어준다.
+
+                if (pressedTime < 0)                        //누르고 있었던 시간이 음수면 GoodTrip이 열려있는것임
+                {                                           //그러니까 닫아준다.
+                    playerController.b_camControll = false;
+                    minimapMMF.Direction           = MMFeedbacks.Directions.BottomToTop;
+                    minimapMMF.PlayFeedbacks();
+                    Cursor.lockState = CursorLockMode.Locked;
+                
+                }
+            
+                //탭 뗐을때 값 초기화
+                pressedTime        = 0;
+                tabFill.fillAmount = 0;
+            }
+        }
     }
 
     public void ResetLevel(int level)

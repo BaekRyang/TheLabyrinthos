@@ -219,9 +219,10 @@ public class PlayerController : MonoBehaviour
         prevRoom.GetComponent<RoomController>().ChangeRoomState(true);
 
         //위랑 똑같지만 미니맵 전용
-        prevRoomMinimap.GetComponent<Image>().color = Color.gray;
-        prevRoomMinimap                             = Minimap.instance.GetRoom(enteredRoomIndex);
-        prevRoomMinimap.GetComponent<Image>().color = Color.white;
+        prevRoomMinimap.GetComponent<GoodTrip>().entered = true;
+        prevRoomMinimap.GetComponent<Image>().color      = Color.gray;
+        prevRoomMinimap                                  = Minimap.instance.GetRoom(enteredRoomIndex);
+        prevRoomMinimap.GetComponent<Image>().color      = Color.white;
         Minimap.instance.SetAnchor(enteredRoomIndex);
 
         if (prevRoom.GetComponent<RoomController>().hasCreature) //들어간 방에 크리쳐가 있으면

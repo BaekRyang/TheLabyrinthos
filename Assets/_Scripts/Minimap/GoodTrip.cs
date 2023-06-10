@@ -1,3 +1,4 @@
+using MoreMountains.Feedbacks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,7 @@ public class GoodTrip : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         if (!entered)
-            Debug.Log("Not Yet");
+            GetComponent<MMF_Player>().PlayFeedbacks();
         else
         {
             if (index == Player.Instance.GetComponent<PlayerController>().roomIndex)

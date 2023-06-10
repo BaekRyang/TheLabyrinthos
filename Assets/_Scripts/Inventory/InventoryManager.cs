@@ -1,8 +1,11 @@
+using MoreMountains.Feedbacks;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using TypeDefs;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class InventoryManager : MonoBehaviour
@@ -38,6 +41,9 @@ public class InventoryManager : MonoBehaviour
     public EffectIndicator   effectIndicator;
 
     public GameObject ui;
+
+    public Transform  itemNotificationAnchor;
+    public GameObject getNotifiactionPrefab;
 
     public IEnumerator LoadSetting()
     {
@@ -178,6 +184,7 @@ public class InventoryManager : MonoBehaviour
                 weaponInventory.Add(item.i_id, new List<Weapon>());
             //그 다음 리스트에 아이템을 추가해준다.
             weaponInventory[item.i_id].Add(new Weapon(item as Weapon));
+            PlayGetNotification(item, amount);
             return;
         }
 
@@ -185,6 +192,8 @@ public class InventoryManager : MonoBehaviour
             inventory[item.i_id] += amount;   //개수만큼 더해주고
         else                                       //없으면
             inventory.Add(item.i_id, amount); //새로 만들어준다.
+        
+        PlayGetNotification(item, amount);
     }
 
     public bool RemoveItem(Item item, int amount = 1)
@@ -349,5 +358,19 @@ public class InventoryManager : MonoBehaviour
             }
         }
 
+    }
+
+    private void PlayGetNotification(Item item, int count)
+    {
+        Debug.Log("Item Added");
+        var noti     = Instantiate(getNotifiactionPrefab, itemNotificationAnchor);
+        var notiIcon = noti.transform.GetComponentsInChildren<Image>()[1];
+        var notiText = noti.transform.GetComponentInChildren<TMP_Text>();
+        var notiAnim = noti.GetComponent<MMF_Player>();
+        notiAnim.Initialization();
+        
+        notiIcon.sprite = GetImage(item.i_id);
+        notiText.text   = $"<color=#00ff68>+{count}</color> {definedItems[item.i_id].s_name}";
+        noti.GetComponent<MMF_Player>().PlayFeedbacks();
     }
 }

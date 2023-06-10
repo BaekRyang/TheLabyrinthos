@@ -164,7 +164,7 @@ public class BattleMain : MonoBehaviour
         {
             //speed를 기반으로 증가량을 계산.
             //0~100까지 증가량은 속도 1.0 기준으로 3초가 걸린다.
-            float tmp_playerIncrement = Time.deltaTime * PS_playerStats.speed * P_player.WP_weapon.f_speedMult * (100 / f_turnDelay);
+            float tmp_playerIncrement = Time.deltaTime * PS_playerStats.Speed * P_player.WP_weapon.f_speedMult * (100 / f_turnDelay);
             float tmp_enemyIncrement  = Time.deltaTime * f_enemySpeed         * (100                                  / f_turnDelay);
 
             //증가량만큼 더해주고
@@ -215,8 +215,8 @@ public class BattleMain : MonoBehaviour
         PS_playerStats = P_player.GetPlayerStats();
 
         //행동 포인트관련 초기화 : 전투 중간에 변경될 일이 있을까? => 있으면 f_Speed같은 경우는 ref로 넘겨줘야함
-        ChangeSliderValue(true, StatsType.Hp, PS_playerStats.health); //체력바 플레이어 체력으로 초기화
-        SL_playerTP.value = PS_playerStats.prepareSpeed               //플레이어 TP를 스텟으로 맞춰줌(선제공격용)
+        ChangeSliderValue(true, StatsType.Hp, PS_playerStats.Health); //체력바 플레이어 체력으로 초기화
+        SL_playerTP.value = PS_playerStats.PrepareSpeed               //플레이어 TP를 스텟으로 맞춰줌(선제공격용)
                           + P_player.WP_weapon.i_preparedSpeed;       //무기 스텟을 더해준다.
 
         SL_enemyHP.value = SL_enemyHP.maxValue = CR_Enemy.health; //Enemy의 체력 초기값 설정 (MAX/NOW)
@@ -262,7 +262,7 @@ public class BattleMain : MonoBehaviour
 
     public void UpdateDamageIndicator()
     {
-        TMP_playerDamage.text = "DMG\n" + (PS_playerStats.damage + P_player.WP_weapon.i_damage);
+        TMP_playerDamage.text = "DMG\n" + (PS_playerStats.Damage + P_player.WP_weapon.i_damage);
         TMP_EnemyDamage.text  = "DMG\n" + CR_Enemy.damage;
     }
 
@@ -306,7 +306,7 @@ public class BattleMain : MonoBehaviour
 
         //인벤토리 내부 값 업데이트
         InventoryManager.Instance.equippedItem.UpdateUI();
-        InventoryManager.Instance.stats.UpdateUI();
+        // InventoryManager.Instance.stats.UpdateUI();
 
         //애니메이션 되감기
         yield return BA_battleActions.MMF_player[2].PlayFeedbacksCoroutine(transform.position);

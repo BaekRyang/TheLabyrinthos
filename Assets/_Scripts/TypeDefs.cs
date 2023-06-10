@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace TypeDefs
@@ -96,14 +97,98 @@ namespace TypeDefs
     public class PlayerStats
     {
         //기본 스텟
-        public float  health       = 100.0f;
-        public float  maxHealth    = 100.0f;
-        public float  exp          = 0.0f;
-        public float  speed        = 1.0f;
-        public int    defense      = 5;
-        public int    prepareSpeed = 0;
-        public float  accuracyMult = 1;
-        public int    damage       = 10;
+        private float health       = 1.0f;
+        private float maxHealth    = 1000.0f;
+        private float exp          = 0.0f;
+        private float speed        = 1.0f;
+        private int   defense      = 5;
+        private int   prepareSpeed = 0;
+        private float accuracyMult = 1;
+        private int   damage       = 10;
+        
+        public float Health
+        {
+            get => health;
+            set
+            {
+                health = value;
+                GameManager.Instance.UpdateStatsSlider(StatsType.Hp);
+                if (InventoryManager.Instance.b_UIOpen)
+                    InventoryManager.Instance.stats.UpdateUI();
+            }
+        }
+
+        public float MaxHealth
+        {
+            get => maxHealth;
+            set
+            {
+                maxHealth = value;
+                GameManager.Instance.UpdateStatsSlider(StatsType.Hp);
+                if (InventoryManager.Instance.b_UIOpen)
+                    InventoryManager.Instance.stats.UpdateUI();
+            }
+        }
+
+        public float Exp
+        {
+            get => exp;
+            set
+            {
+                exp = value;
+                if (InventoryManager.Instance.b_UIOpen)
+                    InventoryManager.Instance.stats.UpdateUI();
+            }
+        }
+
+        public float Speed
+        {
+            get => speed;
+            set
+            {
+                speed = value;
+                if (InventoryManager.Instance.b_UIOpen)
+                    InventoryManager.Instance.stats.UpdateUI();
+            }
+        }
+
+        public int Defense
+        {
+            get => defense;
+            set
+            {
+                defense = value;
+                if (InventoryManager.Instance.b_UIOpen)
+                    InventoryManager.Instance.stats.UpdateUI();
+            }
+        }
+
+        public int PrepareSpeed
+        {
+            get => prepareSpeed;
+            set
+            {
+                prepareSpeed = value;
+            }
+        }
+
+        public float AccuracyMult
+        {
+            get => accuracyMult;
+            set
+            {
+                accuracyMult = value;
+            }
+        }
+
+        public int Damage
+        {
+            get => damage;
+            set
+            {
+                damage = value;
+            }
+        }
     }
     
     #endregion

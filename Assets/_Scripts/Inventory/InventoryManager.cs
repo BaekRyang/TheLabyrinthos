@@ -70,8 +70,10 @@ public class InventoryManager : MonoBehaviour
             }
         }
         
-        AddItem(definedItems[0]); //기본칼 추가
+        AddItem(definedItems[0]); //기본칼 추가  
 
+        Player.Instance.WP_weapon = GetWeaponInstance(0);
+        
         equippedItem.UpdateUI();
         stats.UpdateUI();
         
@@ -85,7 +87,7 @@ public class InventoryManager : MonoBehaviour
         GameObject GO_targetUI = null;
         if (target == "Inventory")
         {
-            stats.UpdateUI();
+            // stats.UpdateUI();
             effectIndicator.UpdateUI();
             equippedItem.UpdateUI();
             GO_targetUI = GO_inventory;

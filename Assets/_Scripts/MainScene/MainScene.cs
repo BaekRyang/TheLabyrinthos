@@ -32,6 +32,7 @@ public class MainScene : MonoBehaviour
 
     [SerializeField] GameObject[] GO_cameras;
 
+    [SerializeField] CanvasGroup warningCG;
     [SerializeField] VideoPlayer videoPlayer;
     bool                         b_loaded;
 
@@ -194,6 +195,13 @@ public class MainScene : MonoBehaviour
     private IEnumerator Open()
     {
         yield return new WaitForSeconds(1f);
+        
+        yield return StartCoroutine(Lerp.LerpValue(value => warningCG.alpha = value, 0, 1f, 1, Mathf.Lerp));
+        yield return new WaitForSeconds(3f);
+        yield return StartCoroutine(Lerp.LerpValue(value => warningCG.alpha = value, 1, 0f, 1, Mathf.Lerp));
+        DestroyImmediate(warningCG.gameObject);
+        
+        yield return new WaitForSeconds(2f);
         yield return StartCoroutine(Lerp.LerpValue(value => I_curtainOverVideo.color = value, new Color(0, 0, 0, 1), new Color(0, 0, 0, 0), 1, Color.Lerp));
 
         while (true)

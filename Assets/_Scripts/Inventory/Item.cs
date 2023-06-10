@@ -12,7 +12,7 @@ public class Item
     public ItemType IT_type;        //아이템 타입
     public bool b_useable;
 
-    public delegate void ParseAttributes(Item item, string[] dataValue, int startIndex); //CSV에서 파일을 읽어서 각 멤버 변수를 초기화 하는 코드가 들어갈 자리
+    public delegate void ParseAttributes(Item item, string[] dataValue); //CSV에서 파일을 읽어서 각 멤버 변수를 초기화 하는 코드가 들어갈 자리
     public ParseAttributes parsing;
 }
 
@@ -72,7 +72,12 @@ public class Disposable : Item
     public Effect effect;
     public Color  color;
     public short  effectID;
-    public Dele   dele_itemEffect; //아이템 효과(함수로)
+
+    public float restoreHp;
+    public float restoreHpPercent;
+    public float restoreHpLossPercent;
+    
+    public Dele  dele_itemEffect; //아이템 효과(함수로)
     public Disposable(Item item)
     {
         IT_type = item.IT_type;
@@ -101,7 +106,7 @@ public class Disposable : Item
     }
 }
 
-public class Food : Item
+public class Food : Disposable
 {
     public Food(Item item)
     {

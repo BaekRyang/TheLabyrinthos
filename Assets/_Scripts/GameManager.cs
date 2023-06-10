@@ -129,7 +129,6 @@ public class GameManager : MonoBehaviour
         Debug.Log("Item Table Load Complete");
 
         yield return StartCoroutine(GetComponent<InventoryManager>().LoadSetting());
-        Player.Instance.WP_weapon = InventoryManager.weaponInventory[0][0];
         yield return new WaitForSeconds(0.1f);
         Debug.Log("ItemManager Load Complete");
 
@@ -300,11 +299,11 @@ public class GameManager : MonoBehaviour
         switch (statsType)
         {
             case StatsType.Hp:
-                SL_hpBar.maxValue = stats.maxHealth;
-                SL_hpBar.value    = stats.health;
+                SL_hpBar.maxValue = stats.MaxHealth;
+                SL_hpBar.value    = stats.Health;
                 break;
             case StatsType.Exp:
-                SL_expBar.value = stats.exp;
+                SL_expBar.value = stats.Exp;
                 break;
         }
     }

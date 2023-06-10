@@ -22,7 +22,7 @@ public class Effect
             endturnEffect = () =>
             {
                 var playerStats = Player.Instance.GetPlayerStats();
-                playerStats.health -= effectStrength;
+                playerStats.Health -= effectStrength;
                 GameManager.Instance.UpdateStatsSlider(StatsType.Hp);
             };
         }
@@ -49,22 +49,22 @@ public class Effect
         switch (effectType)
         {
             case EffectTypes.MaxHealth:
-                playerStats.maxHealth += isPositive ? effectStrength : -effectStrength;
+                playerStats.MaxHealth += isPositive ? effectStrength : -effectStrength;
                 break;
             case EffectTypes.Speed:
-                playerStats.speed += isPositive ? effectStrength * 0.01f : -effectStrength * 0.01f;
+                playerStats.Speed += isPositive ? effectStrength * 0.01f : -effectStrength * 0.01f;
                 break;
             case EffectTypes.Defense:
-                playerStats.defense += isPositive ? effectStrength : -effectStrength;
+                playerStats.Defense += isPositive ? effectStrength : -effectStrength;
                 break;
             case EffectTypes.Accuracy:
-                playerStats.accuracyMult += isPositive ? effectStrength * 0.01f : -effectStrength * 0.01f;
+                playerStats.AccuracyMult += isPositive ? effectStrength * 0.01f : -effectStrength * 0.01f;
                 break;
             case EffectTypes.PrepareSpeed:
-                playerStats.prepareSpeed += isPositive ? effectStrength : -effectStrength;
+                playerStats.PrepareSpeed += isPositive ? effectStrength : -effectStrength;
                 break;
             case EffectTypes.Damage:
-                playerStats.damage += isPositive ? effectStrength : -effectStrength;
+                playerStats.Damage += isPositive ? effectStrength : -effectStrength;
                 break;
             case EffectTypes.Poison:
                 break;

@@ -106,7 +106,7 @@ public class BattleActions : MonoBehaviour
 
     public void ItemUsed()
     {
-        BM_BattleMain.ChangeSliderValue(true, StatsType.Hp, PS_playerStats.health);
+        BM_BattleMain.ChangeSliderValue(true, StatsType.Hp, PS_playerStats.Health);
         P_player.ConsumeTurn();
         BM_BattleMain.EndTurn(true);
         BM_BattleMain.GO_attackList.SetActive(false);
@@ -130,7 +130,7 @@ public class BattleActions : MonoBehaviour
             {
                 isHit = true;
 
-                damage = ((PS_playerStats.damage + P_player.WP_weapon.i_damage) *          //플레이어 공격력
+                damage = ((PS_playerStats.Damage + P_player.WP_weapon.i_damage) *          //플레이어 공격력
                           (dict_attackTable[part].damage)                       *          //부위 데미지 계수
                           (1 - CR_Enemy.defense / (float)(CR_Enemy.defense + CONST_DEF))); //방어력 계산
 
@@ -191,11 +191,11 @@ public class BattleActions : MonoBehaviour
             {
                 isHit = true;
 
-                damage                =  (CR_Enemy.damage * (1 - PS_playerStats.defense / (float)(PS_playerStats.defense + CONST_DEF)));
+                damage                =  (CR_Enemy.damage * (1 - PS_playerStats.Defense / (float)(PS_playerStats.Defense + CONST_DEF)));
                 damage                =  Mathf.Round(damage                             * 10f) / 10f;
-                PS_playerStats.health -= damage;
-                PS_playerStats.health =  Mathf.Round(PS_playerStats.health * 10f) / 10f;
-                BM_BattleMain.ChangeSliderValue(true, StatsType.Hp, PS_playerStats.health);
+                PS_playerStats.Health -= damage;
+                PS_playerStats.Health =  Mathf.Round(PS_playerStats.Health * 10f) / 10f;
+                BM_BattleMain.ChangeSliderValue(true, StatsType.Hp, PS_playerStats.Health);
 
                 StartCoroutine(LerpColor(BM_BattleMain.playerElements,
                                          SliderColor.Hp_hilighted,
@@ -284,7 +284,7 @@ public class BattleActions : MonoBehaviour
         typeDict[Parts.Outer].percentage.text     = Mathf.Clamp((outerACC     * P_player.WP_weapon.f_accuracyMult), 0, 100) + "%";
 
 
-        var baseDamage  = PS_playerStats.damage + P_player.WP_weapon.i_damage;
+        var baseDamage  = PS_playerStats.Damage + P_player.WP_weapon.i_damage;
         var creatureDef = 1                     - CR_Enemy.defense                               / (float)(CR_Enemy.defense + CONST_DEF);
         typeDict[Parts.Weakpoint].damage.text = ((baseDamage - P_player.WP_weapon.i_damageRange) * dict_attackTable[Parts.Weakpoint].damage * (creatureDef)).ToString("0.##") + " ~ " + ((baseDamage + P_player.WP_weapon.i_damageRange) * dict_attackTable[Parts.Weakpoint].damage * (creatureDef)).ToString("0.##") + " DMG";
         typeDict[Parts.Thorax].damage.text    = ((baseDamage - P_player.WP_weapon.i_damageRange) * dict_attackTable[Parts.Thorax].damage    * (creatureDef)).ToString("0.##") + " ~ " + ((baseDamage + P_player.WP_weapon.i_damageRange) * dict_attackTable[Parts.Thorax].damage    * (creatureDef)).ToString("0.##") + " DMG";
@@ -336,7 +336,7 @@ public class BattleActions : MonoBehaviour
         Debug.Log("WaitEnd");
 
         //애니메이션 출력중 전투 종료 조건을 검사하여 전투씬 종료 시키기
-        if (PS_playerStats.health <= 0) //플레이어 체력 먼저 검사
+        if (PS_playerStats.Health <= 0) //플레이어 체력 먼저 검사
         {
             GameManager.Instance.GameOver();
             yield break;

@@ -43,8 +43,6 @@ public class Player : MonoBehaviour
         
         effect.ApplyEffect();
         Debug.Log("Effect Applied : " + effect.effectType);
-        
-        InventoryManager.Instance.stats.UpdateUI();
     }
 
     public void ConsumeTurn()

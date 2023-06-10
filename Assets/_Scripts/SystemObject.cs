@@ -61,4 +61,45 @@ public class SystemObject : MonoBehaviour
         
         return firstPlay;
     }
+
+    public bool SaveData()
+    {
+        SaveData saveData = new SaveData();
+
+        foreach (var (index, roomNode) in GameManager.Instance.GetComponent<RoomCreation>().roomMap)
+        {
+            if (!saveData.roomVisited.Contains(index)) //방문 안한방은 저장 안해도됨
+                continue;
+
+            saveData.interacted.Add(index, new Dictionary<int, bool>()); //방문은 했으니깐 안에 오브젝트들의 상태를 저장해야함
+            
+            var interactables = roomNode.RoomObject.transform.GetComponentsInChildren<Interactable>(); //Interactable 컴포넌트를 가진 오브젝트들을 가져옴
+            
+            for (var i = 0; i < interactables.Length; i++) //오브젝트들을 돌면서 상태를 저장
+            {
+                var  interactable = interactables[i];
+                bool interacted   = false;
+
+                if (interactable.type == ObjectType.Door || interactable.type == ObjectType.Item)
+                {
+                    //Interact를 했던 오브젝트들만 저장 (일반 문과 아이템만 저장)
+                    if (interactable.interacted)
+                        interacted = true;
+                }
+                saveData.interacted[index].Add(i, interacted);
+            }
+        }
+        
+        try
+        {
+            System.IO.File.WriteAllText(Application.persistentDataPath + "/Data.json", JsonConvert.SerializeObject(saveData));
+        }
+        catch (Exception e)
+        {
+            Debug.LogWarning("Save Failed");
+            return false;
+        }
+        
+        return true;
+    }
 }

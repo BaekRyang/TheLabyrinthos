@@ -74,10 +74,14 @@ public class GameManager : MonoBehaviour
     public Image tabFill;
     
     [Header("Minimap Control")] public MMF_Player minimapMMF;
+    float                                           pressThreshold = 0.3f;
 
     public PlayerController playerController;
 
     private bool loaded = false;
+
+    public string Seed => s_seed;
+
     void Awake()
     {
         Instance ??= this;
@@ -112,11 +116,11 @@ public class GameManager : MonoBehaviour
                 GetComponent<RoomCreation>().CreateSeed(out s_seed);
         }
 
-        dict_randomObjects.Add("Object",   new Random(Convert.ToInt32(s_seed, 16) + 1)); //오브젝트용 랜덤 시드
-        dict_randomObjects.Add("Creature", new Random(Convert.ToInt32(s_seed, 16) + 2)); //크리쳐용 랜덤 시드
-        dict_randomObjects.Add("Room",     new Random(Convert.ToInt32(s_seed, 16) + 3)); //방배치용 랜덤 시드
-        dict_randomObjects.Add("Effect",   new Random(Convert.ToInt32(s_seed, 16) + 4)); //아이템용 랜덤 시드
-        dict_randomObjects.Add("Syringe",  new Random(Convert.ToInt32(s_seed, 16) + 5)); //주사기용 랜덤 시드
+        dict_randomObjects.Add("Object",   new Random(Convert.ToInt32(Seed, 16) + 1)); //오브젝트용 랜덤 시드
+        dict_randomObjects.Add("Creature", new Random(Convert.ToInt32(Seed, 16) + 2)); //크리쳐용 랜덤 시드
+        dict_randomObjects.Add("Room",     new Random(Convert.ToInt32(Seed, 16) + 3)); //방배치용 랜덤 시드
+        dict_randomObjects.Add("Effect",   new Random(Convert.ToInt32(Seed, 16) + 4)); //아이템용 랜덤 시드
+        dict_randomObjects.Add("Syringe",  new Random(Convert.ToInt32(Seed, 16) + 5)); //주사기용 랜덤 시드
         
         StartCoroutine(LoadSettings()); 
     }
@@ -187,9 +191,9 @@ public class GameManager : MonoBehaviour
             
             if (Input.GetKey(KeyCode.Tab) && !playerController.b_camControll) //탭을 누르고 있으면 게이지를 채워준다.
             {                                                                 //특정 상황안에 있으면 작동하지 않음
-                tabFill.fillAmount = pressedTime / 0.5f;
+                tabFill.fillAmount = pressedTime / pressThreshold;
                 pressedTime += Time.deltaTime;
-                if (pressedTime > 0.5f)                                       //일정시간 계속 누르고 있었으면 GoodTrip을 열어준다.
+                if (pressedTime > pressThreshold)                                       //일정시간 계속 누르고 있었으면 GoodTrip을 열어준다.
                 {
                     playerController.vertical = playerController.horizontal = 0;
                     minimapMMF.Direction      = MMFeedbacks.Directions.TopToBottom;
@@ -204,7 +208,7 @@ public class GameManager : MonoBehaviour
             //탭을 뗐을때 누르고 있었던 시간이 0.5초 이하면 인벤토리를 열어준다.
             if (Input.GetKeyUp(KeyCode.Tab))                 //탭을 뗐을때
             {
-                if (pressedTime <= 0.5f && pressedTime >= 0)//누르고 있었던 시간이 0.5초 이하면
+                if (pressedTime <= pressThreshold && pressedTime >= 0)//누르고 있었던 시간이 0.5초 이하면
                     Inventory("Inventory");                 //인벤토리를 열어준다.
 
                 if (pressedTime < 0)                        //누르고 있었던 시간이 음수면 GoodTrip이 열려있는것임
@@ -229,7 +233,7 @@ public class GameManager : MonoBehaviour
         i_roomSize = 5 + Mathf.RoundToInt(level * 3.3f);
         Debug.Log("구조 생성 시작 - Size : " + i_roomSize);
         GetComponent<RoomCreation>()
-           .InitStruct(Convert.ToInt32(s_seed, 16) + level, i_roomSize); //시드는 16진수이지만, 알고리즘은 10진수 => 바꿔서 넘겨줌
+           .InitStruct(Convert.ToInt32(Seed, 16) + level, i_roomSize); //시드는 16진수이지만, 알고리즘은 10진수 => 바꿔서 넘겨줌
         Debug.Log("구조 생성 완료 - 배치 시작");
         GetComponent<RoomCreation>().PlaceRoom();
         Debug.Log("방 배치 완료");
@@ -349,7 +353,7 @@ public class GameManager : MonoBehaviour
 
     public void UpdateStatsSlider(StatsType statsType)
     {
-        var stats = Player.Instance.GetPlayerStats();
+        var stats = Player.Instance.PS_playerStats;
         switch (statsType)
         {
             case StatsType.Hp:
@@ -423,6 +427,11 @@ public class GameManager : MonoBehaviour
             StartCoroutine(Lerp.LerpValueAfter<float>(value => canvasAlpha.alpha = value, 1, 0, 0.3f, Mathf.Lerp,
                                                       Lerp.EaseOut, () => settings.gameObject.SetActive(false)));
             SystemObject.Instance.SaveSetting();
+        }
+
+        if (buttonType == "Save")
+        {
+            SystemObject.Instance.SaveData();
         }
 
         if (buttonType == "Exit")

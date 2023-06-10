@@ -21,7 +21,7 @@ public class Effect
         {
             endturnEffect = () =>
             {
-                var playerStats = Player.Instance.GetPlayerStats();
+                var playerStats = Player.Instance.PS_playerStats;
                 playerStats.Health -= effectStrength;
                 GameManager.Instance.UpdateStatsSlider(StatsType.Hp);
             };
@@ -39,7 +39,7 @@ public class Effect
 
     public void ApplyEffect(bool revert = false)
     {
-        var playerStats = Player.Instance.GetPlayerStats();
+        var playerStats = Player.Instance.PS_playerStats;
 
         //revert가 true면 효과를 반대로 적용한다.
         //revert가 true로 들어왔다는것이 효과를 제거한다는 뜻이므로, isPositive를 반대로 바꿔도 됨

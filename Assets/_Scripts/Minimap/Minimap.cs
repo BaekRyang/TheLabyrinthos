@@ -6,7 +6,7 @@ public class Minimap : MonoBehaviour
     public static Minimap instance;
     [SerializeField] public int i_boxSize = 75;
     [SerializeField] GameObject GO_roomPrefab;
-    [SerializeField] GameObject GO_anchor;
+    [SerializeField] public GameObject GO_anchor;
     [SerializeField] public GameObject GO_arrow;
     [SerializeField] public GameObject GO_minimapAnchor;
 

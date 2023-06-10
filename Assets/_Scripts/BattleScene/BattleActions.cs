@@ -47,7 +47,7 @@ public class BattleActions : MonoBehaviour
     public IEnumerator LoadSetting()
     {
         P_player       = Player.Instance;
-        PS_playerStats = P_player.GetPlayerStats();
+        PS_playerStats = P_player.PS_playerStats;
 
         BM_BattleMain = GetComponent<BattleMain>();
 

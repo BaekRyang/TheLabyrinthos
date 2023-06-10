@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -6,8 +7,8 @@ using UnityEngine.UI;
 
 namespace TypeDefs
 {
+#region BattleMain
 
-    #region BattleMain
     public enum StatsType
     {
         Hp,
@@ -46,8 +47,9 @@ namespace TypeDefs
         public DmgAccText(TMP_Text percent, TMP_Text dmg)
         {
             percentage = percent;
-            damage = dmg;
+            damage     = dmg;
         }
+
         public TMP_Text percentage;
         public TMP_Text damage;
     }
@@ -69,9 +71,11 @@ namespace TypeDefs
         Attack,
         Missed
     }
-    #endregion
 
-    #region BattleAttacks
+#endregion
+
+#region BattleAttacks
+
     public enum Parts
     {
         Weakpoint,
@@ -83,16 +87,18 @@ namespace TypeDefs
     {
         public AttackPair(float dmg, float acc)
         {
-            damage = dmg;
+            damage   = dmg;
             accuracy = acc;
         }
 
         public float damage;
         public float accuracy;
     }
-    #endregion
 
-    #region Player
+#endregion
+
+#region Player
+
     [Serializable]
     public class PlayerStats
     {
@@ -106,7 +112,7 @@ namespace TypeDefs
         private float accuracyMult = 1;
         private int   damage       = 10;
         private int   level        = 1;
-        
+
         public float Health
         {
             get => health;
@@ -130,7 +136,7 @@ namespace TypeDefs
                     InventoryManager.Instance.stats.UpdateUI();
             }
         }
-        
+
         public float MissingHealth => MaxHealth - Health;
 
         public int Exp
@@ -148,7 +154,7 @@ namespace TypeDefs
                     Damage    += 2;
                     Defense   += 2;
                 }
-                
+
                 GameManager.Instance.UpdateStatsSlider(StatsType.Exp);
                 if (InventoryManager.Instance.b_UIOpen)
                     InventoryManager.Instance.stats.UpdateUI();
@@ -215,48 +221,50 @@ namespace TypeDefs
             }
         }
     }
-    
-    #endregion
 
-    #region Creature
+#endregion
+
+#region Creature
+
     [Serializable]
     public class Creature
     {
         public Creature(Creature other)
         {
-            health = other.health;
-            speed = other.speed;
-            defense = other.defense;
+            health       = other.health;
+            speed        = other.speed;
+            defense      = other.defense;
             prepareSpeed = other.prepareSpeed;
-            damage = other.damage;
-            spritePack = other.spritePack;
+            damage       = other.damage;
+            spritePack   = other.spritePack;
         }
-        
+
         public Creature(int atk, int def, float hp, float spd, int pspd, CreatureSpritePack csp)
         {
-            damage = atk;
-            defense = def;
-            health = hp;
-            speed = spd;
+            damage       = atk;
+            defense      = def;
+            health       = hp;
+            speed        = spd;
             prepareSpeed = pspd;
-            spritePack = csp;
+            spritePack   = csp;
         }
 
         public Creature(Creature creature, CreatureSpritePack csp)
         {
-            health = creature.health;
-            speed = creature.speed;
-            defense = creature.defense;
+            health       = creature.health;
+            speed        = creature.speed;
+            defense      = creature.defense;
             prepareSpeed = creature.prepareSpeed;
-            damage = creature.damage;
-            spritePack = csp;
+            damage       = creature.damage;
+            spritePack   = csp;
         }
 
-        public int damage = 1;
-        public int defense = 5;
-        public float health = 100.0f;
-        public float speed = 1.0f;
-        public int prepareSpeed;
+        public int   damage  = 1;
+        public int   defense = 5;
+        public float health  = 100.0f;
+        public float speed   = 1.0f;
+        public int   prepareSpeed;
+
         public CreatureSpritePack spritePack;
         //Sprite attackSprite = null;
     }
@@ -274,10 +282,12 @@ namespace TypeDefs
         public Sprite cut_Avoid;
         public Sprite attackScratch;
     }
-    #endregion
 
-    #region Interactable
-    enum ObjectType
+#endregion
+
+#region Interactable
+
+    public enum ObjectType
     {
         MoveDoor,
         Door,
@@ -285,9 +295,11 @@ namespace TypeDefs
         Item,
         CraftingTable
     }
-    #endregion
 
-    #region Rooms
+#endregion
+
+#region Rooms
+
     public enum RoomType
     {
         empty,
@@ -300,9 +312,11 @@ namespace TypeDefs
         Shop,
         KeyRoom
     }
-    #endregion
+    
+#endregion
 
-    #region Item
+#region Item
+
     public enum ItemType
     {
         Undefined,
@@ -311,9 +325,11 @@ namespace TypeDefs
         Food,
         Other
     }
-    #endregion
 
-    #region Effect
+#endregion
+
+#region Effect
+
     public enum EffectTypes
     {
         MaxHealth,
@@ -324,21 +340,20 @@ namespace TypeDefs
         Damage,
         Poison
     }
-    
 
-    #endregion
+#endregion
 
 #region Setting
 
     [Serializable]
     public class OptionData
     {
-        public Volume         volume;
-        public Resolution     resolution;
-        public int screenMode;
-        public int            refreshRate;
-        public int           vsync;
-        
+        public Volume     volume;
+        public Resolution resolution;
+        public int        screenMode;
+        public int        refreshRate;
+        public int        vsync;
+
         public OptionData()
         {
             volume      = new Volume(100f, 100f, 100f);
@@ -352,11 +367,11 @@ namespace TypeDefs
         {
             Screen.SetResolution(resolution.width, resolution.height, (FullScreenMode)screenMode, refreshRate);
             QualitySettings.vSyncCount = vsync;
-            
+
             SystemObject.Instance.audioMixer.SetFloat("Master", Mathf.Log10(volume.master / 100) * 20);
             SystemObject.Instance.audioMixer.SetFloat("Music",  Mathf.Log10(volume.music  / 100) * 20);
             SystemObject.Instance.audioMixer.SetFloat("SFX",    Mathf.Log10(volume.sfx    / 100) * 20);
-            
+
             Debug.Log("Setting Applied");
         }
     }
@@ -380,15 +395,54 @@ namespace TypeDefs
         public float master;
         public float music;
         public float sfx;
-        
+
         public Volume(float master, float music, float sfx)
         {
             this.master = master;
-            this.music = music;
-            this.sfx = sfx;
+            this.music  = music;
+            this.sfx    = sfx;
         }
     }
-    
+
+#endregion
+
+#region SystemObject
+
+    public class SaveData
+    {
+        public string seed;
+        public int    level;
+        public int    stayingRoomIndex;
+
+        public PlayerStats  playerStats;
+        public Weapon       equippedWeapon;
+        public List<Effect> appliedEffects;
+
+        public Dictionary<int, int> inventroy;
+        public Dictionary<int, List<Weapon>> weaponInventory;
+        
+        public List<int> roomVisited = new List<int>();
+        public Dictionary<int, Dictionary<int, bool>> interacted = new Dictionary<int, Dictionary<int, bool>>();
+
+
+        public SaveData()
+        {
+            seed             = GameManager.Instance.Seed;
+            level            = GameManager.Instance.i_level;
+            stayingRoomIndex = Player.Instance.GetComponent<PlayerController>().roomIndex;
+            playerStats      = Player.Instance.PS_playerStats;
+            equippedWeapon   = Player.Instance.WP_weapon;
+            appliedEffects   = Player.Instance.effectList;
+            inventroy        = InventoryManager.inventory;
+            weaponInventory  = InventoryManager.weaponInventory;
+
+            foreach (var room in Minimap.instance.GO_anchor.transform.GetComponentsInChildren<GoodTrip>())
+            {
+                if (room.entered)
+                    roomVisited.Add(room.index);
+            }
+        }
+    }
 
 #endregion
 }

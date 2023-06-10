@@ -24,11 +24,6 @@ public class Player : MonoBehaviour
         Instance ??= this;
     }
 
-    public ref PlayerStats GetPlayerStats()
-    {
-        return ref PS_playerStats;
-    }
-
     public void AddEffect(ref Effect originEffect)
     {
         //해당 effectType을 가진 effect를 복사 - 남은 시간 같은 요소를 분리하기 위해

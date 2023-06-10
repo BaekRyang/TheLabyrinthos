@@ -6,18 +6,19 @@
   <component name="ChangeListManager">
     <list default="true" id="d5900f44-99a2-43fd-9ca2-3f86618ff3b1" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TheLabyrinthos/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TheLabyrinthos/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Fonts/NotoSans/NotoSansKR-Black SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Fonts/NotoSans/NotoSansKR-Black SDF.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/_UI/Minimap/Room.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/_UI/Minimap/Room.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Anton SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Anton SDF.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Bangers SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Bangers SDF.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Electronic Highway Sign SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Electronic Highway Sign SDF.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Creature/CreatureManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Creature/CreatureManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/BattleScene/BattleActions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/BattleScene/BattleActions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/BattleScene/BattleMain.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/BattleScene/BattleMain.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Creature/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Creature/Player.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Creature/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Creature/PlayerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Effects/Effect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Effects/Effect.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Environment/RoomController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Environment/RoomController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Scripts/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/GameManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Minimap.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Minimap.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/PopUpManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/PopUpManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Minimap/Minimap.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Minimap/Minimap.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/ObjectController/Interactable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/ObjectController/Interactable.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/ObjectController/ObjectController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/ObjectController/ObjectController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/SystemObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/SystemObject.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/TypeDefs.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/TypeDefs.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +93,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "XThreadsFramesViewSplitterKey": "0.08695652",
+    "XThreadsFramesViewSplitterKey": "0.06825939",
     "full.screen.before.presentation.mode": "false",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
@@ -213,7 +214,7 @@
       <workItem from="1686138652134" duration="3694000" />
       <workItem from="1686228401044" duration="10467000" />
       <workItem from="1686306996917" duration="1737000" />
-      <workItem from="1686314651053" duration="25796000" />
+      <workItem from="1686314651053" duration="33772000" />
     </task>
     <servers />
   </component>
@@ -236,6 +237,25 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/_Scripts/ObjectController/Interactable.cs</url>
+          <line>118</line>
+          <properties documentPath="C:\Github\TheLabyrinthos\Assets\_Scripts\ObjectController\Interactable.cs" initialLine="118" containingFunctionPresentation="메서드 'Run'">
+            <startOffsets>
+              <option value="4647" />
+            </startOffsets>
+            <endOffsets>
+              <option value="4744" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

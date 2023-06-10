@@ -6,16 +6,17 @@ using UnityEngine.Serialization;
 public class RoomController : MonoBehaviour
 {
     [Header("Set Automatically")]
-    [SerializeField] public int index;
-    [SerializeField] GameObject walls;
-    [SerializeField] GameObject ceilings;
+    [SerializeField] public int           index;
+    [SerializeField]        GameObject walls;
+    [SerializeField]        GameObject ceilings;
     [SerializeField] public GameObject go_specialObject;
-    [SerializeField] public RoomType RT_roomType;
+    [SerializeField] public RoomType   RT_roomType;
+    [SerializeField] public int        nextID = 1;
     
     [Header("Battle Encounter System")]
-    [SerializeField] public bool hasCreature;
-    [SerializeField] public bool forcedBattle;
-    [SerializeField] public Creature CR_creature;
+    [SerializeField] public bool       hasCreature;
+    [SerializeField] public bool       forcedBattle;
+    [SerializeField] public Creature   CR_creature;
     [SerializeField] public GameObject GO_creature;
     
     public void ChangeRoomState(bool _state)
@@ -25,7 +26,7 @@ public class RoomController : MonoBehaviour
 
     public void SortObjects()
     {
-        transform.name = "Room_" + index;
+        transform.gameObject.name = "Room_" + index;
         for (int i = 0; i < transform.childCount; i++)
         {
             if (transform.GetChild(i).name.StartsWith("DoorWall"))

@@ -14,13 +14,15 @@ public class Interactable : MonoBehaviour
 
     Coroutine crt_coroutine;
     [Header("This Object Type")]
-    [SerializeField] ObjectType type;
+    [SerializeField] public ObjectType type;
     [SerializeField]        Outline.Mode mode                 = Outline.Mode.OutlineVisible;
     [SerializeField]        Color        enabledOutlineColor  = Color.white;
     [SerializeField]        Color        disabledOutlineColor = Color.white;
     [SerializeField]        float        enabledOutlineWidth  = 1f;
     [SerializeField]        float        disabledOutlineWidth = 1f;
     private static readonly int          EmissionColor        = Shader.PropertyToID("_EmissionColor");
+
+    public bool interacted = false;
 
 
     private void Awake()
@@ -116,14 +118,62 @@ public class Interactable : MonoBehaviour
                 //아이템 인벤토리에 집어넣고
                 GameManager.Instance.GetComponent<InventoryManager>().AddItem(GetComponent<ItemObject>().I_item);
 
-                //아이템 오브젝트 삭제
-                DestroyImmediate(gameObject);
+                // //아이템 오브젝트 삭제
+                // DestroyImmediate(gameObject);
+
+                //아이템 오브젝트 비활성화
+                {
+                    //만약 아이템에 MeshRenderer가 있다면
+                    if (gameObject.TryGetComponent(out MeshRenderer meshRenderer))
+                        meshRenderer.enabled = false;
+                    else //아이템에 없다면
+                    {
+                        //자식에 있는 MeshRender를 전부 비활성화
+                        foreach (Transform child in transform)
+                        {
+                            if (child.TryGetComponent(out MeshRenderer childMeshRenderer))
+                                childMeshRenderer.enabled = false;
+                        }
+                    }
+                    
+                    //Collider도 똑같이 작업
+                    if (gameObject.TryGetComponent(out Collider _))
+                        //여러개가 있다면 전부 비활성화
+                        foreach (var foundCollider in GetComponents<Collider>())
+                            foundCollider.enabled = false;
+                    else
+                    {
+                        foreach (Transform child in transform)
+                        {
+                            if (child.TryGetComponent(out Collider _))
+                                foreach(var foundCollider in child.GetComponents<Collider>())
+                                    foundCollider.enabled = false;
+                        }
+                    }
+                    
+                    //Rigidbody도 똑같지만 중력만 꺼주기
+                    if (gameObject.TryGetComponent(out Rigidbody _))
+                        GetComponent<Rigidbody>().useGravity = false;
+                    else
+                    {
+                        foreach (Transform child in transform)
+                        {
+                            if (child.TryGetComponent(out Rigidbody _))
+                                child.GetComponent<Rigidbody>().useGravity = false;
+                        }
+                    }
+                    
+                    
+                }
+
                 break;
 
             case ObjectType.CraftingTable:
                 GameManager.Instance.Inventory("Crafting");
                 break;
         }
+
+        interacted = true;
     }
 
     private IEnumerator OpenDoor(float delay = 1.5f)

@@ -29,6 +29,8 @@ public class ObjectController : MonoBehaviour
             return;
         }
 
+        RoomController RC_room = transform.parent.parent.GetComponent<RoomController>();
+        
         if (b_isCreature)
         {
             i_randNum = GameManager.Instance.dict_randomObjects["Creature"].Next(101);
@@ -50,8 +52,7 @@ public class ObjectController : MonoBehaviour
                 
                 tmpCR.spritePack = sprites.fullBody != null ? sprites : tmpCR.spritePack;
             }
-            
-            RoomController RC_room = transform.parent.parent.GetComponent<RoomController>();
+
             
             
             if (RC_room == null) return;

@@ -19,6 +19,7 @@ public class RoomController : MonoBehaviour
     [SerializeField] public Creature   CR_creature;
     [SerializeField] public GameObject GO_creature;
     
+    public bool alreadyCleared = false;
     public void ChangeRoomState(bool _state)
     {
         ceilings.SetActive(!_state);

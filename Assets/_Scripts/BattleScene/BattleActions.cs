@@ -59,7 +59,7 @@ public class BattleActions : MonoBehaviour
         thoraxACC    = BASE_ACCURACY * dict_attackTable[Parts.Thorax].accuracy;
         outerACC     = BASE_ACCURACY * dict_attackTable[Parts.Outer].accuracy;
 
-        
+
         audioSource = GetComponent<AudioSource>();
         gameObject.SetActive(false); //전부 로딩 되면 오브젝트 끄기
         yield return null;
@@ -116,11 +116,11 @@ public class BattleActions : MonoBehaviour
 
     public void Attack(bool b_IsPlayer, Parts part = Parts.Thorax)
     {
-        int       randInt = rand.Next(101);
-        bool      isHit   = false;
+        int  randInt = rand.Next(101);
+        bool isHit   = false;
         BM_BattleMain.b_paused = true;
-        float damage = 0;
-
+        float damage     = 0;
+        bool  isCritical = false;
         if (b_IsPlayer)
         {
             int accInt = (int)(BASE_ACCURACY * dict_attackTable[part].accuracy * P_player.WP_weapon.f_accuracyMult);
@@ -137,7 +137,14 @@ public class BattleActions : MonoBehaviour
                 double d_damageRange = P_player.WP_weapon.i_damageRange;
                 damage += (float)(rand.NextDouble() * (d_damageRange * 2) - d_damageRange);
 
-                damage          =  Mathf.Round(damage * 10f) / 10f;
+                damage = Mathf.Round(damage * 10f) / 10f;
+
+                if (rand.Next(101) < .1f * 100)
+                {
+                    damage     *= 1.5f;
+                    isCritical =  true;
+                }
+
                 CR_Enemy.health -= damage;
                 CR_Enemy.health =  Mathf.Round(CR_Enemy.health * 10f) / 10f;
                 BM_BattleMain.ChangeSliderValue(false, StatsType.Hp, CR_Enemy.health);
@@ -164,11 +171,14 @@ public class BattleActions : MonoBehaviour
 
                 //내구도 하나 빼주기
                 P_player.WP_weapon.ConsumeDurability();
+
+                GameManager.Instance.statistics[Statistics.DealtDamage] += damage;
             }
             else
             {
                 //빗나가면 다른 소리로
                 audioSource.clip = BM_BattleMain.AC_playerMissed[rand.Next(BM_BattleMain.AC_playerMissed.Length)];
+                GameManager.Instance.statistics[Statistics.MissedAttack]++;
             }
 
             P_player.ConsumeTurn(); //턴 하나 소모
@@ -191,8 +201,15 @@ public class BattleActions : MonoBehaviour
             {
                 isHit = true;
 
-                damage                =  (CR_Enemy.damage * (1 - PS_playerStats.Defense / (float)(PS_playerStats.Defense + CONST_DEF)));
-                damage                =  Mathf.Round(damage                             * 10f) / 10f;
+                damage = (CR_Enemy.damage * (1 - PS_playerStats.Defense / (float)(PS_playerStats.Defense + CONST_DEF)));
+                damage = Mathf.Round(damage                             * 10f) / 10f;
+
+                if (rand.Next(101) < 0.1f * 100)
+                {
+                    damage     *= 1.5f;
+                    isCritical =  true;
+                }
+
                 PS_playerStats.Health -= damage;
                 PS_playerStats.Health =  Mathf.Round(PS_playerStats.Health * 10f) / 10f;
                 BM_BattleMain.ChangeSliderValue(true, StatsType.Hp, PS_playerStats.Health);
@@ -203,9 +220,12 @@ public class BattleActions : MonoBehaviour
 
 
                 audioSource.clip = BM_BattleMain.AC_enemyAttack[rand.Next(BM_BattleMain.AC_enemyAttack.Length)];
+
+                GameManager.Instance.statistics[Statistics.TakenDamage] += damage;
             }
             else
             {
+                GameManager.Instance.statistics[Statistics.AvoidedAttack]++;
                 audioSource.clip = BM_BattleMain.AC_playerMissed[rand.Next(BM_BattleMain.AC_playerMissed.Length)];
             }
 
@@ -219,7 +239,7 @@ public class BattleActions : MonoBehaviour
             // );
         }
 
-        StartCoroutine(AnimateAction(isHit ? ActionTypes.Attack : ActionTypes.Missed, b_IsPlayer, damage, false));
+        StartCoroutine(AnimateAction(isHit ? ActionTypes.Attack : ActionTypes.Missed, b_IsPlayer, damage, isCritical));
     }
 
     IEnumerator LerpColor(UIModElements targetElements, SliderColor to, float duration, bool isEndColor = false)
@@ -295,12 +315,12 @@ public class BattleActions : MonoBehaviour
     {
         var targetMMF = isPlayer ? MMF_player[0] : MMF_player[1];
         var dmgObject = Instantiate(damageObject,
-                                    transform.position + (isPlayer ? Vector3.left * 120: Vector3.right * 550),
+                                    transform.position + (isPlayer ? Vector3.left * 120 : Vector3.right * 550),
                                     Quaternion.identity,
                                     BM_BattleMain.damageIndicate
-                                    );
-        var dmgText   = dmgObject.GetComponentInChildren<TMP_Text>();
-        var dmgMMF    = dmgObject.GetComponent<MMF_Player>();
+        );
+        var dmgText = dmgObject.GetComponentInChildren<TMP_Text>();
+        var dmgMMF  = dmgObject.GetComponent<MMF_Player>();
         dmgMMF.Initialization();
 
         switch (acType)
@@ -314,13 +334,14 @@ public class BattleActions : MonoBehaviour
                     dmgText.fontMaterial = critMaterial;
                     dmgText.color        = critColor;
                 }
+
                 // BM_BattleMain.playerAttackSprite.sprite   = isPlayer ? P_player.cut_Attack : P_player.cut_Hited;
                 break;
             case ActionTypes.Missed:
                 BM_BattleMain.creatureAttackSprite.sprite = isPlayer ? CR_Enemy.spritePack.cut_Avoid : CR_Enemy.spritePack.cut_Attack;
                 dmgText.text                              = "빗나감!";
                 dmgText.color                             = missedColor;
-                
+
                 // BM_BattleMain.playerAttackSprite.sprite   = isPlayer ? P_player.cut_Attack : P_player.cut_Avoid;
                 break;
         }
@@ -338,7 +359,7 @@ public class BattleActions : MonoBehaviour
         //애니메이션 출력중 전투 종료 조건을 검사하여 전투씬 종료 시키기
         if (PS_playerStats.Health <= 0) //플레이어 체력 먼저 검사
         {
-            GameManager.Instance.GameOver();
+            GameManager.Instance.GameOver(CR_Enemy.spritePack.fullBody);
             yield break;
         }
 

@@ -14,10 +14,10 @@ public class InventoryManager : MonoBehaviour
 
     //인벤토리 key, value 형식으로 사용
     [Header("Dictionaries")]
-    public static readonly Dictionary<int, int>          inventory       = new Dictionary<int, int>();
-    public static readonly Dictionary<int, List<Weapon>> weaponInventory = new Dictionary<int, List<Weapon>>();
-    public static readonly Dictionary<int, Item>         definedItems    = new Dictionary<int, Item>();
-    public static readonly Dictionary<int, Sprite>       loadedImages    = new Dictionary<int, Sprite>();
+    public static Dictionary<int, int>          inventory       = new Dictionary<int, int>();
+    public static Dictionary<int, List<Weapon>> weaponInventory = new Dictionary<int, List<Weapon>>();
+    public static Dictionary<int, Item>         definedItems    = new Dictionary<int, Item>();
+    public static Dictionary<int, Sprite>       loadedImages    = new Dictionary<int, Sprite>();
     
     [Header("Default Sprite Setting")]
     public Sprite emptyItem;
@@ -184,7 +184,7 @@ public class InventoryManager : MonoBehaviour
                 weaponInventory.Add(item.i_id, new List<Weapon>());
             //그 다음 리스트에 아이템을 추가해준다.
             weaponInventory[item.i_id].Add(new Weapon(item as Weapon));
-            PlayGetNotification(item, amount);
+            PlayItemNotification(item, amount);
             return;
         }
 
@@ -193,53 +193,8 @@ public class InventoryManager : MonoBehaviour
         else                                       //없으면
             inventory.Add(item.i_id, amount); //새로 만들어준다.
         
-        PlayGetNotification(item, amount);
+        PlayItemNotification(item, amount);
     }
-
-    public bool RemoveItem(Item item, int amount = 1)
-    {
-        if (item.IT_type == ItemType.Weapon)
-        {
-            //인자로 들어온 해당 아이템을 삭제한다.
-            if (weaponInventory[item.i_id].Contains(item as Weapon))
-            {
-                weaponInventory[item.i_id].Remove(item as Weapon);
-
-                if (weaponInventory[item.i_id].Count == 0)
-                    // 해당 무기 아이템 리스트가 비어있으면 딕셔너리에서 제거
-                    weaponInventory.Remove(item.i_id);
-                return true;
-            }
-
-            return false;
-        }
-
-        if (inventory.ContainsKey(item.i_id)) //해당 아이템을 가지고 있다면
-        {
-            inventory[item.i_id] -= amount;  //개수를 감소시키고
-            if (inventory[item.i_id] <= 0)   //아이템 개수가 0 이하면
-                inventory.Remove(item.i_id); //딕셔너리에서 아이템을 제거
-            return true;
-        }
-
-        return false;
-    }
-
-
-    public bool HasItem(Item item, int amount = 1)
-    {
-        if (item.IT_type == ItemType.Weapon)
-        {
-            if (weaponInventory.ContainsKey(item.i_id))
-                return true;
-            return false;
-        }
-
-        if (inventory.TryGetValue(item.i_id, out var value))      //해당 아이템을 가지고 있다면     
-            return value >= amount; //아이템 개수가 amount 이상이면 true, 그렇지 않으면 false 반환
-        return false;                                   //해당 아이템을 가지고 있지 않다면 false 반환
-    }
-
 
     public void AddItem(int item, int amount = 1)
     {
@@ -259,34 +214,75 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public bool RemoveItem(int item, int amount = 1)
+    public bool RemoveItem(Item itemInstance, int amount = 1) //아이템의 객체를 지정해서 삭제
     {
-        if (item < 100)
+        bool removed = false;
+        if (itemInstance.IT_type == ItemType.Weapon)
+        {
+            //인자로 들어온 해당 아이템을 삭제한다.
+            if (weaponInventory[itemInstance.i_id].Contains(itemInstance as Weapon))
+            {
+                weaponInventory[itemInstance.i_id].Remove(itemInstance as Weapon);
+
+                if (weaponInventory[itemInstance.i_id].Count == 0)
+                    // 해당 무기 아이템 리스트가 비어있으면 딕셔너리에서 제거
+                    weaponInventory.Remove(itemInstance.i_id);
+                removed = true;
+                PlayItemNotification(itemInstance, -1);
+            }
+        }
+        else
+            removed = RemoveItem(itemInstance.i_id);
+        return removed;
+    }
+    
+    public bool RemoveItem(int itemIndex, int amount = 1) //아이템의 코드를 지정해서 일치하는 아이템 삭제
+    {
+        if (itemIndex < 100)
         {
             //무기는 무조건 맨 앞에 있던걸 지운다.
-            if (weaponInventory.ContainsKey(item) && weaponInventory[item].Count > 0)
+            if (weaponInventory.ContainsKey(itemIndex) && weaponInventory[itemIndex].Count > 0)
             {
-                if (weaponInventory[item].Count > 0)
-                    weaponInventory[item].RemoveAt(0); // 무기 아이템 리스트에서 첫번째 아이템 제거
+                if (weaponInventory[itemIndex].Count > 0)
+                    weaponInventory[itemIndex].RemoveAt(0); // 무기 아이템 리스트에서 첫번째 아이템 제거
 
-                if (weaponInventory[item].Count == 0)
-                    weaponInventory.Remove(item); // 해당 무기 아이템 리스트가 비어있으면 딕셔너리에서 제거
+                if (weaponInventory[itemIndex].Count == 0)
+                    weaponInventory.Remove(itemIndex); // 해당 무기 아이템 리스트가 비어있으면 딕셔너리에서 제거
+                
+                PlayItemNotification(definedItems[itemIndex], -amount);
                 return true;
             }
 
             return false;
         }
 
-        if (inventory.ContainsKey(item)) //해당 아이템을 가지고 있다면
+        if (inventory.ContainsKey(itemIndex)) //해당 아이템을 가지고 있다면
         {
-            inventory[item] -= amount;  //개수를 감소시키고
-            if (inventory[item] <= 0)   //아이템 개수가 0 이하면
-                inventory.Remove(item); //딕셔너리에서 아이템을 제거
+            inventory[itemIndex] -= amount;  //개수를 감소시키고
+            if (inventory[itemIndex] <= 0)   //아이템 개수가 0 이하면
+                inventory.Remove(itemIndex); //딕셔너리에서 아이템을 제거
+            PlayItemNotification(definedItems[itemIndex], -amount);
             return true;
         }
 
+        
         return false;
     }
+
+    public bool HasItem(Item item, int amount = 1)
+    {
+        if (item.IT_type == ItemType.Weapon)
+        {
+            if (weaponInventory.ContainsKey(item.i_id))
+                return true;
+            return false;
+        }
+
+        if (inventory.TryGetValue(item.i_id, out var value))      //해당 아이템을 가지고 있다면     
+            return value >= amount; //아이템 개수가 amount 이상이면 true, 그렇지 않으면 false 반환
+        return false;                                   //해당 아이템을 가지고 있지 않다면 false 반환
+    }
+
 
     public bool HasItem(int item, int amount = 1)
     {
@@ -360,9 +356,8 @@ public class InventoryManager : MonoBehaviour
 
     }
 
-    private void PlayGetNotification(Item item, int count)
+    private void PlayItemNotification(Item item, int count)
     {
-        Debug.Log("Item Added");
         var noti     = Instantiate(getNotifiactionPrefab, itemNotificationAnchor);
         var notiIcon = noti.transform.GetComponentsInChildren<Image>()[1];
         var notiText = noti.transform.GetComponentInChildren<TMP_Text>();
@@ -370,7 +365,9 @@ public class InventoryManager : MonoBehaviour
         notiAnim.Initialization();
         
         notiIcon.sprite = GetImage(item.i_id);
-        notiText.text   = $"<color=#00ff68>+{count}</color> {definedItems[item.i_id].s_name}";
+        notiText.text = $"{(count >= 1 ? "<color=#00ff68>+" : "<color=#FF0000>")}" +
+                        $"{count}</color> "                                       +
+                        $"{definedItems[item.i_id].s_name}";
         noti.GetComponent<MMF_Player>().PlayFeedbacks();
     }
 }

@@ -106,9 +106,7 @@ public class CSVReader : MonoBehaviour
                         item.dele_itemEffect += () =>
                         {
                             var hp = Player.Instance.PS_playerStats;
-                            hp.Health += hp.MaxHealth * item.restoreHpPercent;
-                            if (hp.Health > hp.MaxHealth)
-                                hp.Health = hp.MaxHealth;
+                            hp.Health += Mathf.Clamp(hp.MaxHealth * item.restoreHpPercent, 0, hp.MissingHealth);
                         };
                         break;
 
@@ -119,13 +117,13 @@ public class CSVReader : MonoBehaviour
                         item.dele_itemEffect += () =>
                         {
                             var hp = Player.Instance.PS_playerStats;
-                            hp.Health += hp.MissingHealth * item.restoreHpLossPercent;
-                            if (hp.Health > hp.MaxHealth)
-                                hp.Health = hp.MaxHealth;
+                            hp.Health += Mathf.Clamp(hp.MissingHealth * item.restoreHpLossPercent, 0, hp.MissingHealth);
                         };
                         break;
                 }
             }
+
+            item.dele_itemEffect += () => GameManager.Instance.statistics[Statistics.UsedItem]++;
         };
         Food.parsing += (baseItem, dataValue) =>
         {
@@ -177,6 +175,7 @@ public class CSVReader : MonoBehaviour
                         };
                         break;
                 }
+                item.dele_itemEffect += () => GameManager.Instance.statistics[Statistics.UsedItem]++;
             }
         };
         Other.parsing += (item, dataValue) =>

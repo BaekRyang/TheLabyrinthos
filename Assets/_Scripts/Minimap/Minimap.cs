@@ -1,20 +1,24 @@
+using MoreMountains.Feedbacks;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Minimap : MonoBehaviour
 {
-    public static Minimap instance;
-    [SerializeField] public int i_boxSize = 75;
-    [SerializeField] GameObject GO_roomPrefab;
-    [SerializeField] public GameObject GO_anchor;
-    [SerializeField] public GameObject GO_arrow;
-    [SerializeField] public GameObject GO_minimapAnchor;
+    public static           Minimap                     Instance;
+    [SerializeField] public int                         i_boxSize = 75;
+    [SerializeField]        GameObject                  GO_roomPrefab;
+    [SerializeField] public GameObject                  GO_anchor;
+    [SerializeField] public GameObject                  GO_arrow;
+    [SerializeField] public GameObject                  GO_minimapAnchor;
+    [SerializeField] public MMF_Player                  textMMF;
+    [DoNotNormalize] public Dictionary<int, GameObject> rooms;
 
     GameObject[] GO_rooms;
 
     private void Awake()
     {
-        instance = this;
+        Instance = this;
     }                                                
 
     private void Start()
@@ -26,6 +30,7 @@ public class Minimap : MonoBehaviour
 
     public void CreateMinimap(Dictionary<int, RoomNode> map)
     {
+        rooms = new Dictionary<int, GameObject>();
         if (GO_anchor.transform.childCount > 0) //만약 기존에 사용하던 미니맵 오브젝트가 남아있으면
         {
             foreach (Transform child in GO_anchor.transform)
@@ -54,6 +59,9 @@ public class Minimap : MonoBehaviour
             //localPosition은 Instantiate때 설정할 수 없어서 나누어서 설정한다.
 
             GO_rooms[i].name = i.ToString(); //식별용
+
+            if (i == 45)
+                GO_rooms[i].GetComponent<GoodTrip>().entered = true;
         }
     }
 

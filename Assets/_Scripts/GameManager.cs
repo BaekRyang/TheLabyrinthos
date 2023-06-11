@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     public GameObject GO_curtain;
 
-    public GameObject gameOver;
+    public GameOver gameOver;
 
     [SerializeField] public GameObject GO_BattleCanvas;
     
@@ -77,10 +77,18 @@ public class GameManager : MonoBehaviour
     float                                           pressThreshold = 0.3f;
 
     public PlayerController playerController;
+    
+    [Header("System Message")]
+    public SystemAlerts systemAlerts;
 
-    private bool loaded = false;
+    private bool                      loaded     = false;
+    public  Dictionary<Statistics, float> statistics = new Dictionary<Statistics, float>();
 
-    public string Seed => s_seed;
+    private bool    loadedData     = false;
+    private Vector3 loadedPosition = Vector3.zero;
+    public  string  Seed => s_seed;
+
+
 
     void Awake()
     {
@@ -99,21 +107,39 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         GameObject data = GameObject.Find("DataPacker");
 
-        if (!data.IsUnityNull())
+        if (!SystemObject.Instance.IsUnityNull() && !SystemObject.Instance.saveData.IsUnityNull())
         {
-            if (!data.GetComponent<DataCarrier>().useSeed)
-                //시드를 따로 지정하지 않았으면 새로 만들어준다.
-                GetComponent<RoomCreation>().CreateSeed(out s_seed);
-            else
-                s_seed = data.GetComponent<DataCarrier>().seed;
-
-            Destroy(data);
+            Debug.Log("Data Loaded");
+            loadedData = true;
+            
+            SaveData saveData = SystemObject.Instance.saveData;
+            s_seed = saveData.seed;
+            i_level = saveData.level;
+            loadedPosition = new Vector3(
+                (saveData.stayingRoomIndex % 10 - 5) * 10,
+                0,
+                (saveData.stayingRoomIndex / 10 - 4) * 10
+            );
         }
         else
         {
-            if (!b_useSeed)
-                //시드를 따로 지정하지 않았으면 새로 만들어준다.
-                GetComponent<RoomCreation>().CreateSeed(out s_seed);
+            Debug.Log("New Game");
+            if (!data.IsUnityNull())
+            {
+                if (!data.GetComponent<DataCarrier>().useSeed)
+                    //시드를 따로 지정하지 않았으면 새로 만들어준다.
+                    GetComponent<RoomCreation>().CreateSeed(out s_seed);
+                else
+                    s_seed = data.GetComponent<DataCarrier>().seed;
+
+                Destroy(data);
+            }
+            else
+            {
+                if (!b_useSeed)
+                    //시드를 따로 지정하지 않았으면 새로 만들어준다.
+                    GetComponent<RoomCreation>().CreateSeed(out s_seed);
+            }
         }
 
         dict_randomObjects.Add("Object",   new Random(Convert.ToInt32(Seed, 16) + 1)); //오브젝트용 랜덤 시드
@@ -127,9 +153,15 @@ public class GameManager : MonoBehaviour
 
     IEnumerator LoadSettings()
     {
-        gameOver.SetActive(false);
-     
-        go_player      = Instantiate(go_playerPrefab);
+        gameOver.gameObject.SetActive(false);
+
+        foreach (var type in Enum.GetValues(typeof(Statistics)))
+        {
+            statistics.Add((Statistics)type, 0f);
+            Debug.Log((Statistics)type + " : " + statistics[(Statistics)type]);
+        }
+
+        go_player      = Instantiate(go_playerPrefab, loadedPosition, Quaternion.identity);
         go_player.name = "Player"; //플레이어는 로딩중에 참조하니까 미리 만든다.
         var playerRigid = go_player.GetComponent<Rigidbody>();
         playerRigid.useGravity = false; //맵 생기기전에 떨어지지 말라고 중력을 꺼준다.
@@ -165,17 +197,73 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         Debug.Log("Battle Action Load Complete");
 
+
+        ResetLevel(i_level);
+        
+        yield return new WaitForSeconds(2f);
+        
+        if (loadedData)
+        {
+            SaveData saveData = SystemObject.Instance.saveData;
+            Player.Instance.PS_playerStats   = saveData.playerStats;
+            Player.Instance.WP_weapon        = saveData.equippedWeapon;
+            Player.Instance.effectList       = saveData.appliedEffects;
+            InventoryManager.inventory       = saveData.inventroy;
+            InventoryManager.weaponInventory = saveData.weaponInventory;
+
+            var map = GetComponent<RoomCreation>().roomMap;
+
+            foreach (var (index, roomNode) in map)
+            {
+                if (!saveData.roomVisited.Contains(index)) continue;
+                var rc = roomNode.RoomObject.GetComponent<RoomController>();
+                if (rc.hasCreature)
+                {
+                    rc.hasCreature = false;
+                    rc.DestroyCreature();
+                }
+
+                var interactables = roomNode.RoomObject.transform.GetComponentsInChildren<Interactable>(); 
+                    
+                for (var i = 0; i < interactables.Length; i++)
+                {
+                    var interactable = interactables[i];
+
+                    if (interactable.type != ObjectType.Door && interactable.type != ObjectType.Item) continue;
+                    
+                    if (saveData.interactedObject[index][i])
+                    {
+                        switch (interactable.type)
+                        {
+                            case ObjectType.Door:
+                                interactable.Run();
+                                break;
+                            case ObjectType.Item:
+                                //아이템 오브젝트 비활성화
+                                interactable.DisableItem();
+                                break;
+                        }
+                    }
+                }
+            }
+
+            foreach (var index in saveData.roomVisited)
+            {
+                Minimap.Instance.GetRoom(index).GetComponent<GoodTrip>().SetRoomStatus(true);
+                Minimap.Instance.GetRoom(index).GetComponent<Image>().color = Color.gray;
+            }
+            
+            
+        }
+        Debug.Log("Setting End");
+        yield return new WaitForSeconds(1f);
         UpdateStatsSlider(StatsType.Hp);
         UpdateStatsSlider(StatsType.Exp);
 
-        ResetLevel(i_level);
-
         playerController = Player.Instance.GetComponent<PlayerController>();
         playerController.ResetSetting();
-
-        yield return new WaitForSeconds(2f);
+        
         playerRigid.useGravity = true;
-        go_player.transform.position = Vector3.zero;
         yield return StartCoroutine(CurtainModify(true, 2));
         loaded = true;
         yield return null;
@@ -183,47 +271,52 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (!b_nowBattle) //전투중에서는 전부 작동하지 않도록
-        {
-            //UI 켜거나 끄기
-            if (Input.GetKeyDown(KeyCode.Escape) && pressedTime != -1) //Esc는 기다리지 않고 바로 열어준다.
-                Inventory("Inventory");                                //그런데 탭을 누르고 있으면 무시한다.
+        if (b_nowBattle) return; //전투중에서는 전부 작동하지 않도록
+        
+        //UI 켜거나 끄기
+        if (Input.GetKeyDown(KeyCode.Escape) && pressedTime != -1) //Esc는 기다리지 않고 바로 열어준다.
+            Inventory("Inventory");                                //그런데 탭을 누르고 있으면 무시한다.
             
-            if (Input.GetKey(KeyCode.Tab) && !playerController.b_camControll) //탭을 누르고 있으면 게이지를 채워준다.
-            {                                                                 //특정 상황안에 있으면 작동하지 않음
-                tabFill.fillAmount = pressedTime / pressThreshold;
-                pressedTime += Time.deltaTime;
-                if (pressedTime > pressThreshold)                                       //일정시간 계속 누르고 있었으면 GoodTrip을 열어준다.
-                {
-                    playerController.vertical = playerController.horizontal = 0;
-                    minimapMMF.Direction      = MMFeedbacks.Directions.TopToBottom;
-                    minimapMMF.PlayFeedbacks();
-                    Cursor.lockState               = CursorLockMode.Confined;
-                    playerController.b_camControll = true;
-                    pressedTime                    = -1;
-                    tabFill.fillAmount             = 1;
-                }
-            }
-            
-            //탭을 뗐을때 누르고 있었던 시간이 0.5초 이하면 인벤토리를 열어준다.
-            if (Input.GetKeyUp(KeyCode.Tab))                 //탭을 뗐을때
+        if (Input.GetKey(KeyCode.Tab) && !playerController.b_camControll) //탭을 누르고 있으면 게이지를 채워준다.
+        {                                                                 //특정 상황안에 있으면 작동하지 않음
+            tabFill.fillAmount =  pressedTime / pressThreshold;
+            pressedTime        += Time.deltaTime;
+            if (pressedTime > pressThreshold) //일정시간 계속 누르고 있었으면 GoodTrip을 열어준다.
             {
-                if (pressedTime <= pressThreshold && pressedTime >= 0)//누르고 있었던 시간이 0.5초 이하면
-                    Inventory("Inventory");                 //인벤토리를 열어준다.
-
-                if (pressedTime < 0)                        //누르고 있었던 시간이 음수면 GoodTrip이 열려있는것임
-                {                                           //그러니까 닫아준다.
-                    playerController.b_camControll = false;
-                    minimapMMF.Direction           = MMFeedbacks.Directions.BottomToTop;
-                    minimapMMF.PlayFeedbacks();
-                    Cursor.lockState = CursorLockMode.Locked;
-                
-                }
-            
-                //탭 뗐을때 값 초기화
-                pressedTime        = 0;
-                tabFill.fillAmount = 0;
+                playerController.vertical = playerController.horizontal = 0;
+                minimapMMF.Direction      = MMFeedbacks.Directions.TopToBottom;
+                minimapMMF.PlayFeedbacks();
+                Cursor.lockState               = CursorLockMode.Confined;
+                playerController.b_camControll = true;
+                pressedTime                    = -1;
+                tabFill.fillAmount             = 1;
             }
+        }
+            
+        //탭을 뗐을때 누르고 있었던 시간이 0.5초 이하면 인벤토리를 열어준다.
+        if (Input.GetKeyUp(KeyCode.Tab)) //탭을 뗐을때
+        {
+            if (pressedTime <= pressThreshold && pressedTime >= 0) //누르고 있었던 시간이 0.5초 이하면
+                Inventory("Inventory");                            //인벤토리를 열어준다.
+
+            if (pressedTime < 0) //누르고 있었던 시간이 음수면 GoodTrip이 열려있는것임
+            {                    //그러니까 닫아준다.
+                playerController.b_camControll = false;
+                minimapMMF.Direction           = MMFeedbacks.Directions.BottomToTop;
+                if (Minimap.Instance.textMMF.IsPlaying)
+                {
+                    Minimap.Instance.textMMF.StopFeedbacks();
+                    Minimap.Instance.textMMF.RestoreInitialValues();
+                }
+                minimapMMF.PlayFeedbacks();
+                    
+                Cursor.lockState = CursorLockMode.Locked;
+                
+            }
+            
+            //탭 뗐을때 값 초기화
+            pressedTime        = 0;
+            tabFill.fillAmount = 0;
         }
     }
 
@@ -241,7 +334,7 @@ public class GameManager : MonoBehaviour
                                     .GetComponent<TMP_Text>().text = "Level " + i_level;
         if (!go_player.IsUnityNull()) go_player.GetComponent<Rigidbody>().useGravity = true;
 
-        Minimap.instance.CreateMinimap(GetComponent<RoomCreation>().roomMap);
+        Minimap.Instance.CreateMinimap(GetComponent<RoomCreation>().roomMap);
 
         GetComponent<RoomCreation>().roomMap[45].RoomObject.GetComponent<BGMPlayer>().StartMusic(null);
     }
@@ -303,9 +396,15 @@ public class GameManager : MonoBehaviour
         }
 
         obj[0].transform.localPosition = obj1EndPosition;
-        obj[1].transform.localPosition = obj2EndPosition; //여기까지 문 관련 코드 - 엘레베이터 문이 닫힘
-        yield return
-            new WaitForSeconds(CHANGE_LEVEL_DELAY - duration); //CHANGE_LEVEL_DELAY가 문닫히는 시간보다 기니까 암전 완료될때까지 기다림
+        obj[1].transform.localPosition = obj2EndPosition;               //여기까지 문 관련 코드 - 엘레베이터 문이 닫힘
+        yield return new WaitForSeconds(CHANGE_LEVEL_DELAY - duration); //CHANGE_LEVEL_DELAY가 문닫히는 시간보다 기니까 암전 완료될때까지 기다림
+
+        if (i_level + 1 > 9)
+        {
+            gameOver.Ending();
+            yield break;
+        }
+
         Instance.ResetLevel(++i_level);
         yield return new WaitForSeconds(1f);                       //방 바뀌는 모습 보이지 않게 멈추고
         StartCoroutine(CurtainModify(true, CHANGE_LEVEL_DELAY));   //암전 풀어주고
@@ -393,95 +492,101 @@ public class GameManager : MonoBehaviour
 
     public void SystemButtonAction(string buttonType)
     {
-        if (buttonType == "Setting")
+        switch (buttonType)
         {
-            if (settings.activeSelf)
-            {
-                buttonType = "Resume";
-            }
-            else
-            {
-                settings.SetActive(true);
-                CanvasGroup canvasAlpha = settings.GetComponent<CanvasGroup>();
-                StartCoroutine(Lerp.LerpValue<float>(value => canvasAlpha.alpha = value, 0, 1, 0.3f, Mathf.Lerp,
-                                                     Lerp.EaseOut));
+            case "Setting" when settings.activeSelf:
                 {
-                    var anchor = settings.transform.Find("SoundSettingElements");
-        
-                    Dictionary<string, Slider> soundSliders = new Dictionary<string, Slider>();
-                    //각 자식의 이름으로 슬라이더를 등록해준다.
-                    foreach (Transform child in anchor)
-                        soundSliders.Add(child.name, child.GetComponentInChildren<Slider>());
-                
-                    //Settings.Instance.optionData.volume의 값을 슬라이더에 적용시킨다.
-                    soundSliders["Master"].value = SystemObject.Instance.optionData.volume.master;
-                    soundSliders["Music"].value  = SystemObject.Instance.optionData.volume.music;
-                    soundSliders["SFX"].value    = SystemObject.Instance.optionData.volume.sfx;
+                    buttonType = "Resume";
+                    break;
                 }
-            }
-        }
-
-        if (buttonType == "Resume")
-        {
-            CanvasGroup canvasAlpha = settings.GetComponent<CanvasGroup>();
-            StartCoroutine(Lerp.LerpValueAfter<float>(value => canvasAlpha.alpha = value, 1, 0, 0.3f, Mathf.Lerp,
-                                                      Lerp.EaseOut, () => settings.gameObject.SetActive(false)));
-            SystemObject.Instance.SaveSetting();
-        }
-
-        if (buttonType == "Save")
-        {
-            SystemObject.Instance.SaveData();
-        }
-
-        if (buttonType == "Exit")
-            Application.Quit();
-
-        if (buttonType == "Retry") //현재 씬을 다시 로드한다.
-        {
-            Instance                  = null;
-            Crafting.Instance         = null;
-            Player.Instance           = null;
-            InventoryManager.Instance = null;
-            BattleMain.Instance       = null;
+            case "Setting":
+                {
+                    settings.SetActive(true);
+                    CanvasGroup canvasAlpha = settings.GetComponent<CanvasGroup>();
+                    StartCoroutine(Lerp.LerpValue<float>(value => canvasAlpha.alpha = value, 0, 1, 0.3f, Mathf.Lerp,
+                                                         Lerp.EaseOut));
+                    {
+                        var anchor = settings.transform.Find("SoundSettingElements");
+        
+                        Dictionary<string, Slider> soundSliders = new Dictionary<string, Slider>();
+                        //각 자식의 이름으로 슬라이더를 등록해준다.
+                        foreach (Transform child in anchor)
+                            soundSliders.Add(child.name, child.GetComponentInChildren<Slider>());
+                
+                        //Settings.Instance.optionData.volume의 값을 슬라이더에 적용시킨다.
+                        soundSliders["Master"].value = SystemObject.Instance.optionData.volume.master;
+                        soundSliders["Music"].value  = SystemObject.Instance.optionData.volume.music;
+                        soundSliders["SFX"].value    = SystemObject.Instance.optionData.volume.sfx;
+                    }
+                    break;
+                }
+            case "Resume":
+                {
+                    CanvasGroup canvasAlpha = settings.GetComponent<CanvasGroup>();
+                    StartCoroutine(Lerp.LerpValueAfter<float>(value => canvasAlpha.alpha = value, 1, 0, 0.3f, Mathf.Lerp,
+                                                              Lerp.EaseOut, () => settings.gameObject.SetActive(false)));
+                    SystemObject.Instance.SaveSetting();
+                    break;
+                }
+            case "Save":
+                {
+                    SystemObject.Instance.SaveData();
+                    break;
+                }
+            case "Exit":
+                {
+                    Application.Quit();
+                    break;
+                }
+            //현재 씬을 다시 로드한다.
+            case "Retry":
+                {
+                    Instance                  = null;
+                    Crafting.Instance         = null;
+                    Player.Instance           = null;
+                    InventoryManager.Instance = null;
+                    BattleMain.Instance       = null;
             
-            StartCoroutine(Lerp.LerpValueAfter(
-                               value => gameOver.transform.GetChild(2).GetComponent<Image>().color = new Color(0, 0, 0, value),
-                               0,
-                               1f,
-                               1f,
-                               Mathf.Lerp,
-                               null,
-                               () => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex))
-            );
-        }
-
-        if (buttonType == "BackToLobby")
-        {
-            Instance = null;
-            Crafting.Instance = null;
-            Player.Instance = null;
-            InventoryManager.Instance = null;
-            BattleMain.Instance = null;
+                    StartCoroutine(Lerp.LerpValueAfter(
+                                       value => gameOver.transform.GetChild(2).GetComponent<Image>().color = new Color(0, 0, 0, value),
+                                       0,
+                                       1f,
+                                       1f,
+                                       Mathf.Lerp,
+                                       null,
+                                       () => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex))
+                    );
+                    break;
+                }
+            case "BackToLobby":
+                {
+                    Instance                  = null;
+                    Crafting.Instance         = null;
+                    Player.Instance           = null;
+                    InventoryManager.Instance = null;
+                    BattleMain.Instance       = null;
             
             
-            StartCoroutine(Lerp.LerpValueAfter(
-                               value => gameOver.transform.GetChild(2).GetComponent<Image>().color = new Color(0, 0, 0, value),
-                               0,
-                               1f,
-                               1f,
-                               Mathf.Lerp,
-                               null,
-                               () => SceneManager.LoadScene("Lobby"))
-            );
-            
+                    StartCoroutine(Lerp.LerpValueAfter(
+                                       value => gameOver.transform.GetChild(2).GetComponent<Image>().color = new Color(0, 0, 0, value),
+                                       0,
+                                       1f,
+                                       1f,
+                                       Mathf.Lerp,
+                                       null,
+                                       () => SceneManager.LoadScene("Lobby"))
+                    );
+                    break;
+                }
         }
     }
 
-    public void GameOver()
+    public void GameOver(Sprite killer)
     {
-        gameOver.transform.GetChild(0).GetComponent<CanvasGroup>().alpha = 0;
-        gameOver.transform.GetChild(2).gameObject.SetActive(true);
+        gameOver.statisticCanvasGroup.alpha = 0;
+        gameOver.killedBy.sprite = killer;
+        gameOver.blackPanel.SetActive(true);
+        gameOver.BuildStatistic(statistics);
         StartCoroutine(GameOverProcess());
     }
 
@@ -489,8 +594,8 @@ public class GameManager : MonoBehaviour
     {
         yield return CurtainModify(false, 0.5f);
         yield return new WaitForSeconds(1);
-        gameOver.SetActive(true);
-        gameOver.GetComponent<MMF_Player>().PlayFeedbacks();
+        gameOver.gameObject.SetActive(true);
+        gameOver.gameoverMMF.PlayFeedbacks();
         
     }
 }

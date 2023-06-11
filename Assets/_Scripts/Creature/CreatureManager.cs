@@ -62,7 +62,12 @@ public class CreatureManager : MonoBehaviour
         if (type == -1) //타입을 입력하지 않았으면
             type = UnityEngine.Random.Range(1, 4); //1~3 사이에서 무작위 크리쳐 이미지를 준다.
 
-        return spritesDictionary["L" + level + "_Creature" + type];
+        if (spritesDictionary.TryGetValue(("L" + level + "_Creature" + type), out var spritePack))
+            return spritePack;
+
+        return spritesDictionary["L3_Creature" + type];
+
+
     }
 
     public CreatureSpritePack GetSpritePack(string creatureName)

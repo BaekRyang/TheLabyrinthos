@@ -1,3 +1,4 @@
+using TypeDefs;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -57,7 +58,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        GO_minimapArrow = Minimap.instance.GO_arrow.GetComponent<RectTransform>();
+        GO_minimapArrow = Minimap.Instance.GO_arrow.GetComponent<RectTransform>();
         GO_minimapArrow.transform.rotation = Quaternion.Euler(0,
             0,
             Camera.main.transform.rotation.eulerAngles.y + (90 - Camera.main.transform.rotation.eulerAngles.y) * 2);
@@ -181,7 +182,7 @@ public class PlayerController : MonoBehaviour
             .RoomObject;                                               //플레이어가 위치한 방의 루트 오브젝트를 저장 (플레이어는 45번에 생성)
         prevRoom.GetComponent<RoomController>().ChangeRoomState(true); //플레이어가 위치한 방의 상태를 변경
 
-        prevRoomMinimap                             = Minimap.instance.GetRoom(45);
+        prevRoomMinimap                             = Minimap.Instance.GetRoom(45);
         prevRoomMinimap.GetComponent<Image>().color = Color.white;
     }
 
@@ -220,10 +221,15 @@ public class PlayerController : MonoBehaviour
 
         //위랑 똑같지만 미니맵 전용
         prevRoomMinimap.GetComponent<Image>().color      = Color.gray;
-        prevRoomMinimap                                  = Minimap.instance.GetRoom(enteredRoomIndex);
+        prevRoomMinimap                                  = Minimap.Instance.GetRoom(enteredRoomIndex);
         prevRoomMinimap.GetComponent<Image>().color      = Color.white;
-        prevRoomMinimap.GetComponent<GoodTrip>().entered = true;
-        Minimap.instance.SetAnchor(enteredRoomIndex);
+
+        if (!prevRoomMinimap.GetComponent<GoodTrip>().entered)
+        {
+            prevRoomMinimap.GetComponent<GoodTrip>().SetRoomStatus(true);
+            GameManager.Instance.statistics[Statistics.EnteredRoom]++;
+        }
+        Minimap.Instance.SetAnchor(enteredRoomIndex);
 
         if (prevRoom.GetComponent<RoomController>().hasCreature) //들어간 방에 크리쳐가 있으면
         {

@@ -24,6 +24,7 @@ public class ObjectController : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("ITEM!");
         if (GameManager.Instance == null)
         {
             return;
@@ -55,8 +56,7 @@ public class ObjectController : MonoBehaviour
 
             
             
-            if (RC_room == null) return;
-            
+            if (RC_room == null || RC_room.alreadyCleared) return;
             RC_room.hasCreature = true;
             RC_room.CR_creature   = tmpCR;
             RC_room.GO_creature   = gameObject;

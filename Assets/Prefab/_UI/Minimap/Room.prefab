@@ -280,15 +280,6 @@ MonoBehaviour:
           m_Curve:
           - serializedVersion: 3
             time: 0
-            value: 0
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          - serializedVersion: 3
-            time: 0.5
             value: 1
             inSlope: 0
             outSlope: 0
@@ -421,7 +412,7 @@ MonoBehaviour:
         CurveRemapZero: 1
         CurveRemapOne: 0.5
         DestinationAlpha: 1
-        DisableOnStop: 1
+        DisableOnStop: 0
 --- !u!114 &5857623913925670023
 MonoBehaviour:
   m_ObjectHideFlags: 0

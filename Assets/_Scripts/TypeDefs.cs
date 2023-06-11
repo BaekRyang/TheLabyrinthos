@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
@@ -103,8 +104,8 @@ namespace TypeDefs
     public class PlayerStats
     {
         //기본 스텟
-        private float health       = 1.0f;
-        private float maxHealth    = 1000.0f;
+        private float health       = 100.0f;
+        private float maxHealth    = 100.0f;
         private int   exp          = 0;
         private float speed        = 1.0f;
         private int   defense      = 5;
@@ -118,10 +119,22 @@ namespace TypeDefs
             get => health;
             set
             {
-                health = value;
-                GameManager.Instance.UpdateStatsSlider(StatsType.Hp);
-                if (InventoryManager.Instance.b_UIOpen)
-                    InventoryManager.Instance.stats.UpdateUI();
+                //현재 씬이 "Level"이라면 
+                if (SceneManager.GetActiveScene().name == "Level")
+                {
+                    if (value - health >= 1) //체력회복일 경우
+                        GameManager.Instance.statistics[Statistics.Healed] += value - health;
+                
+                    health = (float) Math.Round(value, 1);
+                
+                    GameManager.Instance.UpdateStatsSlider(StatsType.Hp);
+                    if (InventoryManager.Instance.b_UIOpen)
+                        InventoryManager.Instance.stats.UpdateUI();
+                }
+                else
+                {
+                    health = value;
+                }
             }
         }
 
@@ -130,10 +143,17 @@ namespace TypeDefs
             get => maxHealth;
             set
             {
-                maxHealth = value;
-                GameManager.Instance.UpdateStatsSlider(StatsType.Hp);
-                if (InventoryManager.Instance.b_UIOpen)
-                    InventoryManager.Instance.stats.UpdateUI();
+                if (SceneManager.GetActiveScene().name == "Level")
+                {
+                    maxHealth = value;
+                    GameManager.Instance.UpdateStatsSlider(StatsType.Hp);
+                    if (InventoryManager.Instance.b_UIOpen)
+                        InventoryManager.Instance.stats.UpdateUI();
+                }
+                else
+                {
+                    maxHealth = value;
+                }
             }
         }
 
@@ -144,20 +164,27 @@ namespace TypeDefs
             get => exp;
             set
             {
-                exp += value;
-                if (Exp >= 100)
+                if (SceneManager.GetActiveScene().name == "Level")
                 {
-                    exp -= 100;
-                    Level++;
-                    MaxHealth += 5;
-                    Health    += MissingHealth / 2;
-                    Damage    += 2;
-                    Defense   += 2;
-                }
+                    exp += value;
+                    if (Exp >= 100)
+                    {
+                        exp -= 100;
+                        Level++;
+                        MaxHealth += 5;
+                        Health    += MissingHealth / 2;
+                        Damage    += 2;
+                        Defense   += 2;
+                    }
 
-                GameManager.Instance.UpdateStatsSlider(StatsType.Exp);
-                if (InventoryManager.Instance.b_UIOpen)
-                    InventoryManager.Instance.stats.UpdateUI();
+                    GameManager.Instance.UpdateStatsSlider(StatsType.Exp);
+                    if (InventoryManager.Instance.b_UIOpen)
+                        InventoryManager.Instance.stats.UpdateUI();
+                }
+                else
+                {
+                    exp = value;
+                }
             }
         }
 
@@ -166,9 +193,16 @@ namespace TypeDefs
             get => speed;
             set
             {
-                speed = value;
-                if (InventoryManager.Instance.b_UIOpen)
-                    InventoryManager.Instance.stats.UpdateUI();
+                if (SceneManager.GetActiveScene().name == "Level")
+                {
+                    speed = value;
+                    if (InventoryManager.Instance.b_UIOpen)
+                        InventoryManager.Instance.stats.UpdateUI();
+                }
+                else
+                {
+                    speed = value;
+                }
             }
         }
 
@@ -177,9 +211,16 @@ namespace TypeDefs
             get => defense;
             set
             {
-                defense = value;
-                if (InventoryManager.Instance.b_UIOpen)
-                    InventoryManager.Instance.stats.UpdateUI();
+                if (SceneManager.GetActiveScene().name == "Level")
+                {
+                    defense = value;
+                    if (InventoryManager.Instance.b_UIOpen)
+                        InventoryManager.Instance.stats.UpdateUI();
+                }
+                else
+                {
+                    defense = value;
+                }
             }
         }
 
@@ -215,9 +256,16 @@ namespace TypeDefs
             get => level;
             set
             {
-                level = value;
-                if (InventoryManager.Instance.b_UIOpen)
-                    InventoryManager.Instance.stats.UpdateUI();
+                if (SceneManager.GetActiveScene().name == "Level")
+                {
+                    level = value;
+                    if (InventoryManager.Instance.b_UIOpen)
+                        InventoryManager.Instance.stats.UpdateUI();
+                }
+                else
+                {
+                    level = value;
+                }
             }
         }
     }
@@ -410,22 +458,35 @@ namespace TypeDefs
 
     public class SaveData
     {
-        public string seed;
-        public int    level;
-        public int    stayingRoomIndex;
-
-        public PlayerStats  playerStats;
-        public Weapon       equippedWeapon;
-        public List<Effect> appliedEffects;
-
-        public Dictionary<int, int> inventroy;
-        public Dictionary<int, List<Weapon>> weaponInventory;
-        
-        public List<int> roomVisited = new List<int>();
-        public Dictionary<int, Dictionary<int, bool>> interacted = new Dictionary<int, Dictionary<int, bool>>();
+        public string                                 seed;
+        public int                                    level;
+        public int                                    stayingRoomIndex;
+        public PlayerStats                            playerStats;
+        public Weapon                                 equippedWeapon;
+        public List<Effect>                           appliedEffects;
+        public Dictionary<int, int>                   inventroy;
+        public Dictionary<int, List<Weapon>>          weaponInventory;
+        public List<int>                              roomVisited;
+        public Dictionary<int, Dictionary<int, bool>> interactedObject;
+        public Dictionary<int, bool>                  creatureKilled;
 
 
         public SaveData()
+        {
+            seed              = "";
+            level             = 0;
+            stayingRoomIndex  = 0;
+            playerStats       = new PlayerStats();
+            equippedWeapon    = new Weapon();
+            appliedEffects    = new List<Effect>();
+            inventroy         = new Dictionary<int, int>();
+            weaponInventory   = new Dictionary<int, List<Weapon>>();
+            roomVisited       = new List<int>();
+            interactedObject  = new Dictionary<int, Dictionary<int, bool>>();
+            creatureKilled    = new Dictionary<int, bool>();
+        }
+
+        public void LoadData()
         {
             seed             = GameManager.Instance.Seed;
             level            = GameManager.Instance.i_level;
@@ -436,13 +497,64 @@ namespace TypeDefs
             inventroy        = InventoryManager.inventory;
             weaponInventory  = InventoryManager.weaponInventory;
 
-            foreach (var room in Minimap.instance.GO_anchor.transform.GetComponentsInChildren<GoodTrip>())
+            roomVisited = new List<int>();
+            interactedObject = new Dictionary<int, Dictionary<int, bool>>();
+            creatureKilled = new Dictionary<int, bool>();
+
+            foreach (var room in Minimap.Instance.GO_anchor.transform.GetComponentsInChildren<GoodTrip>())
             {
                 if (room.entered)
                     roomVisited.Add(room.index);
+            }
+
+
+            var map = GameManager.Instance.GetComponent<RoomCreation>().roomMap;
+            
+            foreach (var (index, roomNode) in map)
+            {
+                if (!roomVisited.Contains(index)) //방문 안한방은 저장 안해도됨
+                    continue;
+
+                interactedObject.Add(index, new Dictionary<int, bool>()); //방문은 했으니깐 안에 오브젝트들의 상태를 저장해야함
+            
+                var interactables = roomNode.RoomObject.transform.GetComponentsInChildren<Interactable>(); //Interactable 컴포넌트를 가진 오브젝트들을 가져옴
+            
+                for (var i = 0; i < interactables.Length; i++) //오브젝트들을 돌면서 상태를 저장
+                {
+                    var  interactable = interactables[i];
+                    bool interacted   = false;
+
+                    if (interactable.type == ObjectType.Door || interactable.type == ObjectType.Item)
+                    {
+                        //Interact를 했던 오브젝트들만 저장 (일반 문과 아이템만 저장)
+                        if (interactable.interacted)
+                            interacted = true;
+                    }
+                    
+                    interactedObject[index].Add(i, interacted);
+                }
+            }
+
+            foreach (var (index, roomNode) in map)
+            {
+                if (roomVisited.Contains(index))
+                    creatureKilled.Add(index, roomNode.RoomObject.GetComponent<RoomController>().hasCreature);
             }
         }
     }
 
 #endregion
+
+    [Serializable]
+    public enum Statistics
+    {
+        KilledEnemy,
+        DealtDamage,
+        TakenDamage,
+        Healed,
+        UsedItem,
+        MissedAttack,
+        AvoidedAttack,
+        EnteredRoom,
+    }
 }

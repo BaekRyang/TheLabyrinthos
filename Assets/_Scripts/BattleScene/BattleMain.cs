@@ -294,9 +294,7 @@ public class BattleMain : MonoBehaviour
         b_paused = true; //행동 멈추고
 
         if (PC_player.prevRoom.GetComponent<RoomController>().RT_roomType == RoomType.KeyRoom)
-        {
             Instantiate(keyCard, PC_player.prevRoom.transform.position + Vector3.up, Quaternion.identity);
-        }
 
         //화면 암전
         yield return StartCoroutine(GameManager.Instance.CurtainModify(false, 1));
@@ -320,6 +318,8 @@ public class BattleMain : MonoBehaviour
         PC_player.ExitBattle();
 
         P_player.PS_playerStats.Exp += GameManager.Instance.levelEXP;
+        
+        GameManager.Instance.statistics[Statistics.KilledEnemy]++;
         
         // //외부 상시 스텟바 업데이트
         // GameManager.Instance.UpdateStatsSlider(StatsType.Hp);

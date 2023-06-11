@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using TypeDefs;
 using Unity.VisualScripting;
@@ -16,7 +17,23 @@ public class Player : MonoBehaviour
     public PlayerStats  PS_playerStats;
     public Weapon       WP_weapon;
     public List<Effect> effectList = new List<Effect>();
-    
+
+    public Vector3 Position
+    {
+        set
+        {
+            StartCoroutine(ChangePosition(value));
+        }
+    }
+
+    private IEnumerator ChangePosition(Vector3 position)
+    {
+        yield return StartCoroutine(GameManager.Instance.CurtainModify(false, 0.2f));
+        transform.position = position;
+        yield return StartCoroutine(GameManager.Instance.CurtainModify(true, 0.2f));
+        yield return null;
+    }
+
     void Awake()
     {
         PS_playerStats = new PlayerStats();

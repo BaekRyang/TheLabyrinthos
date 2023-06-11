@@ -22,7 +22,7 @@ public class SliderValue : MonoBehaviour
         if (hasText)
         {
             if (isFloat) text.text = sliderValue.value.ToString();
-            else text.text = Mathf.FloorToInt(sliderValue.value).ToString();
+            else text.text = sliderValue.value.ToString("0.#");
         }
     }
 }

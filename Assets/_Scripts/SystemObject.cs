@@ -12,6 +12,7 @@ public class SystemObject : MonoBehaviour
     public static SystemObject Instance;
     public        OptionData   optionData;
     public        AudioMixer   audioMixer;
+    public        SaveData     saveData;
     private void Awake()
     {
         Instance ??= this;
@@ -29,18 +30,18 @@ public class SystemObject : MonoBehaviour
         optionData.refreshRate   = Application.targetFrameRate;
         optionData.vsync         = QualitySettings.vSyncCount;
         
-        System.IO.File.WriteAllText(Application.persistentDataPath + "/Settings.json", JsonConvert.SerializeObject(optionData));
+        System.IO.File.WriteAllText(Application.persistentDataPath + "/Settings", JsonConvert.SerializeObject(optionData));
     }
 
     public bool LoadSetting()
     {
         bool firstPlay = false;
-        if (System.IO.File.Exists(Application.persistentDataPath + "/Settings.json"))
+        if (System.IO.File.Exists(Application.persistentDataPath + "/Settings"))
         {
             //만약 Serialize에 실패했다면 새로 생성
             try
             {
-                optionData = JsonConvert.DeserializeObject<OptionData>(System.IO.File.ReadAllText(Application.persistentDataPath + "/Settings.json"));
+                optionData = JsonConvert.DeserializeObject<OptionData>(System.IO.File.ReadAllText(Application.persistentDataPath + "/Settings"));
             }
             catch (Exception e)
             {
@@ -65,34 +66,11 @@ public class SystemObject : MonoBehaviour
     public bool SaveData()
     {
         SaveData saveData = new SaveData();
-
-        foreach (var (index, roomNode) in GameManager.Instance.GetComponent<RoomCreation>().roomMap)
-        {
-            if (!saveData.roomVisited.Contains(index)) //방문 안한방은 저장 안해도됨
-                continue;
-
-            saveData.interacted.Add(index, new Dictionary<int, bool>()); //방문은 했으니깐 안에 오브젝트들의 상태를 저장해야함
-            
-            var interactables = roomNode.RoomObject.transform.GetComponentsInChildren<Interactable>(); //Interactable 컴포넌트를 가진 오브젝트들을 가져옴
-            
-            for (var i = 0; i < interactables.Length; i++) //오브젝트들을 돌면서 상태를 저장
-            {
-                var  interactable = interactables[i];
-                bool interacted   = false;
-
-                if (interactable.type == ObjectType.Door || interactable.type == ObjectType.Item)
-                {
-                    //Interact를 했던 오브젝트들만 저장 (일반 문과 아이템만 저장)
-                    if (interactable.interacted)
-                        interacted = true;
-                }
-                saveData.interacted[index].Add(i, interacted);
-            }
-        }
+        saveData.LoadData();
         
         try
         {
-            System.IO.File.WriteAllText(Application.persistentDataPath + "/Data.json", JsonConvert.SerializeObject(saveData));
+            System.IO.File.WriteAllText(Application.persistentDataPath + "/Data", JsonConvert.SerializeObject(saveData));
         }
         catch (Exception e)
         {
@@ -100,6 +78,25 @@ public class SystemObject : MonoBehaviour
             return false;
         }
         
+        return true;
+    }
+
+    public bool LoadData()
+    {
+        saveData = new SaveData();
+        
+        try
+        {
+            saveData = JsonConvert.DeserializeObject<SaveData>(System.IO.File.ReadAllText(Application.persistentDataPath + "/Data"));
+        }
+        catch (Exception e)
+        {
+            saveData = null;
+            Debug.Log("Load Failed");
+            Debug.Log(e.ToString());
+            return false;
+        }
+
         return true;
     }
 }

@@ -19,6 +19,7 @@ public class MainScene : MonoBehaviour
     [SerializeField] Image       I_curtainOverVideo;
     [SerializeField] AudioSource AS_mainLoop;
     [SerializeField] GameObject  GO_mainUI;
+    [SerializeField] GameObject  loadGame;
 
     [SerializeField] GameObject[] GO_lights;
     [SerializeField] Light[]      LIT_lights;
@@ -32,13 +33,15 @@ public class MainScene : MonoBehaviour
 
     [SerializeField] GameObject[] GO_cameras;
 
-    [SerializeField] CanvasGroup warningCG;
-    [SerializeField] VideoPlayer videoPlayer;
-    bool                         b_loaded;
+    private bool loaded = false;
 
     void Start()
     {
-        SystemObject.Instance.LoadSetting(); 
+        SystemObject.Instance.LoadSetting();
+        if (SystemObject.Instance.LoadData())
+        {
+            loadGame.GetComponent<Button>().interactable = true;
+        }
 
         StartCoroutine(Open());
         dataCarrier = GameObject.Find("DataPacker").GetComponent<DataCarrier>();
@@ -66,31 +69,41 @@ public class MainScene : MonoBehaviour
 
     public void ButtonAction(string button)
     {
-        if (button == "ClickToStart" && b_loaded)
+        switch (button)
         {
-            transform.GetChild(0).gameObject.SetActive(false);
-            transform.GetChild(2).gameObject.SetActive(false);
-            CanvasGroup tmpCG = GO_mainUI.GetComponent<CanvasGroup>();
-            GO_mainUI.SetActive(true);
-            StartCoroutine(Lerp.LerpValue(alpha => tmpCG.alpha = alpha, 0, 1f, 1, Mathf.Lerp));
-            StartCoroutine(Lerp.LerpValue(intense =>
-            {
-                for (int i = 0; i < 12; i++)
-                    LIT_lights[i].intensity = intense;
-            }, 0.1f, 5, 3, Mathf.Lerp));
+            case "ClickToStart" when loaded:
+                {
+                    transform.GetChild(0).gameObject.SetActive(false);
+                    transform.GetChild(2).gameObject.SetActive(false);
+                    CanvasGroup tmpCG = GO_mainUI.GetComponent<CanvasGroup>();
+                    GO_mainUI.SetActive(true);
+                    StartCoroutine(Lerp.LerpValue(alpha => tmpCG.alpha = alpha, 0, 1f, 1, Mathf.Lerp));
+                    StartCoroutine(Lerp.LerpValue(intense =>
+                    {
+                        for (int i = 0; i < 12; i++)
+                            LIT_lights[i].intensity = intense;
+                    }, 0.1f, 5, 3, Mathf.Lerp));
+                    break;
+                }
+            case "StartGame":
+                StartCoroutine(MoveMenu(0));
+                break;
+            case "BacktoMenu_NG":
+                StartCoroutine(MoveMenu(1));
+                break;
+            case "Settings":
+                StartCoroutine(MoveMenu(2));
+                break;
+            case "BacktoMenu_ST":
+                StartCoroutine(MoveMenu(3));
+                break;
+            case "LoadGame":
+                StartGame();
+                break;
+            case "Exit":
+                StartCoroutine(CurtainModify(false, 1, false, true));
+                break;
         }
-        else if (button == "StartGame")
-            StartCoroutine(MoveMenu(0));
-        else if (button == "BacktoMenu_NG")
-            StartCoroutine(MoveMenu(1));
-        else if (button == "Settings")
-            StartCoroutine(MoveMenu(2));
-        else if (button == "BacktoMenu_ST")
-            StartCoroutine(MoveMenu(3));
-        else if (button == "LoadLevel")
-            StartGame();
-        else if (button == "Exit")
-            StartCoroutine(CurtainModify(false, 1, false, true));
     }
 
     public void StartGame()
@@ -196,36 +209,11 @@ public class MainScene : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         
-        yield return StartCoroutine(Lerp.LerpValue(value => warningCG.alpha = value, 0, 1f, 1, Mathf.Lerp));
-        yield return new WaitForSeconds(3f);
-        yield return StartCoroutine(Lerp.LerpValue(value => warningCG.alpha = value, 1, 0f, 1, Mathf.Lerp));
-        DestroyImmediate(warningCG.gameObject);
-        
-        yield return new WaitForSeconds(2f);
-        yield return StartCoroutine(Lerp.LerpValue(value => I_curtainOverVideo.color = value, new Color(0, 0, 0, 1), new Color(0, 0, 0, 0), 1, Color.Lerp));
-
-        while (true)
-        {
-            //videoPlayer가 실행된지 1초 이상이면서 비디오가 재생중이 아니라면
-            if (videoPlayer.time > 1 && !videoPlayer.isPlaying || Input.GetMouseButtonDown(0))
-            {
-                videoPlayer.Stop();
-                break;
-            }
-            yield return null;
-        }
-
-        yield return StartCoroutine(Lerp.LerpValue(value => I_curtainOverVideo.color = value, new Color(0, 0, 0, 0), new Color(0, 0, 0, 1), 1, Color.Lerp));
-        
-        DestroyImmediate(videoPlayer.gameObject);
-        DestroyImmediate(I_curtainOverVideo.gameObject);
-
-        yield return new WaitForSeconds(1);
         StartCoroutine(Lerp.LerpValue<float>(volume => AS_mainLoop.volume = volume, 0, 1, 4, Mathf.Lerp));
         yield return new WaitForSeconds(1);
-        StartCoroutine(CurtainModify(true, 2));
-        yield return new WaitForSeconds(3);
-        b_loaded = true;
+        
+        yield return StartCoroutine(CurtainModify(true, 2));
+        loaded = true;
     }
 
 

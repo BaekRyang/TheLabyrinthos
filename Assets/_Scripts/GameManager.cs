@@ -81,8 +81,8 @@ public class GameManager : MonoBehaviour
     [Header("System Message")]
     public SystemAlerts systemAlerts;
 
-    private bool                      loaded     = false;
-    public  Dictionary<Statistics, float> statistics = new Dictionary<Statistics, float>();
+    private bool                          loaded = false;
+    public  Dictionary<Statistics, float> statistics;
 
     private bool    loadedData     = false;
     private Vector3 loadedPosition = Vector3.zero;
@@ -120,6 +120,7 @@ public class GameManager : MonoBehaviour
                 0,
                 (saveData.stayingRoomIndex / 10 - 4) * 10
             );
+            statistics = saveData.statistics;
         }
         else
         {
@@ -140,6 +141,8 @@ public class GameManager : MonoBehaviour
                     //시드를 따로 지정하지 않았으면 새로 만들어준다.
                     GetComponent<RoomCreation>().CreateSeed(out s_seed);
             }
+            
+            statistics = new Dictionary<Statistics, float>();
         }
 
         dict_randomObjects.Add("Object",   new Random(Convert.ToInt32(Seed, 16) + 1)); //오브젝트용 랜덤 시드

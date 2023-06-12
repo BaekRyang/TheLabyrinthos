@@ -334,15 +334,13 @@ public class BattleActions : MonoBehaviour
                     dmgText.fontMaterial = critMaterial;
                     dmgText.color        = critColor;
                 }
-
-                // BM_BattleMain.playerAttackSprite.sprite   = isPlayer ? P_player.cut_Attack : P_player.cut_Hited;
+                BM_BattleMain.playerAttackSprite.sprite   = isPlayer ? P_player.cut_Attack : P_player.cut_Hited;
                 break;
             case ActionTypes.Missed:
                 BM_BattleMain.creatureAttackSprite.sprite = isPlayer ? CR_Enemy.spritePack.cut_Avoid : CR_Enemy.spritePack.cut_Attack;
                 dmgText.text                              = "빗나감!";
                 dmgText.color                             = missedColor;
-
-                // BM_BattleMain.playerAttackSprite.sprite   = isPlayer ? P_player.cut_Attack : P_player.cut_Avoid;
+                BM_BattleMain.playerAttackSprite.sprite   = isPlayer ? P_player.cut_Attack : P_player.cut_Avoid;
                 break;
         }
 

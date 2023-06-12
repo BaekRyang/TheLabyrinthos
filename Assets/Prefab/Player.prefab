@@ -100,18 +100,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b754bc57bbc4ac43a85291dc32145bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PS_playerStats:
-    health: 100
-    maxHealth: 100
-    exp: 1
-    speed: 1
-    defense: 5
-    prepareSpeed: 0
-    accuracyMult: 1
-    damage: 10
-    attackSprite: {fileID: 0}
-    hitedSprite: {fileID: 0}
-    avoidSprite: {fileID: 0}
+  cut_Attack: {fileID: 21300000, guid: daff6a4ad31449d4e948a57938941170, type: 3}
+  cut_Avoid: {fileID: 21300000, guid: 52d51637f3c9d4c4086ee34d08a2e487, type: 3}
+  cut_Hited: {fileID: 21300000, guid: 79842790e9f9b40428ec19d84c73c496, type: 3}
+  attackScratch: {fileID: 0}
   WP_weapon:
     i_id: 0
     s_name: 
@@ -127,8 +119,6 @@ MonoBehaviour:
     i_maxDurability: 0
     i_durability: 0
   effectList: []
-  defaultExp: 0
-  defaultStr: 1
 --- !u!1 &2271119612486156601
 GameObject:
   m_ObjectHideFlags: 0

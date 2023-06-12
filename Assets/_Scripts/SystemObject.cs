@@ -66,7 +66,7 @@ public class SystemObject : MonoBehaviour
     public bool SaveData()
     {
         SaveData saveData = new SaveData();
-        saveData.LoadData();
+        saveData.LoadToSave();
         
         try
         {

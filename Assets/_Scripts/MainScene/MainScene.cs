@@ -98,6 +98,7 @@ public class MainScene : MonoBehaviour
                 StartCoroutine(MoveMenu(3));
                 break;
             case "LoadGame":
+            case "LoadLevel":
                 StartGame();
                 break;
             case "Exit":
@@ -109,7 +110,7 @@ public class MainScene : MonoBehaviour
     public void StartGame()
     {
         StartCoroutine(Lerp.LerpValue(volume => AS_mainLoop.volume = volume, 1, 0f, 2, Mathf.Lerp));
-        StartCoroutine(CurtainModify(false, 2, true));
+        StartCoroutine(CurtainModify(false, 2f, true));
     }
 
     private IEnumerator MoveMenu(int type)
@@ -168,21 +169,21 @@ public class MainScene : MonoBehaviour
             var tmpCG2 = GO_mainUI.transform.Find("MainTabs").GetComponent<CanvasGroup>();
             StartCoroutine(Lerp.LerpValue(value => tmpCG.alpha  = value, 0, 1f, 1f, Mathf.Lerp, Lerp.EaseOut));
             StartCoroutine(Lerp.LerpValue(value => tmpCG2.alpha = value, 1, 0f, 1f, Mathf.Lerp, Lerp.EaseOut));
-            
+
             {
                 var anchor = GO_mainUI.transform.Find("Settings").Find("SoundSettingElements");
-        
+
                 Dictionary<string, Slider> soundSliders = new Dictionary<string, Slider>();
                 //각 자식의 이름으로 슬라이더를 등록해준다.
                 foreach (Transform child in anchor)
                     soundSliders.Add(child.name, child.GetComponentInChildren<Slider>());
-                
+
                 //Settings.Instance.optionData.volume의 값을 슬라이더에 적용시킨다.
                 soundSliders["Master"].value = SystemObject.Instance.optionData.volume.master;
                 soundSliders["Music"].value  = SystemObject.Instance.optionData.volume.music;
                 soundSliders["SFX"].value    = SystemObject.Instance.optionData.volume.sfx;
             }
-            
+
             yield return null;
         }
         else if (type == 3)
@@ -200,7 +201,7 @@ public class MainScene : MonoBehaviour
 
             StartCoroutine(Lerp.LerpValue(value => dof.focusDistance.value = value, 1.5f, 6,    1, Mathf.Lerp));
             StartCoroutine(Lerp.LerpValue(value => dof.focalLength.value   = value, 100,  300f, 1, Mathf.Lerp));
-            
+
             yield return null;
         }
     }
@@ -208,10 +209,10 @@ public class MainScene : MonoBehaviour
     private IEnumerator Open()
     {
         yield return new WaitForSeconds(1f);
-        
+
         StartCoroutine(Lerp.LerpValue<float>(volume => AS_mainLoop.volume = volume, 0, 1, 4, Mathf.Lerp));
         yield return new WaitForSeconds(1);
-        
+
         yield return StartCoroutine(CurtainModify(true, 2));
         loaded = true;
     }

@@ -469,6 +469,7 @@ namespace TypeDefs
         public List<int>                              roomVisited;
         public Dictionary<int, Dictionary<int, bool>> interactedObject;
         public Dictionary<int, bool>                  creatureKilled;
+        public Dictionary<Statistics, float>          statistics;
 
 
         public SaveData()
@@ -484,9 +485,10 @@ namespace TypeDefs
             roomVisited       = new List<int>();
             interactedObject  = new Dictionary<int, Dictionary<int, bool>>();
             creatureKilled    = new Dictionary<int, bool>();
+            statistics        = new Dictionary<Statistics, float>();
         }
 
-        public void LoadData()
+        public void LoadToSave()
         {
             seed             = GameManager.Instance.Seed;
             level            = GameManager.Instance.i_level;
@@ -540,6 +542,8 @@ namespace TypeDefs
                 if (roomVisited.Contains(index))
                     creatureKilled.Add(index, roomNode.RoomObject.GetComponent<RoomController>().hasCreature);
             }
+            
+            statistics = GameManager.Instance.statistics;
         }
     }
 

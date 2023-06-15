@@ -39,14 +39,14 @@ public class ItemObject : MonoBehaviour, IScrollHandler, IPointerEnterHandler, I
         if (I_item.i_id >= 500)
         {
             var tmpImage = transform.GetChild(0).GetComponent<Image>();
-            tmpImage.sprite = InventoryManager.loadedImages[104];
+            tmpImage.sprite = InventoryManager.LoadedImages[104];
 
             if (I_item is Disposable tmpDisposable)
                 tmpImage.color = tmpDisposable.color;
         }
         else
         {
-            bool isSpriteExist = InventoryManager.loadedImages.TryGetValue(I_item.i_id, out Sprite foundedSprite);
+            bool isSpriteExist = InventoryManager.LoadedImages.TryGetValue(I_item.i_id, out Sprite foundedSprite);
 
             transform.GetChild(0).GetComponent<Image>().sprite =
                 isSpriteExist ? foundedSprite : InventoryManager.Instance.spriteNotFounded;

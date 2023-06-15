@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 5075444667038061118}
   - component: {fileID: 272145440937396315}
   - component: {fileID: 6148260093558427122}
-  - component: {fileID: 8509033228250575184}
   m_Layer: 8
   m_Name: Door01bWindow
   m_TagString: Interactable
@@ -115,25 +114,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75e9a907cb2e9da43bef6cd397d0cf59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  type: 1
   mode: 1
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  outlineWidth: 1
---- !u!114 &8509033228250575184
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6796859843004491490}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 1, g: 0.8352941, b: 0, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
+  enabledOutlineColor: {r: 1, g: 1, b: 1, a: 1}
+  disabledOutlineColor: {r: 1, g: 1, b: 1, a: 1}
+  enabledOutlineWidth: 1
+  disabledOutlineWidth: 1
+  interacted: 0

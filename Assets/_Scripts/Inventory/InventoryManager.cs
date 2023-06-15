@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using TMPro;
 using TypeDefs;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -13,25 +14,20 @@ public class InventoryManager : MonoBehaviour
     public static InventoryManager Instance;
 
     //인벤토리 key, value 형식으로 사용
-    [Header("Dictionaries")]
-    public static Dictionary<int, int>          inventory       = new Dictionary<int, int>();
-    public static Dictionary<int, List<Weapon>> weaponInventory = new Dictionary<int, List<Weapon>>();
-    public static Dictionary<int, Item>         definedItems    = new Dictionary<int, Item>();
-    public static Dictionary<int, Sprite>       loadedImages    = new Dictionary<int, Sprite>();
-    
-    [Header("Default Sprite Setting")]
+    public static          Dictionary<int, int>          Inventory       = new Dictionary<int, int>();
+    public static          Dictionary<int, List<Weapon>> WeaponInventory = new Dictionary<int, List<Weapon>>();
+    public static readonly Dictionary<int, Item>         DefinedItems    = new Dictionary<int, Item>();
+    public static readonly Dictionary<int, Sprite>       LoadedImages    = new Dictionary<int, Sprite>();
+
     public Sprite emptyItem;
     public Sprite spriteNotFounded;
     public Sprite weaponSpriteNotFounded;
 
-    [Header("UI Setting")]
-    public bool      b_UIOpen;
-    public Inventory openedInventory;
-
-    [Header("Set In Inspector")]
-    //UI요소
-    public GameObject GO_inventory;
-    public GameObject GO_crafting;
+    [NonSerialized] public bool      UIOpen;
+    [NonSerialized] public Inventory openedInventory;
+    
+    [FormerlySerializedAs("InventoryTab")] public GameObject inventoryTab;
+    [FormerlySerializedAs("CraftingTab")]  public GameObject craftingTab;
 
     public Crafting crafting;
 
@@ -40,66 +36,74 @@ public class InventoryManager : MonoBehaviour
     public Stats             stats;
     public EffectIndicator   effectIndicator;
 
-    public GameObject ui;
+    [SerializeField]
+    [FormerlySerializedAs("UIObject")]
+    public GameObject UI;
 
-    public Transform  itemNotificationAnchor;
-    public GameObject getNotifiactionPrefab;
+    [SerializeField]
+    [FormerlySerializedAs("NotificationAnchor")]
+    private Transform itemNotificationAnchor;
+
+    [SerializeField]
+    [FormerlySerializedAs("NotificationPrefab")]
+    private GameObject getNotificationPrefab;
 
     public IEnumerator LoadSetting()
     {
         Instance = this;
-        crafting = GO_crafting.GetComponent<Crafting>();
-        
-        ui.SetActive(true);
-        GO_inventory.SetActive(true);
-        GO_crafting.SetActive(true);
+        crafting = craftingTab.GetComponent<Crafting>();
 
-        if (loadedImages.Count == 0) //이미지가 하나도 없을 때만 로드
+        UI.SetActive(true);
+        inventoryTab.SetActive(true);
+        craftingTab.SetActive(true);
+
+        if (LoadedImages.Count == 0) //이미지가 하나도 없을 때만 로드
         {
             var tmpArray = Resources.LoadAll<Sprite>("Sprites/Items");
 
             foreach (var sprite in tmpArray)
             {
-                loadedImages.Add(int.Parse(sprite.name), sprite);
+                LoadedImages.Add(int.Parse(sprite.name), sprite);
             }
 
-            emptyItem              = loadedImages[-1];
-            spriteNotFounded       = loadedImages[-2];
-            weaponSpriteNotFounded = loadedImages[-3];
+            emptyItem              = LoadedImages[-1];
+            spriteNotFounded       = LoadedImages[-2];
+            weaponSpriteNotFounded = LoadedImages[-3];
 
             CreateSyringes();
-            
+
             // foreach (var (_, value) in definedItems)
             // {
             //     if (value.i_id == 306) continue;
             //     AddItem(value, 2);
             // }
         }
-        
-        AddItem(definedItems[0]); //기본칼 추가  
+
+        AddItem(DefinedItems[0]); //기본칼 추가  
 
         Player.Instance.WP_weapon = GetWeaponInstance(0);
-        
+
         equippedItem.UpdateUI();
         stats.UpdateUI();
-        
-        GO_inventory.SetActive(false);
+
+        inventoryTab.SetActive(false);
         yield return null;
     }
 
     public void OpenInventory(string target)
     {
-        b_UIOpen = true;
+        UIOpen = true;
         GameObject GO_targetUI = null;
         if (target == "Inventory")
         {
             stats.UpdateUI();
             effectIndicator.UpdateUI();
             equippedItem.UpdateUI();
-            GO_targetUI = GO_inventory;
+            GO_targetUI = inventoryTab;
         }
+
         if (target == "Crafting")
-            GO_targetUI = GO_crafting;
+            GO_targetUI = craftingTab;
 
         if (target != null)
         {
@@ -112,53 +116,53 @@ public class InventoryManager : MonoBehaviour
 
     public void CloseUI()
     {
-        if (GO_inventory.activeSelf)
+        if (inventoryTab.activeSelf)
         {
-            StartCoroutine(Lerp.LerpValueAfter(value => GO_inventory.GetComponent<CanvasGroup>().alpha = value,
-                1,
-                0f,
-                0.3f,
-                Mathf.Lerp,
-                null,
-                () =>
-                {
-                    GO_inventory.transform.Find("Inventory").GetComponent<Inventory>().DestroyElements();
-                    GO_inventory.SetActive(false);
-                }
-            ));
+            StartCoroutine(Lerp.LerpValueAfter(value => inventoryTab.GetComponent<CanvasGroup>().alpha = value,
+                                               1,
+                                               0f,
+                                               0.3f,
+                                               Mathf.Lerp,
+                                               null,
+                                               () =>
+                                               {
+                                                   inventoryTab.transform.Find("Inventory").GetComponent<Inventory>().DestroyElements();
+                                                   inventoryTab.SetActive(false);
+                                               }
+                           ));
         }
 
-        if (GO_crafting.activeSelf)
+        if (craftingTab.activeSelf)
         {
-            StartCoroutine(Lerp.LerpValueAfter(value => GO_crafting.GetComponent<CanvasGroup>().alpha = value,
-                1,
-                0f,
-                0.3f,
-                Mathf.Lerp,
-                null,
-                () =>
-                {
-                    GO_crafting.transform.Find("Inventory").GetComponent<Inventory>().DestroyElements();
-                    GO_crafting.GetComponent<Crafting>().ResetCells(true);
-                    GO_crafting.SetActive(false);
-                }
-            ));
+            StartCoroutine(Lerp.LerpValueAfter(value => craftingTab.GetComponent<CanvasGroup>().alpha = value,
+                                               1,
+                                               0f,
+                                               0.3f,
+                                               Mathf.Lerp,
+                                               null,
+                                               () =>
+                                               {
+                                                   craftingTab.transform.Find("Inventory").GetComponent<Inventory>().DestroyElements();
+                                                   craftingTab.GetComponent<Crafting>().ResetCells(true);
+                                                   craftingTab.SetActive(false);
+                                               }
+                           ));
         }
 
         if (GameManager.Instance.settings.activeSelf)
         {
             StartCoroutine(Lerp.LerpValueAfter(value => GameManager.Instance.settings.GetComponent<CanvasGroup>().alpha = value,
-                1,
-                0f,
-                0.3f,
-                Mathf.Lerp,
-                null,
-                () =>
-                    GameManager.Instance.settings.SetActive(false)
-            ));
+                                               1,
+                                               0f,
+                                               0.3f,
+                                               Mathf.Lerp,
+                                               null,
+                                               () =>
+                                                   GameManager.Instance.settings.SetActive(false)
+                           ));
         }
 
-        b_UIOpen = false;
+        UIOpen = false;
     }
 
     private IEnumerator LerpCanvas(CanvasGroup target, float from, float to, float duration)
@@ -179,38 +183,44 @@ public class InventoryManager : MonoBehaviour
     {
         if (item.IT_type == ItemType.Weapon)
         {
-            if (!weaponInventory.ContainsKey(item.i_id))
+            if (!WeaponInventory.ContainsKey(item.i_id))
                 //해당 무기를 이미 갖고있지 않으면 리스트를 만들어준다.
-                weaponInventory.Add(item.i_id, new List<Weapon>());
+                WeaponInventory.Add(item.i_id, new List<Weapon>());
             //그 다음 리스트에 아이템을 추가해준다.
-            weaponInventory[item.i_id].Add(new Weapon(item as Weapon));
+            WeaponInventory[item.i_id].Add(new Weapon(item as Weapon));
             PlayItemNotification(item, amount);
             return;
         }
 
-        if (inventory.ContainsKey(item.i_id)) //해당 아이템을 이미 갖고있으면
-            inventory[item.i_id] += amount;   //개수만큼 더해주고
-        else                                       //없으면
-            inventory.Add(item.i_id, amount); //새로 만들어준다.
-        
+        if (Inventory.ContainsKey(item.i_id)) //해당 아이템을 이미 갖고있으면
+            Inventory[item.i_id] += amount;   //개수만큼 더해주고
+        else                                  //없으면
+            Inventory.Add(item.i_id, amount); //새로 만들어준다.
+
         PlayItemNotification(item, amount);
     }
 
     public void AddItem(int item, int amount = 1)
     {
+        if (item == -100)
+        {
+            //무작위 아이템을 추가
+            AddItem(DefinedItems[Random.Range(300, 311)], Random.Range(1, 4)); //무작위 아이템을 1~3개 추가
+        }
+        
         if (item < 100)
         {
-            AddItem(definedItems[item]);
+            AddItem(DefinedItems[item]);
             return;
         }
 
-        if (inventory.ContainsKey(item)) //해당 아이템을 이미 갖고있으면
+        if (Inventory.ContainsKey(item)) //해당 아이템을 이미 갖고있으면
         {
-            inventory[item] += amount; //개수만큼 더해주고
+            Inventory[item] += amount; //개수만큼 더해주고
         }
         else //없으면
         {
-            inventory.Add(item, amount); //새로 만들어준다.
+            Inventory.Add(item, amount); //새로 만들어준다.
         }
     }
 
@@ -220,52 +230,53 @@ public class InventoryManager : MonoBehaviour
         if (itemInstance.IT_type == ItemType.Weapon)
         {
             //인자로 들어온 해당 아이템을 삭제한다.
-            if (weaponInventory[itemInstance.i_id].Contains(itemInstance as Weapon))
+            if (WeaponInventory[itemInstance.i_id].Contains(itemInstance as Weapon))
             {
-                weaponInventory[itemInstance.i_id].Remove(itemInstance as Weapon);
+                WeaponInventory[itemInstance.i_id].Remove(itemInstance as Weapon);
 
-                if (weaponInventory[itemInstance.i_id].Count == 0)
+                if (WeaponInventory[itemInstance.i_id].Count == 0)
                     // 해당 무기 아이템 리스트가 비어있으면 딕셔너리에서 제거
-                    weaponInventory.Remove(itemInstance.i_id);
+                    WeaponInventory.Remove(itemInstance.i_id);
                 removed = true;
                 PlayItemNotification(itemInstance, -1);
             }
         }
         else
             removed = RemoveItem(itemInstance.i_id);
+
         return removed;
     }
-    
+
     public bool RemoveItem(int itemIndex, int amount = 1) //아이템의 코드를 지정해서 일치하는 아이템 삭제
     {
         if (itemIndex < 100)
         {
             //무기는 무조건 맨 앞에 있던걸 지운다.
-            if (weaponInventory.ContainsKey(itemIndex) && weaponInventory[itemIndex].Count > 0)
+            if (WeaponInventory.ContainsKey(itemIndex) && WeaponInventory[itemIndex].Count > 0)
             {
-                if (weaponInventory[itemIndex].Count > 0)
-                    weaponInventory[itemIndex].RemoveAt(0); // 무기 아이템 리스트에서 첫번째 아이템 제거
+                if (WeaponInventory[itemIndex].Count > 0)
+                    WeaponInventory[itemIndex].RemoveAt(0); // 무기 아이템 리스트에서 첫번째 아이템 제거
 
-                if (weaponInventory[itemIndex].Count == 0)
-                    weaponInventory.Remove(itemIndex); // 해당 무기 아이템 리스트가 비어있으면 딕셔너리에서 제거
-                
-                PlayItemNotification(definedItems[itemIndex], -amount);
+                if (WeaponInventory[itemIndex].Count == 0)
+                    WeaponInventory.Remove(itemIndex); // 해당 무기 아이템 리스트가 비어있으면 딕셔너리에서 제거
+
+                PlayItemNotification(DefinedItems[itemIndex], -amount);
                 return true;
             }
 
             return false;
         }
 
-        if (inventory.ContainsKey(itemIndex)) //해당 아이템을 가지고 있다면
+        if (Inventory.ContainsKey(itemIndex)) //해당 아이템을 가지고 있다면
         {
-            inventory[itemIndex] -= amount;  //개수를 감소시키고
-            if (inventory[itemIndex] <= 0)   //아이템 개수가 0 이하면
-                inventory.Remove(itemIndex); //딕셔너리에서 아이템을 제거
-            PlayItemNotification(definedItems[itemIndex], -amount);
+            Inventory[itemIndex] -= amount;  //개수를 감소시키고
+            if (Inventory[itemIndex] <= 0)   //아이템 개수가 0 이하면
+                Inventory.Remove(itemIndex); //딕셔너리에서 아이템을 제거
+            PlayItemNotification(DefinedItems[itemIndex], -amount);
             return true;
         }
 
-        
+
         return false;
     }
 
@@ -273,14 +284,14 @@ public class InventoryManager : MonoBehaviour
     {
         if (item.IT_type == ItemType.Weapon)
         {
-            if (weaponInventory.ContainsKey(item.i_id))
+            if (WeaponInventory.ContainsKey(item.i_id))
                 return true;
             return false;
         }
 
-        if (inventory.TryGetValue(item.i_id, out var value))      //해당 아이템을 가지고 있다면     
-            return value >= amount; //아이템 개수가 amount 이상이면 true, 그렇지 않으면 false 반환
-        return false;                                   //해당 아이템을 가지고 있지 않다면 false 반환
+        if (Inventory.TryGetValue(item.i_id, out var value)) //해당 아이템을 가지고 있다면     
+            return value >= amount;                          //아이템 개수가 amount 이상이면 true, 그렇지 않으면 false 반환
+        return false;                                        //해당 아이템을 가지고 있지 않다면 false 반환
     }
 
 
@@ -288,19 +299,19 @@ public class InventoryManager : MonoBehaviour
     {
         if (item < 100)
         {
-            if (weaponInventory.ContainsKey(item))
+            if (WeaponInventory.ContainsKey(item))
                 return true;
             return false;
         }
 
-        if (inventory.TryGetValue(item, out var value)) //해당 아이템을 가지고 있다면    
-            return value >= amount;                             //아이템 개수가 amount 이상이면 true, 그렇지 않으면 false 반환
-        return false;                                           //해당 아이템을 가지고 있지 않다면 false 반환
+        if (Inventory.TryGetValue(item, out var value)) //해당 아이템을 가지고 있다면    
+            return value >= amount;                     //아이템 개수가 amount 이상이면 true, 그렇지 않으면 false 반환
+        return false;                                   //해당 아이템을 가지고 있지 않다면 false 반환
     }
 
     public Sprite GetImage(int id)
     {
-        bool isSpriteExist = loadedImages.TryGetValue(id, out Sprite foundedSprite);
+        bool isSpriteExist = LoadedImages.TryGetValue(id, out Sprite foundedSprite);
 
         return isSpriteExist ? foundedSprite : spriteNotFounded;
     }
@@ -309,7 +320,7 @@ public class InventoryManager : MonoBehaviour
     {
         if (HasItem(id))
             //해당 아이템을 갖고있다면 제일 처음 아이템을 반환한다.
-            return weaponInventory[id][0];
+            return WeaponInventory[id][0];
 
         return null;
     }
@@ -325,19 +336,19 @@ public class InventoryManager : MonoBehaviour
     private void CreateSyringes()
     {
         var effectCount = Enum.GetValues(typeof(EffectTypes)).Length;
-        
+
         //이펙트의 개수 출력
         Debug.Log(effectCount);
-        
+
         Disposable tmpDisposable;
         for (int i = 0; i < effectCount; i++)
         {
             for (int j = 0; j < 2; j++)
             {
-                tmpDisposable = new Disposable(definedItems[104] as Disposable);
-                
+                tmpDisposable = new Disposable(DefinedItems[104] as Disposable);
+
                 tmpDisposable.CreateEffect((EffectTypes)i, j == 1);
-                
+
                 tmpDisposable.i_id = 500 + i * 2 + j;
                 //tmpDisposable.color를 i 따라서 무작위 색상으로 설정 (단 너무 비슷한 색상끼리 겹치지 않게)
                 tmpDisposable.color = new Color(
@@ -346,28 +357,27 @@ public class InventoryManager : MonoBehaviour
                     Random.Range(0.0f, 0.5f) + (i % 5) * 0.5f);
 
                 Debug.Log(tmpDisposable.i_id + " 주사기 추가 - " + GameManager.Instance.effectsManager.GetEffectDesc(tmpDisposable.effect));
-                definedItems.Add(tmpDisposable.i_id, tmpDisposable);
+                DefinedItems.Add(tmpDisposable.i_id, tmpDisposable);
 
                 if ((EffectTypes)i is EffectTypes.Poison)
                     break;
                 //독은 두개 만들것이 없음
             }
         }
-
     }
 
     private void PlayItemNotification(Item item, int count)
     {
-        var noti     = Instantiate(getNotifiactionPrefab, itemNotificationAnchor);
+        var noti     = Instantiate(getNotificationPrefab, itemNotificationAnchor);
         var notiIcon = noti.transform.GetComponentsInChildren<Image>()[1];
         var notiText = noti.transform.GetComponentInChildren<TMP_Text>();
         var notiAnim = noti.GetComponent<MMF_Player>();
         notiAnim.Initialization();
-        
+
         notiIcon.sprite = GetImage(item.i_id);
         notiText.text = $"{(count >= 1 ? "<color=#00ff68>+" : "<color=#FF0000>")}" +
-                        $"{count}</color> "                                       +
-                        $"{definedItems[item.i_id].s_name}";
+                        $"{count}</color> "                                        +
+                        $"{DefinedItems[item.i_id].s_name}";
         noti.GetComponent<MMF_Player>().PlayFeedbacks();
     }
 }

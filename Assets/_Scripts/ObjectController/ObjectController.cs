@@ -24,7 +24,6 @@ public class ObjectController : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("ITEM!");
         if (GameManager.Instance == null)
         {
             return;

@@ -31,7 +31,7 @@ public class Inventory : MonoBehaviour
 
         if ((target & (1 << 3)) != 0)
         {
-            foreach (var weaponList in InventoryManager.weaponInventory)
+            foreach (var weaponList in InventoryManager.WeaponInventory)
             {
                 foreach (var weapon in weaponList.Value)
                 {
@@ -47,9 +47,9 @@ public class Inventory : MonoBehaviour
         }
 
 
-        foreach (KeyValuePair<int, int> kvp in InventoryManager.inventory)
+        foreach (KeyValuePair<int, int> kvp in InventoryManager.Inventory)
         {
-            Item targetItem = InventoryManager.definedItems[kvp.Key];
+            Item targetItem = InventoryManager.DefinedItems[kvp.Key];
             switch (targetItem.IT_type)
             {
                 case ItemType.Weapon:

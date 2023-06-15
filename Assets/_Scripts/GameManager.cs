@@ -26,9 +26,10 @@ public class GameManager : MonoBehaviour
     public GameObject GO_curtain;
 
     public GameOver gameOver;
+    public GameOver gameClear;
 
     [SerializeField] public GameObject GO_BattleCanvas;
-    
+
     [Header("Player Prefab")]
     [SerializeField]
     private GameObject go_playerPrefab;
@@ -68,18 +69,16 @@ public class GameManager : MonoBehaviour
 
     [Header("Battle Controll")] public bool b_nowBattle;
 
-    [Header("EXP Control")]     public int        levelEXP    = 15;
-    [Header("UI Control")]
-    public float pressedTime = 0;
-    public Image tabFill;
-    
+    [Header("EXP Control")] public int   levelEXP    = 15;
+    [Header("UI Control")]  public float pressedTime = 0;
+    public                         Image tabFill;
+
     [Header("Minimap Control")] public MMF_Player minimapMMF;
-    float                                           pressThreshold = 0.3f;
+    float                                         pressThreshold = 0.3f;
 
     public PlayerController playerController;
-    
-    [Header("System Message")]
-    public SystemAlerts systemAlerts;
+
+    [Header("System Message")] public SystemAlerts systemAlerts;
 
     private bool                          loaded = false;
     public  Dictionary<Statistics, float> statistics;
@@ -87,7 +86,6 @@ public class GameManager : MonoBehaviour
     private bool    loadedData     = false;
     private Vector3 loadedPosition = Vector3.zero;
     public  string  Seed => s_seed;
-
 
 
     void Awake()
@@ -107,13 +105,13 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         GameObject data = GameObject.Find("DataPacker");
 
-        if (!SystemObject.Instance.IsUnityNull() && !SystemObject.Instance.saveData.IsUnityNull())
+        if (!SystemObject.Instance.IsUnityNull() && SystemObject.Instance.useSave)
         {
             Debug.Log("Data Loaded");
             loadedData = true;
-            
+
             SaveData saveData = SystemObject.Instance.saveData;
-            s_seed = saveData.seed;
+            s_seed  = saveData.seed;
             i_level = saveData.level;
             loadedPosition = new Vector3(
                 (saveData.stayingRoomIndex % 10 - 5) * 10,
@@ -141,8 +139,14 @@ public class GameManager : MonoBehaviour
                     //시드를 따로 지정하지 않았으면 새로 만들어준다.
                     GetComponent<RoomCreation>().CreateSeed(out s_seed);
             }
-            
+
             statistics = new Dictionary<Statistics, float>();
+
+            foreach (var type in Enum.GetValues(typeof(Statistics)))
+            {
+                statistics.Add((Statistics)type, 0f);
+                Debug.Log((Statistics)type + " : " + statistics[(Statistics)type]);
+            }
         }
 
         dict_randomObjects.Add("Object",   new Random(Convert.ToInt32(Seed, 16) + 1)); //오브젝트용 랜덤 시드
@@ -150,25 +154,20 @@ public class GameManager : MonoBehaviour
         dict_randomObjects.Add("Room",     new Random(Convert.ToInt32(Seed, 16) + 3)); //방배치용 랜덤 시드
         dict_randomObjects.Add("Effect",   new Random(Convert.ToInt32(Seed, 16) + 4)); //아이템용 랜덤 시드
         dict_randomObjects.Add("Syringe",  new Random(Convert.ToInt32(Seed, 16) + 5)); //주사기용 랜덤 시드
-        
-        StartCoroutine(LoadSettings()); 
+
+        StartCoroutine(LoadSettings());
     }
 
     IEnumerator LoadSettings()
     {
         gameOver.gameObject.SetActive(false);
-
-        foreach (var type in Enum.GetValues(typeof(Statistics)))
-        {
-            statistics.Add((Statistics)type, 0f);
-            Debug.Log((Statistics)type + " : " + statistics[(Statistics)type]);
-        }
+        gameClear.gameObject.SetActive(false);
 
         go_player      = Instantiate(go_playerPrefab, loadedPosition, Quaternion.identity);
         go_player.name = "Player"; //플레이어는 로딩중에 참조하니까 미리 만든다.
         var playerRigid = go_player.GetComponent<Rigidbody>();
         playerRigid.useGravity = false; //맵 생기기전에 떨어지지 말라고 중력을 꺼준다.
-        
+
         yield return new WaitForSeconds(1f);
         //Awake나 Start 대기용
 
@@ -202,17 +201,17 @@ public class GameManager : MonoBehaviour
 
 
         ResetLevel(i_level);
-        
+
         yield return new WaitForSeconds(2f);
-        
+
         if (loadedData)
         {
             SaveData saveData = SystemObject.Instance.saveData;
             Player.Instance.PS_playerStats   = saveData.playerStats;
             Player.Instance.WP_weapon        = saveData.equippedWeapon;
             Player.Instance.effectList       = saveData.appliedEffects;
-            InventoryManager.inventory       = saveData.inventroy;
-            InventoryManager.weaponInventory = saveData.weaponInventory;
+            InventoryManager.Inventory       = saveData.inventroy;
+            InventoryManager.WeaponInventory = saveData.weaponInventory;
 
             var map = GetComponent<RoomCreation>().roomMap;
 
@@ -226,14 +225,14 @@ public class GameManager : MonoBehaviour
                     rc.DestroyCreature();
                 }
 
-                var interactables = roomNode.RoomObject.transform.GetComponentsInChildren<Interactable>(); 
-                    
+                var interactables = roomNode.RoomObject.transform.GetComponentsInChildren<Interactable>();
+
                 for (var i = 0; i < interactables.Length; i++)
                 {
                     var interactable = interactables[i];
 
                     if (interactable.type != ObjectType.Door && interactable.type != ObjectType.Item) continue;
-                    
+
                     if (saveData.interactedObject[index][i])
                     {
                         switch (interactable.type)
@@ -255,9 +254,8 @@ public class GameManager : MonoBehaviour
                 Minimap.Instance.GetRoom(index).GetComponent<GoodTrip>().SetRoomStatus(true);
                 Minimap.Instance.GetRoom(index).GetComponent<Image>().color = Color.gray;
             }
-            
-            
         }
+
         Debug.Log("Setting End");
         yield return new WaitForSeconds(1f);
         UpdateStatsSlider(StatsType.Hp);
@@ -265,7 +263,7 @@ public class GameManager : MonoBehaviour
 
         playerController = Player.Instance.GetComponent<PlayerController>();
         playerController.ResetSetting();
-        
+
         playerRigid.useGravity = true;
         yield return StartCoroutine(CurtainModify(true, 2));
         loaded = true;
@@ -275,13 +273,13 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         if (b_nowBattle) return; //전투중에서는 전부 작동하지 않도록
-        
+
         //UI 켜거나 끄기
         if (Input.GetKeyDown(KeyCode.Escape) && pressedTime != -1) //Esc는 기다리지 않고 바로 열어준다.
             Inventory("Inventory");                                //그런데 탭을 누르고 있으면 무시한다.
-            
+
         if (Input.GetKey(KeyCode.Tab) && !playerController.b_camControll) //탭을 누르고 있으면 게이지를 채워준다.
-        {                                                                 //특정 상황안에 있으면 작동하지 않음
+        {
             tabFill.fillAmount =  pressedTime / pressThreshold;
             pressedTime        += Time.deltaTime;
             if (pressedTime > pressThreshold) //일정시간 계속 누르고 있었으면 GoodTrip을 열어준다.
@@ -295,7 +293,7 @@ public class GameManager : MonoBehaviour
                 tabFill.fillAmount             = 1;
             }
         }
-            
+
         //탭을 뗐을때 누르고 있었던 시간이 0.5초 이하면 인벤토리를 열어준다.
         if (Input.GetKeyUp(KeyCode.Tab)) //탭을 뗐을때
         {
@@ -303,7 +301,8 @@ public class GameManager : MonoBehaviour
                 Inventory("Inventory");                            //인벤토리를 열어준다.
 
             if (pressedTime < 0) //누르고 있었던 시간이 음수면 GoodTrip이 열려있는것임
-            {                    //그러니까 닫아준다.
+            {
+                //그러니까 닫아준다.
                 playerController.b_camControll = false;
                 minimapMMF.Direction           = MMFeedbacks.Directions.BottomToTop;
                 if (Minimap.Instance.textMMF.IsPlaying)
@@ -311,12 +310,12 @@ public class GameManager : MonoBehaviour
                     Minimap.Instance.textMMF.StopFeedbacks();
                     Minimap.Instance.textMMF.RestoreInitialValues();
                 }
+
                 minimapMMF.PlayFeedbacks();
-                    
+
                 Cursor.lockState = CursorLockMode.Locked;
-                
             }
-            
+
             //탭 뗐을때 값 초기화
             pressedTime        = 0;
             tabFill.fillAmount = 0;
@@ -402,9 +401,11 @@ public class GameManager : MonoBehaviour
         obj[1].transform.localPosition = obj2EndPosition;               //여기까지 문 관련 코드 - 엘레베이터 문이 닫힘
         yield return new WaitForSeconds(CHANGE_LEVEL_DELAY - duration); //CHANGE_LEVEL_DELAY가 문닫히는 시간보다 기니까 암전 완료될때까지 기다림
 
-        if (i_level + 1 > 9)
+        if (i_level + 1 > 8)
         {
-            gameOver.Ending();
+            gameClear.BuildStatistic(statistics);
+            gameClear.Ending();
+            GameClearProcess();
             yield break;
         }
 
@@ -420,12 +421,9 @@ public class GameManager : MonoBehaviour
         switch (roomType)
         {
             case RoomType.common:
-                if (typeId != -1) return GO_roomPrefabs[typeId];
-                return GO_roomPrefabs[dict_randomObjects["Room"].Next(GO_roomPrefabs.Length)]; //무작위 구조 반환
-
             case RoomType.EndRoom:
                 if (typeId != -1) return GO_roomPrefabs[typeId];
-                return GO_roomPrefabs[dict_randomObjects["Room"].Next(GO_roomPrefabs.Length)];
+                return GO_roomPrefabs[dict_randomObjects["Room"].Next(GO_roomPrefabs.Length)]; //무작위 구조 반환
 
             case RoomType.StartRoom:
                 return GO_startRoomPrefab; //시작방은 하나
@@ -470,13 +468,13 @@ public class GameManager : MonoBehaviour
 
     public void Inventory(string targetUI)
     {
-        bool b_setClose = InventoryManager.Instance.b_UIOpen;
+        bool b_setClose = InventoryManager.Instance.UIOpen;
 
         PlayerController PC_tmp = go_player.GetComponent<PlayerController>();
         if (b_setClose) //인벤끄기
         {
             PC_tmp.b_camControll = false;
-            
+
             PopUpManager.Instance.infoBox.gameObject.SetActive(false);
             PopUpManager.Instance.descBox.gameObject.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
@@ -510,12 +508,12 @@ public class GameManager : MonoBehaviour
                                                          Lerp.EaseOut));
                     {
                         var anchor = settings.transform.Find("SoundSettingElements");
-        
+
                         Dictionary<string, Slider> soundSliders = new Dictionary<string, Slider>();
                         //각 자식의 이름으로 슬라이더를 등록해준다.
                         foreach (Transform child in anchor)
                             soundSliders.Add(child.name, child.GetComponentInChildren<Slider>());
-                
+
                         //Settings.Instance.optionData.volume의 값을 슬라이더에 적용시킨다.
                         soundSliders["Master"].value = SystemObject.Instance.optionData.volume.master;
                         soundSliders["Music"].value  = SystemObject.Instance.optionData.volume.music;
@@ -549,9 +547,13 @@ public class GameManager : MonoBehaviour
                     Player.Instance           = null;
                     InventoryManager.Instance = null;
                     BattleMain.Instance       = null;
-            
+
                     StartCoroutine(Lerp.LerpValueAfter(
-                                       value => gameOver.transform.GetChild(2).GetComponent<Image>().color = new Color(0, 0, 0, value),
+                                       value =>
+                                       {
+                                           gameOver.transform.GetChild(2).GetComponent<Image>().color = new Color(0, 0, 0, value);
+                                           gameClear.transform.GetChild(2).GetComponent<Image>().color = new Color(0, 0, 0, value);
+                                       },
                                        0,
                                        1f,
                                        1f,
@@ -568,10 +570,14 @@ public class GameManager : MonoBehaviour
                     Player.Instance           = null;
                     InventoryManager.Instance = null;
                     BattleMain.Instance       = null;
-            
-            
+
+
                     StartCoroutine(Lerp.LerpValueAfter(
-                                       value => gameOver.transform.GetChild(2).GetComponent<Image>().color = new Color(0, 0, 0, value),
+                                       value =>
+                                       {
+                                           gameOver.transform.GetChild(2).GetComponent<Image>().color = new Color(0, 0, 0, value);
+                                           gameClear.transform.GetChild(2).GetComponent<Image>().color = new Color(0, 0, 0, value);
+                                       },
                                        0,
                                        1f,
                                        1f,
@@ -587,7 +593,7 @@ public class GameManager : MonoBehaviour
     public void GameOver(Sprite killer)
     {
         gameOver.statisticCanvasGroup.alpha = 0;
-        gameOver.killedBy.sprite = killer;
+        gameOver.killedBy.sprite            = killer;
         gameOver.blackPanel.SetActive(true);
         gameOver.BuildStatistic(statistics);
         StartCoroutine(GameOverProcess());
@@ -599,6 +605,11 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1);
         gameOver.gameObject.SetActive(true);
         gameOver.gameoverMMF.PlayFeedbacks();
-        
+    }
+    public void GameClearProcess()
+    {
+        Cursor.lockState = CursorLockMode.Confined;
+        gameClear.gameObject.SetActive(true);
+        gameClear.gameoverMMF.PlayFeedbacks();
     }
 }

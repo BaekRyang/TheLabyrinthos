@@ -28,7 +28,7 @@ public class Crafting : MonoBehaviour
     public IEnumerator LoadSetting()
     {
         IM_manager  = InventoryManager.Instance;
-        InventoryUI = IM_manager.GO_crafting.transform.Find("Inventory").GetComponent<Inventory>();
+        InventoryUI = IM_manager.craftingTab.transform.Find("Inventory").GetComponent<Inventory>();
         StartCoroutine(LoadRecipe());
         yield return null;
     }
@@ -66,7 +66,7 @@ public class Crafting : MonoBehaviour
         {
             int        i_type = t / 100;
             GameObject tmpGO  = Instantiate(GO_recipeTab, RTR_contents[i_type]);
-            tmpGO.GetComponent<Recipe>().I_destItem  = InventoryManager.definedItems[t];
+            tmpGO.GetComponent<Recipe>().I_destItem  = InventoryManager.DefinedItems[t];
             tmpGO.GetComponent<Recipe>().dict_recipe = dict_craftingTable[t];
             tmpGO.GetComponent<Recipe>().RunSetting();
         }
@@ -80,7 +80,7 @@ public class Crafting : MonoBehaviour
         ResetCells(true);
 
         //완성품 칸 업데이트
-        GO_destItemCell.GetComponent<ItemObject>().I_item = InventoryManager.definedItems[destItemID];
+        GO_destItemCell.GetComponent<ItemObject>().I_item = InventoryManager.DefinedItems[destItemID];
         GO_destItemCell.GetComponent<ItemObject>().UpdateItem();
 
         dict_targetRecipe = recipe; //혹시 다른데서 쓸 지도 모르니깐 저장하고
@@ -101,7 +101,7 @@ public class Crafting : MonoBehaviour
             else
             {
                 //무기인데 소유중이 아니거나, 무기가 아닌경우는 원본을 올린다.
-                GO_resourceCells[count].GetComponent<ItemObject>().I_item  = InventoryManager.definedItems[kvp.Key];
+                GO_resourceCells[count].GetComponent<ItemObject>().I_item  = InventoryManager.DefinedItems[kvp.Key];
                 GO_resourceCells[count].GetComponent<ItemObject>().hasItem = IM_manager.RemoveItem(kvp.Key, kvp.Value);
             }
                 

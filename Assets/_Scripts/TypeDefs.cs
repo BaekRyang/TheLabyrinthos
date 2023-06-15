@@ -120,7 +120,7 @@ namespace TypeDefs
             set
             {
                 //현재 씬이 "Level"이라면 
-                if (SceneManager.GetActiveScene().name == "Level")
+                if (SceneManager.GetActiveScene().name == "Levels")
                 {
                     if (value - health >= 1) //체력회복일 경우
                         GameManager.Instance.statistics[Statistics.Healed] += value - health;
@@ -128,12 +128,13 @@ namespace TypeDefs
                     health = (float) Math.Round(value, 1);
                 
                     GameManager.Instance.UpdateStatsSlider(StatsType.Hp);
-                    if (InventoryManager.Instance.b_UIOpen)
+                    if (InventoryManager.Instance.UIOpen)
                         InventoryManager.Instance.stats.UpdateUI();
                 }
                 else
                 {
                     health = value;
+                    Debug.Log(SceneManager.GetActiveScene().name);
                 }
             }
         }
@@ -143,11 +144,11 @@ namespace TypeDefs
             get => maxHealth;
             set
             {
-                if (SceneManager.GetActiveScene().name == "Level")
+                if (SceneManager.GetActiveScene().name == "Levels")
                 {
                     maxHealth = value;
                     GameManager.Instance.UpdateStatsSlider(StatsType.Hp);
-                    if (InventoryManager.Instance.b_UIOpen)
+                    if (InventoryManager.Instance.UIOpen)
                         InventoryManager.Instance.stats.UpdateUI();
                 }
                 else
@@ -164,10 +165,10 @@ namespace TypeDefs
             get => exp;
             set
             {
-                if (SceneManager.GetActiveScene().name == "Level")
+                if (SceneManager.GetActiveScene().name == "Levels")
                 {
-                    exp += value;
-                    if (Exp >= 100)
+                    exp = value;
+                    if (exp >= 100)
                     {
                         exp -= 100;
                         Level++;
@@ -178,7 +179,7 @@ namespace TypeDefs
                     }
 
                     GameManager.Instance.UpdateStatsSlider(StatsType.Exp);
-                    if (InventoryManager.Instance.b_UIOpen)
+                    if (InventoryManager.Instance.UIOpen)
                         InventoryManager.Instance.stats.UpdateUI();
                 }
                 else
@@ -193,10 +194,10 @@ namespace TypeDefs
             get => speed;
             set
             {
-                if (SceneManager.GetActiveScene().name == "Level")
+                if (SceneManager.GetActiveScene().name == "Levels")
                 {
                     speed = value;
-                    if (InventoryManager.Instance.b_UIOpen)
+                    if (InventoryManager.Instance.UIOpen)
                         InventoryManager.Instance.stats.UpdateUI();
                 }
                 else
@@ -211,10 +212,10 @@ namespace TypeDefs
             get => defense;
             set
             {
-                if (SceneManager.GetActiveScene().name == "Level")
+                if (SceneManager.GetActiveScene().name == "Levels")
                 {
                     defense = value;
-                    if (InventoryManager.Instance.b_UIOpen)
+                    if (InventoryManager.Instance.UIOpen)
                         InventoryManager.Instance.stats.UpdateUI();
                 }
                 else
@@ -256,10 +257,10 @@ namespace TypeDefs
             get => level;
             set
             {
-                if (SceneManager.GetActiveScene().name == "Level")
+                if (SceneManager.GetActiveScene().name == "Levels")
                 {
                     level = value;
-                    if (InventoryManager.Instance.b_UIOpen)
+                    if (InventoryManager.Instance.UIOpen)
                         InventoryManager.Instance.stats.UpdateUI();
                 }
                 else
@@ -496,8 +497,8 @@ namespace TypeDefs
             playerStats      = Player.Instance.PS_playerStats;
             equippedWeapon   = Player.Instance.WP_weapon;
             appliedEffects   = Player.Instance.effectList;
-            inventroy        = InventoryManager.inventory;
-            weaponInventory  = InventoryManager.weaponInventory;
+            inventroy        = InventoryManager.Inventory;
+            weaponInventory  = InventoryManager.WeaponInventory;
 
             roomVisited = new List<int>();
             interactedObject = new Dictionary<int, Dictionary<int, bool>>();

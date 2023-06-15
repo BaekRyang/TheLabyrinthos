@@ -229,7 +229,7 @@ public class BattleMain : MonoBehaviour
         //damage indicator 안에 있는 자식 오브젝트들이 있으면 전부 삭제
         foreach (Transform child in damageIndicate)
             DestroyImmediate(child.gameObject);
-        
+
         InventoryManager.Instance.openedInventory = inventory.transform.GetComponentInChildren<Inventory>();
         yield return StartCoroutine(Lerp.LerpValue(color => background.color = color,
                                                    new Color(.5f, .5f, .5f, 0),
@@ -247,9 +247,10 @@ public class BattleMain : MonoBehaviour
                 if (b_IsPlayer)
                 {
                     SL_playerHP.maxValue = PS_playerStats.MaxHealth;
-                    SL_playerHP.value = f_val;
+                    SL_playerHP.value    = f_val;
                 }
-                else SL_enemyHP.value             = f_val;
+                else SL_enemyHP.value = f_val;
+
                 break;
             case StatsType.Tp:
                 if (b_IsPlayer) SL_playerTP.value = f_val;
@@ -318,9 +319,9 @@ public class BattleMain : MonoBehaviour
         PC_player.ExitBattle();
 
         P_player.PS_playerStats.Exp += GameManager.Instance.levelEXP;
-        
+
         GameManager.Instance.statistics[Statistics.KilledEnemy]++;
-        
+
         // //외부 상시 스텟바 업데이트
         // GameManager.Instance.UpdateStatsSlider(StatsType.Hp);
         // GameManager.Instance.UpdateStatsSlider(StatsType.Exp);

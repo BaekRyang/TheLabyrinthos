@@ -69,14 +69,6 @@ public class Player : MonoBehaviour
                 effectList.Remove(effect);
         }
     }
-
-    public bool AddExp(int value)
-    {
-        PS_playerStats.Exp += value;
-        
-
-        return false;
-    }
 }
 
 

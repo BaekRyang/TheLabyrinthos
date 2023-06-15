@@ -618,33 +618,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b284ee297a387424a85493a4717413f3, type: 3}
---- !u!1 &651582456924418334 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1192694168584788757, guid: b284ee297a387424a85493a4717413f3,
-    type: 3}
-  m_PrefabInstance: {fileID: 1839632264098884107}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &6704326316827607673
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 651582456924418334}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3076c2e333e57b741aae8ecf5b602237, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  transferScrollEvent: 0
-  b_canClick: 0
-  I_item:
-    i_id: 209
-    s_name: 
-    s_description: 
-    IT_type: 0
-    b_useable: 0
-  hasItem: 0
 --- !u!4 &768355075973462945 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1382060907981574570, guid: b284ee297a387424a85493a4717413f3,
@@ -722,11 +695,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: First_Aid_Kit
-      objectReference: {fileID: 0}
-    - target: {fileID: 6601132239608466893, guid: b9a94eafb522c2a479caa48d0e1c3986,
-        type: 3}
-      propertyPath: i_percent
-      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9a94eafb522c2a479caa48d0e1c3986, type: 3}
@@ -976,33 +944,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8610e4665d29f649a137e17ec96a211, type: 3}
---- !u!1 &6687295916693968674 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4108834913440961114, guid: e8610e4665d29f649a137e17ec96a211,
-    type: 3}
-  m_PrefabInstance: {fileID: 7335114339858892152}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1903807560906684241
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6687295916693968674}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3076c2e333e57b741aae8ecf5b602237, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  transferScrollEvent: 0
-  b_canClick: 0
-  I_item:
-    i_id: 213
-    s_name: 
-    s_description: 
-    IT_type: 0
-    b_useable: 0
-  hasItem: 0
 --- !u!4 &8688886313405985857 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2116322053857014073, guid: e8610e4665d29f649a137e17ec96a211,

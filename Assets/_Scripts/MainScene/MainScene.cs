@@ -98,7 +98,10 @@ public class MainScene : MonoBehaviour
                 StartCoroutine(MoveMenu(3));
                 break;
             case "LoadGame":
-            case "LoadLevel":
+                SystemObject.Instance.useSave = true;
+                StartGame();
+                break;
+            case "NewGame":
                 StartGame();
                 break;
             case "Exit":
@@ -107,7 +110,7 @@ public class MainScene : MonoBehaviour
         }
     }
 
-    public void StartGame()
+    public void StartGame(bool useSave = false)
     {
         StartCoroutine(Lerp.LerpValue(volume => AS_mainLoop.volume = volume, 1, 0f, 2, Mathf.Lerp));
         StartCoroutine(CurtainModify(false, 2f, true));

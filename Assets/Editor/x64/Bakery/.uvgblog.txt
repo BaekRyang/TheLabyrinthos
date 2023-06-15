@@ -6526,3 +6526,1054 @@ Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Librar
 Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
 Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
 Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+2023-6-15
+Rendering UV GBuffer for Room Fix_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Room Fix_LMA1 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_Room Fix_LM0.lz4" 2 0 0 0
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_Room Fix_LMA1.lz4" 2 0 1 0
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_0" 4 0 0 batchpointlight_0_0_0.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_1_0_0" 4 0 1 batchpointlight_1_0_0.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM00.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_diffuse" 4 16 1 "gi_Room Fix_LMA10.bin" "Room Fix_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM01.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_diffuse" 4 16 1 "gi_Room Fix_LMA11.bin" "Room Fix_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM02.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_diffuse" 4 16 1 "gi_Room Fix_LMA12.bin" "Room Fix_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM03.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_diffuse" 4 16 1 "gi_Room Fix_LMA13.bin" "Room Fix_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_final" 4 16 0 "gi_Room Fix_LM04.bin" "Room Fix_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_final" 4 16 1 "gi_Room Fix_LMA14.bin" "Room Fix_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" 512 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "Room Fix_LM0_final_HDR.lz4"
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LMA1_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LMA1_final_HDR.lz4" 256 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "1" "Room Fix_LMA1_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/Room Fix_LM0_final.hdr" 1024
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LMA1_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/Room Fix_LMA1_final.hdr" 1024
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Done
+Rendering UV GBuffer for Room Fix_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Room Fix_LMA1 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_Room Fix_LM0.lz4" 2 0 0 0
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_Room Fix_LMA1.lz4" 2 0 1 0
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_0" 4 0 0 batchpointlight_0_0_0.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_1_0_0" 4 0 1 batchpointlight_1_0_0.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM00.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_diffuse" 4 16 1 "gi_Room Fix_LMA10.bin" "Room Fix_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM01.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_diffuse" 4 16 1 "gi_Room Fix_LMA11.bin" "Room Fix_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM02.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_diffuse" 4 16 1 "gi_Room Fix_LMA12.bin" "Room Fix_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM03.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_diffuse" 4 16 1 "gi_Room Fix_LMA13.bin" "Room Fix_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_final" 4 16 0 "gi_Room Fix_LM04.bin" "Room Fix_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_final" 4 16 1 "gi_Room Fix_LMA14.bin" "Room Fix_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" 512 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "Room Fix_LM0_final_HDR.lz4"
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LMA1_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LMA1_final_HDR.lz4" 256 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "1" "Room Fix_LMA1_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/Room Fix_LM0_final.hdr" 1024
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LMA1_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/Room Fix_LMA1_final.hdr" 1024
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 1024x1024: 2
+Num alphas of 2048x2048: 1
+Done
+Rendering UV GBuffer for Room Fix_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Room Fix_LMA1 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Room Fix_LMA2 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Room Fix_VLM 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_Room Fix_LMA1.lz4" 2 0 1 0
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_Room Fix_LM0.lz4" 2 0 0 0
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_Room Fix_LMA2.lz4" 2 0 2 0
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_3_0_0" 4 0 3 batchpointlight_3_0_0.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM" 4 0 3 comp_3.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_1_0_0" 4 0 1 batchpointlight_1_0_0.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_0" 4 0 0 batchpointlight_0_0_0.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_2_0_0" 4 0 2 batchpointlight_2_0_0.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA2" 4 0 2 comp_2.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 3 "gi_Room Fix_VLM0.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_diffuse" 4 16 1 "gi_Room Fix_LMA10.bin" "Room Fix_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM00.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA2_diffuse" 4 16 2 "gi_Room Fix_LMA20.bin" "Room Fix_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 3 "gi_Room Fix_VLM1.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_diffuse" 4 16 1 "gi_Room Fix_LMA11.bin" "Room Fix_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM01.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA2_diffuse" 4 16 2 "gi_Room Fix_LMA21.bin" "Room Fix_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 3 "gi_Room Fix_VLM2.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_diffuse" 4 16 1 "gi_Room Fix_LMA12.bin" "Room Fix_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM02.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA2_diffuse" 4 16 2 "gi_Room Fix_LMA22.bin" "Room Fix_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 3 "gi_Room Fix_VLM3.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_diffuse" 4 16 1 "gi_Room Fix_LMA13.bin" "Room Fix_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM03.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA2_diffuse" 4 16 2 "gi_Room Fix_LMA23.bin" "Room Fix_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_final" 4 16 3 "gi_Room Fix_VLM4.bin" "Room Fix_VLM_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_final" 4 16 1 "gi_Room Fix_LMA14.bin" "Room Fix_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_final" 4 16 0 "gi_Room Fix_LM04.bin" "Room Fix_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA2_final" 4 16 2 "gi_Room Fix_LMA24.bin" "Room Fix_LMA2_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LMA1_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LMA1_final_HDR.lz4" 512 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "1" "Room Fix_LMA1_final_HDR.lz4"
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" 512 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "Room Fix_LM0_final_HDR.lz4"
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LMA2_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LMA2_final_HDR.lz4" 512 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "2" "Room Fix_LMA2_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LMA1_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/Room Fix_LMA1_final.hdr" 1024
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/Room Fix_LM0_final.hdr" 1024
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LMA2_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/Room Fix_LMA2_final.hdr" 1024
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 1024x1024: 2
+Num alphas of 2048x2048: 1
+Done
+Rendering UV GBuffer for Room Fix_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Room Fix_LMA1 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Room Fix_LMA2 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Room Fix_VLM 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_Room Fix_LM0.lz4" 2 0 0 0
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_Room Fix_LMA1.lz4" 2 0 1 0
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_Room Fix_LMA2.lz4" 2 0 2 0
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_3_0_0" 4 0 3 batchpointlight_3_0_0.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM" 4 0 3 comp_3.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_0" 4 0 0 batchpointlight_0_0_0.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_1_0_0" 4 0 1 batchpointlight_1_0_0.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_2_0_0" 4 0 2 batchpointlight_2_0_0.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA2" 4 0 2 comp_2.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 3 "gi_Room Fix_VLM0.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM00.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_diffuse" 4 16 1 "gi_Room Fix_LMA10.bin" "Room Fix_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA2_diffuse" 4 16 2 "gi_Room Fix_LMA20.bin" "Room Fix_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 3 "gi_Room Fix_VLM1.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM01.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_diffuse" 4 16 1 "gi_Room Fix_LMA11.bin" "Room Fix_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA2_diffuse" 4 16 2 "gi_Room Fix_LMA21.bin" "Room Fix_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 3 "gi_Room Fix_VLM2.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM02.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_diffuse" 4 16 1 "gi_Room Fix_LMA12.bin" "Room Fix_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA2_diffuse" 4 16 2 "gi_Room Fix_LMA22.bin" "Room Fix_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 3 "gi_Room Fix_VLM3.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM03.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_diffuse" 4 16 1 "gi_Room Fix_LMA13.bin" "Room Fix_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA2_diffuse" 4 16 2 "gi_Room Fix_LMA23.bin" "Room Fix_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_final" 4 16 3 "gi_Room Fix_VLM4.bin" "Room Fix_VLM_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_final" 4 16 0 "gi_Room Fix_LM04.bin" "Room Fix_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_final" 4 16 1 "gi_Room Fix_LMA14.bin" "Room Fix_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA2_final" 4 16 2 "gi_Room Fix_LMA24.bin" "Room Fix_LMA2_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" 512 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "Room Fix_LM0_final_HDR.lz4"
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LMA1_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LMA1_final_HDR.lz4" 512 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "1" "Room Fix_LMA1_final_HDR.lz4"
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LMA2_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LMA2_final_HDR.lz4" 512 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "2" "Room Fix_LMA2_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/Room Fix_LM0_final.hdr" 1024
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LMA1_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/Room Fix_LMA1_final.hdr" 1024
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LMA2_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/Room Fix_LMA2_final.hdr" 1024
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 1024x1024: 2
+Num alphas of 2048x2048: 1
+Done
+Rendering UV GBuffer for Room Fix_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Room Fix_LMA1 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Room Fix_LMA2 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Room Fix_VLM 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_Room Fix_LM0.lz4" 2 0 0 0
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_Room Fix_LMA1.lz4" 2 0 1 0
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_Room Fix_LMA2.lz4" 2 0 2 0
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_3_0_3" 4 0 3 batchpointlight_3_0_3.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM" 4 0 3 comp_3.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_3" 4 0 0 batchpointlight_0_0_3.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_1_0_3" 4 0 1 batchpointlight_1_0_3.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_2_0_3" 4 0 2 batchpointlight_2_0_3.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA2" 4 0 2 comp_2.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 3 "gi_Room Fix_VLM0.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM00.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_diffuse" 4 16 1 "gi_Room Fix_LMA10.bin" "Room Fix_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA2_diffuse" 4 16 2 "gi_Room Fix_LMA20.bin" "Room Fix_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 3 "gi_Room Fix_VLM1.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM01.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_diffuse" 4 16 1 "gi_Room Fix_LMA11.bin" "Room Fix_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA2_diffuse" 4 16 2 "gi_Room Fix_LMA21.bin" "Room Fix_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 3 "gi_Room Fix_VLM2.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM02.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_diffuse" 4 16 1 "gi_Room Fix_LMA12.bin" "Room Fix_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA2_diffuse" 4 16 2 "gi_Room Fix_LMA22.bin" "Room Fix_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 3 "gi_Room Fix_VLM3.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM03.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_diffuse" 4 16 1 "gi_Room Fix_LMA13.bin" "Room Fix_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA2_diffuse" 4 16 2 "gi_Room Fix_LMA23.bin" "Room Fix_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_final" 4 16 3 "gi_Room Fix_VLM4.bin" "Room Fix_VLM_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_final" 4 16 0 "gi_Room Fix_LM04.bin" "Room Fix_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_final" 4 16 1 "gi_Room Fix_LMA14.bin" "Room Fix_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA2_final" 4 16 2 "gi_Room Fix_LMA24.bin" "Room Fix_LMA2_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" 512 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "Room Fix_LM0_final_HDR.lz4"
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LMA1_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LMA1_final_HDR.lz4" 512 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "1" "Room Fix_LMA1_final_HDR.lz4"
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LMA2_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LMA2_final_HDR.lz4" 512 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "2" "Room Fix_LMA2_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/Room Fix_LM0_final.hdr" 1024
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LMA1_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/Room Fix_LMA1_final.hdr" 1024
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LMA2_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/Room Fix_LMA2_final.hdr" 1024
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 1024x1024: 2
+Num alphas of 2048x2048: 1
+Done
+Rendering UV GBuffer for Room Fix_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Room Fix_LMA1 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Room Fix_LMA2 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Room Fix_VLM 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_Room Fix_LM0.lz4" 2 0 0 0
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_Room Fix_LMA1.lz4" 2 0 1 0
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_Room Fix_LMA2.lz4" 2 0 2 0
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_3_0_3" 4 0 3 batchpointlight_3_0_3.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM" 4 0 3 comp_3.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_3" 4 0 0 batchpointlight_0_0_3.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_1_0_3" 4 0 1 batchpointlight_1_0_3.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_2_0_3" 4 0 2 batchpointlight_2_0_3.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA2" 4 0 2 comp_2.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 3 "gi_Room Fix_VLM0.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM00.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_diffuse" 4 16 1 "gi_Room Fix_LMA10.bin" "Room Fix_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA2_diffuse" 4 16 2 "gi_Room Fix_LMA20.bin" "Room Fix_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 3 "gi_Room Fix_VLM1.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM01.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_diffuse" 4 16 1 "gi_Room Fix_LMA11.bin" "Room Fix_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA2_diffuse" 4 16 2 "gi_Room Fix_LMA21.bin" "Room Fix_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 3 "gi_Room Fix_VLM2.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM02.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_diffuse" 4 16 1 "gi_Room Fix_LMA12.bin" "Room Fix_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA2_diffuse" 4 16 2 "gi_Room Fix_LMA22.bin" "Room Fix_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 3 "gi_Room Fix_VLM3.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM03.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_diffuse" 4 16 1 "gi_Room Fix_LMA13.bin" "Room Fix_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA2_diffuse" 4 16 2 "gi_Room Fix_LMA23.bin" "Room Fix_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_final" 4 16 3 "gi_Room Fix_VLM4.bin" "Room Fix_VLM_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_final" 4 16 0 "gi_Room Fix_LM04.bin" "Room Fix_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_final" 4 16 1 "gi_Room Fix_LMA14.bin" "Room Fix_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA2_final" 4 16 2 "gi_Room Fix_LMA24.bin" "Room Fix_LMA2_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" 512 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "Room Fix_LM0_final_HDR.lz4"
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LMA1_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LMA1_final_HDR.lz4" 512 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "1" "Room Fix_LMA1_final_HDR.lz4"
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LMA2_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LMA2_final_HDR.lz4" 512 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "2" "Room Fix_LMA2_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/Room Fix_LM0_final.hdr" 1024
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LMA1_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/Room Fix_LMA1_final.hdr" 1024
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LMA2_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/Room Fix_LMA2_final.hdr" 1024
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 1024x1024: 2
+Num alphas of 2048x2048: 1
+Done
+Rendering UV GBuffer for Room Fix_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Room Fix_LMA1 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Room Fix_LMA2 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Room Fix_VLM 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_Room Fix_LM0.lz4" 2 0 0 0
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_Room Fix_LMA1.lz4" 2 0 1 0
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_Room Fix_LMA2.lz4" 2 0 2 0
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_3_0_3" 4 0 3 batchpointlight_3_0_3.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM" 4 0 3 comp_3.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_3" 4 0 0 batchpointlight_0_0_3.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_1_0_3" 4 0 1 batchpointlight_1_0_3.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_2_0_3" 4 0 2 batchpointlight_2_0_3.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA2" 4 0 2 comp_2.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 3 "gi_Room Fix_VLM0.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM00.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_diffuse" 4 16 1 "gi_Room Fix_LMA10.bin" "Room Fix_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA2_diffuse" 4 16 2 "gi_Room Fix_LMA20.bin" "Room Fix_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 3 "gi_Room Fix_VLM1.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM01.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_diffuse" 4 16 1 "gi_Room Fix_LMA11.bin" "Room Fix_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA2_diffuse" 4 16 2 "gi_Room Fix_LMA21.bin" "Room Fix_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 3 "gi_Room Fix_VLM2.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM02.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_diffuse" 4 16 1 "gi_Room Fix_LMA12.bin" "Room Fix_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA2_diffuse" 4 16 2 "gi_Room Fix_LMA22.bin" "Room Fix_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 3 "gi_Room Fix_VLM3.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM03.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_diffuse" 4 16 1 "gi_Room Fix_LMA13.bin" "Room Fix_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA2_diffuse" 4 16 2 "gi_Room Fix_LMA23.bin" "Room Fix_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_final" 4 16 3 "gi_Room Fix_VLM4.bin" "Room Fix_VLM_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_final" 4 16 0 "gi_Room Fix_LM04.bin" "Room Fix_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_final" 4 16 1 "gi_Room Fix_LMA14.bin" "Room Fix_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA2_final" 4 16 2 "gi_Room Fix_LMA24.bin" "Room Fix_LMA2_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" 512 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "Room Fix_LM0_final_HDR.lz4"
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LMA1_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LMA1_final_HDR.lz4" 512 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "1" "Room Fix_LMA1_final_HDR.lz4"
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LMA2_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LMA2_final_HDR.lz4" 512 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "2" "Room Fix_LMA2_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/Room Fix_LM0_final.hdr" 1024
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LMA1_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/Room Fix_LMA1_final.hdr" 1024
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LMA2_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/Room Fix_LMA2_final.hdr" 1024
+2023-6-15
+Rendering UV GBuffer for Room Fix_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_Room Fix_LM0.lz4" 2 0 0 0
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_0" 4 0 0 batchpointlight_0_0_0.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM00.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM01.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM02.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM03.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_final" 4 16 0 "gi_Room Fix_LM04.bin" "Room Fix_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" 512 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "Room Fix_LM0_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/Room Fix_LM0_final.hdr" 1024
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 1024x512: 1
+Num alphas of 1024x1024: 1
+Done
+Rendering UV GBuffer for Room Fix_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Room Fix_LMA1 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_Room Fix_LM0.lz4" 2 0 0 0
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_Room Fix_LMA1.lz4" 2 0 1 0
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_0" 4 0 0 batchpointlight_0_0_0.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_1_0_0" 4 0 1 batchpointlight_1_0_0.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM00.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_diffuse" 4 16 1 "gi_Room Fix_LMA10.bin" "Room Fix_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM01.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_diffuse" 4 16 1 "gi_Room Fix_LMA11.bin" "Room Fix_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM02.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_diffuse" 4 16 1 "gi_Room Fix_LMA12.bin" "Room Fix_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM03.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_diffuse" 4 16 1 "gi_Room Fix_LMA13.bin" "Room Fix_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_final" 4 16 0 "gi_Room Fix_LM04.bin" "Room Fix_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_final" 4 16 1 "gi_Room Fix_LMA14.bin" "Room Fix_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" 512 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "Room Fix_LM0_final_HDR.lz4"
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LMA1_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LMA1_final_HDR.lz4" 512 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "1" "Room Fix_LMA1_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/Room Fix_LM0_final.hdr" 1024
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LMA1_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/Room Fix_LMA1_final.hdr" 1024
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 1024x512: 1
+Num alphas of 1024x1024: 1
+Done
+Rendering UV GBuffer for Room Fix_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Room Fix_LMA1 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_Room Fix_LM0.lz4" 2 0 0 0
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_Room Fix_LMA1.lz4" 2 0 1 0
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_0" 4 0 0 batchpointlight_0_0_0.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_1_0_0" 4 0 1 batchpointlight_1_0_0.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM00.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_diffuse" 4 16 1 "gi_Room Fix_LMA10.bin" "Room Fix_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM01.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_diffuse" 4 16 1 "gi_Room Fix_LMA11.bin" "Room Fix_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM02.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_diffuse" 4 16 1 "gi_Room Fix_LMA12.bin" "Room Fix_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM03.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_diffuse" 4 16 1 "gi_Room Fix_LMA13.bin" "Room Fix_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_final" 4 16 0 "gi_Room Fix_LM04.bin" "Room Fix_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_final" 4 16 1 "gi_Room Fix_LMA14.bin" "Room Fix_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" 512 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "Room Fix_LM0_final_HDR.lz4"
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LMA1_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LMA1_final_HDR.lz4" 512 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "1" "Room Fix_LMA1_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/Room Fix_LM0_final.hdr" 1024
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LMA1_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/Room Fix_LMA1_final.hdr" 1024
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Done
+Rendering UV GBuffer for Room Fix_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Room Fix_LMA1 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_Room Fix_LMA1.lz4" 2 0 1 0
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_Room Fix_LM0.lz4" 2 0 0 0
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_1_0_0" 4 0 1 batchpointlight_1_0_0.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_0" 4 0 0 batchpointlight_0_0_0.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_diffuse" 4 16 1 "gi_Room Fix_LMA10.bin" "Room Fix_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM00.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_diffuse" 4 16 1 "gi_Room Fix_LMA11.bin" "Room Fix_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM01.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_diffuse" 4 16 1 "gi_Room Fix_LMA12.bin" "Room Fix_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM02.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_diffuse" 4 16 1 "gi_Room Fix_LMA13.bin" "Room Fix_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM03.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_final" 4 16 1 "gi_Room Fix_LMA14.bin" "Room Fix_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_final" 4 16 0 "gi_Room Fix_LM04.bin" "Room Fix_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LMA1_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LMA1_final_HDR.lz4" 512 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "1" "Room Fix_LMA1_final_HDR.lz4"
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" 512 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "Room Fix_LM0_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LMA1_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/Room Fix_LMA1_final.hdr" 1024
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/Room Fix_LM0_final.hdr" 1024
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Done
+Rendering UV GBuffer for Room Fix_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Room Fix_LMA1 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_Room Fix_LM0.lz4" 2 0 0 0
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_Room Fix_LMA1.lz4" 2 0 1 0
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_1" 4 0 0 batchpointlight_0_0_1.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_1_0_1" 4 0 1 batchpointlight_1_0_1.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM00.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_diffuse" 4 16 1 "gi_Room Fix_LMA10.bin" "Room Fix_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM01.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_diffuse" 4 16 1 "gi_Room Fix_LMA11.bin" "Room Fix_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM02.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_diffuse" 4 16 1 "gi_Room Fix_LMA12.bin" "Room Fix_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM03.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_diffuse" 4 16 1 "gi_Room Fix_LMA13.bin" "Room Fix_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_final" 4 16 0 "gi_Room Fix_LM04.bin" "Room Fix_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LMA1_final" 4 16 1 "gi_Room Fix_LMA14.bin" "Room Fix_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" 1024 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "Room Fix_LM0_final_HDR.lz4"
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LMA1_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LMA1_final_HDR.lz4" 1024 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "1" "Room Fix_LMA1_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/Room Fix_LM0_final.hdr" 1024
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LMA1_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/Room Fix_LMA1_final.hdr" 1024
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 1024x512: 1
+Num alphas of 1024x1024: 3
+Num alphas of 2048x2048: 1
+Done
+Rendering UV GBuffer for Room Fix_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Room Fix_VLM 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_Room Fix_LM0.lz4" 2 0 0 0
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_1_0_8" 4 0 1 batchpointlight_1_0_8.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM" 4 0 1 comp_1.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_7" 4 0 0 batchpointlight_0_0_7.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_8_8" 4 0 0 batchpointlight_0_8_8.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 1 "gi_Room Fix_VLM0.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM00.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 1 "gi_Room Fix_VLM1.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM01.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 1 "gi_Room Fix_VLM2.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM02.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 1 "gi_Room Fix_VLM3.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM03.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_final" 4 16 1 "gi_Room Fix_VLM4.bin" "Room Fix_VLM_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_final" 4 16 0 "gi_Room Fix_LM04.bin" "Room Fix_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "Room Fix_LM0_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/Room Fix_LM0_final.hdr" 1024
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 1024x1024: 2
+Num alphas of 2048x2048: 1
+Done
+Rendering UV GBuffer for Room Fix_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Room Fix_VLM 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_Room Fix_LM0.lz4" 2 0 0 0
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_1_0_3" 4 0 1 batchpointlight_1_0_3.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM" 4 0 1 comp_1.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_3" 4 0 0 batchpointlight_0_0_3.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 1 "gi_Room Fix_VLM0.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM00.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 1 "gi_Room Fix_VLM1.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM01.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 1 "gi_Room Fix_VLM2.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM02.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 1 "gi_Room Fix_VLM3.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM03.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_final" 4 16 1 "gi_Room Fix_VLM4.bin" "Room Fix_VLM_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_final" 4 16 0 "gi_Room Fix_LM04.bin" "Room Fix_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" 1024 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "Room Fix_LM0_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/Room Fix_LM0_final.hdr" 1024
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 1024x1024: 2
+Num alphas of 2048x2048: 1
+Done
+Rendering UV GBuffer for Room Fix_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Room Fix_VLM 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_Room Fix_LM0.lz4" 2 0 0 0
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_1_0_6" 4 0 1 batchpointlight_1_0_6.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM" 4 0 1 comp_1.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_6" 4 0 0 batchpointlight_0_0_6.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 1 "gi_Room Fix_VLM0.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM00.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 1 "gi_Room Fix_VLM1.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM01.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 1 "gi_Room Fix_VLM2.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM02.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 1 "gi_Room Fix_VLM3.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM03.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_final" 4 16 1 "gi_Room Fix_VLM4.bin" "Room Fix_VLM_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_final" 4 16 0 "gi_Room Fix_LM04.bin" "Room Fix_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" 1024 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "Room Fix_LM0_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/Room Fix_LM0_final.hdr" 1024
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 1024x1024: 2
+Num alphas of 2048x2048: 1
+Done
+Rendering UV GBuffer for Room Fix_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Room Fix_VLM 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_Room Fix_LM0.lz4" 2 0 0 0
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_1_0_6" 4 0 1 batchpointlight_1_0_6.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM" 4 0 1 comp_1.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_6" 4 0 0 batchpointlight_0_0_6.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 1 "gi_Room Fix_VLM0.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM00.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 1 "gi_Room Fix_VLM1.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM01.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 1 "gi_Room Fix_VLM2.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM02.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 1 "gi_Room Fix_VLM3.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM03.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_final" 4 16 1 "gi_Room Fix_VLM4.bin" "Room Fix_VLM_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_final" 4 16 0 "gi_Room Fix_LM04.bin" "Room Fix_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" 1024 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "Room Fix_LM0_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/Room Fix_LM0_final.hdr" 1024
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 1024x1024: 2
+Num alphas of 2048x2048: 1
+Done
+Rendering UV GBuffer for Room Fix_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Room Fix_VLM 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_Room Fix_LM0.lz4" 2 0 0 0
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_1_0_6" 4 0 1 batchpointlight_1_0_6.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM" 4 0 1 comp_1.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_6" 4 0 0 batchpointlight_0_0_6.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 1 "gi_Room Fix_VLM0.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM00.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 1 "gi_Room Fix_VLM1.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM01.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 1 "gi_Room Fix_VLM2.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM02.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 1 "gi_Room Fix_VLM3.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM03.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_final" 4 16 1 "gi_Room Fix_VLM4.bin" "Room Fix_VLM_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_final" 4 16 0 "gi_Room Fix_LM04.bin" "Room Fix_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" 1024 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "Room Fix_LM0_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/Room Fix_LM0_final.hdr" 1024
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 1024x512: 1
+Num alphas of 1024x1024: 3
+Num alphas of 2048x2048: 1
+Done
+Rendering UV GBuffer for Room Fix_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Room Fix_VLM 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_Room Fix_LM0.lz4" 2 0 0 0
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_1_0_11" 4 0 1 batchpointlight_1_0_11.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM" 4 0 1 comp_1.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_10" 4 0 0 batchpointlight_0_0_10.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_11_11" 4 0 0 batchpointlight_0_11_11.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 1 "gi_Room Fix_VLM0.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM00.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 1 "gi_Room Fix_VLM1.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM01.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 1 "gi_Room Fix_VLM2.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM02.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 1 "gi_Room Fix_VLM3.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM03.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_final" 4 16 1 "gi_Room Fix_VLM4.bin" "Room Fix_VLM_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_final" 4 16 0 "gi_Room Fix_LM04.bin" "Room Fix_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "Room Fix_LM0_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/Room Fix_LM0_final.hdr" 1024
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 1024x512: 1
+Num alphas of 1024x1024: 3
+Num alphas of 2048x2048: 1
+Done
+Rendering UV GBuffer for Room Fix_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Room Fix_VLM 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_Room Fix_LM0.lz4" 2 0 0 0
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_1_0_11" 4 0 1 batchpointlight_1_0_11.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM" 4 0 1 comp_1.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_10" 4 0 0 batchpointlight_0_0_10.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_11_11" 4 0 0 batchpointlight_0_11_11.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 1 "gi_Room Fix_VLM0.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM00.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 1 "gi_Room Fix_VLM1.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM01.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 1 "gi_Room Fix_VLM2.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM02.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 1 "gi_Room Fix_VLM3.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM03.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_final" 4 16 1 "gi_Room Fix_VLM4.bin" "Room Fix_VLM_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_final" 4 16 0 "gi_Room Fix_LM04.bin" "Room Fix_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "Room Fix_LM0_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/Room Fix_LM0_final.hdr" 1024
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 1024x512: 1
+Num alphas of 1024x1024: 3
+Num alphas of 2048x2048: 1
+Done
+Rendering UV GBuffer for Room Fix_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Room Fix_VLM 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_Room Fix_LM0.lz4" 2 0 0 0
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_1_0_12" 4 0 1 batchpointlight_1_0_12.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM" 4 0 1 comp_1.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_10" 4 0 0 batchpointlight_0_0_10.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_11_12" 4 0 0 batchpointlight_0_11_12.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 1 "gi_Room Fix_VLM0.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM00.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 1 "gi_Room Fix_VLM1.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM01.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 1 "gi_Room Fix_VLM2.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM02.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 1 "gi_Room Fix_VLM3.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM03.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_final" 4 16 1 "gi_Room Fix_VLM4.bin" "Room Fix_VLM_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_final" 4 16 0 "gi_Room Fix_LM04.bin" "Room Fix_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "Room Fix_LM0_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/Room Fix_LM0_final.hdr" 1024
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 1024x512: 1
+Num alphas of 1024x1024: 3
+Num alphas of 2048x2048: 1
+Done
+Rendering UV GBuffer for Room Fix_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Room Fix_VLM 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\grayw\AppData\Local\Temp\frender" "uvpos_Room Fix_LM0.lz4" 2 0 0 0
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_1_0_16" 4 0 1 batchpointlight_1_0_16.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM" 4 0 1 comp_1.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_0_14" 4 0 0 batchpointlight_0_0_14.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\grayw\AppData\Local\Temp\frender" "PointBatch_0_15_16" 4 0 0 batchpointlight_0_15_16.bin
+Running ftraceRTX addmul "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 1 "gi_Room Fix_VLM0.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM00.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 1 "gi_Room Fix_VLM1.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM01.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 1 "gi_Room Fix_VLM2.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM02.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_diffuse" 4 16 1 "gi_Room Fix_VLM3.bin" "Room Fix_VLM_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_diffuse" 4 16 0 "gi_Room Fix_LM03.bin" "Room Fix_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_VLM_final" 4 16 1 "gi_Room Fix_VLM4.bin" "Room Fix_VLM_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\grayw\AppData\Local\Temp\frender" "Room Fix_LM0_final" 4 16 0 "gi_Room Fix_LM04.bin" "Room Fix_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running denoiserOIDN c "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\grayw\AppData\Local\Temp\frender" "0" "Room Fix_LM0_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\grayw\AppData\Local\Temp\frender/Room Fix_LM0_final_HDR.lz4" "C:/Github/TheLabyrinthos/Assets/BakeryLightmaps/Room Fix_LM0_final.hdr" 1024
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Symbol file LoadedFromMemory doesn't match image C:\Github\TheLabyrinthos\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+C:\build\output\Unity-Technologies\mono\mono\eglib\gpath.c:115: assertion 'filename != NULL' failed
+

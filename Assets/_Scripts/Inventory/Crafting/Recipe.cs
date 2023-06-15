@@ -44,7 +44,7 @@ public class Recipe : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
         sb.Append(I_destItem.s_description + "\n\n" + "<color=orange>필요한 재료</color>\n");
         for (int i = 0; i < resourceCount.Length; i++)
         {
-            sb.Append(InventoryManager.definedItems[resourceID[i]].s_name + " <color=green>" + resourceCount[i] + "개</color>");
+            sb.Append(InventoryManager.DefinedItems[resourceID[i]].s_name + " <color=green>" + resourceCount[i] + "개</color>");
             if (i != resourceCount.Length - 1)
             {
                 sb.Append("\n");

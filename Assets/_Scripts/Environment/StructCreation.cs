@@ -11,14 +11,6 @@ public class RoomNode
     public List<int> Children { get; set; } //직접 연결된 하위 노드
     public GameObject RoomObject { get; set; }
 
-    public StructCreation StructCreation
-    {
-        get => default;
-        set
-        {
-        }
-    }
-
     public RoomNode(int id, RoomNode parentNode = null)
     {
         Id = id;

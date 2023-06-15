@@ -42,7 +42,7 @@ public class EquipedItem : MonoBehaviour
         UpdateStatsCell();
 
         bool isSpriteExist =
-            InventoryManager.loadedImages.TryGetValue(Player.Instance.WP_weapon.i_id + 1000, out Sprite foundedSprite);
+            InventoryManager.LoadedImages.TryGetValue(Player.Instance.WP_weapon.i_id + 1000, out Sprite foundedSprite);
 
         weaponImage.sprite =
             isSpriteExist ? foundedSprite : InventoryManager.Instance.weaponSpriteNotFounded;

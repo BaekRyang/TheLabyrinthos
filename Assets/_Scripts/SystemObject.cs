@@ -13,6 +13,7 @@ public class SystemObject : MonoBehaviour
     public        OptionData   optionData;
     public        AudioMixer   audioMixer;
     public        SaveData     saveData;
+    public        bool         useSave;
     private void Awake()
     {
         Instance ??= this;

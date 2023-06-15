@@ -195,11 +195,11 @@ public class CSVReader : MonoBehaviour
     private void LoadItems() //CSV를 읽는 기본 로직 처리
     {
         //이미 아이템이 등록되어있으면 더이상 읽지 않는다. (중복 등록 방지)
-        if (InventoryManager.definedItems.Count > 0)
+        if (InventoryManager.DefinedItems.Count > 0)
         {
             //인벤토리를 초기화 한다.
-            InventoryManager.inventory.Clear();
-            InventoryManager.weaponInventory.Clear();
+            InventoryManager.Inventory.Clear();
+            InventoryManager.WeaponInventory.Clear();
             return;
         }
 
@@ -218,7 +218,7 @@ public class CSVReader : MonoBehaviour
             Item tmpItem = ParseItem(data_value);                //ParseItem을 호출하여 위에서 만든 배열을 넘겨준다.
             if (tmpItem.IT_type == ItemType.Undefined) continue; //만들어진 아이템의 종류가 Undefined 이면 정상적으로 만들어진 아이템이 아니므로 지나간다.
 
-            InventoryManager.definedItems.Add(tmpItem.i_id, tmpItem); //만들어진 아이템을 InventoryManager에 있는 아이템 목록을 저장하는 Dictionary에 저장한다.
+            InventoryManager.DefinedItems.Add(tmpItem.i_id, tmpItem); //만들어진 아이템을 InventoryManager에 있는 아이템 목록을 저장하는 Dictionary에 저장한다.
             Debug.Log(tmpItem.s_name + " 등록됨");
         }
     }
@@ -286,7 +286,7 @@ public class CSVReader : MonoBehaviour
 
     public IEnumerator LoadCraftingTable()
     {
-        Crafting     C_crafting = InventoryManager.Instance.GO_crafting.GetComponent<Crafting>();
+        Crafting     C_crafting = InventoryManager.Instance.craftingTab.GetComponent<Crafting>();
         TextAsset    textAsset  = Resources.Load<TextAsset>("Craftings");
         StringReader sReader    = new StringReader(textAsset.text);
 

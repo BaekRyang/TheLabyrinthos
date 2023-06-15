@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5198793495870318963}
-  m_RootOrder: 22
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2974061117107855282
 MonoBehaviour:
@@ -264,7 +264,7 @@ MonoBehaviour:
   - {fileID: 3330510538938074203}
   - {fileID: 3516896310555638998}
   - {fileID: 7015326585986778954}
-  - {fileID: 8644128179343134242}
+  - {fileID: 0}
   bakedIDs: 00000000000000000000000002000000020000000100000000000000000000000000000001000000010000000200000002000000000000000100000002000000000000000100000000000000010000000100000001000000020000000200000002000000020000000200000002000000010000000200000002000000020000000200000001000000020000000000000002000000020000000000000001000000010000000100000002000000010000000100000001000000010000000200000001000000010000000100000001000000020000000100000002000000020000000100000001000000010000000100000002000000010000000100000001000000010000000200000000000000010000000200000000000000000000000000000000000000010000000100000002000000000000000100000001000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000002000000020000000100000001000000010000000100000000000000
   bakedScaleOffset:
   - {x: 0.5695953, y: 0.567355, z: 0.28479764, w: 0.2836775}
@@ -733,7 +733,6 @@ Transform:
   - {fileID: 4500069562980941620}
   - {fileID: 2343466454752626617}
   - {fileID: 8147115633403198501}
-  - {fileID: 8487433400895190857}
   - {fileID: 4287239777618268182}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -752,7 +751,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enableBaking: 1
   ignoreWarnings: 0
-  errorMessage: 
+  errorMessage: this GameObject is not a prefab
 --- !u!114 &-7295181109749623704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2644,14 +2643,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   i_percent: 100
-  CSP_spritePack:
-    fullBody: {fileID: 0}
-    fullBody_WeakPoint: {fileID: 0}
-    fullBody_Thrax: {fileID: 0}
-    fullBody_Outer: {fileID: 0}
-    cut_Attack: {fileID: 0}
-    cut_Hited: {fileID: 0}
-    cut_Avoid: {fileID: 0}
   b_customCreature: 0
   damage: 0
   defense: 0
@@ -2659,6 +2650,7 @@ MonoBehaviour:
   speed: 0
   prepareSpeed: 0
   sprites:
+    creatureName: 
     fullBody: {fileID: 0}
     fullBody_WeakPoint: {fileID: 0}
     fullBody_Thrax: {fileID: 0}
@@ -2666,6 +2658,7 @@ MonoBehaviour:
     cut_Attack: {fileID: 0}
     cut_Hited: {fileID: 0}
     cut_Avoid: {fileID: 0}
+    attackScratch: {fileID: 0}
   i_randNum: 0
   b_isCreature: 0
   CR_creature:
@@ -2675,6 +2668,7 @@ MonoBehaviour:
     speed: 0
     prepareSpeed: 0
     spritePack:
+      creatureName: 
       fullBody: {fileID: 0}
       fullBody_WeakPoint: {fileID: 0}
       fullBody_Thrax: {fileID: 0}
@@ -2682,6 +2676,7 @@ MonoBehaviour:
       cut_Attack: {fileID: 0}
       cut_Hited: {fileID: 0}
       cut_Avoid: {fileID: 0}
+      attackScratch: {fileID: 0}
 --- !u!1001 &5198793494610721014
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2769,7 +2764,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8509033228250575184, guid: 8cea1a67e08778740b77e8a9869d92f6, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8cea1a67e08778740b77e8a9869d92f6, type: 3}
 --- !u!23 &1029715914730662600 stripped
 MeshRenderer:
@@ -3899,14 +3895,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   i_percent: 90
-  CSP_spritePack:
-    fullBody: {fileID: 0}
-    fullBody_WeakPoint: {fileID: 0}
-    fullBody_Thrax: {fileID: 0}
-    fullBody_Outer: {fileID: 0}
-    cut_Attack: {fileID: 0}
-    cut_Hited: {fileID: 0}
-    cut_Avoid: {fileID: 0}
   b_customCreature: 0
   damage: 0
   defense: 0
@@ -3914,6 +3902,7 @@ MonoBehaviour:
   speed: 0
   prepareSpeed: 0
   sprites:
+    creatureName: 
     fullBody: {fileID: 0}
     fullBody_WeakPoint: {fileID: 0}
     fullBody_Thrax: {fileID: 0}
@@ -3921,6 +3910,7 @@ MonoBehaviour:
     cut_Attack: {fileID: 0}
     cut_Hited: {fileID: 0}
     cut_Avoid: {fileID: 0}
+    attackScratch: {fileID: 0}
   i_randNum: 0
   b_isCreature: 0
   CR_creature:
@@ -3930,6 +3920,7 @@ MonoBehaviour:
     speed: 0
     prepareSpeed: 0
     spritePack:
+      creatureName: 
       fullBody: {fileID: 0}
       fullBody_WeakPoint: {fileID: 0}
       fullBody_Thrax: {fileID: 0}
@@ -3937,6 +3928,7 @@ MonoBehaviour:
       cut_Attack: {fileID: 0}
       cut_Hited: {fileID: 0}
       cut_Avoid: {fileID: 0}
+      attackScratch: {fileID: 0}
 --- !u!1001 &5198793495693840865
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4594,159 +4586,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5198793496435913654}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &5488639934705763470
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 5198793495870318963}
-    m_Modifications:
-    - target: {fileID: 4171172480734311367, guid: 588abdac28e9e7247bc95d21672b3e74,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 21
-      objectReference: {fileID: 0}
-    - target: {fileID: 4171172480734311367, guid: 588abdac28e9e7247bc95d21672b3e74,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 2.437
-      objectReference: {fileID: 0}
-    - target: {fileID: 4171172480734311367, guid: 588abdac28e9e7247bc95d21672b3e74,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.1716557
-      objectReference: {fileID: 0}
-    - target: {fileID: 4171172480734311367, guid: 588abdac28e9e7247bc95d21672b3e74,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 4.567
-      objectReference: {fileID: 0}
-    - target: {fileID: 4171172480734311367, guid: 588abdac28e9e7247bc95d21672b3e74,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4171172480734311367, guid: 588abdac28e9e7247bc95d21672b3e74,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4171172480734311367, guid: 588abdac28e9e7247bc95d21672b3e74,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4171172480734311367, guid: 588abdac28e9e7247bc95d21672b3e74,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4171172480734311367, guid: 588abdac28e9e7247bc95d21672b3e74,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4171172480734311367, guid: 588abdac28e9e7247bc95d21672b3e74,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4171172480734311367, guid: 588abdac28e9e7247bc95d21672b3e74,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4313758186390328428, guid: 588abdac28e9e7247bc95d21672b3e74,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4313758186390489164, guid: 588abdac28e9e7247bc95d21672b3e74,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.016
-      objectReference: {fileID: 0}
-    - target: {fileID: 4313758186390489164, guid: 588abdac28e9e7247bc95d21672b3e74,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.028
-      objectReference: {fileID: 0}
-    - target: {fileID: 7628435508137918103, guid: 588abdac28e9e7247bc95d21672b3e74,
-        type: 3}
-      propertyPath: m_Name
-      value: CannedFood_01_01
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 588abdac28e9e7247bc95d21672b3e74, type: 3}
---- !u!1 &2735432500017920537 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7628435508137918103, guid: 588abdac28e9e7247bc95d21672b3e74,
-    type: 3}
-  m_PrefabInstance: {fileID: 5488639934705763470}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &445043909128129210
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2735432500017920537}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12b1f4524d325a44cb9731193edfa2d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  i_percent: 40
-  CSP_spritePack:
-    fullBody: {fileID: 0}
-    fullBody_WeakPoint: {fileID: 0}
-    fullBody_Thrax: {fileID: 0}
-    fullBody_Outer: {fileID: 0}
-    cut_Attack: {fileID: 0}
-    cut_Hited: {fileID: 0}
-    cut_Avoid: {fileID: 0}
-  b_customCreature: 0
-  damage: 0
-  defense: 0
-  health: 0
-  speed: 0
-  prepareSpeed: 0
-  sprites:
-    fullBody: {fileID: 0}
-    fullBody_WeakPoint: {fileID: 0}
-    fullBody_Thrax: {fileID: 0}
-    fullBody_Outer: {fileID: 0}
-    cut_Attack: {fileID: 0}
-    cut_Hited: {fileID: 0}
-    cut_Avoid: {fileID: 0}
-  i_randNum: 0
-  b_isCreature: 0
-  CR_creature:
-    damage: 0
-    defense: 0
-    health: 0
-    speed: 0
-    prepareSpeed: 0
-    spritePack:
-      fullBody: {fileID: 0}
-      fullBody_WeakPoint: {fileID: 0}
-      fullBody_Thrax: {fileID: 0}
-      fullBody_Outer: {fileID: 0}
-      cut_Attack: {fileID: 0}
-      cut_Hited: {fileID: 0}
-      cut_Avoid: {fileID: 0}
---- !u!4 &8487433400895190857 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4171172480734311367, guid: 588abdac28e9e7247bc95d21672b3e74,
-    type: 3}
-  m_PrefabInstance: {fileID: 5488639934705763470}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &8644128179343134242 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 4313758186388064940, guid: 588abdac28e9e7247bc95d21672b3e74,
-    type: 3}
-  m_PrefabInstance: {fileID: 5488639934705763470}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6680930130517403747
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5100,14 +4939,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   i_percent: 90
-  CSP_spritePack:
-    fullBody: {fileID: 0}
-    fullBody_WeakPoint: {fileID: 0}
-    fullBody_Thrax: {fileID: 0}
-    fullBody_Outer: {fileID: 0}
-    cut_Attack: {fileID: 0}
-    cut_Hited: {fileID: 0}
-    cut_Avoid: {fileID: 0}
   b_customCreature: 0
   damage: 0
   defense: 0
@@ -5115,6 +4946,7 @@ MonoBehaviour:
   speed: 0
   prepareSpeed: 0
   sprites:
+    creatureName: 
     fullBody: {fileID: 0}
     fullBody_WeakPoint: {fileID: 0}
     fullBody_Thrax: {fileID: 0}
@@ -5122,6 +4954,7 @@ MonoBehaviour:
     cut_Attack: {fileID: 0}
     cut_Hited: {fileID: 0}
     cut_Avoid: {fileID: 0}
+    attackScratch: {fileID: 0}
   i_randNum: 0
   b_isCreature: 0
   CR_creature:
@@ -5131,6 +4964,7 @@ MonoBehaviour:
     speed: 0
     prepareSpeed: 0
     spritePack:
+      creatureName: 
       fullBody: {fileID: 0}
       fullBody_WeakPoint: {fileID: 0}
       fullBody_Thrax: {fileID: 0}
@@ -5138,6 +4972,7 @@ MonoBehaviour:
       cut_Attack: {fileID: 0}
       cut_Hited: {fileID: 0}
       cut_Avoid: {fileID: 0}
+      attackScratch: {fileID: 0}
 --- !u!1001 &7745862764237838944
 PrefabInstance:
   m_ObjectHideFlags: 0

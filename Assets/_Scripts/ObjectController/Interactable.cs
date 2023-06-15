@@ -117,6 +117,19 @@ public class Interactable : MonoBehaviour
                 break;
 
             case ObjectType.Item:
+                if (GetComponent<ItemObject>().I_item.i_id == -100)
+                {
+                    GameManager.Instance.GetComponent<InventoryManager>().AddItem(-100);
+                    DisableItem();
+                    break;
+                } 
+                
+                if(GetComponent<ItemObject>().I_item.i_id == -200)
+                {
+                    GameManager.Instance.GetComponent<InventoryManager>().AddItem(Random.Range(500, 513));
+                    DisableItem();
+                    break;
+                }
                 //아이템 인벤토리에 집어넣고
                 GameManager.Instance.GetComponent<InventoryManager>().AddItem(GetComponent<ItemObject>().I_item);
 

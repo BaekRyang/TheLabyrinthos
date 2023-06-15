@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7363651845552523270}
   - component: {fileID: -3517332216677951099}
   - component: {fileID: -7475390212014864069}
+  - component: {fileID: 1468278180}
   m_Layer: 10
   m_Name: Pills_1_2
   m_TagString: Untagged
@@ -119,6 +120,7 @@ MonoBehaviour:
   disabledOutlineColor: {r: 1, g: 1, b: 0, a: 1}
   enabledOutlineWidth: 2
   disabledOutlineWidth: 1
+  interacted: 0
 --- !u!114 &-3517332216677951099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,27 +134,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   i_percent: 40
-  CSP_spritePack:
+  b_customCreature: 0
+  damage: 0
+  defense: 0
+  health: 0
+  speed: 0
+  prepareSpeed: 0
+  sprites:
+    creatureName: 
+    fullBody: {fileID: 0}
     fullBody_WeakPoint: {fileID: 0}
     fullBody_Thrax: {fileID: 0}
     fullBody_Outer: {fileID: 0}
     cut_Attack: {fileID: 0}
     cut_Hited: {fileID: 0}
     cut_Avoid: {fileID: 0}
-  b_customCreature: 0
-  CR_customCreature:
-    damage: 0
-    defense: 0
-    health: 0
-    speed: 0
-    prepareSpeed: 0
-    spritePack:
-      fullBody_WeakPoint: {fileID: 0}
-      fullBody_Thrax: {fileID: 0}
-      fullBody_Outer: {fileID: 0}
-      cut_Attack: {fileID: 0}
-      cut_Hited: {fileID: 0}
-      cut_Avoid: {fileID: 0}
+    attackScratch: {fileID: 0}
   i_randNum: 0
   b_isCreature: 0
   CR_creature:
@@ -162,12 +159,15 @@ MonoBehaviour:
     speed: 0
     prepareSpeed: 0
     spritePack:
+      creatureName: 
+      fullBody: {fileID: 0}
       fullBody_WeakPoint: {fileID: 0}
       fullBody_Thrax: {fileID: 0}
       fullBody_Outer: {fileID: 0}
       cut_Attack: {fileID: 0}
       cut_Hited: {fileID: 0}
       cut_Avoid: {fileID: 0}
+      attackScratch: {fileID: 0}
 --- !u!54 &-7475390212014864069
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -184,3 +184,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1468278180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8243228478871671272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3076c2e333e57b741aae8ecf5b602237, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transferScrollEvent: 0
+  b_canClick: 0
+  I_item:
+    i_id: -200
+    s_name: 
+    s_description: 
+    IT_type: 0
+    b_useable: 0
+  hasItem: 0

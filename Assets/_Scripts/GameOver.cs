@@ -74,6 +74,6 @@ public class GameOver : MonoBehaviour
 
     public void Ending()
     {
-        
+        Debug.Log("END");
     }
 }

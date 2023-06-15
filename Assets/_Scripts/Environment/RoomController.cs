@@ -32,6 +32,7 @@ public class RoomController : MonoBehaviour
         {
             if (transform.GetChild(i).name.StartsWith("DoorWall"))
                 continue;
+            
 
             //오브젝트가 Instantiate로 생성된 오브젝트일 경우
             if (transform.GetChild(i).name.EndsWith("(Clone)"))

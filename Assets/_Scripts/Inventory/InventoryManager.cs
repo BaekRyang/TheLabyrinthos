@@ -72,7 +72,7 @@ public class InventoryManager : MonoBehaviour
 
             CreateSyringes();
 
-            // foreach (var (_, value) in definedItems)
+            // foreach (var (_, value) in DefinedItems)
             // {
             //     if (value.i_id == 306) continue;
             //     AddItem(value, 2);
@@ -206,7 +206,8 @@ public class InventoryManager : MonoBehaviour
         {
             //무작위 아이템을 추가
             AddItem(DefinedItems[Random.Range(300, 311)], Random.Range(1, 4)); //무작위 아이템을 1~3개 추가
-        }
+            return;
+        } 
         
         if (item < 100)
         {

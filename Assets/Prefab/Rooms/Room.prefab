@@ -100,7 +100,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: X
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -667,12 +667,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
-  startActive: 0
-  doors: {fileID: 2954250316342633207}
   walls: {fileID: 8496486192655038132}
   ceilings: {fileID: 3504254278579423959}
-  GO_RoomPrefabs: []
-  M_Ceiling: []
+  go_specialObject: {fileID: 0}
+  RT_roomType: 0
+  nextID: 1
+  hasCreature: 0
+  forcedBattle: 0
+  CR_creature:
+    damage: 0
+    defense: 0
+    health: 0
+    speed: 0
+    prepareSpeed: 0
+    spritePack:
+      creatureName: 
+      fullBody: {fileID: 0}
+      fullBody_WeakPoint: {fileID: 0}
+      fullBody_Thrax: {fileID: 0}
+      fullBody_Outer: {fileID: 0}
+      cut_Attack: {fileID: 0}
+      cut_Hited: {fileID: 0}
+      cut_Avoid: {fileID: 0}
+      attackScratch: {fileID: 0}
+  GO_creature: {fileID: 0}
+  alreadyCleared: 0
 --- !u!1 &8496486192655038132
 GameObject:
   m_ObjectHideFlags: 0

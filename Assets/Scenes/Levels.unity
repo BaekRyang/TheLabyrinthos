@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingSettings: {fileID: 1581618723}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -6770,12 +6770,12 @@ PrefabInstance:
     - target: {fileID: 1908039067156952492, guid: 69dc6c374b73a8a448ec2f8f9fb31f68,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 465.30008
+      value: 465.30002
       objectReference: {fileID: 0}
     - target: {fileID: 1908039067387700086, guid: 69dc6c374b73a8a448ec2f8f9fb31f68,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 465.30008
+      value: 465.30002
       objectReference: {fileID: 0}
     - target: {fileID: 1908039067674748754, guid: 69dc6c374b73a8a448ec2f8f9fb31f68,
         type: 3}
@@ -6810,7 +6810,7 @@ PrefabInstance:
     - target: {fileID: 1908039068594636715, guid: 69dc6c374b73a8a448ec2f8f9fb31f68,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 465.30008
+      value: 465.30002
       objectReference: {fileID: 0}
     - target: {fileID: 1944197032894919049, guid: 69dc6c374b73a8a448ec2f8f9fb31f68,
         type: 3}
@@ -7015,7 +7015,7 @@ PrefabInstance:
     - target: {fileID: 2434707501005147585, guid: 69dc6c374b73a8a448ec2f8f9fb31f68,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 465.30005
+      value: 465.3
       objectReference: {fileID: 0}
     - target: {fileID: 2434707501588150578, guid: 69dc6c374b73a8a448ec2f8f9fb31f68,
         type: 3}
@@ -15217,7 +15217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   b_useSeed: 0
-  s_seed: 9DC1A2
+  s_seed: 9D9508
   i_roomSize: 0
   GO_curtain: {fileID: 1947326161}
   gameOver: {fileID: 1750497544}
@@ -23852,6 +23852,68 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1820, y: 979.8998}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!850595691 &1581618723
+LightingSettings:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  serializedVersion: 4
+  m_GIWorkflowMode: 1
+  m_EnableBakedLightmaps: 1
+  m_EnableRealtimeLightmaps: 0
+  m_RealtimeEnvironmentLighting: 1
+  m_BounceScale: 1
+  m_AlbedoBoost: 1
+  m_IndirectOutputScale: 1
+  m_UsingShadowmask: 1
+  m_BakeBackend: 1
+  m_LightmapMaxSize: 1024
+  m_BakeResolution: 40
+  m_Padding: 2
+  m_LightmapCompression: 3
+  m_AO: 0
+  m_AOMaxDistance: 1
+  m_CompAOExponent: 1
+  m_CompAOExponentDirect: 0
+  m_ExtractAO: 0
+  m_MixedBakeMode: 2
+  m_LightmapsBakeMode: 1
+  m_FilterMode: 1
+  m_LightmapParameters: {fileID: 15204, guid: 0000000000000000f000000000000000, type: 0}
+  m_ExportTrainingData: 0
+  m_TrainingDataDestination: TrainingData
+  m_RealtimeResolution: 2
+  m_ForceWhiteAlbedo: 0
+  m_ForceUpdates: 0
+  m_FinalGather: 0
+  m_FinalGatherRayCount: 256
+  m_FinalGatherFiltering: 1
+  m_PVRCulling: 1
+  m_PVRSampling: 1
+  m_PVRDirectSampleCount: 32
+  m_PVRSampleCount: 512
+  m_PVREnvironmentSampleCount: 256
+  m_PVREnvironmentReferencePointCount: 2048
+  m_LightProbeSampleCountMultiplier: 4
+  m_PVRBounces: 2
+  m_PVRMinBounces: 1
+  m_PVREnvironmentMIS: 1
+  m_PVRFilteringMode: 1
+  m_PVRDenoiserTypeDirect: 1
+  m_PVRDenoiserTypeIndirect: 1
+  m_PVRDenoiserTypeAO: 1
+  m_PVRFilterTypeDirect: 0
+  m_PVRFilterTypeIndirect: 0
+  m_PVRFilterTypeAO: 0
+  m_PVRFilteringGaussRadiusDirect: 1
+  m_PVRFilteringGaussRadiusIndirect: 5
+  m_PVRFilteringGaussRadiusAO: 2
+  m_PVRFilteringAtrousPositionSigmaDirect: 0.5
+  m_PVRFilteringAtrousPositionSigmaIndirect: 2
+  m_PVRFilteringAtrousPositionSigmaAO: 1
+  m_PVRTiledBaking: 0
 --- !u!114 &1586652209 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3980250042945978597, guid: 1b86992ea5a8918439ed31a5d966a05f,
@@ -28209,6 +28271,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 352897072}
     m_Modifications:
+    - target: {fileID: 154508076252212938, guid: 27a060075cf878648906390b12bb49ba,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 6051592930146451157, guid: f2df23b5b7d1a0542a04164415cfad1f,
+        type: 2}
     - target: {fileID: 3028661936135004171, guid: 27a060075cf878648906390b12bb49ba,
         type: 3}
       propertyPath: m_Name
@@ -28219,6 +28287,24 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3905255620422349025, guid: 27a060075cf878648906390b12bb49ba,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 6051592930146451157, guid: f2df23b5b7d1a0542a04164415cfad1f,
+        type: 2}
+    - target: {fileID: 3905255620445663182, guid: 27a060075cf878648906390b12bb49ba,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 6051592930146451157, guid: f2df23b5b7d1a0542a04164415cfad1f,
+        type: 2}
+    - target: {fileID: 3905255620824077040, guid: 27a060075cf878648906390b12bb49ba,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 6051592930146451157, guid: f2df23b5b7d1a0542a04164415cfad1f,
+        type: 2}
     - target: {fileID: 4782051129644729653, guid: 27a060075cf878648906390b12bb49ba,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -31567,6 +31653,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory
       objectReference: {fileID: 0}
+    - target: {fileID: 2434707501588150578, guid: 69dc6c374b73a8a448ec2f8f9fb31f68,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2434707501588150579, guid: 69dc6c374b73a8a448ec2f8f9fb31f68,
         type: 3}
       propertyPath: m_Pivot.x
@@ -32421,7 +32512,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 171.45001, y: -22.6}
+  m_AnchoredPosition: {x: 171.45, y: -22.6}
   m_SizeDelta: {x: 342.9, y: 45.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4729610588855947877

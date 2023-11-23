@@ -1,5 +1,5 @@
 # The Labyrinthos
-### 2023-1 Capstone Project
+### 2023-1 Project
 ---
 * Producer Programmer : **JeongMin Yun**
 * 2D Graphic Artist - Monster : **Hayeong Jung** 
